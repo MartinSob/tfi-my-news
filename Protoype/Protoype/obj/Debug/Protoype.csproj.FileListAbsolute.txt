@@ -1,0 +1,10 @@
+C:\Projects\my-news\Protoype\Protoype\bin\Debug\Protoype.exe.config
+C:\Projects\my-news\Protoype\Protoype\bin\Debug\Protoype.exe
+C:\Projects\my-news\Protoype\Protoype\bin\Debug\Protoype.pdb
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.csproj.AssemblyReference.cache
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.CrearNoticia.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.Properties.Resources.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.csproj.GenerateResource.cache
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.csproj.CoreCompileInputs.cache
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.exe
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.pdb
