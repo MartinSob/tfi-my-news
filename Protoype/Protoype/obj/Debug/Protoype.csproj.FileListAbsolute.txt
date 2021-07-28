@@ -8,3 +8,5 @@ C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.csproj.GenerateResource
 C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.csproj.CoreCompileInputs.cache
 C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.exe
 C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.pdb
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.Listar_Noticias.ListarNoticias.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Debug\Protoype.Prototype.resources

@@ -46,17 +46,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrearNoticia.cs">
+    <Compile Include="Crear Noticia\CrearNoticia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CrearNoticia.Designer.cs">
+    <Compile Include="Crear Noticia\CrearNoticia.Designer.cs">
       <DependentUpon>CrearNoticia.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProbabilityController.cs" />
+    <Compile Include="Crear Noticia\ProbabilityController.cs" />
+    <Compile Include="Listar Noticias\ListarNoticias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listar Noticias\ListarNoticias.Designer.cs">
+      <DependentUpon>ListarNoticias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listar Noticias\Recommendation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CrearNoticia.resx">
+    <Compile Include="Prototype.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prototype.Designer.cs">
+      <DependentUpon>Prototype.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Crear Noticia\CrearNoticia.resx">
       <DependentUpon>CrearNoticia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listar Noticias\ListarNoticias.resx">
+      <DependentUpon>ListarNoticias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -67,6 +83,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Prototype.resx">
+      <DependentUpon>Prototype.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
