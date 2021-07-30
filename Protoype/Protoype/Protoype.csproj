@@ -52,6 +52,7 @@
     <Compile Include="Crear Noticia\CrearNoticia.Designer.cs">
       <DependentUpon>CrearNoticia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Crear Noticia\Probability.cs" />
     <Compile Include="Crear Noticia\ProbabilityController.cs" />
     <Compile Include="Listar Noticias\ListarNoticias.cs">
       <SubType>Form</SubType>

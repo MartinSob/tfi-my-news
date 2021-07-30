@@ -53,8 +53,10 @@ namespace Protoype.Listar_Noticias
 			try {
 				string item = ((ListBox)sender).SelectedItem.ToString();
 				Recommendation rec = recommendations.First(r => r.title == item);
-				notaTxt.Text = rec.title;
 				rec.opens++;
+				notaTxt.Text = rec.title;
+				openTxt.Text = rec.opens.ToString();
+				likeTxt.Text = rec.likes.ToString();
 				selectedRecommendation = rec;
 			} catch (Exception err) { }
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Protoype.Crear_Noticia;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Protoype
 		double totalPostsRead = 10;
 		double avgParagraphs = 2;
 
-		public double calculate(string title, List<string> tags, string body) {
+		public Probability calculate(string title, List<string> tags, string body) {
 			var sportTag = new { avgWords = 2.0, postsOpen = 2.0, postsRead = 1.0 };
 			var econTag = new { avgWords = 5.0, postsOpen = 5.0, postsRead = 3.0 };
 			var politTag = new { avgWords = 3.0, postsOpen = 3.0, postsRead = 2.0 };
@@ -49,17 +50,20 @@ namespace Protoype
 					StringSplitOptions.RemoveEmptyEntries)
 				.Count();
 
-			double open = (totalOpen / totalPostsOpen) * 0.7;
-			double read = (totalRead / totalPostsRead) * 0.8;
-			double words = calculatePercentageDiff(bodyLength, totalAvgWords) * 0.3;
-			double paragraphs = calculatePercentageDiff(paragraphsCount, avgParagraphs) * 0.4;
+			var prob = new Probability() {
+				open = (totalOpen / totalPostsOpen),
+				read = (totalRead / totalPostsRead),
+				words = calculatePercentageDiff(bodyLength, totalAvgWords),
+				paragraphs = calculatePercentageDiff(paragraphsCount, avgParagraphs),
+			};
 
-			double result = ( open + read - paragraphs - words) * 100;
+			prob.calculateValue();
+			prob.calculateRecommendations();
+			
+			if (prob.value < 0)
+				prob.value = 0;
 
-			if (result < 0)
-				result = 0;
-
-			return result;
+			return prob;
 		}
 
 		int calculateBodyLenght(string body) {

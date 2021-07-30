@@ -33,13 +33,17 @@ namespace Protoype.Listar_Noticias
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.btnDislike = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
+			this.label2 = new System.Windows.Forms.Label();
+			this.openTxt = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.likeTxt = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnLike
 			// 
 			this.btnLike.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnLike.Location = new System.Drawing.Point(28, 73);
+			this.btnLike.Location = new System.Drawing.Point(29, 96);
 			this.btnLike.Name = "btnLike";
 			this.btnLike.Size = new System.Drawing.Size(75, 27);
 			this.btnLike.TabIndex = 0;
@@ -74,12 +78,16 @@ namespace Protoype.Listar_Noticias
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.likeTxt);
+			this.groupBox1.Controls.Add(this.label4);
+			this.groupBox1.Controls.Add(this.openTxt);
+			this.groupBox1.Controls.Add(this.label2);
 			this.groupBox1.Controls.Add(this.btnDislike);
 			this.groupBox1.Controls.Add(this.notaTxt);
 			this.groupBox1.Controls.Add(this.btnLike);
 			this.groupBox1.Location = new System.Drawing.Point(264, 38);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(216, 116);
+			this.groupBox1.Size = new System.Drawing.Size(216, 141);
 			this.groupBox1.TabIndex = 4;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Nota";
@@ -87,7 +95,7 @@ namespace Protoype.Listar_Noticias
 			// btnDislike
 			// 
 			this.btnDislike.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnDislike.Location = new System.Drawing.Point(109, 73);
+			this.btnDislike.Location = new System.Drawing.Point(110, 96);
 			this.btnDislike.Name = "btnDislike";
 			this.btnDislike.Size = new System.Drawing.Size(75, 27);
 			this.btnDislike.TabIndex = 5;
@@ -108,6 +116,40 @@ namespace Protoype.Listar_Noticias
 			this.button1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(12, 67);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(48, 13);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Abiertos:";
+			// 
+			// openTxt
+			// 
+			this.openTxt.AutoSize = true;
+			this.openTxt.Location = new System.Drawing.Point(69, 67);
+			this.openTxt.Name = "openTxt";
+			this.openTxt.Size = new System.Drawing.Size(0, 13);
+			this.openTxt.TabIndex = 7;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(110, 67);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(35, 13);
+			this.label4.TabIndex = 8;
+			this.label4.Text = "Likes:";
+			// 
+			// likeTxt
+			// 
+			this.likeTxt.AutoSize = true;
+			this.likeTxt.Location = new System.Drawing.Point(163, 67);
+			this.likeTxt.Name = "likeTxt";
+			this.likeTxt.Size = new System.Drawing.Size(0, 13);
+			this.likeTxt.TabIndex = 9;
 			// 
 			// ListarNoticias
 			// 
@@ -136,5 +178,9 @@ namespace Protoype.Listar_Noticias
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Button btnDislike;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label likeTxt;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label openTxt;
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Protoype.Crear_Noticia;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,8 +35,17 @@ namespace Protoype
 			}
 
 			try {
-				//prob.Text = String.Format("{0:.##}", controller.calculate(title.Text, tags, body.Text));
-				prob.Text = controller.calculate(title.Text, tags, body.Text).ToString();
+				var p = new Probability();
+				p = controller.calculate(title.Text, tags, body.Text);
+
+				prob.Text = String.Format("{0:0.00}", p.value);
+
+				string message = "";
+				foreach (string m in p.recommendations) {
+					message += m + "\n";
+				}
+
+				MessageBox.Show(message);
 			} catch (Exception exc) {
 				prob.Text = exc.Message;
 			}
