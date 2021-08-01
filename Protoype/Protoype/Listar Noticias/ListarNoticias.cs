@@ -19,27 +19,27 @@ namespace Protoype.Listar_Noticias
 			InitializeComponent();
 
 			recommendations.Add(new Recommendation {
-				title = "Zoom: cómo convertirse en un personaje de Pixar durante una videollamada",
+				title = "1 - Zoom: cómo convertirse en un personaje de Pixar durante una videollamada",
 				opens = 0,
 				likes = 0,
 			});
 			recommendations.Add(new Recommendation {
-				title = "Cómo eliminar permanentemente una cuenta de Instagram",
+				title = "2 - Cómo eliminar permanentemente una cuenta de Instagram",
 				opens = 0,
 				likes = 0,
 			});
 			recommendations.Add(new Recommendation {
-				title = "Google y Facebook exigirán que todos los empleados estén vacunados antes del regreso a las oficinas",
+				title = "3 - Google y Facebook exigirán que todos los empleados estén vacunados antes del regreso a las oficinas",
 				opens = 0,
 				likes = 0,
 			});
 			recommendations.Add(new Recommendation {
-				title = "WhatsApp prepara función para transferir chats entre iOS y Android",
+				title = "4 - WhatsApp prepara función para transferir chats entre iOS y Android",
 				opens = 0,
 				likes = 0,
 			});
 			recommendations.Add(new Recommendation {
-				title = "Cómo usar la función de Mejores Amigos en Instagram",
+				title = "5 - Cómo usar la función de Mejores Amigos en Instagram",
 				opens = 0,
 				likes = 0,
 			});

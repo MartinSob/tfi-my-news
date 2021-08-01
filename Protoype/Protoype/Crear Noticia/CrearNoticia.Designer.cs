@@ -62,6 +62,7 @@ namespace Protoype
 			this.title.Name = "title";
 			this.title.Size = new System.Drawing.Size(162, 20);
 			this.title.TabIndex = 2;
+			this.title.Text = "Titulo de nota";
 			// 
 			// body
 			// 
@@ -70,6 +71,7 @@ namespace Protoype
 			this.body.Name = "body";
 			this.body.Size = new System.Drawing.Size(162, 174);
 			this.body.TabIndex = 3;
+			this.body.Text = "Esto es\r\n\r\nun \r\n\r\nejemplo";
 			// 
 			// label2
 			// 
@@ -144,6 +146,8 @@ namespace Protoype
 			// cbx_pol
 			// 
 			this.cbx_pol.AutoSize = true;
+			this.cbx_pol.Checked = true;
+			this.cbx_pol.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.cbx_pol.Location = new System.Drawing.Point(38, 82);
 			this.cbx_pol.Name = "cbx_pol";
 			this.cbx_pol.Size = new System.Drawing.Size(60, 17);
