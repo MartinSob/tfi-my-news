@@ -51,6 +51,10 @@ namespace Protoype.Listar_Noticias
 
 		private void listBox1_SelectedValueChanged(object sender, EventArgs e) {
 			try {
+				if (((ListBox)sender).SelectedItem == null) {
+					return;
+				}
+
 				string item = ((ListBox)sender).SelectedItem.ToString();
 				Recommendation rec = recommendations.First(r => r.title == item);
 				rec.opens++;
@@ -58,7 +62,9 @@ namespace Protoype.Listar_Noticias
 				openTxt.Text = rec.opens.ToString();
 				likeTxt.Text = rec.likes.ToString();
 				selectedRecommendation = rec;
-			} catch (Exception err) { }
+			} catch (Exception err) {
+				Console.Write(err.Message);
+			}
 		}
 
 		private void btnLike_Click(object sender, EventArgs e) {

@@ -1,0 +1,12 @@
+C:\Projects\my-news\Protoype\Protoype\bin\Release\Protoype.exe.config
+C:\Projects\my-news\Protoype\Protoype\bin\Release\Protoype.exe
+C:\Projects\my-news\Protoype\Protoype\bin\Release\Protoype.pdb
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.csproj.AssemblyReference.cache
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.CrearNoticia.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.Listar_Noticias.ListarNoticias.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.Properties.Resources.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.Prototype.resources
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.csproj.GenerateResource.cache
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.csproj.CoreCompileInputs.cache
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.exe
+C:\Projects\my-news\Protoype\Protoype\obj\Release\Protoype.pdb

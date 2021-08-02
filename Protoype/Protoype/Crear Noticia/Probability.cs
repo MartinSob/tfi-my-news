@@ -25,23 +25,23 @@ namespace Protoype.Crear_Noticia
 			}
 
 			if (read < 0.3) {
-				recommendations.Add("Los tags seleccionados no suelen ser leidos.");
+				recommendations.Add("Los tags seleccionados no suelen ser leídos.");
 			}
 
 			if (words > 0) {
-				recommendations.Add("Las notas con exito suelen ser mas cortas.");
+				recommendations.Add("Las notas con éxito suelen ser más cortas.");
 			}
 
 			if (words < 0) {
-				recommendations.Add("Las notas con exito suelen ser mas largas.");
+				recommendations.Add("Las notas con éxito suelen ser más largas.");
 			}
 
-			if (paragraphs > 0) {
-				recommendations.Add("Las notas con exito suelen tener mas parrafos");
+			if (paragraphs > 0.5) {
+				recommendations.Add("Las notas con éxito suelen tener más párrafos");
 			}
 
-			if (paragraphs < 0) {
-				recommendations.Add("Las notas con exito suelen tener menos parrafos");
+			if (paragraphs < 0.5) {
+				recommendations.Add("Las notas con éxito suelen tener menos párrafos");
 			}
 		}
 	}
