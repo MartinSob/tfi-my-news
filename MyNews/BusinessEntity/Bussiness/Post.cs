@@ -2,7 +2,7 @@
 
 namespace BusinessEntity
 {
-	class Post
+	public class Post
 	{
 		public int id;
 		public string title;

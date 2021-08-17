@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
-	class Writer
+	public class Writer
 	{
 		public int writerId;
 		public DateTime startDay;

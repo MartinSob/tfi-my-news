@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
-	class BitacoreFilter
+	public class BitacoreFilter
 	{
 		public DateTime from;
 		public DateTime to;

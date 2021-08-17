@@ -2,7 +2,7 @@
 
 namespace BusinessEntity
 {
-	class Role
+	public class Role
 	{
 		public List<Policy> policies;
 	}

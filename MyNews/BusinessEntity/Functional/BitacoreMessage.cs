@@ -2,7 +2,7 @@
 
 namespace BusinessEntity
 {
-	class BitacoreMessage
+	public class BitacoreMessage
 	{
 		public int id;
 		public string title;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
-	class Backup
+	public class Backup
 	{
 		public int id;
 		public string name;

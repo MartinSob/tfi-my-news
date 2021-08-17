@@ -2,7 +2,7 @@
 
 namespace BusinessEntity
 {
-	class UserView
+	public class UserView
 	{
 		public int id;
 		public User user;

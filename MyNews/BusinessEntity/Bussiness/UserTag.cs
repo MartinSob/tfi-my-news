@@ -2,7 +2,7 @@
 
 namespace BusinessEntity
 {
-	class UserTag
+	public class UserTag
 	{
 		public int id;
 		public User user;

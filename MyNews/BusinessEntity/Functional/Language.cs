@@ -2,7 +2,7 @@
 
 namespace BusinessEntity
 {
-	class Language
+	public class Language
 	{
 		public string name;
 		public Dictionary<string, string> texts;

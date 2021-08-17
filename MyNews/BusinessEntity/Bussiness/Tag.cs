@@ -1,6 +1,6 @@
 ﻿namespace BusinessEntity
 {
-	class Tag
+	public class Tag
 	{
 		public int id;
 		public string name;
