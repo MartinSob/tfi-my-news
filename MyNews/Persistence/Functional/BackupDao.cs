@@ -9,19 +9,19 @@ namespace Persistence.Functional
 {
 	public class BackupDao : ConnectionDao
 	{
-		bool restore(Backup backup) {
+		public bool restore(Backup backup) {
 			// TODO
 
 			return true;
 		}
 
-		bool backup(Backup backup) {
+		public bool backup(Backup backup) {
 			// TODO
 
 			return true;
 		}
 
-		List<Backup> get() {
+		public List<Backup> get() {
 			// TODO
 
 			return new List<Backup>();

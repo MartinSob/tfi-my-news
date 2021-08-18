@@ -9,13 +9,13 @@ namespace Persistence.Functional
 {
 	public class LanguageDao : ConnectionDao
 	{
-		Language load(Language language) {
+		public Language load(Language language) {
 			// TODO
 
 			return new Language();
 		}
 
-		List<Language> get() {
+		public List<Language> get() {
 			// TODO
 
 			return new List<Language>();

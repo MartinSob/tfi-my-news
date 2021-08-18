@@ -9,13 +9,13 @@ namespace Persistence.Functional
 {
 	public class BitacoreDao : ConnectionDao
 	{
-		int create(BitacoreMessage message) {
+		public int create(BitacoreMessage message) {
 			// TODO
 			
 			return 1;
 		}
 
-		List<BitacoreMessage> get(BitacoreFilter filter) {
+		public List<BitacoreMessage> get(BitacoreFilter filter) {
 			// TODO
 
 			return new List<BitacoreMessage>();

@@ -20,7 +20,7 @@ namespace Persistence.Functional
 			return new List<string>();
 		}
 
-		List<string> getTables() {
+		public List<string> getTables() {
 			// TODO
 
 			return new List<string>();
@@ -32,19 +32,19 @@ namespace Persistence.Functional
 			return "";
 		}
 
-		string calculateDvv(string table) {
+		public string calculateDvv(string table) {
 			// TODO
 
 			return "";
 		}
 
-		void updateDvv(string table) {
+		public void updateDvv(string table) {
 			// TODO
 
 			return;
 		}
 
-		void updateDvh(string table) {
+		public void updateDvh(string table) {
 			// TODO
 
 			return;

@@ -9,55 +9,55 @@ namespace Persistence.Functional
 {
 	public class PolicyDao : ConnectionDao
 	{
-		bool assignRole(User user, Policy policy) {
+		public bool assignRole(User user, Policy policy) {
 			// TODO
 			
 			return true;
 		}
 
-		bool assignBasicRole(User user) {
+		public bool assignBasicRole(User user) {
 			// TODO
 
 			return true;
 		}
 
-		bool delete(int id) {
+		public bool delete(int id) {
 			// TODO
 
 			return true;
 		}
 
-		bool exists(string username, string mail) {
+		public bool exists(string names) {
 			// TODO
 
 			return true;
 		}
 
-		int create(Policy policy) {
+		public int create(Policy policy) {
 			// TODO
 
 			return 1;
 		}
 
-		int update(Policy policy) {
+		public int update(Policy policy) {
 			// TODO
 
 			return 1;
 		}
 
-		List<Policy> get(User user) {
+		public List<Policy> get(User user) {
 			// TODO
 
 			return new List<Policy>();
 		}
 
-		List<Policy> get() {
+		public List<Policy> get() {
 			// TODO
 
 			return new List<Policy>();
 		}
 
-		void cleanRoles(User user) {
+		public void cleanRoles(User user) {
 			// TODO
 		}
 	}

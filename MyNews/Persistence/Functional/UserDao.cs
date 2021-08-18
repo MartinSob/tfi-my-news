@@ -4,55 +4,55 @@ namespace Persistence.Functional
 {
 	public class UserDao : ConnectionDao
 	{
-		bool delete(int id) {
+		public bool delete(int id) {
 			// TODO
 
 			return true;
 		}
 
-		bool exists(string username, string mail) {
+		public bool exists(string username, string mail) {
 			// TODO
 
 			return true;
 		}
 
-		int addFailedAttempt(string username) {
+		public int addFailedAttempt(string username) {
 			// TODO
 
 			return 1;
 		}
 
-		User create(User writer) {
+		public User create(User user) {
 			// TODO
 
 			return new User();
 		}
 
-		User update(User writer) {
+		public User update(User user) {
 			// TODO
 
 			return new User();
 		}
 
-		User login(User writer) {
+		public User login(User user) {
 			// TODO
 
 			return new User();
 		}
 
-		User create(int id) {
+		public User create(int id) {
 			// TODO
 
 			return new User();
 		}
 
-		void block(User writer) {
+		public void block(User user) {
 			// TODO
 
 			return;
 		}
 
-		void restartFailedAttempts(int userId) {
+		public void restartFailedAttempts(int userId) {
 			// TODO
 
 			return;
