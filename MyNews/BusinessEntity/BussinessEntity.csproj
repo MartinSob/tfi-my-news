@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39806EF0-4064-4A82-8D20-1C1CB4C068D0}</ProjectGuid>
+    <ProjectGuid>{93EA0B26-C213-4D43-87A6-AC751B56D8D9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Persistence</RootNamespace>
-    <AssemblyName>Persistence</AssemblyName>
+    <RootNamespace>BusinessEntity</RootNamespace>
+    <AssemblyName>BusinessEntity</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,25 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bussiness\PostDao.cs" />
-    <Compile Include="Bussiness\ProbabilityDao.cs" />
-    <Compile Include="Bussiness\TagDao.cs" />
-    <Compile Include="Bussiness\WriterDao.cs" />
-    <Compile Include="ConnectionDao.cs" />
-    <Compile Include="Functional\BackupDao.cs" />
-    <Compile Include="Functional\BitacoreDao.cs" />
-    <Compile Include="Functional\DvDao.cs" />
-    <Compile Include="Functional\ErrorDao.cs" />
-    <Compile Include="Functional\LanguageDao.cs" />
-    <Compile Include="Functional\PolicyDao.cs" />
-    <Compile Include="Functional\UserDao.cs" />
+    <Compile Include="Functional\Backup.cs" />
+    <Compile Include="Functional\BitacoreFilter.cs" />
+    <Compile Include="Functional\BitacoreMessage.cs" />
+    <Compile Include="Functional\Language.cs" />
+    <Compile Include="Functional\Policy.cs" />
+    <Compile Include="Bussiness\Post.cs" />
+    <Compile Include="Bussiness\PostRecommendation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessEntity\BussinessEntity.csproj">
-      <Project>{93ea0b26-c213-4d43-87a6-ac751b56d8d9}</Project>
-      <Name>BussinessEntity</Name>
-    </ProjectReference>
+    <Compile Include="Functional\Role.cs" />
+    <Compile Include="Bussiness\Tag.cs" />
+    <Compile Include="Bussiness\TagRecommendation.cs" />
+    <Compile Include="Functional\User.cs" />
+    <Compile Include="Bussiness\UserTag.cs" />
+    <Compile Include="Bussiness\UserView.cs" />
+    <Compile Include="Bussiness\Writer.cs" />
+    <Compile Include="Bussiness\WriterRecommendation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
