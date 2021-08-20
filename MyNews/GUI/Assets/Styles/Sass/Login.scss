@@ -1,0 +1,23 @@
+﻿.login {
+	&-center {
+		display: flex;
+		height: 100vh;
+		justify-content: center;
+		overflow: hidden;
+	}
+
+	&-container {
+		display: flex;
+		align-items: center;
+	}
+
+	&-box {
+		border-radius: 5px;
+		background-color: #dcdcdc;
+		padding: 1rem;
+	}
+
+	&-navbar {
+		justify-content: center;
+	}
+}

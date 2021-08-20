@@ -16,7 +16,7 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Login(string username, string password) {
-            return View();
+            return Json(new { id = 1, value = "new" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

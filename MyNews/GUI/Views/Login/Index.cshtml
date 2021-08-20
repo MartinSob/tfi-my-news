@@ -1,0 +1,63 @@
+﻿@{
+	ViewBag.Title = "Login";
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+	@Styles.Render("~/Content/css")
+</head>
+
+<body>
+	<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand login-navbar">
+			<a class="navbar-item" href="https://bulma.io">
+				<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+			</a>
+		</div>
+	</nav>
+
+	<div class="login-center">
+		<div class="columns login-container">
+			<div class="column login-box">
+				<h2 class="title is-2">Login</h2>
+
+				<div class="field">
+					<label class="label">Username</label>
+					<div class="control has-icons-left has-icons-right">
+						<input class="input" type="text" placeholder="Text input" value="admin">
+						<span class="icon is-small is-left">
+							<i class="fas fa-user"></i>
+						</span>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Password</label>
+					<div class="control has-icons-left has-icons-right">
+						<input class="input" type="password" placeholder="Text input" value="admin">
+						<span class="icon is-small is-left">
+							<i class="fas fa-lock"></i>
+						</span>
+					</div>
+				</div>
+
+				<button class="button is-info is-pulled-right">Login</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+		get('Login/Login?username=asd&password=aaaa');
+
+	</script>
+
+	@Scripts.Render("~/Content/js")
+</body>
+</html>
+
