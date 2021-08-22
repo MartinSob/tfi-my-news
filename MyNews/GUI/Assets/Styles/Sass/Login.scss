@@ -1,23 +1,64 @@
 ﻿.login {
 	&-center {
-		display: flex;
 		height: 100vh;
-		justify-content: center;
 		overflow: hidden;
+		background: linear-gradient(90deg, rgba(30,88,63,1) 0%, rgba(38,113,80,1) 62%, rgba(63,189,134,1) 100%);
 	}
 
 	&-container {
+		height: 100%;
+	}
+
+	&-column {
 		display: flex;
+		justify-content: center;
 		align-items: center;
+
+		&-right {
+			justify-content: flex-start;
+		}
+
+		&-left {
+			justify-content: flex-end;
+		}
+
+		.company-container {
+			padding: 2rem;
+			border: solid 1px gainsboro;
+			border-radius: 5px;
+			background-color: #00000045;
+			text-align: center;
+			margin: 2rem;
+
+			image {
+				padding: 1rem;
+			}
+
+			p {
+				color: #d0d0d0;
+				padding: 1rem;
+			}
+		}
 	}
 
 	&-box {
 		border-radius: 5px;
 		background-color: #dcdcdc;
-		padding: 1rem;
+		margin: 2rem;
+		padding: 2rem;
+		border-right: solid 10px #464646;
 	}
 
-	&-navbar {
-		justify-content: center;
+	// Mobile
+	@media (max-width: 1022px) {
+		&-column {
+			.company-container {
+				margin-bottom: 0;
+			}
+		}
+
+		&-box {
+			margin-top: 0;
+		}
 	}
 }

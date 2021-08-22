@@ -13,40 +13,40 @@
 </head>
 
 <body>
-	<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-		<div class="navbar-brand login-navbar">
-			<a class="navbar-item" href="https://bulma.io">
-				<img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-			</a>
-		</div>
-	</nav>
-
 	<div class="login-center">
-		<div class="columns login-container">
-			<div class="column login-box">
-				<h2 class="title is-2">Login</h2>
-
-				<div class="field">
-					<label class="label">Username</label>
-					<div class="control has-icons-left has-icons-right">
-						<input id="username" class="input" type="text" placeholder="Text input" value="admin">
-						<span class="icon is-small is-left">
-							<i class="fas fa-user"></i>
-						</span>
-					</div>
+		<div class="columns is-desktop login-container">
+			<div class="column login-column login-column-left">
+				<div class="company-container">
+					<img src="~/Assets/Images/logo.png">
+					<p>El mejor lugar para enterarte de las noticias.</p>
 				</div>
+			</div>
+			<div class="column login-column login-column-right">
+				<div class="login-box">
+					<h2 class="title is-2">Login</h2>
 
-				<div class="field">
-					<label class="label">Password</label>
-					<div class="control has-icons-left has-icons-right">
-						<input id="password" class="input" type="password" placeholder="Text input" value="admin">
-						<span class="icon is-small is-left">
-							<i class="fas fa-lock"></i>
-						</span>
+					<div class="field">
+						<label class="label">Username</label>
+						<div class="control has-icons-left has-icons-right">
+							<input id="username" class="input" type="text" placeholder="Text input" value="admin">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+						</div>
 					</div>
-				</div>
 
-				<button id="loginBtn" class="button is-info is-pulled-right">Login</button>
+					<div class="field">
+						<label class="label">Password</label>
+						<div class="control has-icons-left has-icons-right">
+							<input id="password" class="input" type="password" placeholder="Text input" value="admin">
+							<span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
+						</div>
+					</div>
+
+					<button id="loginBtn" class="button is-info is-pulled-right">Login</button>
+				</div>
 			</div>
 		</div>
 	</div>

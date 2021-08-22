@@ -1,1 +1,1 @@
-sass --no-source-map Sass/Site.scss Site.css --style=compressed
+sass --no-source-map Sass/Site.scss Site.css --style=compressed --watch
