@@ -8,7 +8,7 @@ namespace Persistence.Functional
 {
 	public class ErrorDao
 	{
-		void create(string text) { 
+		public void create(string text) { 
 			// TODO
 		}
 	}

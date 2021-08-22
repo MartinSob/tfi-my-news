@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,45 +11,137 @@ namespace Persistence.Functional
 	public class DvDao : ConnectionDao
 	{
 		bool verifyDvv(string table) {
-			// TODO
-
-			return true;
+			string dvvCalculado = calculateDvv(table).GetHashCode().ToString();
+			return dvvCalculado.Equals(getDvv(table));
 		}
 
 		List<string> verifyDvh(string table) {
-			// TODO
+			List<string> result = new List<string>();
 
-			return new List<string>();
+			string selectDVH = $"SELECT * FROM {table}";
+			SqlCommand query = new SqlCommand(selectDVH, conn);
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
+
+			var dvhs = new System.Text.StringBuilder();
+			int row = 1;
+			while (data.Read()) {
+				for (int i = 0; i < data.FieldCount; i++) {
+					if (!data.GetName(i).Equals("dvh")) {
+						dvhs.Append(data.GetValue(i).GetHashCode().ToString());
+					}
+				}
+
+				string dvhsCalculated = dvhs.ToString().GetHashCode().ToString();
+				if (dvhsCalculated != data["dvh"].ToString()) {
+					result.Add(row.ToString());
+				}
+				row++;
+				dvhs.Clear();
+			}
+			conn.Close();
+
+			return result;
 		}
 
 		public List<string> getTables() {
-			// TODO
+			string selectDVV = "SELECT table_name FROM dvv";
+			SqlCommand query = new SqlCommand(selectDVV, conn);
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
 
-			return new List<string>();
+			List<string> names = new List<string>();
+			while (data.Read()) {
+				names.Add(data["table_name"].ToString());
+			}
+			conn.Close();
+
+			return names;
 		}
 
 		string getDvv(string table) {
-			// TODO
-			
-			return "";
+			string selectDVV = $"SELECT dvv FROM dvv WHERE table_name = '{table}'";
+			SqlCommand query = new SqlCommand(selectDVV, conn);
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
+
+			string dvv = "";
+			while (data.Read()) {
+				dvv = data["dvv"].ToString();
+			}
+			conn.Close();
+
+			return dvv;
 		}
 
 		public string calculateDvv(string table) {
-			// TODO
+			string selectDVH = $"SELECT dvh FROM {table}";
+			SqlCommand query = new SqlCommand(selectDVH, conn);
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
 
-			return "";
+			var dvhs = new StringBuilder();
+			while (data.Read()) {
+				dvhs.Append(data["dvh"]);
+			}
+			conn.Close();
+
+			return dvhs.ToString();
 		}
 
 		public void updateDvv(string table) {
-			// TODO
+			try {
+				if (conn.State == ConnectionState.Open) {
+					return;
+				}
 
-			return;
+				string SQL = $"UPDATE Dvv SET dvv = '{calculateDvv(table).GetHashCode().ToString()}' WHERE table_name = '{table}'";
+				conn.Open();
+				SqlCommand mCom = new SqlCommand(SQL, conn);
+
+				mCom.ExecuteNonQuery();
+				conn.Close();
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+			}
 		}
 
 		public void updateDvh(string table) {
-			// TODO
+			try {
+				if (conn.State == ConnectionState.Open) {
+					return;
+				}
 
-			return;
+				List<string> result = new List<string>();
+
+				string selectDVH = $"SELECT * FROM {table}";
+				SqlCommand selectQuery = new SqlCommand(selectDVH, conn);
+				conn.Open();
+				SqlDataReader data = selectQuery.ExecuteReader();
+
+				var finalQuery = new StringBuilder();
+				var dvhs = new StringBuilder();
+				int row = 1;
+				while (data.Read()) {
+					for (int i = 0; i < data.FieldCount; i++) {
+						if (!data.GetName(i).Equals("dvh")) {
+							dvhs.Append(data.GetValue(i).GetHashCode().ToString());
+						}
+					}
+
+					finalQuery.Append($"UPDATE {table} SET dvh = '{dvhs.ToString().GetHashCode().ToString()}' WHERE id = {data["id"].ToString()};");
+					row++;
+					dvhs.Clear();
+				}
+				conn.Close();
+
+				conn.Open();
+				SqlCommand updateQuery = new SqlCommand(finalQuery.ToString(), conn);
+				updateQuery.ExecuteNonQuery();
+				conn.Close();
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+			}
 		}
 	}
 }

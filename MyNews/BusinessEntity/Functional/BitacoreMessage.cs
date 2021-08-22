@@ -6,9 +6,17 @@ namespace BusinessEntity
 	{
 		public int id;
 		public string title;
-		public string type;
+		public MessageType type;
 		public string description;
 		public DateTime date;
 		public User user;
+	}
+
+	public enum MessageType
+	{
+		Info,
+		Error,
+		Warning,
+		Control
 	}
 }

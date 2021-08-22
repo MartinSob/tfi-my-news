@@ -21,11 +21,11 @@ namespace Persistence.Functional
 			return new List<Language>();
 		}
 
-		void load(User user) {
+		public void load(User user) {
 			// TODO
 		}
 
-		void setToUser(Language language) { 
+		public void setToUser(Language language) { 
 			// TODO
 		}
 	}

@@ -35,23 +35,45 @@ namespace Security
 		}
 
 		public User login(User user) {
-			return dao.login(user);
+			user.password = new EncryptBl().encrypt(user.password);
+			User loggedUser = dao.login(user);
+
+			if (loggedUser == null) {
+				int failedAttempts = dao.addFailedAttempt(user.username);
+
+				if (failedAttempts > 5) {
+					new BitacoreBl().create(new BitacoreMessage() {
+						title = "Intentos fallidos",
+						type = MessageType.Warning,
+						description = $"{user.username} ha intentado iniciar sesión {failedAttempts} veces",
+						user = null
+					});
+
+					dao.block(user);
+					return null;
+				}
+			}
+
+			dao.restartFailedAttempts(user);
+
+			// Consultar permiso?
+
+			// new LanguageDao().load(loggedUser);
+
+			return loggedUser;
 		}
 
-		public void logout() {
-			// TODO
+		public void logout(User user) {
+			new BitacoreBl().create(new BitacoreMessage() {
+				title = "Cerrar Sesión",
+				type = MessageType.Info,
+				description = $"{user.username} ha cerrado sesión.",
+				user = user
+			});
 		}
 
 		public User update(User user) {
 			return dao.update(user);
-		}
-
-		public void block(User user) {
-			dao.block(user);
-		}
-
-		public void restartFailedAttempts(int userId) {
-			dao.restartFailedAttempts(userId);
 		}
 	}
 }

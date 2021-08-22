@@ -29,7 +29,7 @@
 				<div class="field">
 					<label class="label">Username</label>
 					<div class="control has-icons-left has-icons-right">
-						<input class="input" type="text" placeholder="Text input" value="admin">
+						<input id="username" class="input" type="text" placeholder="Text input" value="admin">
 						<span class="icon is-small is-left">
 							<i class="fas fa-user"></i>
 						</span>
@@ -39,22 +39,24 @@
 				<div class="field">
 					<label class="label">Password</label>
 					<div class="control has-icons-left has-icons-right">
-						<input class="input" type="password" placeholder="Text input" value="admin">
+						<input id="password" class="input" type="password" placeholder="Text input" value="admin">
 						<span class="icon is-small is-left">
 							<i class="fas fa-lock"></i>
 						</span>
 					</div>
 				</div>
 
-				<button class="button is-info is-pulled-right">Login</button>
+				<button id="loginBtn" class="button is-info is-pulled-right">Login</button>
 			</div>
 		</div>
 	</div>
 
 	<script>
-
-		get('Login/Login?username=asd&password=aaaa');
-
+		document.getElementById("loginBtn").addEventListener("click", () => {
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			get('Login/Login?username=' + username + '&password=' + password);
+		});
 	</script>
 
 	@Scripts.Render("~/Content/js")

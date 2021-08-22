@@ -12,5 +12,7 @@ namespace BusinessEntity
 		public string username;
 		public string password;
 		public Language language;
+		public bool active;
+		public int failedAttempts;
 	}
 }
