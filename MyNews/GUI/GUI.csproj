@@ -133,17 +133,12 @@
     <Content Include="Assets\Fonts\fa-solid-900.svg" />
     <Content Include="Assets\Js\requests.js" />
     <Content Include="Assets\Styles\fa.min.css" />
+    <Content Include="Assets\Styles\Sass\Home.scss" />
     <None Include="Assets\Styles\Sass\Login.scss" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Assets\Styles\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assets\Fonts\fa-brands-400.eot" />
     <Content Include="Assets\Fonts\fa-brands-400.ttf" />
     <Content Include="Assets\Fonts\fa-brands-400.woff" />
@@ -157,17 +152,6 @@
     <Content Include="Assets\Fonts\fa-solid-900.woff" />
     <Content Include="Assets\Fonts\fa-solid-900.woff2" />
     <Content Include="Assets\Styles\Sass\Site.scss" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Assets\Styles\bulma-rtl.min.css" />
     <Content Include="Assets\Styles\bulma.min.css" />
     <Content Include="Web.config" />
@@ -195,13 +179,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Assets\Styles\Sass\Navbar.scss" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntity\BussinessEntity.csproj">
