@@ -13,9 +13,9 @@ namespace Persistence.Functional
 	{
 		public bool restore(Backup backup) {
 			try {
-				SqlCommand singleUser = new SqlCommand("ALTER DATABASE aWords SET Single_User WITH Rollback Immediate", conn);
-				SqlCommand query = new SqlCommand("USE master; RESTORE DATABASE aWords FROM DISK = @bkpPath WITH REPLACE;", conn);
-				SqlCommand multiUser = new SqlCommand("ALTER DATABASE aWords SET Multi_User", conn);
+				SqlCommand singleUser = new SqlCommand("ALTER DATABASE myNews SET Single_User WITH Rollback Immediate", conn);
+				SqlCommand query = new SqlCommand("USE master; RESTORE DATABASE myNews FROM DISK = @bkpPath WITH REPLACE;", conn);
+				SqlCommand multiUser = new SqlCommand("ALTER DATABASE myNews SET Multi_User", conn);
 
 				query.Parameters.AddWithValue("@bkpPath", backup.name);
 
@@ -32,16 +32,18 @@ namespace Persistence.Functional
 			}
 		}
 
-		public bool backup(Backup backup) {
+		public bool backup(string path) {
 			try {
-				SqlCommand query = new SqlCommand("BACKUP DATABASE aWords TO  DISK = @bkpPath", conn);
-				string bkpPath = Directory.GetCurrentDirectory() + "\\..\\..\\..\\BackUps\\bkp" + getTimestamp(DateTime.Now) + ".bak";
+				SqlCommand query = new SqlCommand("BACKUP DATABASE myNews TO  DISK = @bkpPath", conn);
+				string bkpPath = path + "\\..\\BackUps\\bkp_" + getTimestamp(DateTime.Now) + ".bak";
 				File.Delete(bkpPath);
 				query.Parameters.AddWithValue("@bkpPath", bkpPath);
 
 				conn.Open();
 				query.ExecuteNonQuery();
 				conn.Close();
+
+				insert("backups", new string[] { "name", "date" }, new string[] { "", DateTime.Now.ToString() });
 
 				return true;
 			} catch (Exception e) {

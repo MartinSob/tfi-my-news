@@ -1,0 +1,28 @@
+﻿<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column">
+			<h1 class="title is-2"><i class="fas fa-archive"></i> Backup</h1>
+			<p>Use this to create a new backup file with all the data gathered to the date.</p>
+			<button id="backupBtn" class="button is-success my-4">Create</button>
+		</div>
+		<div class="column left-divider">
+			<h1 class="title is-2"><i class="fas fa-box-open"></i> Restore</h1>
+			<p>Use this to restore the data from a backup file created before.</p>
+			<input type='file' />
+			<button id="restoreBtn" class="button is-success my-4">Create</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	document.getElementById("backupBtn").addEventListener("click", async () => {
+		const response = await get('Backup/CreateBackup');
+		console.log(response);
+	});
+
+	document.getElementById("restoreBtn").addEventListener("click", async () => {
+
+		//const response = await get('Backup/CreateRestore?name=' + );
+		//console.log(response);
+	});
+</script>

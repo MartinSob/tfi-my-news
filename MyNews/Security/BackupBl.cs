@@ -13,8 +13,8 @@ namespace Security
 			return dao.restore(backup);
 		}
 
-		public bool backup(Backup backup) {
-			return dao.backup(backup);
+		public bool backup(string path) {
+			return dao.backup(path);
 		}
 
 		public List<Backup> get() {
