@@ -23,5 +23,10 @@ namespace MyNews.Controllers
             Session["user"] = loggedUser;
             return Json(new { id = 1, value = "new" }, JsonRequestBehavior.AllowGet);
         }
+
+        // GET: Login/Signup
+        public ActionResult Signup() {
+            return View();
+        }
     }
 }

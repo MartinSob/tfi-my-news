@@ -9,8 +9,8 @@ namespace Security
 	{
 		BackupDao dao = new BackupDao();
 
-		public bool restore(Backup backup) {
-			return dao.restore(backup);
+		public bool restore(Backup backup, string path) {
+			return dao.restore(backup, path);
 		}
 
 		public bool backup(string path) {

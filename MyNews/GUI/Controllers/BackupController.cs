@@ -1,4 +1,6 @@
-﻿using Security;
+﻿using BusinessEntity;
+using MyNews.Models;
+using Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,7 @@ namespace MyNews.Controllers
         // GET: Backup
         public ActionResult Index()
         {
-            //new BackupBl().get();
-            return View();
+            return View(new ListModel<Backup>(new BackupBl().get()));
         }
 
         public ActionResult CreateBackup() {
@@ -25,9 +26,9 @@ namespace MyNews.Controllers
         }
 
         public ActionResult CreateRestore(string name) {
-            if (new BackupBl().restore(new BusinessEntity.Backup {
+            if (new BackupBl().restore(new Backup {
                 name = name,
-            })) {
+            }, Server.MapPath("/"))) {
                 return Json(new { type = "success", description = "The restore was successfuly." }, JsonRequestBehavior.AllowGet);
             } else {
                 return Json(new { type = "error", description = "There was an error with the restore." }, JsonRequestBehavior.AllowGet);

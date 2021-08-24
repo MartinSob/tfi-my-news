@@ -11,13 +11,13 @@ namespace Persistence.Functional
 {
 	public class BackupDao : ConnectionDao
 	{
-		public bool restore(Backup backup) {
+		public bool restore(Backup backup, string path) {
 			try {
 				SqlCommand singleUser = new SqlCommand("ALTER DATABASE myNews SET Single_User WITH Rollback Immediate", conn);
 				SqlCommand query = new SqlCommand("USE master; RESTORE DATABASE myNews FROM DISK = @bkpPath WITH REPLACE;", conn);
 				SqlCommand multiUser = new SqlCommand("ALTER DATABASE myNews SET Multi_User", conn);
 
-				query.Parameters.AddWithValue("@bkpPath", backup.name);
+				query.Parameters.AddWithValue("@bkpPath", path + "..\\BackUps\\" + backup.name);
 
 				conn.Open();
 				singleUser.ExecuteNonQuery();
@@ -34,8 +34,9 @@ namespace Persistence.Functional
 
 		public bool backup(string path) {
 			try {
+				string fileName = "bkp_" + getTimestamp(DateTime.Now) + ".bak";
 				SqlCommand query = new SqlCommand("BACKUP DATABASE myNews TO  DISK = @bkpPath", conn);
-				string bkpPath = path + "\\..\\BackUps\\bkp_" + getTimestamp(DateTime.Now) + ".bak";
+				string bkpPath = path + "\\..\\BackUps\\" + fileName;
 				File.Delete(bkpPath);
 				query.Parameters.AddWithValue("@bkpPath", bkpPath);
 
@@ -43,7 +44,7 @@ namespace Persistence.Functional
 				query.ExecuteNonQuery();
 				conn.Close();
 
-				insert("backups", new string[] { "name", "date" }, new string[] { "", DateTime.Now.ToString() });
+				insert("backups", new string[] { "name", "date" }, new string[] { fileName, DateTime.Now.ToString() });
 
 				return true;
 			} catch (Exception e) {
@@ -54,7 +55,7 @@ namespace Persistence.Functional
 
 		public List<Backup> get() {
 			try {
-				string consultaSQL = $"SELECT * FROM bakcups";
+				string consultaSQL = $"SELECT * FROM backups";
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
 				conn.Open();

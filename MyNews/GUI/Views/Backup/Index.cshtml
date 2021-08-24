@@ -1,14 +1,44 @@
-﻿<div class="container.is-widescreen my-5">
+﻿@using BusinessEntity;
+@using MyNews.Models;
+@model ListModel<BusinessEntity.Backup>
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
 	<div class="columns">
-		<div class="column">
+		<div class="column px-5">
 			<h1 class="title is-2"><i class="fas fa-archive"></i> Backup</h1>
 			<p>Use this to create a new backup file with all the data gathered to the date.</p>
 			<button id="backupBtn" class="button is-success my-4">Create</button>
 		</div>
-		<div class="column left-divider">
+		<div class="column left-divider px-5">
 			<h1 class="title is-2"><i class="fas fa-box-open"></i> Restore</h1>
 			<p>Use this to restore the data from a backup file created before.</p>
-			<input type='file' />
+
+			<table class="table is-striped is-hoverable">
+				<thead>
+					<tr>
+						<th></th>
+						<th>#</th>
+						<th>Name</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+				   @foreach (Backup bkp in Model.Items) {
+					<tr>
+						<td>
+							<label class="radio"><input type="radio" id="@bkp.name" name="restore-item"></label>
+						</td>
+						<td>@(i++)</td>
+						<td>@bkp.name</td>
+						<td>@bkp.date</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+
 			<button id="restoreBtn" class="button is-success my-4">Create</button>
 		</div>
 	</div>
@@ -21,8 +51,8 @@
 	});
 
 	document.getElementById("restoreBtn").addEventListener("click", async () => {
-
-		//const response = await get('Backup/CreateRestore?name=' + );
-		//console.log(response);
+		const restoreName = document.querySelector('input[name="restore-item"]:checked').id;
+		const response = await get('Backup/CreateRestore?name=' + restoreName);
+		console.log(response);
 	});
 </script>
