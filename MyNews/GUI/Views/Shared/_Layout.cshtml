@@ -73,15 +73,21 @@
 		</div>
 	</nav>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+	<div id="custom-alert-notification" class="alert-notification">
+		<article id="custom-alert" class="message is-hidden">
+			<div id="custom-alert-message" class="message-body"></div>
+		</article>
+	</div>
 
-    @Scripts.Render("~/Content/js")
-    @RenderSection("scripts", required: false)
+	<div class="container body-content">
+		@RenderBody()
+		<hr />
+		<footer>
+			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+		</footer>
+	</div>
+
+	@Scripts.Render("~/Content/js")
+	@RenderSection("scripts", required: false)
 </body>
 </html>

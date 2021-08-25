@@ -21,7 +21,7 @@ namespace MyNews.Controllers
             if (new BackupBl().backup(Server.MapPath("/"))) {
                 return Json(new { type = "success", description = "The backup was created successfuly." }, JsonRequestBehavior.AllowGet);
             } else {
-                return Json(new { type = "error", description = "There was an error creating the backup." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = "There was an error creating the backup." }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -31,7 +31,7 @@ namespace MyNews.Controllers
             }, Server.MapPath("/"))) {
                 return Json(new { type = "success", description = "The restore was successfuly." }, JsonRequestBehavior.AllowGet);
             } else {
-                return Json(new { type = "error", description = "There was an error with the restore." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = "There was an error with the restore." }, JsonRequestBehavior.AllowGet);
             }
         }
     }

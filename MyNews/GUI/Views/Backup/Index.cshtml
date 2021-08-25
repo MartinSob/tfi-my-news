@@ -47,12 +47,12 @@
 <script>
 	document.getElementById("backupBtn").addEventListener("click", async () => {
 		const response = await get('Backup/CreateBackup');
-		console.log(response);
+		showAlert(response);
 	});
 
 	document.getElementById("restoreBtn").addEventListener("click", async () => {
 		const restoreName = document.querySelector('input[name="restore-item"]:checked').id;
 		const response = await get('Backup/CreateRestore?name=' + restoreName);
-		console.log(response);
+		showAlert(response);
 	});
 </script>

@@ -37,3 +37,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/*
+ * Response must contain a type and a description.
+ * 
+ * Type can be: 'is-success', 'is-warning', 'is-danger'
+ */
+const showAlert = (response) => {
+    const alertNotification = document.getElementById('custom-alert-notification');
+    alertNotification.style.opacity = "1";
+
+    const customAlert = document.getElementById('custom-alert');
+    customAlert.classList.add('is-'+response.type);
+
+    const customAlertMessage = document.getElementById('custom-alert-message');
+    customAlertMessage.innerHTML = response.description;
+
+    customAlert.classList.remove('is-hidden');
+
+    setTimeout(function () {
+        alertNotification.style.opacity = "0";
+
+        setTimeout(function () {
+            customAlert.classList.add('is-hidden');
+            customAlert.classList.remove('is-' + response.type);
+        }, 600);
+    }, 3000);
+}
