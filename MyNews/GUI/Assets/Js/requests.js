@@ -64,3 +64,13 @@ const showAlert = (response) => {
         }, 600);
     }, 3000);
 }
+
+const isJsonString = (str) => {
+    try {
+        JSON.parse(JSON.stringify(str));
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
+    return true;
+}

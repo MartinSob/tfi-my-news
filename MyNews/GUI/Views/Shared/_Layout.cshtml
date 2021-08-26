@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using BusinessEntity;
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My News</title>
-    @Styles.Render("~/Content/css")
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My News</title>
+	@Styles.Render("~/Content/css")
 </head>
 <body>
 	<nav class="navbar" role="navigation" aria-label="main navigation">
@@ -61,12 +62,18 @@
 			<div class="navbar-end">
 				<div class="navbar-item">
 					<div class="buttons">
-						<a class="button is-primary" href="~/Login/Signup">
-							<strong>Sign up</strong>
+						@if (Session["user"] == null) {
+							<a class="button is-primary" href="~/Login/Signup">
+								<strong>Sign up</strong>
+							</a>
+							<a class="button is-light" href="~/Login">
+								Log in
+							</a>
+						} else {
+						<a class="button is-light" href="~/User/@(((User)Session["user"]).id)">
+							<i class="fas fa-user"></i> <span class="navbar-item-text">@(((User)Session["user"]).username)</span>
 						</a>
-						<a class="button is-light" href="~/Login">
-							Log in
-						</a>
+						}
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,12 @@
 </head>
 
 <body>
+	<div id="custom-alert-notification" class="alert-notification">
+		<article id="custom-alert" class="message is-hidden">
+			<div id="custom-alert-message" class="message-body"></div>
+		</article>
+	</div>
+
 	<div class="login-center">
 		<div class="columns is-desktop login-container">
 			<div class="column login-column login-column-left">
@@ -53,15 +59,18 @@
 	</div>
 
 	<script>
-		document.getElementById("loginForm").addEventListener("submit", (event) => {
+		document.getElementById("loginForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 			var username = document.getElementById("username").value;
 			var password = document.getElementById("password").value;
-			get('Login/Login?username=' + username + '&password=' + password);
+			const response = await get('Login/Login?username=' + username + '&password=' + password);
+			showAlert(response);
+			if (response.type == 'success') {
+				window.location.replace("./Home");
+			}
 		});
 	</script>
 
 	@Scripts.Render("~/Content/js")
 </body>
 </html>
-

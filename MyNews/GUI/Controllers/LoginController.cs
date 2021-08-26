@@ -13,6 +13,10 @@ namespace MyNews.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            if (Session["user"] != null) {
+                return Redirect("./Home");
+            }
+
             return View();
         }
 
@@ -20,8 +24,11 @@ namespace MyNews.Controllers
             UserBl userBl = new UserBl();
             User loggedUser;
             loggedUser = userBl.login(new User { username = username, password = password });
+            if (loggedUser == null) {
+                return Json(new { type = "danger", description = "El nombre de usuario o contraseña no son correctos." }, JsonRequestBehavior.AllowGet);
+            }
             Session["user"] = loggedUser;
-            return Json(new { id = 1, value = "new" }, JsonRequestBehavior.AllowGet);
+            return Json(new { type = "success", description = "Inicio de sesion correcto." }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Login/Signup
