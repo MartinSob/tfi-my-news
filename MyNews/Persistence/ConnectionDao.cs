@@ -69,6 +69,66 @@ namespace Persistence
 			}
 		}
 
+		protected int update(string table, string[] columns, string[] values, string[] whereColumns, string[] whereValues) {
+			try {
+				StringBuilder queryString = new StringBuilder().AppendFormat("UPDATE @table SET ");
+
+				for (int i = 0; i < columns.Length; i++) {
+					if (i != 0) {
+						queryString.Append(", ");
+					}
+
+					queryString.Append(columns[i] + " = @" + columns[i]);
+				}
+
+				queryString.Append(" WHERE ");
+
+				for (int i = 0; i < columns.Length; i++) {
+					if (i != 0) {
+						queryString.Append(" AND ");
+					}
+
+					queryString.Append(whereColumns[i] + " = @" + whereColumns[i]);
+				}
+
+				queryString.Append(")");
+
+				var asd = queryString.ToString();
+
+				SqlCommand query = new SqlCommand(queryString.ToString(), conn);
+
+				query.Parameters.AddWithValue("@table", table);
+				for (int i = 0; i < columns.Length; i++) {
+					if (values[i] == null) {
+						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
+					} else {
+						query.Parameters.AddWithValue("@" + columns[i], truncate(values[i], 200));
+					}
+				}
+
+				for (int i = 0; i < whereColumns.Length; i++) {
+					if (whereValues[i] == null) {
+						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
+					} else {
+						query.Parameters.AddWithValue("@" + columns[i], truncate(whereValues[i], 200));
+					}
+				}
+
+				if (conn.State == ConnectionState.Open) {
+					return 0;
+				}
+
+				conn.Open();
+				query.ExecuteNonQuery();
+				conn.Close();
+
+				return getLastId(table);
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return 0;
+			}
+		}
+
 		public string truncate(string value, int maxChars) {
 			return value.Length <= maxChars ? value : value.Substring(0, maxChars) + " ...";
 		}

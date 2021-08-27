@@ -45,7 +45,7 @@ namespace Security
 					new BitacoreBl().create(new BitacoreMessage() {
 						title = "Intentos fallidos",
 						type = MessageType.Warning,
-						description = $"{user.username} ha intentado iniciar sesión {failedAttempts} veces",
+						description = $"{user.username} ha intentado iniciar sesión {failedAttempts} veces.",
 						user = null
 					});
 
@@ -55,6 +55,13 @@ namespace Security
 			}
 
 			dao.restartFailedAttempts(user);
+
+			new BitacoreBl().create(new BitacoreMessage() {
+				title = "Inicio sesion",
+				type = MessageType.Info,
+				description = $"{user.username} ha iniciado sesión.",
+				user = null
+			});
 
 			// Consultar permiso?
 
