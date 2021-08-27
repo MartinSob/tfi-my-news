@@ -60,22 +60,34 @@
 			</div>
 
 			<div class="navbar-end">
-				<div class="navbar-item">
-					<div class="buttons">
-						@if (Session["user"] == null) {
+				@if (Session["user"] == null) {
+					<div class="navbar-item">
+						<div class="buttons">
 							<a class="button is-primary" href="~/Login/Signup">
 								<strong>Sign up</strong>
 							</a>
 							<a class="button is-light" href="~/Login">
 								Log in
 							</a>
-						} else {
-						<a class="button is-light" href="~/User/@(((User)Session["user"]).id)">
-							<i class="fas fa-user"></i> <span class="navbar-item-text">@(((User)Session["user"]).username)</span>
-						</a>
-						}
+						</div>
 					</div>
-				</div>
+				} else {
+					<div class="navbar-item has-dropdown is-hoverable">
+						<a class="navbar-link">
+							<i class="fas fa-user-circle"></i> <span class="navbar-item-text">@(((User)Session["user"]).username)</span>
+						</a>
+
+						<div class="navbar-dropdown">
+							<a class="navbar-item" href="~/User/@(((User)Session["user"]).id)">
+								Perfil
+							</a>
+							<hr class="navbar-divider">
+							<a class="navbar-item" href="~/Login/Logout">
+								Cerrar sesion
+							</a>
+						</div>
+					</div>
+				}
 			</div>
 		</div>
 	</nav>

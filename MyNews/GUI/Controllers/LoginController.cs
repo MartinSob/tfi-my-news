@@ -28,7 +28,13 @@ namespace MyNews.Controllers
                 return Json(new { type = "danger", description = "El nombre de usuario o contraseña no son correctos." }, JsonRequestBehavior.AllowGet);
             }
             Session["user"] = loggedUser;
-            return Json(new { type = "success", description = "Inicio de sesion correcto." }, JsonRequestBehavior.AllowGet);
+            return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Logout() {
+            new UserBl().logout((User)Session["user"]);
+            Session["user"] = null;
+            return Redirect("/Login");
         }
 
         // GET: Login/Signup

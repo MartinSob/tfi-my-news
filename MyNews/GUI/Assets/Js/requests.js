@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
  * Type can be: 'is-success', 'is-warning', 'is-danger'
  */
 const showAlert = (response) => {
+    if (!response.description) {
+        return;
+    }
+
     const alertNotification = document.getElementById('custom-alert-notification');
     alertNotification.style.opacity = "1";
 
