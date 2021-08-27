@@ -37,9 +37,31 @@ namespace MyNews.Controllers
             return Redirect("/Login");
         }
 
-        // GET: Login/Signup
         public ActionResult Signup() {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(string username, string password, string name, string lastname, string mail) {
+            UserBl bl = new UserBl();
+
+			if (bl.exists(username, mail)) {
+				return Json(new { type = "danger", description = "El nombre o mail del usuario ya esta registrado." }, JsonRequestBehavior.AllowGet);
+			}
+
+			User newUser = bl.create(new User {
+				username = username,
+				password = password,
+				name = name,
+				lastname = lastname,
+				mail = mail
+			});
+
+			if (newUser.id == 0) {
+				return Json(new { type = "danger", description = "Hubo un problema creando el usuario." }, JsonRequestBehavior.AllowGet);
+			}
+
+			return Json(new { type = "success", description = "Usuario creado correctamente." }, JsonRequestBehavior.AllowGet);
         }
     }
 }
