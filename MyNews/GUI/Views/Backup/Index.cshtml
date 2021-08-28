@@ -12,6 +12,7 @@
 			<p>Use this to create a new backup file with all the data gathered to the date.</p>
 			<button id="backupBtn" class="button is-success my-4">Create</button>
 		</div>
+
 		<div class="column left-divider px-5">
 			<h1 class="title is-2"><i class="fas fa-box-open"></i> Restore</h1>
 			<p>Use this to restore the data from a backup file created before.</p>
@@ -26,33 +27,90 @@
 					</tr>
 				</thead>
 				<tbody>
-				   @foreach (Backup bkp in Model.Items) {
-					<tr>
-						<td>
-							<label class="radio"><input type="radio" id="@bkp.name" name="restore-item"></label>
-						</td>
-						<td>@(i++)</td>
-						<td>@bkp.name</td>
-						<td>@bkp.date</td>
-					</tr>
+					@foreach (Backup bkp in Model.Items) {
+						<tr>
+							<td>
+								<label class="radio"><input type="radio" id="@bkp.name" name="restore-item"></label>
+							</td>
+							<td>@(i++)</td>
+							<td>@bkp.name</td>
+							<td>@bkp.date</td>
+						</tr>
 					}
 				</tbody>
 			</table>
 
 			<button id="restoreBtn" class="button is-success my-4">Create</button>
 		</div>
+
+		<div class="column left-divider px-5">
+			<h1 class="title is-2"><i class="fas fa-bug"></i> Digito verificador</h1>
+			<p>Use this to validate the integrity of the database.</p>
+
+			<div id="dvResponse" class="is-hidden">
+				<table class="table is-striped is-hoverable">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody id="dvErrors"></tbody>
+				</table>
+			</div>
+
+			<button id="validateDvBtn" class="button is-success my-4">Validate</button>
+			<button id="updateDvBtn" class="button is-success my-4">Update</button>
+		</div>
 	</div>
 </div>
 
 <script>
 	document.getElementById("backupBtn").addEventListener("click", async () => {
-		const response = await get('Backup/CreateBackup');
+		const response = await get('./CreateBackup');
 		showAlert(response);
 	});
 
 	document.getElementById("restoreBtn").addEventListener("click", async () => {
 		const restoreName = document.querySelector('input[name="restore-item"]:checked').id;
-		const response = await get('Backup/CreateRestore?name=' + restoreName);
+		const response = await get('./CreateRestore?name=' + restoreName);
 		showAlert(response);
 	});
+
+	document.getElementById("validateDvBtn").addEventListener("click", async () => {
+		resetDvTable();
+		const response = await get('./ValidateDv');
+		
+		if (response.type == 'success') {
+			showAlert(response);
+		} else {
+			loadDvTable(response.data);
+		}
+	});
+
+	document.getElementById("updateDvBtn").addEventListener("click", async () => {
+		const response = await get('./UpdateDv');
+		showAlert(response);
+	});
+
+	function loadDvTable(items) {
+		const dvResponse = document.getElementById("dvResponse");
+		dvResponse.classList.remove('is-hidden');
+
+		const table = document.getElementById("dvErrors");
+		JSON.parse(items).forEach((item, i) => {
+			let row = table.insertRow();
+			let index = row.insertCell(0);
+			index.innerHTML = ++i;
+			let desc = row.insertCell(1);
+			desc.innerHTML = item;
+		});
+	}
+
+	function resetDvTable() {
+		const table = document.getElementById("dvErrors");
+		table.innerHTML = "";
+		const dvResponse = document.getElementById("dvResponse");
+		dvResponse.classList.add('is-hidden');
+	}
 </script>

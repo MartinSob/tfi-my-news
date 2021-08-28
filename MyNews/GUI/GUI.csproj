@@ -133,6 +133,7 @@
     <Content Include="Assets\Js\requests.js" />
     <Content Include="Assets\Styles\fa.min.css" />
     <Content Include="Assets\Styles\Sass\Home.scss" />
+    <Content Include="Assets\Styles\Sass\Backup.scss" />
     <None Include="Assets\Styles\Sass\Login.scss" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

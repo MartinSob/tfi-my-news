@@ -10,12 +10,12 @@ namespace Persistence.Functional
 {
 	public class DvDao : ConnectionDao
 	{
-		bool verifyDvv(string table) {
-			string dvvCalculado = calculateDvv(table).GetHashCode().ToString();
+		public bool verifyDvv(string table) {
+			string dvvCalculado = calculateDvv(table);
 			return dvvCalculado.Equals(getDvv(table));
 		}
 
-		List<string> verifyDvh(string table) {
+		public List<string> verifyDvh(string table) {
 			List<string> result = new List<string>();
 
 			string selectDVH = $"SELECT * FROM {table}";
@@ -59,7 +59,7 @@ namespace Persistence.Functional
 			return names;
 		}
 
-		string getDvv(string table) {
+		public string getDvv(string table) {
 			string selectDVV = $"SELECT dvv FROM dvv WHERE table_name = '{table}'";
 			SqlCommand query = new SqlCommand(selectDVV, conn);
 			conn.Open();
@@ -86,7 +86,7 @@ namespace Persistence.Functional
 			}
 			conn.Close();
 
-			return dvhs.ToString();
+			return dvhs.ToString().GetHashCode().ToString();
 		}
 
 		public void updateDvv(string table) {
@@ -95,7 +95,7 @@ namespace Persistence.Functional
 					return;
 				}
 
-				string SQL = $"UPDATE Dvv SET dvv = '{calculateDvv(table).GetHashCode().ToString()}' WHERE table_name = '{table}'";
+				string SQL = $"UPDATE dvv SET dvv = '{calculateDvv(table)}' WHERE table_name = '{table}'";
 				conn.Open();
 				SqlCommand mCom = new SqlCommand(SQL, conn);
 

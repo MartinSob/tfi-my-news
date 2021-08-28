@@ -1,5 +1,6 @@
 ﻿using BusinessEntity;
 using MyNews.Models;
+using Newtonsoft.Json;
 using Security;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,24 @@ namespace MyNews.Controllers
                 return Json(new { type = "success", description = "The restore was successfuly." }, JsonRequestBehavior.AllowGet);
             } else {
                 return Json(new { type = "danger", description = "There was an error with the restore." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult UpdateDv() {
+            if (new DvBl().updateDv()) {
+                return Json(new { type = "success", description = "The DV were updated successfuly." }, JsonRequestBehavior.AllowGet);
+            } else {
+                return Json(new { type = "danger", description = "There was an error updating the DV." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult ValidateDv() {
+            List<string> errors = new DvBl().verifyDv((User)Session["user"]);
+            if (errors.Count == 0) {
+                return Json(new { type = "success", description = "The DV are valid." }, JsonRequestBehavior.AllowGet);
+            } else {
+                string json = JsonConvert.SerializeObject(errors);
+                return Json(new { type = "danger", description = "There are problems with the DV.", data = json }, JsonRequestBehavior.AllowGet);
             }
         }
     }

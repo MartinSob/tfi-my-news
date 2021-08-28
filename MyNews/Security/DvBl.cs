@@ -1,4 +1,5 @@
-﻿using Persistence.Functional;
+﻿using BusinessEntity;
+using Persistence.Functional;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,6 @@ namespace Security
 		DvDao dao = new DvDao();
 
 		public bool updateDv() {
-			// TODO
-
 			var tables = dao.getTables();
 
 			foreach (string table in tables) {
@@ -21,14 +20,34 @@ namespace Security
 				dao.updateDvh(table);
 			}
 
-			// BItacore
+			// Bitacore
 
 			return true;
 		}
 
-		public List<string> verifyDv() {
-			// TODO
-			return new List<string>();
+		public List<string> verifyDv(User user) {
+			List<string> errors = new List<string>();
+
+			foreach (string table in dao.getTables()) {
+				if (!dao.verifyDvv(table)) {
+					string errorMsg = "Error DV en tabla: " + table;
+					errors.Add(errorMsg);
+
+					new BitacoreBl().create(new BitacoreMessage {
+						title = "Error DVV en BD",
+						description = errorMsg,
+						type = MessageType.Error,
+						date = DateTime.Now,
+						user = user
+					});
+				}
+				List<string> dvhErrors = dao.verifyDvh(table);
+				foreach (string e in dvhErrors) {
+					errors.Add("[DVH] [" + table + "] Linea:" + e);
+				}
+			}
+
+			return errors;
 		}
 	}
 }
