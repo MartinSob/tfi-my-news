@@ -9,7 +9,7 @@ async function post(url = '', data = {}) {
         headers: {
             'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(data) // body data type must match "Content-Type" header
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
 	});
 	return response.json();
 }

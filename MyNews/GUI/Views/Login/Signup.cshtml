@@ -93,7 +93,7 @@
 	</div>
 
 	<script>
-		document.getElementById("signupForm").addEventListener("submit", (event) => {
+		document.getElementById("signupForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 			const password = document.getElementById("password").value;
 			const confirmPassword = document.getElementById("confirmPassword").value;
@@ -114,7 +114,10 @@
 				mail: document.getElementById("mail").value,
 			}
 
-			post('CreateUser', data);
+			const response = await post('CreateUser', data);
+			if (response.type == 'success') {
+				window.location.replace("./");
+			}
 		});
 	</script>
 
