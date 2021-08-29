@@ -16,8 +16,8 @@ namespace Security
 			var tables = dao.getTables();
 
 			foreach (string table in tables) {
-				dao.updateDvv(table);
 				dao.updateDvh(table);
+				dao.updateDvv(table);
 			}
 
 			// Bitacore
