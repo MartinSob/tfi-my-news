@@ -1,0 +1,38 @@
+﻿@using BusinessEntity;
+@using MyNews.Models;
+@model ListModel<BusinessEntity.BitacoreMessage>
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2"><i class="fas fa-clipboard-list"></i> Bitacore</h1>
+
+			<table class="table is-striped is-hoverable">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Date</th>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Type</th>
+						<th>User</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (BitacoreMessage msg in Model.Items) {
+						<tr id="@msg.id">
+							<td>@(i++)</td>
+							<td>D</td>
+							<td>@bkp.name</td>
+							<td>@bkp.date</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
