@@ -19,6 +19,11 @@ namespace MyNews.Controllers
         }
 
         public ActionResult CreateBackup() {
+            List<string> errors = new DvBl().verifyDv((User)Session["user"]);
+            if (errors.Count != 0) {
+                return Json(new { type = "danger", description = "There are problems with the DV.", data = "DV"}, JsonRequestBehavior.AllowGet);
+            }
+
             if (new BackupBl().backup(Server.MapPath("/"))) {
                 return Json(new { type = "success", description = "The backup was created successfuly." }, JsonRequestBehavior.AllowGet);
             } else {

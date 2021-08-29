@@ -71,6 +71,9 @@
 	document.getElementById("backupBtn").addEventListener("click", async () => {
 		const response = await get('/Backup/CreateBackup');
 		showAlert(response);
+		if (response.data == 'DV') {
+			document.getElementById("validateDvBtn").click();
+		}
 	});
 
 	document.getElementById("restoreBtn").addEventListener("click", async () => {
