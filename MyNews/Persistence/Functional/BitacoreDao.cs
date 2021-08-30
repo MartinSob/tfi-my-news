@@ -19,8 +19,10 @@ namespace Persistence.Functional
                 string consultaSQL = $"SELECT id, date, title, description, type, user_id FROM bitacore WHERE date BETWEEN '{filter.from.ToString("yyyy-MM-dd")}' AND '{filter.to.ToString("yyyy-MM-dd")}  23:59:59'";
 
                 if (filter.type != null) {
-                    consultaSQL += $" AND tipo LIKE '%{filter.type}%'";
+                    consultaSQL += $" AND (type LIKE '%{filter.type}%' OR title LIKE '%{filter.type}%' OR description LIKE '%{filter.type}%')";
                 }
+
+                consultaSQL += " ORDER BY id DESC";
 
                 SqlCommand query = new SqlCommand(consultaSQL, conn);
                 conn.Open();
