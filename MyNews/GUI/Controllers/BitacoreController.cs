@@ -15,14 +15,18 @@ namespace MyNews.Controllers
         {
             BitacoreFilter filter = new BitacoreFilter {
                 from = DateTime.Now.AddMonths(-1),
+                type = type ?? null,
                 to = DateTime.Now
             };
 
-            try {
-                filter.from = from == null ? DateTime.Now.AddMonths(-1) : Convert.ToDateTime(from);
-                filter.type = type ?? null;
-                filter.to = to == null ? DateTime.Now : Convert.ToDateTime(to);
-            } catch (Exception e) { }
+            DateTime value;
+            if (DateTime.TryParse(from, out value)) {
+                filter.from = value;
+            }
+
+            if (DateTime.TryParse(to, out value)) {
+                filter.to = value;
+            }
 
             return View(new ListModel<BitacoreMessage>(new BitacoreBl().get(filter)));
         }

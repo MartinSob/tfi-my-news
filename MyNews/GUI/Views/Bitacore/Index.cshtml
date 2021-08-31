@@ -69,20 +69,16 @@
 	</div>
 
 	<script>
-		document.getElementById("filterBtn").addEventListener("click", async (event) => {
-			const from = document.getElementById("fromFilter").value;
-			const to = document.getElementById("toFilter").value;
-			const type = document.getElementById("typeFilter").value;
-			console.log('from', from);
-			console.log('to', to);
-			console.log('type', type);
-
-			window.location.replace('?from=' + from + '&to=' + to + '&type=' + type);
-		});
-		
 		let params = new URLSearchParams(location.search);
 		document.getElementById("fromFilter").value = params.get('from')
 		document.getElementById("toFilter").value = params.get('to')
 		document.getElementById("typeFilter").value = params.get('type')
+		
+		document.getElementById("filterBtn").addEventListener("click", async (event) => {
+			const from = document.getElementById("fromFilter").value;
+			const to = document.getElementById("toFilter").value;
+			const type = document.getElementById("typeFilter").value;
+			window.location.replace('?from=' + from + '&to=' + to + '&type=' + type);
+		});
 	</script>
 </div>
