@@ -44,6 +44,7 @@
     <Compile Include="BackupBl.cs" />
     <Compile Include="BitacoreBl.cs" />
     <Compile Include="DvBl.cs" />
+    <Compile Include="EmailBl.cs" />
     <Compile Include="EncryptBl.cs" />
     <Compile Include="ErrorBl.cs" />
     <Compile Include="LanguageBl.cs" />

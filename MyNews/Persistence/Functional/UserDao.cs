@@ -90,6 +90,17 @@ namespace Persistence.Functional
 			}
 		}
 
+		public void updatePassword(User user) {
+			try {
+				SqlCommand querySet = new SqlCommand("UPDATE users SET password = @password WHERE mail = @mail", conn);
+				querySet.Parameters.AddWithValue("@mail", user.mail);
+				querySet.Parameters.AddWithValue("@password", user.password);
+				executeQuery(querySet);
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+			}
+		}
+
 		public User castDto(SqlDataReader data) {
 			User result = new User();
 			result.id = Convert.ToInt32(data["id"]);

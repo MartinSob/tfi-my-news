@@ -16,13 +16,13 @@ namespace Persistence.Functional
 
 		public List<BitacoreMessage> get(BitacoreFilter filter) {
             try {
-                string consultaSQL = $"SELECT id, date, title, description, type, user_id FROM bitacore WHERE date BETWEEN '{filter.from.ToString("yyyy-MM-dd")}' AND '{filter.to.ToString("yyyy-MM-dd")}  23:59:59'";
+                string consultaSQL = $"SELECT b.id, b.date, b.title, b.description, b.type, b.user_id, u.username FROM bitacore b LEFT JOIN users u ON u.id = b.user_id WHERE b.date BETWEEN '{filter.from.ToString("yyyy-MM-dd")}' AND '{filter.to.ToString("yyyy-MM-dd")}  23:59:59'";
 
                 if (filter.type != null) {
-                    consultaSQL += $" AND (type LIKE '%{filter.type}%' OR title LIKE '%{filter.type}%' OR description LIKE '%{filter.type}%')";
+                    consultaSQL += $" AND (b.type LIKE '%{filter.type}%' OR b.title LIKE '%{filter.type}%' OR b.description LIKE '%{filter.type}%')";
                 }
 
-                consultaSQL += " ORDER BY id DESC";
+                consultaSQL += " ORDER BY b.id DESC";
 
                 SqlCommand query = new SqlCommand(consultaSQL, conn);
                 conn.Open();
@@ -65,7 +65,8 @@ namespace Persistence.Functional
                     break;
             }
             result.user = new User() {
-                id = Convert.ToInt32(data["user_id"])
+                id = Convert.ToInt32(data["user_id"]),
+                username = data["username"].ToString()
             };
 
             return result;

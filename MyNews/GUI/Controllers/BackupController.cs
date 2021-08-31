@@ -42,7 +42,7 @@ namespace MyNews.Controllers
         }
 
         public ActionResult UpdateDv() {
-            if (new DvBl().updateDv()) {
+            if (new DvBl().updateDv((User)Session["user"])) {
                 return Json(new { type = "success", description = "The DV were updated successfuly." }, JsonRequestBehavior.AllowGet);
             } else {
                 return Json(new { type = "danger", description = "There was an error updating the DV." }, JsonRequestBehavior.AllowGet);

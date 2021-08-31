@@ -12,7 +12,7 @@ namespace Security
 	{
 		DvDao dao = new DvDao();
 
-		public bool updateDv() {
+		public bool updateDv(User user) {
 			var tables = dao.getTables();
 
 			foreach (string table in tables) {
@@ -20,7 +20,13 @@ namespace Security
 				dao.updateDvv(table);
 			}
 
-			// Bitacore
+			new BitacoreBl().create(new BitacoreMessage {
+				title = "DV actualizados",
+				description = "Los digitos verificadores fueron actualizados",
+				type = MessageType.Info,
+				date = DateTime.Now,
+				user = user
+			});
 
 			return true;
 		}

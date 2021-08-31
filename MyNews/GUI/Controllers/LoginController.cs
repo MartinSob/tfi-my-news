@@ -63,5 +63,17 @@ namespace MyNews.Controllers
 
 			return Json(new { type = "success", description = "Usuario creado correctamente." }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ForgotPassword() {
+            return View();
+        }
+
+        public ActionResult Reset(string email) {
+            if (new UserBl().resetPassword(email)) {
+                return Json(new { type = "success", description = "Se ha enviado un correo con la nueva contraseña." }, JsonRequestBehavior.AllowGet);
+            } else {
+                return Json(new { type = "danger", description = "Hubo un problema generando la nueva contraseña." }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

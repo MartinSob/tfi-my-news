@@ -60,7 +60,7 @@ namespace Security
 				title = "Inicio sesion",
 				type = MessageType.Info,
 				description = $"{user.username} ha iniciado sesión.",
-				user = null
+				user = loggedUser
 			});
 
 			// Consultar permiso?
@@ -81,6 +81,24 @@ namespace Security
 
 		public User update(User user) {
 			return dao.update(user);
+		}
+
+		public bool resetPassword(string mail) {
+			try {
+				string newPass = new EncryptBl().randomString(6);
+				User user = new User {
+					mail = mail,
+					password = newPass
+				};
+				dao.updatePassword(user);
+
+				new EmailBl().sendEmail(
+					"<h1>Reset password</h1><p>The system has generated a new password.<br><br>New Pass: " + user.password + "<br><br>Thanks<br>myNewsMaker</p>", 
+					"New Password", user.mail);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
 		}
 	}
 }
