@@ -46,26 +46,27 @@ namespace Persistence.Functional
 			return 1;
 		}
 
-		public Role get(User user) {
+		public List<Role> get(User user) {
 			try {
-				SqlCommand query = new SqlCommand("SELECT r.policy_id, p.name, r.role_id FROM policies p JOIN user_roles up ON up.policy_id = p.id JOIN roles r ON r.role_id = p.id WHERE up.user_id = @user", conn);
+				SqlCommand query = new SqlCommand("SELECT p.* FROM policies p JOIN user_roles ur ON ur.policy_id = p.id WHERE ur.user_id = @user", conn);
 				query.Parameters.AddWithValue("@user", user.id);
 
-				Role role = new Role();
+				List<Role> roles = new List<Role>();
 				conn.Open();
 				SqlDataReader data = query.ExecuteReader();
 
 				if (data.HasRows) {
 					while (data.Read()) {
-						role.id = int.Parse(data["role_id"].ToString());
-						role.name = data["name"].ToString();
-						role.policies.Add(new Policy { id = int.Parse(data["policy_id"].ToString()) });
+						roles.Add(new Role {
+							id = int.Parse(data["id"].ToString()),
+							name = data["name"].ToString()
+						});
 					}
 				}
 
 				conn.Close();
 
-				return role;
+				return roles;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 				return null;
@@ -74,7 +75,7 @@ namespace Persistence.Functional
 
 		public Role get(Role role) {
 			try {
-				SqlCommand query = new SqlCommand("SELECT r.policy_id FROM roles r WHERE r.role_id = @role", conn);
+				SqlCommand query = new SqlCommand("SELECT p.* FROM roles r JOIN policies p ON p.id = r.policy_id WHERE r.role_id = @role", conn);
 				query.Parameters.AddWithValue("@role", role.id);
 
 				conn.Open();
@@ -82,7 +83,10 @@ namespace Persistence.Functional
 
 				if (data.HasRows) {
 					while (data.Read()) {
-						role.policies.Add(new Policy { id = int.Parse(data["policy_id"].ToString()) });
+						role.policies.Add(new Policy { 
+							id = int.Parse(data["id"].ToString()), 
+							name = data["name"].ToString()
+						});
 					}
 				}
 

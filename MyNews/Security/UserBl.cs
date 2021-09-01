@@ -98,7 +98,7 @@ namespace Security
 					"<h1>Reset password</h1><p>The system has generated a new password.<br><br>New Pass: " + user.password + "<br><br>Thanks<br>myNewsMaker</p>", 
 					"New Password", user.mail);
 				return true;
-			} catch (Exception e) {
+			} catch {
 				return false;
 			}
 		}
