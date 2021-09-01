@@ -41,6 +41,7 @@ namespace Security
 
 			foreach (Role role in roles) { 
 				role.policies = get(role).Distinct().ToList();
+				role.policies = role.policies.Distinct().ToList();
 			}
 			return roles;
 		}
@@ -83,8 +84,13 @@ namespace Security
 		}
 
 		public bool hasPermission(User user, string policy) {
-			var userPolicies = get(user);
-			return userPolicies.Any(p => p.name == policy); ;
+			//List<Role> userRoles = get(user);
+			foreach (Role role in user.roles) {
+				if (role.policies.Any(p => p.name == policy)) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 }

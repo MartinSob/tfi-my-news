@@ -63,9 +63,7 @@ namespace Security
 				user = loggedUser
 			});
 
-			var policies = new PolicyBl().get(loggedUser);
-
-			// Consultar permiso?
+			loggedUser.roles = new PolicyBl().get(loggedUser);
 
 			// new LanguageDao().load(loggedUser);
 

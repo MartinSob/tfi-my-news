@@ -7,7 +7,7 @@ namespace BusinessEntity
 		public int id;
 		public string name;
 		public string lastname;
-		public List<Policy> policies;
+		public List<Role> roles;
 		public string mail;
 		public string username;
 		public string password;

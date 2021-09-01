@@ -15,10 +15,18 @@ namespace MyNews.Controllers
         // GET: Backup
         public ActionResult Index()
         {
+            if (!new PolicyBl().hasPermission((User)Session["user"], "admin_copy")) {
+                return HttpNotFound();
+            }
+
             return View(new ListModel<Backup>(new BackupBl().get()));
         }
 
         public ActionResult CreateBackup() {
+            if (!new PolicyBl().hasPermission((User)Session["user"], "backup_manage")) {
+                return HttpNotFound();
+            }
+
             List<string> errors = new DvBl().verifyDv((User)Session["user"]);
             if (errors.Count != 0) {
                 return Json(new { type = "danger", description = "There are problems with the DV.", data = "DV"}, JsonRequestBehavior.AllowGet);
@@ -32,6 +40,10 @@ namespace MyNews.Controllers
         }
 
         public ActionResult CreateRestore(string name) {
+            if (!new PolicyBl().hasPermission((User)Session["user"], "restore_manage")) {
+                return HttpNotFound();
+            }
+
             if (new BackupBl().restore(new Backup {
                 name = name,
             }, Server.MapPath("/"))) {
@@ -42,6 +54,10 @@ namespace MyNews.Controllers
         }
 
         public ActionResult UpdateDv() {
+            if (!new PolicyBl().hasPermission((User)Session["user"], "dv_update")) {
+                return HttpNotFound();
+            }
+
             if (new DvBl().updateDv((User)Session["user"])) {
                 return Json(new { type = "success", description = "The DV were updated successfuly." }, JsonRequestBehavior.AllowGet);
             } else {

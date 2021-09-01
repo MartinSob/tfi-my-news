@@ -13,6 +13,10 @@ namespace MyNews.Controllers
     {
         public ActionResult Index(string type = null, string from = null, string to = null)
         {
+            if (!new PolicyBl().hasPermission((User)Session["user"], "admin_bitacore")) {
+                return HttpNotFound();
+            }
+
             BitacoreFilter filter = new BitacoreFilter {
                 from = DateTime.Now.AddMonths(-1),
                 type = type ?? null,
