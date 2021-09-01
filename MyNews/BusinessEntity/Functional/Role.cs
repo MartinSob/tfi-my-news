@@ -2,8 +2,8 @@
 
 namespace BusinessEntity
 {
-	public class Role
+	public class Role : Policy
 	{
-		public List<Policy> policies;
+		public List<Policy> policies = new List<Policy>();
 	}
 }

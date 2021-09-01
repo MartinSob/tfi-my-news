@@ -54,14 +54,16 @@ namespace Security
 				}
 			}
 
-			dao.restartFailedAttempts(user);
+			dao.restartFailedAttempts(loggedUser);
 
 			new BitacoreBl().create(new BitacoreMessage() {
 				title = "Inicio sesion",
 				type = MessageType.Info,
-				description = $"{user.username} ha iniciado sesión.",
+				description = $"{loggedUser.username} ha iniciado sesión.",
 				user = loggedUser
 			});
+
+			var policies = new PolicyBl().get(loggedUser);
 
 			// Consultar permiso?
 
