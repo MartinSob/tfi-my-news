@@ -1,4 +1,5 @@
 ﻿@using BusinessEntity;
+@using Security;
 @using MyNews.Models;
 @model ListModel<BusinessEntity.Backup>
 @{
@@ -7,41 +8,46 @@
 
 <div class="container.is-widescreen my-5">
 	<div class="columns">
-		<div class="column px-5">
-			<h1 class="title is-2"><i class="fas fa-archive"></i> Backup</h1>
-			<p>Use this to create a new backup file with all the data gathered to the date.</p>
-			<button id="backupBtn" class="button is-success my-4">Create</button>
-		</div>
 
-		<div class="column left-divider px-5">
-			<h1 class="title is-2"><i class="fas fa-box-open"></i> Restore</h1>
-			<p>Use this to restore the data from a backup file created before.</p>
+		@if (new PolicyBl().hasPermission((User)Session["user"], "backup_manage")) {
+			<div class="column px-5">
+				<h1 class="title is-2"><i class="fas fa-archive"></i> Backup</h1>
+				<p>Use this to create a new backup file with all the data gathered to the date.</p>
+				<button id="backupBtn" class="button is-success my-4">Create</button>
+			</div>
+		}
 
-			<table class="table is-striped is-hoverable">
-				<thead>
-					<tr>
-						<th></th>
-						<th>#</th>
-						<th>Name</th>
-						<th>Date</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (Backup bkp in Model.Items) {
+		@if (new PolicyBl().hasPermission((User)Session["user"], "restore_manage")) {
+			<div class="column left-divider px-5">
+				<h1 class="title is-2"><i class="fas fa-box-open"></i> Restore</h1>
+				<p>Use this to restore the data from a backup file created before.</p>
+
+				<table class="table is-striped is-hoverable">
+					<thead>
 						<tr>
-							<td>
-								<label class="radio"><input type="radio" id="@bkp.name" name="restore-item"></label>
-							</td>
-							<td>@(i++)</td>
-							<td>@bkp.name</td>
-							<td>@bkp.date</td>
+							<th></th>
+							<th>#</th>
+							<th>Name</th>
+							<th>Date</th>
 						</tr>
-					}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						@foreach (Backup bkp in Model.Items) {
+							<tr>
+								<td>
+									<label class="radio"><input type="radio" id="@bkp.name" name="restore-item"></label>
+								</td>
+								<td>@(i++)</td>
+								<td>@bkp.name</td>
+								<td>@bkp.date</td>
+							</tr>
+						}
+					</tbody>
+				</table>
 
-			<button id="restoreBtn" class="button is-success my-4">Create</button>
-		</div>
+				<button id="restoreBtn" class="button is-success my-4">Create</button>
+			</div>
+		}
 
 		<div class="column left-divider px-5">
 			<h1 class="title is-2"><i class="fas fa-bug"></i> Digito verificador</h1>
@@ -62,7 +68,9 @@
 			</div>
 
 			<button id="validateDvBtn" class="button is-success my-4">Validate</button>
-			<button id="updateDvBtn" class="button is-success my-4">Update</button>
+			@if (new PolicyBl().hasPermission((User)Session["user"], "dv_update")) {
+				<button id="updateDvBtn" class="button is-success my-4">Update</button>
+			}
 		</div>
 	</div>
 </div>
@@ -85,7 +93,7 @@
 	document.getElementById("validateDvBtn").addEventListener("click", async () => {
 		resetDvTable();
 		const response = await get('/Backup/ValidateDv');
-		
+
 		if (response.type == 'success') {
 			showAlert(response);
 		} else {
