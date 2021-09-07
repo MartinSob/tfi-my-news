@@ -12,3 +12,10 @@
 		border-left: solid 1px #ccc;
 	}
 }
+
+footer {
+	@media (max-width: 769px) {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+	}
+}

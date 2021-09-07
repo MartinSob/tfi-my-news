@@ -36,6 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    if (document.getElementById('languageList')) {
+        document.getElementById('languageList').addEventListener("change", async function(){
+            const response = await get('Language/LoadLanguage?id=' + this.value);
+            if (response.type == 'success') {
+                location.reload();
+            }
+        });
+    }
 });
 
 /*

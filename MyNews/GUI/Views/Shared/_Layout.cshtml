@@ -120,10 +120,17 @@
 		<hr />
 		<footer>
 			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+			<div class="select is-rounded my-5">
+				<select id="languageList">
+					@foreach (Language l in new LanguageBl().get()) { 
+						<option value="@l.id">@l.name</option>
+					}
+				</select>
+			</div>
 		</footer>
 	</div>
 
 	@Scripts.Render("~/Content/js")
-	@RenderSection("scripts", required: false)
 </body>
 </html>
