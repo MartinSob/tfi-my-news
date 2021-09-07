@@ -1,80 +1,60 @@
 ﻿@{
-	Layout = null;
+	Layout = "_LoginLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-	<meta name="viewport" content="width=device-width" />
-	<title>Index</title>
-	@Styles.Render("~/Content/css")
-</head>
-
-<body>
-	<div id="custom-alert-notification" class="alert-notification">
-		<article id="custom-alert" class="message is-hidden">
-			<div id="custom-alert-message" class="message-body"></div>
-		</article>
-	</div>
-
-	<div class="login-center">
-		<div class="columns is-desktop login-container">
-			<div class="column login-column login-column-left">
-				<div class="company-container">
-					<img src="~/Assets/Images/logo.png">
-					<p>El mejor lugar para enterarte de las noticias.</p>
-					<a class="button is-info" href="Login/Signup">Sign up</a>
-				</div>
+<div class="login-center">
+	<div class="columns is-desktop login-container">
+		<div class="column login-column login-column-left">
+			<div class="company-container">
+				<img src="~/Assets/Images/logo.png">
+				<p>El mejor lugar para enterarte de las noticias.</p>
+				<a class="button is-info" href="Login/Signup">Sign up</a>
 			</div>
-			<div class="column login-column login-column-right">
-				<div class="login-box">
-					<form id="loginForm">
-						<h2 class="title is-2">Login</h2>
+		</div>
+		<div class="column login-column login-column-right">
+			<div class="login-box">
+				<form id="loginForm">
+					<h2 class="title is-2">Login</h2>
 
-						<div class="field">
-							<label class="label">Username</label>
-							<div class="control has-icons-left has-icons-right">
-								<input id="username" class="input" type="text" placeholder="Username" value="admin" required>
-								<span class="icon is-small is-left">
-									<i class="fas fa-user"></i>
-								</span>
-							</div>
+					<div class="field">
+						<label class="label">Username</label>
+						<div class="control has-icons-left has-icons-right">
+							<input id="username" class="input" type="text" placeholder="Username" value="admin" required>
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
 						</div>
+					</div>
 
-						<div class="field">
-							<label class="label">Password</label>
-							<div class="control has-icons-left has-icons-right">
-								<input id="password" class="input" type="password" placeholder="Password" value="admin" required>
-								<span class="icon is-small is-left">
-									<i class="fas fa-lock"></i>
-								</span>
-							</div>
+					<div class="field">
+						<label class="label">Password</label>
+						<div class="control has-icons-left has-icons-right">
+							<input id="password" class="input" type="password" placeholder="Password" value="admin" required>
+							<span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
 						</div>
+					</div>
 
-						<div class="is-pulled-right">
-							<a class="button is-text" href="Login/ForgotPassword">Forgot password?</a>
-							<input class="button is-info" type="submit" value="Login">
-						</div>
-					</form>
-				</div>
+					<div class="is-pulled-right">
+						<a class="button is-text" href="Login/ForgotPassword">Forgot password?</a>
+						<input class="button is-info" type="submit" value="Login">
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<script>
-		document.getElementById("loginForm").addEventListener("submit", async (event) => {
-			event.preventDefault();
-			var username = document.getElementById("username").value;
-			var password = document.getElementById("password").value;
-			const response = await get('Login/Login?username=' + username + '&password=' + password);
-			showAlert(response);
-			if (response.type == 'success') {
-				window.location.replace("/Home");
-			}
-		});
-	</script>
-
-	@Scripts.Render("~/Content/js")
-</body>
-</html>
+<script>
+	document.getElementById("loginForm").addEventListener("submit", async (event) => {
+		event.preventDefault();
+		var username = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+		const response = await get('Login/Login?username=' + username + '&password=' + password);
+		showAlert(response);
+		if (response.type == 'success') {
+			window.location.replace("/Home");
+		}
+	});
+</script>

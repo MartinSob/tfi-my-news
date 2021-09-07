@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+	@Styles.Render("~/Content/css")
+</head>
+
+<body>
+	<div id="custom-alert-notification" class="alert-notification">
+		<article id="custom-alert" class="message is-hidden">
+			<div id="custom-alert-message" class="message-body"></div>
+		</article>
+	</div>
+
+	@RenderBody()
+
+	@Scripts.Render("~/Content/js")
+</body>
+</html>

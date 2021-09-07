@@ -173,6 +173,7 @@
     <Content Include="Views\Login\Signup.cshtml" />
     <Content Include="Views\Bitacore\Index.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
+    <Content Include="Views\Login\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
