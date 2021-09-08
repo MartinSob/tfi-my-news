@@ -110,6 +110,7 @@ namespace Persistence.Functional
 			result.lastname = data["lastname"].ToString();
 			result.active = (bool)data["active"];
 			result.failedAttempts = int.Parse(data["failed_attempts"].ToString());
+			result.language = new Language { id = int.Parse(data["language_id"].ToString()) };
 
 			return result;
 		}

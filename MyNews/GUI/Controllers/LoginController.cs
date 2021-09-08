@@ -10,6 +10,8 @@ namespace MyNews.Controllers
 {
     public class LoginController : Controller
     {
+        UserBl userBl = new UserBl();
+
         // GET: Login
         public ActionResult Index()
         {
@@ -21,13 +23,16 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Login(string username, string password) {
-            UserBl userBl = new UserBl();
             User loggedUser;
             loggedUser = userBl.login(new User { username = username, password = password });
             if (loggedUser == null) {
                 return Json(new { type = "danger", description = "El nombre de usuario o contraseña no son correctos." }, JsonRequestBehavior.AllowGet);
             }
             Session["user"] = loggedUser;
+
+            new LanguageBl().load(loggedUser.language);
+            Session["texts"] = loggedUser.language.texts;
+
             return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
         }
 
@@ -43,13 +48,11 @@ namespace MyNews.Controllers
 
         [HttpPost]
         public ActionResult CreateUser(string username, string password, string name, string lastname, string mail) {
-            UserBl bl = new UserBl();
-
-			if (bl.exists(username, mail)) {
+            if (userBl.exists(username, mail)) {
 				return Json(new { type = "danger", description = "El nombre o mail del usuario ya esta registrado." }, JsonRequestBehavior.AllowGet);
 			}
 
-			User newUser = bl.create(new User {
+			User newUser = userBl.create(new User {
 				username = username,
 				password = password,
 				name = name,

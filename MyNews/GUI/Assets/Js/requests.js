@@ -38,9 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (document.getElementById('languageList')) {
-        document.getElementById('languageList').addEventListener("change", async function(){
+        document.getElementById('languageList').addEventListener("change", async function () {
+            if (!this.value)
+                return;
+
             const response = await get('Language/LoadLanguage?id=' + this.value);
-            if (response.type == 'success') {
+            if (response.type === 'success') {
                 location.reload();
             }
         });
