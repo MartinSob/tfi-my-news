@@ -11,24 +11,24 @@
 
 		@if (new PolicyBl().hasPermission((User)Session["user"], "backup_manage")) {
 			<div class="column px-5">
-				<h1 class="title is-2"><i class="fas fa-archive"></i> Backup</h1>
-				<p>Use this to create a new backup file with all the data gathered to the date.</p>
-				<button id="backupBtn" class="button is-success my-4">Create</button>
+				<h1 class="title is-2"><i class="fas fa-archive"></i> @(((Dictionary<string,string>)Session["texts"])["backup"])</h1>
+				<p>@(((Dictionary<string,string>)Session["texts"])["backup_description"])</p>
+				<button id="backupBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["create"])</button>
 			</div>
 		}
 
 		@if (new PolicyBl().hasPermission((User)Session["user"], "restore_manage")) {
 			<div class="column left-divider px-5">
-				<h1 class="title is-2"><i class="fas fa-box-open"></i> Restore</h1>
-				<p>Use this to restore the data from a backup file created before.</p>
+				<h1 class="title is-2"><i class="fas fa-box-open"></i> @(((Dictionary<string,string>)Session["texts"])["restore"])</h1>
+				<p>@(((Dictionary<string,string>)Session["texts"])["restore_description"])</p>
 
 				<table class="table is-striped is-hoverable">
 					<thead>
 						<tr>
 							<th></th>
 							<th>#</th>
-							<th>Name</th>
-							<th>Date</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["date"])</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,31 +45,31 @@
 					</tbody>
 				</table>
 
-				<button id="restoreBtn" class="button is-success my-4">Create</button>
+				<button id="restoreBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["create"])</button>
 			</div>
 		}
 
 		<div class="column left-divider px-5">
-			<h1 class="title is-2"><i class="fas fa-bug"></i> Digito verificador</h1>
-			<p>Use this to validate the integrity of the database.</p>
+			<h1 class="title is-2"><i class="fas fa-bug"></i> @(((Dictionary<string,string>)Session["texts"])["vd"])</h1>
+			<p>@(((Dictionary<string,string>)Session["texts"])["vd_description"])</p>
 
 			<div id="dvResponse" class="dv-error is-hidden">
-				<p class="title is-3 mb-0">❌ Errors</p>
+				<p class="title is-3 mb-0">❌ @(((Dictionary<string,string>)Session["texts"])["errors"])</p>
 
 				<table class="table is-striped is-hoverable">
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Description</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["description"])</th>
 						</tr>
 					</thead>
 					<tbody id="dvErrors"></tbody>
 				</table>
 			</div>
 
-			<button id="validateDvBtn" class="button is-success my-4">Validate</button>
+			<button id="validateDvBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["validate"])</button>
 			@if (new PolicyBl().hasPermission((User)Session["user"], "dv_update")) {
-				<button id="updateDvBtn" class="button is-success my-4">Update</button>
+		<button id="updateDvBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["update"])</button>
 			}
 		</div>
 	</div>

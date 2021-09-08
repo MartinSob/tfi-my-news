@@ -54,12 +54,39 @@ namespace Persistence.Functional
 			}
 		}
 
+		public Language loadDefault() {
+			try {
+				SqlCommand query = new SqlCommand("SELECT c.*, l.id as l_id FROM controls c JOIN languages l ON l.id = c.language_id WHERE l.name = 'Español'", conn);
+
+				Language language = new Language();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				Dictionary<string, string> result = new Dictionary<string, string>();
+				while (data.Read()) {
+					language.id = int.Parse(data["l_id"].ToString());
+					language.texts.Add(data["tag"].ToString(), data["text"].ToString());
+				}
+				conn.Close();
+
+				return language;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
 		public void load(User user) {
 			// TODO
 		}
 
-		public void setToUser(Language language) { 
-			// TODO
+		public void setToUser(Language language, User user) {
+			update("users", 
+				new string[] { "language_id" },
+				new string[] { language.id.ToString() },
+				new string[] { "id" },
+				new string[] { user.id.ToString() }
+			);
 		}
 
 		public Language castDto(SqlDataReader data) {

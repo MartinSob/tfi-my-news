@@ -16,8 +16,16 @@ namespace Security
 			return dao.load(language);
 		}
 
+		public Language loadDefault() {
+			return dao.loadDefault();
+		}
+
 		public List<Language> get() {
 			return dao.get();
+		}
+
+		public void setToUser(Language language, User user) {
+			dao.setToUser(language, user);
 		}
 	}
 }

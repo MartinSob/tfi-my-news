@@ -10,6 +10,8 @@ namespace MyNews.Controllers
 {
     public class LanguageController : Controller
     {
+        LanguageBl langBl = new LanguageBl();
+
         // GET: Language
         public ActionResult Index()
         {
@@ -17,10 +19,15 @@ namespace MyNews.Controllers
         }
 
         public ActionResult LoadLanguage(int id) {
-            Language lang = new LanguageBl().load(new Language {
+            Language lang = langBl.load(new Language {
                 id = id
             });
             Session["texts"] = lang.texts;
+
+            if (Session["user"] != null) {
+                langBl.setToUser(lang, (User)Session["user"]);
+            }
+
             return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
         }
     }

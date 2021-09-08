@@ -19,6 +19,8 @@ namespace MyNews.Controllers
                 return Redirect("./Home");
             }
 
+            Session["texts"] = new LanguageBl().loadDefault().texts;
+
             return View();
         }
 

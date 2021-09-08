@@ -45,7 +45,6 @@ namespace Persistence
 
 				SqlCommand query = new SqlCommand(queryString.ToString(), conn);
 
-				query.Parameters.AddWithValue("@table", table);
 				for (int i = 0; i < columns.Length; i++) {
 					if (values[i] == null) {
 						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
@@ -71,7 +70,7 @@ namespace Persistence
 
 		protected int update(string table, string[] columns, string[] values, string[] whereColumns, string[] whereValues) {
 			try {
-				StringBuilder queryString = new StringBuilder().AppendFormat("UPDATE @table SET ");
+				StringBuilder queryString = new StringBuilder().AppendFormat("UPDATE {0} SET ", table);
 
 				for (int i = 0; i < columns.Length; i++) {
 					if (i != 0) {
@@ -91,13 +90,10 @@ namespace Persistence
 					queryString.Append(whereColumns[i] + " = @" + whereColumns[i]);
 				}
 
-				queryString.Append(")");
-
 				var asd = queryString.ToString();
 
 				SqlCommand query = new SqlCommand(queryString.ToString(), conn);
 
-				query.Parameters.AddWithValue("@table", table);
 				for (int i = 0; i < columns.Length; i++) {
 					if (values[i] == null) {
 						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
@@ -108,9 +104,9 @@ namespace Persistence
 
 				for (int i = 0; i < whereColumns.Length; i++) {
 					if (whereValues[i] == null) {
-						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
+						query.Parameters.AddWithValue("@" + whereColumns[i], DBNull.Value);
 					} else {
-						query.Parameters.AddWithValue("@" + columns[i], truncate(whereValues[i], 200));
+						query.Parameters.AddWithValue("@" + whereColumns[i], truncate(whereValues[i], 200));
 					}
 				}
 

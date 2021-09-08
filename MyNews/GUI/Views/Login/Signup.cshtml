@@ -7,18 +7,18 @@
 		<div class="column login-column login-column-left">
 			<div class="company-container">
 				<img src="~/Assets/Images/logo.png">
-				<p>El mejor lugar para enterarte de las noticias.</p>
+				<p>@(((Dictionary<string,string>)Session["texts"])["login_caption"])</p>
 			</div>
 		</div>
 		<div class="column login-column login-column-right">
 			<div class="login-box">
-				<h2 class="title is-2">Sign up</h2>
+				<h2 class="title is-2">@(((Dictionary<string,string>)Session["texts"])["signup"])</h2>
 
 				<form id="signupForm">
 					<div class="field">
-						<label class="label">Username</label>
+						<label class="label">@(((Dictionary<string,string>)Session["texts"])["username"])</label>
 						<div class="control has-icons-left has-icons-right">
-							<input id="username" class="input" type="text" placeholder="Username" required>
+							<input id="username" class="input" type="text" placeholder="@(((Dictionary<string,string>)Session["texts"])["username"])" required>
 							<span class="icon is-small is-left">
 								<i class="fas fa-user"></i>
 							</span>
@@ -26,9 +26,9 @@
 					</div>
 
 					<div class="field">
-						<label class="label">Name</label>
+						<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
 						<div class="control has-icons-left has-icons-right">
-							<input id="name" class="input" type="text" placeholder="Name" required>
+							<input id="name" class="input" type="text" placeholder="@(((Dictionary<string,string>)Session["texts"])["name"])" required>
 							<span class="icon is-small is-left">
 								<i class="fas fa-user"></i>
 							</span>
@@ -36,9 +36,9 @@
 					</div>
 
 					<div class="field">
-						<label class="label">Lastname</label>
+						<label class="label">@(((Dictionary<string,string>)Session["texts"])["lastname"])</label>
 						<div class="control has-icons-left has-icons-right">
-							<input id="lastname" class="input" type="text" placeholder="Lastname" required>
+							<input id="lastname" class="input" type="text" placeholder="@(((Dictionary<string,string>)Session["texts"])["lastname"])" required>
 							<span class="icon is-small is-left">
 								<i class="fas fa-user"></i>
 							</span>
@@ -46,9 +46,9 @@
 					</div>
 
 					<div class="field">
-						<label class="label">Mail</label>
+						<label class="label">@(((Dictionary<string,string>)Session["texts"])["mail"])</label>
 						<div class="control has-icons-left has-icons-right">
-							<input id="mail" class="input" type="email" placeholder="Mail" required>
+							<input id="mail" class="input" type="email" placeholder="@(((Dictionary<string,string>)Session["texts"])["mail"])" required>
 							<span class="icon is-small is-left">
 								<i class="far fa-envelope"></i>
 							</span>
@@ -56,9 +56,9 @@
 					</div>
 
 					<div class="field">
-						<label class="label">Password</label>
+						<label class="label">@(((Dictionary<string,string>)Session["texts"])["password"])</label>
 						<div class="control has-icons-left has-icons-right">
-							<input id="password" class="input" type="password" placeholder="Password" required>
+							<input id="password" class="input" type="password" placeholder="@(((Dictionary<string,string>)Session["texts"])["password"])" required>
 							<span class="icon is-small is-left">
 								<i class="fas fa-lock"></i>
 							</span>
@@ -66,16 +66,16 @@
 					</div>
 
 					<div class="field">
-						<label class="label">Confirm password</label>
+						<label class="label">@(((Dictionary<string,string>)Session["texts"])["confirm_password"])</label>
 						<div class="control has-icons-left has-icons-right">
-							<input id="confirmPassword" class="input" type="password" placeholder="Password" required>
+							<input id="confirmPassword" class="input" type="password" placeholder="@(((Dictionary<string,string>)Session["texts"])["confirm_password"])" required>
 							<span class="icon is-small is-left">
 								<i class="fas fa-lock"></i>
 							</span>
 						</div>
 					</div>
 
-					<input class="button is-info is-pulled-right" type="submit" value="Signup">
+					<input class="button is-info is-pulled-right" type="submit" value="@(((Dictionary<string,string>)Session["texts"])["signup"])">
 				</form>
 			</div>
 		</div>
@@ -91,7 +91,7 @@
 		if (password != confirmPassword) {
 			showAlert({
 				type: 'danger',
-				description: 'Las contraseñas no coinciden.'
+				description: '@(((Dictionary<string,string>)Session["texts"])["password_different"])'
 			})
 			return;
 		}

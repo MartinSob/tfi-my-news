@@ -25,50 +25,50 @@
 		<div id="navbarBasicExample" class="navbar-menu">
 			<div class="navbar-start">
 				<a class="navbar-item" href="~/Home">
-					<i class="fas fa-home"></i> <span class="navbar-item-text">Principal</span>
+					<i class="fas fa-home"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["home"])</span>
 				</a>
 
 				@if (new PolicyBl().hasPermission((User)Session["user"], "post_manage")) {
 					<a class="navbar-item" href="~/Writer">
-						<i class="fas fa-i-cursor"></i> <span class="navbar-item-text">Escritor</span>
+						<i class="fas fa-i-cursor"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["writer"])</span>
 					</a>
 				}
 
 				@if (new PolicyBl().hasPermission((User)Session["user"], "admin_see")) {
 					<div class="navbar-item has-dropdown is-hoverable">
 						<a class="navbar-link">
-							<i class="fas fa-cog"></i> <span class="navbar-item-text">Admin</span>
+							<i class="fas fa-cog"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["admin"])</span>
 						</a>
 
 						<div class="navbar-dropdown">
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_employees")) {
 								<a class="navbar-item" href="~/Employee">
-									<i class="fas fa-hard-hat"></i> <span class="navbar-item-text">Empleados</span>
+									<i class="fas fa-hard-hat"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["employees"])</span>
 								</a>
 							}
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_users")) {
 								<a class="navbar-item" href="~/User">
-									<i class="fas fa-users-cog"></i> <span class="navbar-item-text">Usuarios</span>
+									<i class="fas fa-users-cog"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["users"])</span>
 								</a>
 							}
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_copy")) {
 								<a class="navbar-item" href="~/Backup">
-									<i class="fas fa-archive"></i> <span class="navbar-item-text">Copia de seguridad</span>
+									<i class="fas fa-archive"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["backup"])</span>
 								</a>
 							}
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_policies")) {
 								<a class="navbar-item" href="~/Authorization">
-									<i class="fas fa-user-lock"></i> <span class="navbar-item-text">Permisos</span>
+									<i class="fas fa-user-lock"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["permits"])</span>
 								</a>
 							}
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_bitacore")) {
 								<a class="navbar-item" href="~/Bitacore">
-									<i class="fas fa-clipboard-list"></i> <span class="navbar-item-text">Bitácora</span>
+									<i class="fas fa-clipboard-list"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["bitacore"])</span>
 								</a>
 							}
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_reports")) {
 								<a class="navbar-item" href="~/Reports">
-									<i class="fas fa-chart-pie"></i> <span class="navbar-item-text">Reportes</span>
+									<i class="fas fa-chart-pie"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["reports"])</span>
 								</a>
 							}
 						</div>
@@ -81,10 +81,10 @@
 					<div class="navbar-item">
 						<div class="buttons">
 							<a class="button is-primary" href="~/Login/Signup">
-								<strong>Sign up</strong>
+								<strong>@(((Dictionary<string,string>)Session["texts"])["signup"])</strong>
 							</a>
 							<a class="button is-light" href="~/Login">
-								Log in
+								@(((Dictionary<string,string>)Session["texts"])["login"])
 							</a>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 
 						<div class="navbar-dropdown">
 							<a class="navbar-item" href="~/User/@(((User)Session["user"]).id)">
-								Perfil
+								@(((Dictionary<string,string>)Session["texts"])["profile"])
 							</a>
 							<hr class="navbar-divider">
 							<a class="navbar-item" href="~/Login/Logout">

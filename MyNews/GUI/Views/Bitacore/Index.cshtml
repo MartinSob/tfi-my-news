@@ -8,13 +8,13 @@
 <div class="container.is-widescreen my-5">
 	<div class="columns">
 		<div class="column px-5">
-			<h1 class="title is-2"><i class="fas fa-clipboard-list"></i> Bitacore</h1>
+			<h1 class="title is-2"><i class="fas fa-clipboard-list"></i> @(((Dictionary<string,string>)Session["texts"])["bitacore"])</h1>
 
 			<div class="filter-container">
 				<div class="columns">
 					<div class="column">
 						<div class="field">
-							<label class="label">Text</label>
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
 							<div class="control">
 								<input id="typeFilter" class="input" type="text">
 							</div>
@@ -22,17 +22,17 @@
 					</div>
 					<div class="column">
 						<div class="field">
-							<label class="label">From</label>
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["from"])</label>
 							<div class="control">
-								<input id="fromFilter" class="input" type="date" placeholder="From">
+								<input id="fromFilter" class="input" type="date" placeholder="@(((Dictionary<string,string>)Session["texts"])["from"])">
 							</div>
 						</div>
 					</div>
 					<div class="column">
 						<div class="field">
-							<label class="label">To</label>
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["to"])</label>
 							<div class="control">
-								<input id="toFilter" class="input" type="date" placeholder="To">
+								<input id="toFilter" class="input" type="date" placeholder="@(((Dictionary<string,string>)Session["texts"])["to"])">
 							</div>
 						</div>
 					</div>
@@ -45,11 +45,11 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Title</th>
-						<th>Description</th>
-						<th>Type</th>
-						<th>Date</th>
-						<th>User</th>
+						<th>@(((Dictionary<string,string>)Session["texts"])["title"])</th>
+						<th>@(((Dictionary<string,string>)Session["texts"])["description"])</th>
+						<th>@(((Dictionary<string,string>)Session["texts"])["type"])</th>
+						<th>@(((Dictionary<string,string>)Session["texts"])["date"])</th>
+						<th>@(((Dictionary<string,string>)Session["texts"])["user"])</th>
 					</tr>
 				</thead>
 				<tbody>
