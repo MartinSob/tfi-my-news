@@ -29,13 +29,13 @@ namespace MyNews.Controllers
 
             List<string> errors = new DvBl().verifyDv((User)Session["user"]);
             if (errors.Count != 0) {
-                return Json(new { type = "danger", description = "There are problems with the DV.", data = "DV"}, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["vd_problems"], data = "DV"}, JsonRequestBehavior.AllowGet);
             }
 
             if (new BackupBl().backup(Server.MapPath("/"))) {
-                return Json(new { type = "success", description = "The backup was created successfuly." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["backup_success"] }, JsonRequestBehavior.AllowGet);
             } else {
-                return Json(new { type = "danger", description = "There was an error creating the backup." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["backup_error"] }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -47,9 +47,9 @@ namespace MyNews.Controllers
             if (new BackupBl().restore(new Backup {
                 name = name,
             }, Server.MapPath("/"))) {
-                return Json(new { type = "success", description = "The restore was successfuly." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["restore_success"] }, JsonRequestBehavior.AllowGet);
             } else {
-                return Json(new { type = "danger", description = "There was an error with the restore." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["restore_error"] }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -59,19 +59,19 @@ namespace MyNews.Controllers
             }
 
             if (new DvBl().updateDv((User)Session["user"])) {
-                return Json(new { type = "success", description = "The DV were updated successfuly." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["vd_valid_update_success"] }, JsonRequestBehavior.AllowGet);
             } else {
-                return Json(new { type = "danger", description = "There was an error updating the DV." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["vd_valid_update_error"] }, JsonRequestBehavior.AllowGet);
             }
         }
 
         public ActionResult ValidateDv() {
             List<string> errors = new DvBl().verifyDv((User)Session["user"]);
             if (errors.Count == 0) {
-                return Json(new { type = "success", description = "The DV are valid." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["vd_valid"] }, JsonRequestBehavior.AllowGet);
             } else {
                 string json = JsonConvert.SerializeObject(errors);
-                return Json(new { type = "danger", description = "There are problems with the DV.", data = json }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["vd_problems"], data = json }, JsonRequestBehavior.AllowGet);
             }
         }
     }

@@ -26,7 +26,7 @@ namespace MyNews.Controllers
             User loggedUser;
             loggedUser = userBl.login(new User { username = username, password = password });
             if (loggedUser == null) {
-                return Json(new { type = "danger", description = "El nombre de usuario o contraseña no son correctos." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["login_failed"] }, JsonRequestBehavior.AllowGet);
             }
             Session["user"] = loggedUser;
 
@@ -49,7 +49,7 @@ namespace MyNews.Controllers
         [HttpPost]
         public ActionResult CreateUser(string username, string password, string name, string lastname, string mail) {
             if (userBl.exists(username, mail)) {
-				return Json(new { type = "danger", description = "El nombre o mail del usuario ya esta registrado." }, JsonRequestBehavior.AllowGet);
+				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["already_registered"] }, JsonRequestBehavior.AllowGet);
 			}
 
 			User newUser = userBl.create(new User {
@@ -61,10 +61,10 @@ namespace MyNews.Controllers
 			});
 
 			if (newUser.id == 0) {
-				return Json(new { type = "danger", description = "Hubo un problema creando el usuario." }, JsonRequestBehavior.AllowGet);
+				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["user_create_error"] }, JsonRequestBehavior.AllowGet);
 			}
 
-			return Json(new { type = "success", description = "Usuario creado correctamente." }, JsonRequestBehavior.AllowGet);
+			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["user_create_success"] }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ForgotPassword() {
@@ -73,9 +73,9 @@ namespace MyNews.Controllers
 
         public ActionResult Reset(string email) {
             if (new UserBl().resetPassword(email)) {
-                return Json(new { type = "success", description = "Se ha enviado un correo con la nueva contraseña." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["password_reset_success"] }, JsonRequestBehavior.AllowGet);
             } else {
-                return Json(new { type = "danger", description = "Hubo un problema generando la nueva contraseña." }, JsonRequestBehavior.AllowGet);
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["password_reset_error"] }, JsonRequestBehavior.AllowGet);
             }
         }
     }
