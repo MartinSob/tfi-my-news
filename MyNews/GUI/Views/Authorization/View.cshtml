@@ -1,0 +1,46 @@
+﻿@using BusinessEntity;
+@model BusinessEntity.Role
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@Model.name</h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+				<div class="control">
+					<input class="input" type="text" placeholder="Text input" value="@Model.name" disabled>
+				</div>
+			</div>
+
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Policy policy in Model.policies) {
+							<tr id="@policy.id">
+								<td>@(i++)</td>
+								<td>@policy.name</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("editBtn").addEventListener("click", async (event) => {
+			const text = document.getElementById("textFilter").value;
+			window.location.replace('?text=' + text);
+		});
+	</script>
+</div>

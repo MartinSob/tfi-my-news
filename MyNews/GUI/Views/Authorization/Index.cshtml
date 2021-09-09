@@ -1,0 +1,57 @@
+﻿@using BusinessEntity;
+@using MyNews.Models;
+@model ListModel<BusinessEntity.Role>
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2"><i class="fas fa-clipboard-list"></i> @(((Dictionary<string,string>)Session["texts"])["permits"])</h1>
+
+			<div class="filter-container">
+				<div class="columns">
+					<div class="column">
+						<div class="field">
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
+							<div class="control">
+								<input id="textFilter" class="input" type="text">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button id="filterBtn" class="button"><i class="fas fa-search"></i></button>
+			</div>
+
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["action"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Role role in Model.Items) {
+							<tr id="@role.id">
+								<td>@(i++)</td>
+								<td><a href="Authorization/View/@role.id">@role.name</a></td>
+								<td></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("filterBtn").addEventListener("click", async (event) => {
+			const text = document.getElementById("textFilter").value;
+			window.location.replace('?text=' + text);
+		});
+	</script>
+</div>

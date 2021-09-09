@@ -41,30 +41,32 @@
 				<button id="filterBtn" class="button"><i class="fas fa-search"></i></button>
 			</div>
 
-			<table class="table is-striped is-hoverable" style="width: 100%">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>@(((Dictionary<string,string>)Session["texts"])["title"])</th>
-						<th>@(((Dictionary<string,string>)Session["texts"])["description"])</th>
-						<th>@(((Dictionary<string,string>)Session["texts"])["type"])</th>
-						<th>@(((Dictionary<string,string>)Session["texts"])["date"])</th>
-						<th>@(((Dictionary<string,string>)Session["texts"])["user"])</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (BitacoreMessage msg in Model.Items) {
-						<tr id="@msg.id">
-							<td>@(i++)</td>
-							<td>@msg.title</td>
-							<td>@msg.description</td>
-							<td>@msg.type</td>
-							<td>@msg.date.ToString()</td>
-							<td>@(msg.user != null? msg.user.username : "") </td>
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["title"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["description"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["type"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["date"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["user"])</th>
 						</tr>
-					}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						@foreach (BitacoreMessage msg in Model.Items) {
+							<tr id="@msg.id">
+								<td>@(i++)</td>
+								<td>@msg.title</td>
+								<td>@msg.description</td>
+								<td>@msg.type</td>
+								<td>@msg.date.ToString()</td>
+								<td>@(msg.user != null? msg.user.username : "") </td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

@@ -37,7 +37,7 @@ namespace Security
 		}
 
 		public List<Role> get(User user) {
-			List<Role> roles = dao.get(user);
+			List<Role> roles = dao.getPolicies(user);
 
 			foreach (Role role in roles) { 
 				role.policies = get(role).Distinct().ToList();
@@ -47,7 +47,7 @@ namespace Security
 		}
 
 		public List<Policy> get(Role role) {
-			dao.get(role);
+			dao.getPolicies(role);
 
 			foreach (Policy policy in role.policies.ToList()) {
 				if (dao.isRole(policy)) {
@@ -58,25 +58,16 @@ namespace Security
 			return role.policies;
 		}
 
-		//public List<Policy> getRoleTree(Role role) {
-		//	// For each policie check if role
-		//	foreach (Policy policy in role.policies) {
-		//		if (dao.isRole(policy)) {
-		//			// If yes: Get policies of role
-		//			Role newRole = new Role { id = policy.id };
-		//			role.policies.Add(newRole);
-		//			get(newRole);
-		//		} else {
-		//			// If not: Add policy to list
-		//			role.policies.Add(policy);
-		//		}
-		//	}
+		public List<Policy> getPolicies() {
+			return dao.getPolicies();
+		}
 
-		//	return;
-		//}
+		public List<Role> getRoles(string text = null) {
+			return dao.getRoles(text);
+		}
 
-		public List<Policy> get() {
-			return dao.get();
+		public Role getRole(int id) {
+			return dao.getPolicies(new Role { id = id });
 		}
 
 		public int update(Policy policy) {
@@ -84,7 +75,10 @@ namespace Security
 		}
 
 		public bool hasPermission(User user, string policy) {
-			//List<Role> userRoles = get(user);
+			if (user == null) {
+				return false;
+			}
+
 			foreach (Role role in user.roles) {
 				if (role.policies.Any(p => p.name == policy)) {
 					return true;
