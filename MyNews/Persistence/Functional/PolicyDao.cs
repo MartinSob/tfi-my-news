@@ -47,7 +47,7 @@ namespace Persistence.Functional
 			return 1;
 		}
 
-		public List<Role> getPolicies(User user) {
+		public List<Role> getRole(User user) {
 			try {
 				SqlCommand query = new SqlCommand("SELECT p.* FROM policies p JOIN user_roles ur ON ur.policy_id = p.id WHERE ur.user_id = @user", conn);
 				query.Parameters.AddWithValue("@user", user.id);
@@ -74,8 +74,21 @@ namespace Persistence.Functional
 			}
 		}
 
-		public Role getPolicies(Role role) {
+		public Role getRole(Role role) {
 			try {
+				SqlCommand queryGet = new SqlCommand($"SELECT * FROM policies p WHERE p.id = ${role.id}", conn);
+
+				conn.Open();
+				SqlDataReader dataGet = queryGet.ExecuteReader();
+
+				if (dataGet.HasRows) {
+					while (dataGet.Read()) {
+						role.name = dataGet["name"].ToString();
+					}
+				}
+
+				conn.Close();
+
 				SqlCommand query = new SqlCommand("SELECT p.* FROM roles r JOIN policies p ON p.id = r.policy_id WHERE r.role_id = @role", conn);
 				query.Parameters.AddWithValue("@role", role.id);
 
@@ -158,34 +171,7 @@ namespace Persistence.Functional
 			}
 		}
 
-		public Role getRole(int id) {
-			try {
-				string q = $"SELECT DISTINCT p.* FROM roles r JOIN policies p ON p.id = r.role_id WHERE p.id = ${id}";
-
-				SqlCommand query = new SqlCommand(q, conn);
-
-				Role role = new Role { 
-					id = id
-				};
-				conn.Open();
-				SqlDataReader data = query.ExecuteReader();
-
-				if (data.HasRows) {
-					while (data.Read()) {
-						role.name = data["name"].ToString();
-					}
-				}
-
-				conn.Close();
-
-				return role;
-			} catch (Exception e) {
-				new ErrorDao().create(e.ToString());
-				return null;
-			}
-		}
-
-		public List<Policy> getPolicies() {
+		public List<Policy> getRole() {
 			try {
 				string q = "SELECT * FROM policies p WHERE p.id NOT IN ( SELECT DISTINCT p.id FROM roles r JOIN policies p ON p.id = r.role_id )";
 				SqlCommand query = new SqlCommand(q, conn);

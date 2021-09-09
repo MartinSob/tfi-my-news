@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!this.value)
                 return;
 
-            const response = await get('Language/LoadLanguage?id=' + this.value);
+            const response = await get('/Language/LoadLanguage?id=' + this.value);
             if (response.type === 'success') {
                 location.reload();
             }

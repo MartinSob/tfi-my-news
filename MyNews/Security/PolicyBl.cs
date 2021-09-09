@@ -37,7 +37,7 @@ namespace Security
 		}
 
 		public List<Role> get(User user) {
-			List<Role> roles = dao.getPolicies(user);
+			List<Role> roles = dao.getRole(user);
 
 			foreach (Role role in roles) { 
 				role.policies = get(role).Distinct().ToList();
@@ -47,7 +47,7 @@ namespace Security
 		}
 
 		public List<Policy> get(Role role) {
-			dao.getPolicies(role);
+			dao.getRole(role);
 
 			foreach (Policy policy in role.policies.ToList()) {
 				if (dao.isRole(policy)) {
@@ -59,15 +59,15 @@ namespace Security
 		}
 
 		public List<Policy> getPolicies() {
-			return dao.getPolicies();
+			return new List<Policy>(); // dao.getPolicies();
 		}
 
 		public List<Role> getRoles(string text = null) {
 			return dao.getRoles(text);
 		}
 
-		public Role getRole(int id) {
-			return dao.getPolicies(new Role { id = id });
+		public Role getRole(Role role) {
+			return dao.getRole(role);
 		}
 
 		public int update(Policy policy) {

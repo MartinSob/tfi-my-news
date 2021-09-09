@@ -24,7 +24,7 @@ namespace MyNews.Controllers
         }
 
         public ActionResult View(int id) {
-            return View(policyBl.getRole(id));
+            return View(policyBl.getRole(new Role { id = id }));
         }
 
         public ActionResult Create() {
