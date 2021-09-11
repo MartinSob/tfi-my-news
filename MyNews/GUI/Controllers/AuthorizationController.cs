@@ -34,5 +34,13 @@ namespace MyNews.Controllers
         public ActionResult Update(int id) {
             return View();
         }
+
+        public ActionResult Delete(int id) {
+            if (new PolicyBl().delete(id)) {
+                return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
+            } else {
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error"] }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

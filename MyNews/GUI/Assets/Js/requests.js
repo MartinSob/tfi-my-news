@@ -90,3 +90,18 @@ const isJsonString = (str) => {
     }
     return true;
 }
+
+const toggleModal = () => {
+    let modal = document.querySelector('.modal');
+    let html = document.querySelector('html');
+    modal.classList.toggle('is-active');
+    const isShown = html.classList.toggle('is-clipped');
+    
+    if (isShown) {
+        modal.querySelector('.modal-background').addEventListener('click', function (e) {
+            e.preventDefault();
+            modal.classList.remove('is-active');
+            html.classList.remove('is-clipped');
+        });
+    }
+}

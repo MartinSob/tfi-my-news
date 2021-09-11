@@ -39,7 +39,10 @@
 							<tr id="@role.id">
 								<td>@(i++)</td>
 								<td><a href="Authorization/View/@role.id">@role.name</a></td>
-								<td></td>
+								<td>
+									<button onclick="showDeleteModal(@role.id, '@role.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
+									<a href="Authorization/Edit/@role.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
+								</td>
 							</tr>
 						}
 					</tbody>
@@ -48,10 +51,40 @@
 		</div>
 	</div>
 
+	<div class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-card">
+			<header class="modal-card-head">
+				<p id="roleName" class="modal-card-title"></p>
+				<button onclick="toggleModal()" class="delete" aria-label="close"></button>
+			</header>
+			<section class="modal-card-body">
+				<p>@(((Dictionary<string,string>)Session["texts"])["delete_confirmation"])</p>
+			</section>
+			<footer class="modal-card-foot">
+				<button onclick="deleteRole()" class="button is-success"><i class="fas fa-check"></i></button>
+				<button onclick="toggleModal()" class="button"><i class="fas fa-times"></i></button>
+			</footer>
+		</div>
+	</div>
+
 	<script>
+		var roleId = 0;
+
 		document.getElementById("filterBtn").addEventListener("click", async (event) => {
 			const text = document.getElementById("textFilter").value;
 			window.location.replace('?text=' + text);
 		});
+
+		function showDeleteModal(id, name) {
+			roleId = id;
+			document.getElementById("roleName").innerText = name;
+			toggleModal();
+		}
+
+		async function deleteRole() {
+			const response = await get('/Authorization/Delete?id=' + roleId);
+			showAlert(response);
+		}
 	</script>
 </div>

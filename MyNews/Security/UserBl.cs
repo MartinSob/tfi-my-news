@@ -63,7 +63,7 @@ namespace Security
 				user = loggedUser
 			});
 
-			loggedUser.roles = new PolicyBl().get(loggedUser);
+			loggedUser.roles = new PolicyBl().getAllPermits(loggedUser);
 
 			// new LanguageDao().load(loggedUser);
 

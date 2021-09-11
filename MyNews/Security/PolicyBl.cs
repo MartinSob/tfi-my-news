@@ -36,17 +36,23 @@ namespace Security
 			return dao.exists(name);
 		}
 
-		public List<Role> get(User user) {
+		public List<Role> getAllPermits(User user) {
 			List<Role> roles = dao.getRole(user);
 
-			foreach (Role role in roles) { 
-				role.policies = get(role).Distinct().ToList();
-				role.policies = role.policies.Distinct().ToList();
+			foreach (Role role in roles) {
+				getAllPermits(role);
 			}
 			return roles;
 		}
 
-		public List<Policy> get(Role role) {
+		public List<Policy> getAllPermits(Role role) {
+			role.policies = get(role).Distinct().ToList();
+			role.policies = role.policies.Distinct().ToList();
+
+			return role.policies;
+		}
+
+		List<Policy> get(Role role) {
 			dao.getRole(role);
 
 			foreach (Policy policy in role.policies.ToList()) {

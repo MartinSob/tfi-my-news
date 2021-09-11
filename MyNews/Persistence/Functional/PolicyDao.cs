@@ -24,9 +24,8 @@ namespace Persistence.Functional
 		}
 
 		public bool delete(int id) {
-			// TODO
-
-			return true;
+			// TODO remove relations
+			return deleteById("policies", id);
 		}
 
 		public bool exists(string names) {
