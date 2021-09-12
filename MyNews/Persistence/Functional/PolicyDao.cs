@@ -24,8 +24,15 @@ namespace Persistence.Functional
 		}
 
 		public bool delete(int id) {
-			// TODO remove relations
+			if (!deleteRoleRelations(id))
+				return false;
+
 			return deleteById("policies", id);
+		}
+
+		public bool deleteRoleRelations(int id) {
+			SqlCommand query = new SqlCommand($"DELETE FROM roles WHERE role_id = {id}", conn);
+			return executeQuery(query);
 		}
 
 		public bool exists(string names) {
@@ -44,6 +51,42 @@ namespace Persistence.Functional
 			// TODO
 
 			return 1;
+		}
+
+		public List<Policy> getPolicies(string text = null) {
+			try {
+				string q = "SELECT DISTINCT p.* FROM policies p ";
+
+				if (text != null) {
+					q += " WHERE p.name LIKE CONCAT('%', @policyName, '%') ";
+				}
+
+				SqlCommand query = new SqlCommand(q, conn);
+
+				if (text != null) {
+					query.Parameters.AddWithValue("@policyName", text);
+				}
+
+				List<Policy> policies = new List<Policy>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						policies.Add(new Policy {
+							id = int.Parse(data["id"].ToString()),
+							name = data["name"].ToString()
+						});
+					}
+				}
+
+				conn.Close();
+
+				return policies;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
 		}
 
 		public List<Role> getRole(User user) {
@@ -197,8 +240,9 @@ namespace Persistence.Functional
 			}
 		}
 
-		public void cleanRoles(User user) {
-			// TODO
+		public bool cleanRoles(User user) {
+			SqlCommand query = new SqlCommand($"DELETE FROM user_roles WHERE user_id = {user.id}", conn);
+			return executeQuery(query);
 		}
 	}
 }

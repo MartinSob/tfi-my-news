@@ -1,2 +1,79 @@
-﻿<h2>Update</h2>
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.Role
+@{
+	List<Policy> allPolicies = new PolicyBl().getPolicies();
+	int i = 1;
+}
 
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@Model.name</h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+				<div class="control">
+					<input id="rolename" class="input" type="text" value="@Model.name">
+				</div>
+			</div>
+
+			<label class="label">@(((Dictionary<string,string>)Session["texts"])["permits"])</label>
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Policy policy in allPolicies) {
+							if (Model.id != policy.id) {
+								<tr>
+									<td>
+										<label class="checkbox">
+											@if (Model.policies.Any(p => p.id == policy.id)) {
+												<input id="@policy.id" type="checkbox" name="policyboxes" checked>
+											} else {
+												<input id="@policy.id" type="checkbox" name="policyboxes">
+											}
+										</label>
+									</td>
+									<td>@policy.name</td>
+								</tr>
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<button id="saveBtn" class="button"><i class="fas fa-search"></i></button>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("saveBtn").addEventListener("click", async (event) => {
+			const checkedBoxes = document.querySelectorAll('input[name=policyboxes]:checked');
+			let policiesSelected = [];
+
+			checkedBoxes.forEach(box => {
+				if (box.checked) {
+					policiesSelected.push(box.id);
+				}
+			})
+
+			console.log(policiesSelected);
+
+			const data = {
+				name: document.getElementById("rolename").value,
+				policies: policiesSelected
+			}
+
+			const response = await post('/Authorization/UpdateRole', data);
+			if (response.type == 'success') {
+				//window.location.replace("./");
+			}
+		});
+	</script>
+</div>

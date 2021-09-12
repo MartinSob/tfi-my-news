@@ -32,15 +32,20 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Update(int id) {
-            return View();
+            return View(policyBl.getRole(new Role { id = id }));
         }
 
         public ActionResult Delete(int id) {
-            if (new PolicyBl().delete(id)) {
+            if (policyBl.delete(id)) {
                 return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
             } else {
                 return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error"] }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateRole(string name, string[] policies) {
+            return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
     }
 }

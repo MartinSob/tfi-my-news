@@ -65,8 +65,18 @@ namespace Security
 		}
 
 		public List<Policy> getPolicies() {
-			return new List<Policy>(); // dao.getPolicies();
+			return dao.getPolicies();
 		}
+
+		//public List<Policy> getPoliciesForUpdate(Role role) {
+		//	List<Policy> result = new List<Policy>();
+		//	List<Policy> rolePolicies = getAllPermits(role);
+
+		//	foreach (Policy policy in dao.getPolicies()) {
+		//		if (policy esta en las del role no agregar) { 
+		//		}
+		//	}
+		//}
 
 		public List<Role> getRoles(string text = null) {
 			return dao.getRoles(text);

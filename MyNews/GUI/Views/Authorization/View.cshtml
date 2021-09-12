@@ -1,6 +1,8 @@
 ﻿@using BusinessEntity;
+@using Security;
 @model BusinessEntity.Role
 @{
+	List<Role> r = new PolicyBl().getRoles();
 	int i = 1;
 }
 
@@ -29,7 +31,13 @@
 						@foreach (Policy policy in Model.policies) {
 							<tr id="@policy.id">
 								<td>@(i++)</td>
-								<td>@policy.name</td>
+								<td>
+									@if (r.Any(role => role.id == policy.id)) {
+										<a href="/Authorization/View/@policy.id">@policy.name</a>
+									} else {
+										@policy.name
+									}
+								</td>
 							</tr>
 						}
 					</tbody>
