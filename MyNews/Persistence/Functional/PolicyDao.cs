@@ -41,16 +41,23 @@ namespace Persistence.Functional
 			return true;
 		}
 
-		public int create(Policy policy) {
+		public int create(Role role) {
 			// TODO
 
 			return 1;
 		}
 
-		public int update(Policy policy) {
-			// TODO
+		public Role update(Role role) {
+			SqlCommand query = new SqlCommand($"UPDATE policies SET name = '{role.name}' WHERE id = {role.id}", conn);
+			executeQuery(query);
 
-			return 1;
+			deleteRoleRelations(role.id);
+
+			foreach (Policy policy in role.policies) {
+				insert("roles", new string[] { "policy_id", "role_id" }, new string[] { policy.id.ToString(), role.id.ToString() });
+			}
+
+			return role;
 		}
 
 		public List<Policy> getPolicies(string text = null) {

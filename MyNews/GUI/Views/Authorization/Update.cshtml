@@ -48,7 +48,10 @@
 				</table>
 			</div>
 
-			<button id="saveBtn" class="button"><i class="fas fa-search"></i></button>
+			<div class="py-4">
+				<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
+				<a href="/Authorization/View/@Model.id" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+			</div>
 		</div>
 	</div>
 
@@ -63,16 +66,14 @@
 				}
 			})
 
-			console.log(policiesSelected);
-
-			const data = {
+			const response = await post('/Authorization/UpdateRole', {
+				id: @Model.id,
 				name: document.getElementById("rolename").value,
 				policies: policiesSelected
-			}
+			});
 
-			const response = await post('/Authorization/UpdateRole', data);
 			if (response.type == 'success') {
-				//window.location.replace("./");
+				window.location.replace("/Authorization/View/@Model.id");
 			}
 		});
 	</script>

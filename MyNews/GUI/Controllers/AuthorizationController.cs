@@ -44,7 +44,18 @@ namespace MyNews.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateRole(string name, string[] policies) {
+        public ActionResult UpdateRole(int id, string name, string[] policies) {
+            Role role = new Role {
+                id= id,
+                name = name
+            };
+
+            foreach (string policy in policies) {
+                // TODO: Check for circular policies
+                role.policies.Add(new Policy { id = int.Parse(policy) });
+            }
+
+            policyBl.update(role);
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
     }

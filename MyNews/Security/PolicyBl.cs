@@ -24,8 +24,8 @@ namespace Security
 			dao.cleanRoles(user);
 		}
 
-		public int create(Policy policy) {
-			return dao.create(policy);
+		public int create(Role role) {
+			return dao.create(role);
 		}
 
 		public bool delete(int id) {
@@ -86,8 +86,8 @@ namespace Security
 			return dao.getRole(role);
 		}
 
-		public int update(Policy policy) {
-			return dao.update(policy);
+		public Role update(Role role) {
+			return dao.update(role);
 		}
 
 		public bool hasPermission(User user, string policy) {
