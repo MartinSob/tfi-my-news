@@ -31,6 +31,20 @@ namespace MyNews.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult CreateRole(string name, string[] policies) {
+            Role role = new Role {
+                name = name
+            };
+
+            foreach (string policy in policies) {
+                role.policies.Add(new Policy { id = int.Parse(policy) });
+            }
+
+            policyBl.create(role);
+            return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], data= "EL ID del nuevo role" }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Update(int id) {
             return View(policyBl.getRole(new Role { id = id }));
         }
@@ -51,8 +65,12 @@ namespace MyNews.Controllers
             };
 
             foreach (string policy in policies) {
-                // TODO: Check for circular policies
-                role.policies.Add(new Policy { id = int.Parse(policy) });
+                List<Policy> policyPermits = policyBl.getAllPermits(new Role { id = int.Parse(policy) });
+
+                if (policyPermits.Any(p => p.id == role.id)) {
+                    return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["circular_role"] }, JsonRequestBehavior.AllowGet);
+                }
+				role.policies.Add(new Policy { id = int.Parse(policy) });
             }
 
             policyBl.update(role);

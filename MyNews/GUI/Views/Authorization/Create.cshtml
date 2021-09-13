@@ -1,2 +1,72 @@
-﻿<h2>Create</h2>
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.Role
+@{
+	List<Policy> allPolicies = new PolicyBl().getPolicies();
+}
 
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@(((Dictionary<string,string>)Session["texts"])["create"])</h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+				<div class="control">
+					<input id="rolename" class="input" type="text">
+				</div>
+			</div>
+
+			<label class="label">@(((Dictionary<string,string>)Session["texts"])["permits"])</label>
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Policy policy in allPolicies) {
+							<tr>
+								<td>
+									<label class="checkbox">
+											<input id="@policy.id" type="checkbox" name="policyboxes">
+									</label>
+								</td>
+								<td>@policy.name</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="py-4">
+				<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
+				<a href="/Authorization" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("saveBtn").addEventListener("click", async (event) => {
+			const checkedBoxes = document.querySelectorAll('input[name=policyboxes]:checked');
+			let policiesSelected = [];
+
+			checkedBoxes.forEach(box => {
+				if (box.checked) {
+					policiesSelected.push(box.id);
+				}
+			})
+
+			const response = await post('/Authorization/CreateRole', {
+				name: document.getElementById("rolename").value,
+				policies: policiesSelected
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/Authorization/View/@Model.id");
+			}
+		});
+	</script>
+</div>

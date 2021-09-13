@@ -42,9 +42,13 @@ namespace Persistence.Functional
 		}
 
 		public int create(Role role) {
-			// TODO
+			role.id = insert("policies", new string[] { "name" }, new string[] { role.name });
 
-			return 1;
+			foreach (Policy policy in role.policies) {
+				insert("roles", new string[] { "policy_id", "role_id" }, new string[] { policy.id.ToString(), role.id.ToString() });
+			}
+
+			return role.id;
 		}
 
 		public Role update(Role role) {
