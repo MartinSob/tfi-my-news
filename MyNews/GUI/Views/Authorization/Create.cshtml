@@ -65,7 +65,7 @@
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Authorization/View/@Model.id");
+				window.location.replace("/Authorization/View/" + response.data);
 			}
 		});
 	</script>

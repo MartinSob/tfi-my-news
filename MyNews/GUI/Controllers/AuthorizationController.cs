@@ -41,8 +41,8 @@ namespace MyNews.Controllers
                 role.policies.Add(new Policy { id = int.Parse(policy) });
             }
 
-            policyBl.create(role);
-            return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], data= "EL ID del nuevo role" }, JsonRequestBehavior.AllowGet);
+            int result = policyBl.create(role);
+            return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], data = result }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Update(int id) {
