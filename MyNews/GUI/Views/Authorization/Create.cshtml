@@ -51,6 +51,7 @@
 	<script>
 		document.getElementById("saveBtn").addEventListener("click", async (event) => {
 			const checkedBoxes = document.querySelectorAll('input[name=policyboxes]:checked');
+			const roleName = document.getElementById("rolename").value;
 			let policiesSelected = [];
 
 			checkedBoxes.forEach(box => {
@@ -59,8 +60,15 @@
 				}
 			})
 
+			if (policiesSelected.length == 0 || !roleName) {
+				return showAlert({
+					type: 'danger',
+					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
+				});
+			}
+
 			const response = await post('/Authorization/CreateRole', {
-				name: document.getElementById("rolename").value,
+				name: roleName,
 				policies: policiesSelected
 			});
 

@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /*
  * Response must contain a type and a description.
  * 
- * Type can be: 'is-success', 'is-warning', 'is-danger'
+ * Type can be: 'success', 'warning', 'danger'
  */
 const showAlert = (response) => {
     if (!response.description) {

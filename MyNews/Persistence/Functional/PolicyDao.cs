@@ -24,6 +24,10 @@ namespace Persistence.Functional
 		}
 
 		public bool delete(int id) {
+			SqlCommand query = new SqlCommand($"DELETE FROM user_roles WHERE policy_id = {id}", conn);
+			if (!executeQuery(query))
+				return false;
+
 			if (!deleteRoleRelations(id))
 				return false;
 

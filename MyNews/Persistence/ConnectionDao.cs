@@ -188,6 +188,24 @@ namespace Persistence
 			}
 		}
 
+		protected bool logicDeleteById(string table, int id) {
+			try {
+				if (conn.State == ConnectionState.Open) {
+					return false;
+				}
+
+				SqlCommand query = new SqlCommand($"UPDATE {table} SET deleted = 1 WHERE id = {id}", conn);
+
+				conn.Open();
+				query.ExecuteNonQuery();
+				conn.Close();
+				return true;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return false;
+			}
+		}
+
 		public string getTimestamp(DateTime value) {
 			return value.ToString("yyyyMMdd");
 		}
