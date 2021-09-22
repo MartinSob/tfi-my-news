@@ -90,8 +90,6 @@ namespace Persistence
 					queryString.Append(whereColumns[i] + " = @" + whereColumns[i]);
 				}
 
-				var asd = queryString.ToString();
-
 				SqlCommand query = new SqlCommand(queryString.ToString(), conn);
 
 				for (int i = 0; i < columns.Length; i++) {

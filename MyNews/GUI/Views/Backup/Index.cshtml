@@ -69,7 +69,7 @@
 
 			<button id="validateDvBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["validate"])</button>
 			@if (new PolicyBl().hasPermission((User)Session["user"], "dv_update")) {
-		<button id="updateDvBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["update"])</button>
+			<button id="updateDvBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["update"])</button>
 			}
 		</div>
 	</div>
