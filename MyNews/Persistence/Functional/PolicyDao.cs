@@ -31,11 +31,11 @@ namespace Persistence.Functional
 			if (!deleteRoleRelations(id))
 				return false;
 
-			return deleteById("policies", id);
+			return logicDeleteById("policies", id);
 		}
 
 		public bool deleteRoleRelations(int id) {
-			SqlCommand query = new SqlCommand($"DELETE FROM roles WHERE role_id = {id}", conn);
+			SqlCommand query = new SqlCommand($"DELETE FROM roles WHERE role_id = {id} OR policy_id = {id} ", conn);
 			return executeQuery(query);
 		}
 
@@ -70,10 +70,10 @@ namespace Persistence.Functional
 
 		public List<Policy> getPolicies(string text = null) {
 			try {
-				string q = "SELECT DISTINCT p.* FROM policies p ";
+				string q = "SELECT DISTINCT p.* FROM policies p WHERE p.deleted = 0 ";
 
 				if (text != null) {
-					q += " WHERE p.name LIKE CONCAT('%', @policyName, '%') ";
+					q += " AND p.name LIKE CONCAT('%', @policyName, '%') ";
 				}
 
 				SqlCommand query = new SqlCommand(q, conn);
@@ -106,7 +106,7 @@ namespace Persistence.Functional
 
 		public List<Role> getRole(User user) {
 			try {
-				SqlCommand query = new SqlCommand("SELECT p.* FROM policies p JOIN user_roles ur ON ur.policy_id = p.id WHERE ur.user_id = @user", conn);
+				SqlCommand query = new SqlCommand("SELECT p.* FROM policies p JOIN user_roles ur ON ur.policy_id = p.id WHERE p.deleted = 0 AND ur.user_id = @user", conn);
 				query.Parameters.AddWithValue("@user", user.id);
 
 				List<Role> roles = new List<Role>();
@@ -133,7 +133,7 @@ namespace Persistence.Functional
 
 		public Role getRole(Role role) {
 			try {
-				SqlCommand queryGet = new SqlCommand($"SELECT * FROM policies p WHERE p.id = ${role.id}", conn);
+				SqlCommand queryGet = new SqlCommand($"SELECT * FROM policies p WHERE p.deleted = 0 AND p.id = ${role.id}", conn);
 
 				conn.Open();
 				SqlDataReader dataGet = queryGet.ExecuteReader();
@@ -194,10 +194,10 @@ namespace Persistence.Functional
 
 		public List<Role> getRoles(string text = null) {
 			try {
-				string q = "SELECT DISTINCT p.* FROM roles r JOIN policies p ON p.id = r.role_id ";
+				string q = "SELECT DISTINCT p.* FROM roles r JOIN policies p ON p.id = r.role_id WHERE p.deleted = 0 ";
 
 				if (text != null) {
-					q += " WHERE p.name LIKE CONCAT('%', @roleName, '%') ";
+					q += " AND p.name LIKE CONCAT('%', @roleName, '%') ";
 				}
 
 				SqlCommand query = new SqlCommand(q, conn);
@@ -228,32 +228,32 @@ namespace Persistence.Functional
 			}
 		}
 
-		public List<Policy> getRole() {
-			try {
-				string q = "SELECT * FROM policies p WHERE p.id NOT IN ( SELECT DISTINCT p.id FROM roles r JOIN policies p ON p.id = r.role_id )";
-				SqlCommand query = new SqlCommand(q, conn);
+		//public List<Policy> getRole() {
+		//	try {
+		//		string q = "SELECT * FROM policies p WHERE p.id NOT IN ( SELECT DISTINCT p.id FROM roles r JOIN policies p ON p.id = r.role_id )";
+		//		SqlCommand query = new SqlCommand(q, conn);
 
-				List<Policy> policies = new List<Policy>();
-				conn.Open();
-				SqlDataReader data = query.ExecuteReader();
+		//		List<Policy> policies = new List<Policy>();
+		//		conn.Open();
+		//		SqlDataReader data = query.ExecuteReader();
 
-				if (data.HasRows) {
-					while (data.Read()) {
-						policies.Add(new Policy {
-							id = int.Parse(data["id"].ToString()),
-							name = data["name"].ToString()
-						});
-					}
-				}
+		//		if (data.HasRows) {
+		//			while (data.Read()) {
+		//				policies.Add(new Policy {
+		//					id = int.Parse(data["id"].ToString()),
+		//					name = data["name"].ToString()
+		//				});
+		//			}
+		//		}
 
-				conn.Close();
+		//		conn.Close();
 
-				return policies;
-			} catch (Exception e) {
-				new ErrorDao().create(e.ToString());
-				return null;
-			}
-		}
+		//		return policies;
+		//	} catch (Exception e) {
+		//		new ErrorDao().create(e.ToString());
+		//		return null;
+		//	}
+		//}
 
 		public bool cleanRoles(User user) {
 			SqlCommand query = new SqlCommand($"DELETE FROM user_roles WHERE user_id = {user.id}", conn);
