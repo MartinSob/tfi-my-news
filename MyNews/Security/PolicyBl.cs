@@ -16,8 +16,8 @@ namespace Security
 			return dao.assignBasicRole(user);
 		}
 
-		public bool assignRole(User user, Policy policy) {
-			return dao.assignRole(user, policy);
+		public bool assignRole(User user, Role role) {
+			return dao.assignRole(user, role);
 		}
 
 		public void cleanRoles(User user) {

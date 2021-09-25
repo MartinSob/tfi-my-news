@@ -107,6 +107,8 @@
 		const response = await post('CreateUser', data);
 		if (response.type == 'success') {
 			window.location.replace("./");
+		} else {
+			showAlert(response);
 		}
 	});
 </script>

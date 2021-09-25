@@ -13,7 +13,10 @@ namespace Security
 		UserDao dao = new UserDao();
 
 		public User create(User user) {
-			return dao.create(user);
+			user.password = new EncryptBl().encrypt(user.password);
+			dao.create(user);
+			new PolicyBl().assignBasicRole(user);
+			return user;
 		}
 
 		public bool delete(int id) {
@@ -50,8 +53,9 @@ namespace Security
 					});
 
 					dao.block(user);
-					return null;
 				}
+
+				return null;
 			}
 
 			dao.restartFailedAttempts(loggedUser);

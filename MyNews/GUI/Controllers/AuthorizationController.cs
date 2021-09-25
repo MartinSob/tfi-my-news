@@ -50,6 +50,10 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Delete(int id) {
+            if (id == 14) {
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["basic_role_delete"] }, JsonRequestBehavior.AllowGet);
+            }
+
             if (policyBl.delete(id)) {
                 return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
             } else {

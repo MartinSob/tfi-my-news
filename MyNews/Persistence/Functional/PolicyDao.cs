@@ -11,19 +11,20 @@ namespace Persistence.Functional
 {
 	public class PolicyDao : ConnectionDao
 	{
-		public bool assignRole(User user, Policy policy) {
-			// TODO
-			
+		public bool assignRole(User user, Role role) {
+			role.id = insert("user_roles", new string[] { "user_id", "policy_id" }, new string[] { user.id.ToString(), role.id.ToString() });
 			return true;
 		}
 
 		public bool assignBasicRole(User user) {
-			// TODO
-
-			return true;
+			return assignRole(user, new Role { id = 14 });
 		}
 
 		public bool delete(int id) {
+			if (id == 14) {
+				return false;
+			}
+
 			SqlCommand query = new SqlCommand($"DELETE FROM user_roles WHERE policy_id = {id}", conn);
 			if (!executeQuery(query))
 				return false;

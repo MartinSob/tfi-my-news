@@ -45,6 +45,7 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Signup() {
+            Session["texts"] = new LanguageBl().loadDefault().texts;
             return View();
         }
 
@@ -70,6 +71,7 @@ namespace MyNews.Controllers
         }
 
         public ActionResult ForgotPassword() {
+            Session["texts"] = new LanguageBl().loadDefault().texts;
             return View();
         }
 

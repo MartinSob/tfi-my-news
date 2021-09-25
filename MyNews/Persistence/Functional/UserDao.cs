@@ -13,9 +13,26 @@ namespace Persistence.Functional
 		}
 
 		public bool exists(string username, string mail) {
-			// TODO
+			try {
+				SqlCommand query = new SqlCommand("SELECT * FROM users WHERE username = @username OR mail = @mail AND active = 1", conn);
+				query.Parameters.AddWithValue("@username", username);
+				query.Parameters.AddWithValue("@mail", mail);
 
-			return true;
+				bool result = false;
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					result = true;
+				}
+
+				conn.Close();
+
+				return result;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return true;
+			}
 		}
 
 		public int addFailedAttempt(string username) {
@@ -25,15 +42,19 @@ namespace Persistence.Functional
 		}
 
 		public User create(User user) {
-			// TODO
+			var columns = new string[] { "username", "password", "name", "lastname", "mail" };
+			var values = new string[] { user.username, user.password, user.name, user.lastname, user.mail };
+			user.id = insert("users", columns, values);
 
-			return new User();
+			return user;
 		}
 
 		public User update(User user) {
-			// TODO
+			var columns = new string[] { "username", "password", "name", "lastname", "mail" };
+			var values = new string[] { user.username, user.password, user.name, user.lastname, user.mail };
+			update("users", columns, values, new string[] { "id" }, new string[] { user.id.ToString() });
 
-			return new User();
+			return user;
 		}
 
 		public User login(User user) {
