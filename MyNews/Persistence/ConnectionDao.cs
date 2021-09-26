@@ -179,6 +179,7 @@ namespace Persistence
 				conn.Open();
 				query.ExecuteNonQuery();
 				conn.Close();
+
 				return true;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
@@ -197,6 +198,7 @@ namespace Persistence
 				conn.Open();
 				query.ExecuteNonQuery();
 				conn.Close();
+
 				return true;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());

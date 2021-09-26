@@ -7,9 +7,7 @@ namespace Persistence.Functional
 	public class UserDao : ConnectionDao
 	{
 		public bool delete(int id) {
-			// TODO
-
-			return true;
+			return logicDeleteById("users", id);
 		}
 
 		public bool exists(string username, string mail) {
@@ -36,9 +34,30 @@ namespace Persistence.Functional
 		}
 
 		public int addFailedAttempt(string username) {
-			// TODO
+			try {
+				SqlCommand query = new SqlCommand("SELECT * FROM users WHERE username = @username AND active = 1", conn);
+				query.Parameters.AddWithValue("@username", username);
 
-			return 1;
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (!data.HasRows) {
+					return 0;
+				}
+
+				data.Read();
+				int userId = int.Parse(data["id"].ToString());
+				int attempts = int.Parse(data["failed_attempts"].ToString()) + 1;
+				conn.Close();
+
+				update("users", new string[] { "failed_attempts" }, new string[] { attempts.ToString() }, new string[] { "id" }, new string[] { userId.ToString() });
+				new DvDao().updateDv();
+
+				return attempts;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return 0;
+			}
 		}
 
 		public User create(User user) {
@@ -81,12 +100,6 @@ namespace Persistence.Functional
 			}
 		}
 
-		public User create(int id) {
-			// TODO
-
-			return new User();
-		}
-
 		public void block(User user) {
 			try {
 				SqlCommand querySet = new SqlCommand("UPDATE users SET active = 0 WHERE username = @username", conn);
@@ -105,7 +118,7 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@id", user.id);
 
 				executeQuery(querySet);
-
+				new DvDao().updateDv();
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}

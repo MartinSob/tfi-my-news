@@ -49,12 +49,19 @@
 <script>
 	document.getElementById("loginForm").addEventListener("submit", async (event) => {
 		event.preventDefault();
-		var username = document.getElementById("username").value;
-		var password = document.getElementById("password").value;
+		const username = document.getElementById("username").value;
+		const password = document.getElementById("password").value;
 		const response = await get('Login/Login?username=' + username + '&password=' + password);
 		showAlert(response);
+
 		if (response.type == 'success') {
 			window.location.replace("/Home");
+		}
+
+		if (response.data) {
+			setTimeout(function () {
+				window.location.replace("/Backup");
+			}, 1000);
 		}
 	});
 </script>

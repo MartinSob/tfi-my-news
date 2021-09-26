@@ -13,12 +13,7 @@ namespace Security
 		DvDao dao = new DvDao();
 
 		public bool updateDv(User user) {
-			var tables = dao.getTables();
-
-			foreach (string table in tables) {
-				dao.updateDvh(table);
-				dao.updateDvv(table);
-			}
+			dao.updateDv();
 
 			new BitacoreBl().create(new BitacoreMessage {
 				title = "DV actualizados",
@@ -31,7 +26,7 @@ namespace Security
 			return true;
 		}
 
-		public List<string> verifyDv(User user) {
+		public List<string> verifyDv(User user = null) {
 			List<string> errors = new List<string>();
 
 			foreach (string table in dao.getTables()) {

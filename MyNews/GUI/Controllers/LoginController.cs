@@ -12,7 +12,6 @@ namespace MyNews.Controllers
     {
         UserBl userBl = new UserBl();
 
-        // GET: Login
         public ActionResult Index()
         {
             if (Session["user"] != null) {
@@ -32,14 +31,26 @@ namespace MyNews.Controllers
             }
             Session["user"] = loggedUser;
 
+            string data = "";
+            if (new DvBl().verifyDv().Count != 0) {
+                if (!new PolicyBl().hasPermission(loggedUser, "admin_copy")) {
+                    return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"] }, JsonRequestBehavior.AllowGet);
+                }
+                data = "vd_problems";
+            }
+
             new LanguageBl().load(loggedUser.language);
             Session["texts"] = loggedUser.language.texts;
+
+            if (data != "") {
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])[data], data = data }, JsonRequestBehavior.AllowGet);
+            }
 
             return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Logout() {
-            new UserBl().logout((User)Session["user"]);
+            userBl.logout((User)Session["user"]);
             Session["user"] = null;
             return Redirect("/Login");
         }
@@ -76,7 +87,7 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Reset(string email) {
-            if (new UserBl().resetPassword(email)) {
+            if (userBl.resetPassword(email)) {
                 return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["password_reset_success"] }, JsonRequestBehavior.AllowGet);
             } else {
                 return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["password_reset_error"] }, JsonRequestBehavior.AllowGet);

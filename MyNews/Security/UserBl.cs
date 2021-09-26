@@ -16,11 +16,14 @@ namespace Security
 			user.password = new EncryptBl().encrypt(user.password);
 			dao.create(user);
 			new PolicyBl().assignBasicRole(user);
+			new DvDao().updateDv();
 			return user;
 		}
 
 		public bool delete(int id) {
-			return dao.delete(id);
+			bool response = dao.delete(id);
+			new DvDao().updateDv();
+			return response;
 		}
 
 		public bool exists(string username, string mail) {
@@ -69,8 +72,6 @@ namespace Security
 
 			loggedUser.roles = new PolicyBl().getAllPermits(loggedUser);
 
-			// new LanguageDao().load(loggedUser);
-
 			return loggedUser;
 		}
 
@@ -84,7 +85,9 @@ namespace Security
 		}
 
 		public User update(User user) {
-			return dao.update(user);
+			dao.update(user);
+			new DvDao().updateDv();
+			return user;
 		}
 
 		public bool resetPassword(string mail) {
@@ -95,6 +98,7 @@ namespace Security
 					password = newPass
 				};
 				dao.updatePassword(user);
+				new DvDao().updateDv();
 
 				new EmailBl().sendEmail(
 					"<h1>Reset password</h1><p>The system has generated a new password.<br><br>New Pass: " + user.password + "<br><br>Thanks<br>myNewsMaker</p>", 

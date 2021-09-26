@@ -89,6 +89,17 @@ namespace Persistence.Functional
 			return dvhs.ToString().GetHashCode().ToString();
 		}
 
+		public bool updateDv() {
+			var tables = getTables();
+
+			foreach (string table in tables) {
+				updateDvh(table);
+				updateDvv(table);
+			}
+
+			return true;
+		}
+
 		public void updateDvv(string table) {
 			try {
 				if (conn.State == ConnectionState.Open) {
