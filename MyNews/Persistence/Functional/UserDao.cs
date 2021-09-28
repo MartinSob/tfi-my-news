@@ -36,7 +36,7 @@ namespace Persistence.Functional
 
 		public List<User> get(string name = null) {
 			try {
-				string consultaSQL = "SELECT * FROM users u WHERE active = 1";
+				string consultaSQL = "SELECT * FROM users u WHERE deleted = 0";
 				if (name != null) {
 					consultaSQL += $" AND (u.username LIKE '%{name}%' OR u.name LIKE '%{name}%' OR u.lastname LIKE '%{name}%')";
 				}
