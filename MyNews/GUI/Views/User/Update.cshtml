@@ -1,0 +1,107 @@
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.User
+@{
+	List<Role> allRoles = new PolicyBl().getRoles();
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@Model.username </h1>
+
+			<form id="updateForm">
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+					<div class="control">
+						<input id="name" class="input" type="text" placeholder="Text input" value="@Model.name" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["lastname"])</label>
+					<div class="control">
+						<input id="lastname" class="input" type="text" placeholder="Text input" value="@Model.lastname" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["mail"])</label>
+					<div class="control">
+						<input id="mail" class="input" type="email" placeholder="Text input" value="@Model.mail" required>
+					</div>
+				</div>
+
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["permits"])</label>
+				<div class="scrollable-table">
+					<table class="table is-striped is-hoverable" style="width: 100%">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (Role role in allRoles) {
+								<tr id="@role.id">
+									<td>
+										<label class="checkbox">
+											@if (Model.roles.Any(p => p.id == role.id)) {
+												<input id="@role.id" type="checkbox" name="roleboxes" checked>
+											} else {
+												<input id="@role.id" type="checkbox" name="roleboxes">
+											}
+										</label>
+									</td>
+									<td>
+										@role.name
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="py-4">
+					<button type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<a href="/User/View/@Model.id" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("updateForm").addEventListener("submit", async (event) => {
+			const checkedBoxes = document.querySelectorAll('input[name=roleboxes]:checked');
+			let rolesSelected = [];
+
+			checkedBoxes.forEach(box => {
+				if (box.checked) {
+					rolesSelected.push(box.id);
+				}
+			})
+
+			if (rolesSelected.length == 0) {
+				return showAlert({
+					type: 'danger',
+					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
+				});
+			}
+
+			const response = await post('/User/UpdateUser', {
+				id: @Model.id,
+				name: document.getElementById("name").value,
+				lastname: document.getElementById("lastname").value,
+				mail: document.getElementById("mail").value,
+				roles: rolesSelected
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/User/View/@Model.id");
+			}
+
+			showAlert(response);
+		});
+	</script>
+</div>

@@ -181,11 +181,13 @@
     <Content Include="Views\Authorization\View.cshtml" />
     <Content Include="Views\Authorization\Create.cshtml" />
     <Content Include="Views\Authorization\Update.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\View.cshtml" />
+    <Content Include="Views\User\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Language\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

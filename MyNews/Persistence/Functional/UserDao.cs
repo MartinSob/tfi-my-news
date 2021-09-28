@@ -1,5 +1,6 @@
 ﻿using BusinessEntity;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Persistence.Functional
@@ -30,6 +31,58 @@ namespace Persistence.Functional
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 				return true;
+			}
+		}
+
+		public List<User> get(string name = null) {
+			try {
+				string consultaSQL = "SELECT * FROM users u WHERE active = 1";
+				if (name != null) {
+					consultaSQL += $" AND (u.username LIKE '%{name}%' OR u.name LIKE '%{name}%' OR u.lastname LIKE '%{name}%')";
+				}
+
+				SqlCommand query = new SqlCommand(consultaSQL, conn);
+
+				List<User> users = new List<User>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						users.Add(castDto(data));
+					}
+				}
+
+				conn.Close();
+
+				return users;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
+		public User get(int id) {
+			try {
+				SqlCommand query = new SqlCommand("SELECT * FROM users u WHERE active = 1 AND id = @id", conn);
+				query.Parameters.AddWithValue("@id", id);
+
+				User user = null;
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						user = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				return user;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
 			}
 		}
 
@@ -69,8 +122,8 @@ namespace Persistence.Functional
 		}
 
 		public User update(User user) {
-			var columns = new string[] { "username", "password", "name", "lastname", "mail" };
-			var values = new string[] { user.username, user.password, user.name, user.lastname, user.mail };
+			var columns = new string[] { "name", "lastname", "mail" };
+			var values = new string[] { user.name, user.lastname, user.mail };
 			update("users", columns, values, new string[] { "id" }, new string[] { user.id.ToString() });
 
 			return user;
@@ -132,6 +185,32 @@ namespace Persistence.Functional
 				executeQuery(querySet);
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
+			}
+		}
+
+		public User getRoles(User user) {
+			try {
+				SqlCommand query = new SqlCommand("SELECT p.* FROM user_roles ur JOIN policies p ON p.id = ur.policy_id WHERE user_id = @id", conn);
+				query.Parameters.AddWithValue("@id", user.id);
+
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						user.roles.Add(new Role {
+							id = int.Parse(data["id"].ToString()),
+							name = data["name"].ToString()
+						});
+					}
+				}
+
+				conn.Close();
+
+				return user;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
 			}
 		}
 

@@ -7,7 +7,7 @@ namespace BusinessEntity
 		public int id;
 		public string name;
 		public string lastname;
-		public List<Role> roles;
+		public List<Role> roles = new List<Role>();
 		public string mail;
 		public string username;
 		public string password;

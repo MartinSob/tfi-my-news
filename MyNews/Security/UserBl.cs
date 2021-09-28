@@ -30,14 +30,18 @@ namespace Security
 			return dao.exists(username, mail);
 		}
 
-		public List<User> get() {
-			// TODO
-			return new List<User>();
+		public List<User> get(string name = null) {
+			return dao.get(name);
 		}
 
 		public User get(int id) {
-			// TODO
-			return new User();
+			User result = dao.get(id);
+			dao.getRoles(result);
+			return result;
+		}
+
+		public User getRoles(User user) {
+			return dao.getRoles(user);
 		}
 
 		public User login(User user) {
@@ -86,6 +90,13 @@ namespace Security
 
 		public User update(User user) {
 			dao.update(user);
+
+			PolicyBl policyBl = new PolicyBl();
+			policyBl.cleanRoles(user);
+			foreach (Role role in user.roles) {
+				policyBl.assignRole(user, role);
+			}
+
 			new DvDao().updateDv();
 			return user;
 		}

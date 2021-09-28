@@ -82,7 +82,7 @@ namespace Persistence
 
 				queryString.Append(" WHERE ");
 
-				for (int i = 0; i < columns.Length; i++) {
+				for (int i = 0; i < whereColumns.Length; i++) {
 					if (i != 0) {
 						queryString.Append(" AND ");
 					}

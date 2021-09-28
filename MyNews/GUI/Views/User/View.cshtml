@@ -1,0 +1,64 @@
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.User
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@Model.username <a href="/User/Update/@Model.id" class="button is-outlined ml-2"><i class="fas fa-edit"></i></a></h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["mail"])</label>
+				<div class="control">
+					<input class="input" type="text" placeholder="Text input" value="@Model.mail" disabled>
+				</div>
+			</div>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+				<div class="control">
+					<input class="input" type="text" placeholder="Text input" value="@Model.name" disabled>
+				</div>
+			</div>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["lastname"])</label>
+				<div class="control">
+					<input class="input" type="text" placeholder="Text input" value="@Model.lastname" disabled>
+				</div>
+			</div>
+
+			<label class="label">@(((Dictionary<string,string>)Session["texts"])["permits"])</label>
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Role role in Model.roles) {
+							<tr id="@role.id">
+								<td>@(i++)</td>
+								<td>
+									@role.name
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("editBtn").addEventListener("click", async (event) => {
+			const text = document.getElementById("textFilter").value;
+			window.location.replace('?text=' + text);
+		});
+	</script>
+</div>
