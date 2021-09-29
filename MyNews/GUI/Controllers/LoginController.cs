@@ -25,26 +25,28 @@ namespace MyNews.Controllers
 
         public ActionResult Login(string username, string password) {
             User loggedUser;
+
+            if (new DvBl().verifyDv().Count != 0) {
+                loggedUser = userBl.basicLogin(new User { username = username, password = password });
+                if (!new PolicyBl().hasPermission(loggedUser, "admin_copy")) {
+                    return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"] }, JsonRequestBehavior.AllowGet);
+                }
+
+                Session["user"] = loggedUser;
+                new LanguageBl().load(loggedUser.language);
+                Session["texts"] = loggedUser.language.texts;
+
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["vd_problems"], data = "vd_problems" }, JsonRequestBehavior.AllowGet);
+            }
+
             loggedUser = userBl.login(new User { username = username, password = password });
             if (loggedUser == null) {
                 return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["login_failed"] }, JsonRequestBehavior.AllowGet);
             }
+
             Session["user"] = loggedUser;
-
-            string data = "";
-            if (new DvBl().verifyDv().Count != 0) {
-                if (!new PolicyBl().hasPermission(loggedUser, "admin_copy")) {
-                    return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"] }, JsonRequestBehavior.AllowGet);
-                }
-                data = "vd_problems";
-            }
-
             new LanguageBl().load(loggedUser.language);
             Session["texts"] = loggedUser.language.texts;
-
-            if (data != "") {
-                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])[data], data = data }, JsonRequestBehavior.AllowGet);
-            }
 
             return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
         }

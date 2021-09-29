@@ -158,7 +158,7 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@username", user.username);
 
 				executeQuery(querySet);
-
+				new DvDao().updateDv();
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
@@ -170,6 +170,7 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@id", user.id);
 
 				executeQuery(querySet);
+				new DvDao().updateDv();
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
@@ -181,6 +182,7 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@mail", user.mail);
 				querySet.Parameters.AddWithValue("@password", user.password);
 				executeQuery(querySet);
+				new DvDao().updateDv();
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
@@ -192,7 +194,7 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@id", user.id);
 				querySet.Parameters.AddWithValue("@password", user.password);
 				executeQuery(querySet);
-
+				new DvDao().updateDv();
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}

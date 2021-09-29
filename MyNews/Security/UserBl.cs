@@ -79,6 +79,15 @@ namespace Security
 			return loggedUser;
 		}
 
+		public User basicLogin(User user) {
+			user.password = new EncryptBl().encrypt(user.password);
+			User loggedUser = dao.login(user);
+
+			loggedUser.roles = new PolicyBl().getAllPermits(loggedUser);
+
+			return loggedUser;
+		}
+
 		public void logout(User user) {
 			new BitacoreBl().create(new BitacoreMessage() {
 				title = "Cerrar Sesión",

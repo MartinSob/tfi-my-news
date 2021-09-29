@@ -114,11 +114,8 @@ namespace Persistence.Functional
 				}
 
 				string SQL = $"UPDATE dvv SET dvv = '{calculateDvv(table)}' WHERE table_name = '{table}'";
-				conn.Open();
 				SqlCommand mCom = new SqlCommand(SQL, conn);
-
-				mCom.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(mCom);
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}

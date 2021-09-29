@@ -58,6 +58,7 @@ namespace Persistence
 				}
 
 				executeQuery(query);
+				new DvDao().updateDv();
 
 				return getLastId(table);
 			} catch (Exception e) {
@@ -111,6 +112,7 @@ namespace Persistence
 				}
 
 				executeQuery(query);
+				new DvDao().updateDv();
 
 				return 1;
 			} catch (Exception e) {
