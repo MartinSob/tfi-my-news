@@ -87,6 +87,7 @@ namespace Persistence.Functional
 				new string[] { "id" },
 				new string[] { user.id.ToString() }
 			);
+			new DvDao().updateDv(user.id, "users");
 		}
 
 		public Language castDto(SqlDataReader data) {

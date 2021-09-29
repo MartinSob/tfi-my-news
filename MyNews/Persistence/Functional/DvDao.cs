@@ -100,6 +100,13 @@ namespace Persistence.Functional
 			return true;
 		}
 
+		public bool updateDv(int id, string table) {
+			updateDvh(id, table);
+			updateDvv(table);
+
+			return true;
+		}
+
 		public void updateDvv(string table) {
 			try {
 				if (conn.State == ConnectionState.Open) {
@@ -126,6 +133,44 @@ namespace Persistence.Functional
 				List<string> result = new List<string>();
 
 				string selectDVH = $"SELECT * FROM {table}";
+				SqlCommand selectQuery = new SqlCommand(selectDVH, conn);
+				conn.Open();
+				SqlDataReader data = selectQuery.ExecuteReader();
+
+				var finalQuery = new StringBuilder();
+				var dvhs = new StringBuilder();
+				int row = 1;
+				while (data.Read()) {
+					for (int i = 0; i < data.FieldCount; i++) {
+						if (!data.GetName(i).Equals("dvh")) {
+							dvhs.Append(data.GetValue(i).GetHashCode().ToString());
+						}
+					}
+
+					finalQuery.Append($"UPDATE {table} SET dvh = '{dvhs.ToString().GetHashCode().ToString()}' WHERE id = {data["id"].ToString()};");
+					row++;
+					dvhs.Clear();
+				}
+				conn.Close();
+
+				conn.Open();
+				SqlCommand updateQuery = new SqlCommand(finalQuery.ToString(), conn);
+				updateQuery.ExecuteNonQuery();
+				conn.Close();
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+			}
+		}
+
+		public void updateDvh(int id, string table) {
+			try {
+				if (conn.State == ConnectionState.Open) {
+					return;
+				}
+
+				List<string> result = new List<string>();
+
+				string selectDVH = $"SELECT * FROM {table} WHERE id = {id}";
 				SqlCommand selectQuery = new SqlCommand(selectDVH, conn);
 				conn.Open();
 				SqlDataReader data = selectQuery.ExecuteReader();

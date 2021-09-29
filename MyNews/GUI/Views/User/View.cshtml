@@ -8,7 +8,11 @@
 <div class="container.is-widescreen my-5">
 	<div class="columns">
 		<div class="column px-5">
-			<h1 class="title is-2">@Model.username <a href="/User/Update/@Model.id" class="button is-outlined ml-2"><i class="fas fa-edit"></i></a></h1>
+			<h1 class="title is-2">
+				@Model.username
+				<a href="/User/Update/@Model.id" class="button is-outlined ml-2"><i class="fas fa-edit"></i></a>
+				<a href="/User/Password/@Model.id" class="button is-outlined ml-2">@(((Dictionary<string,string>)Session["texts"])["password_reset"])</a>
+			</h1>
 
 			<div class="field">
 				<label class="label">@(((Dictionary<string,string>)Session["texts"])["mail"])</label>

@@ -184,6 +184,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\View.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
+    <Content Include="Views\User\Password.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

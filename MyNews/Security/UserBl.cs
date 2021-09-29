@@ -106,7 +106,7 @@ namespace Security
 				string newPass = new EncryptBl().randomString(6);
 				User user = new User {
 					mail = mail,
-					password = newPass
+					password = new EncryptBl().encrypt(newPass)
 				};
 				dao.updatePassword(user);
 				new DvDao().updateDv();
@@ -116,6 +116,20 @@ namespace Security
 					"New Password", user.mail);
 				return true;
 			} catch {
+				return false;
+			}
+		}
+
+		public bool updatePassword(int id, string password) {
+			try {
+				User user = new User {
+					id = id,
+					password = new EncryptBl().encrypt(password)
+				};
+				dao.updatePasswordById(user);
+				return true;
+			} catch (Exception e) {
+				Console.WriteLine(e);
 				return false;
 			}
 		}

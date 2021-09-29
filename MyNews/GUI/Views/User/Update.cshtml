@@ -3,7 +3,6 @@
 @model BusinessEntity.User
 @{
 	List<Role> allRoles = new PolicyBl().getRoles();
-	int i = 1;
 }
 
 <div class="container.is-widescreen my-5">
@@ -33,35 +32,37 @@
 					</div>
 				</div>
 
-				<label class="label">@(((Dictionary<string,string>)Session["texts"])["permits"])</label>
-				<div class="scrollable-table">
-					<table class="table is-striped is-hoverable" style="width: 100%">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (Role role in allRoles) {
-								<tr id="@role.id">
-									<td>
-										<label class="checkbox">
-											@if (Model.roles.Any(p => p.id == role.id)) {
-												<input id="@role.id" type="checkbox" name="roleboxes" checked>
-											} else {
-												<input id="@role.id" type="checkbox" name="roleboxes">
-											}
-										</label>
-									</td>
-									<td>
-										@role.name
-									</td>
+				@if (new PolicyBl().hasPermission((User)Session["user"], "policies_manage")) {
+					<label class="label">@(((Dictionary<string, string>)Session["texts"])["permits"])</label>
+					<div class="scrollable-table">
+						<table class="table is-striped is-hoverable" style="width: 100%">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>@(((Dictionary<string, string>)Session["texts"])["name"])</th>
 								</tr>
-							}
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								@foreach (Role role in allRoles) {
+									<tr id="@role.id">
+										<td>
+											<label class="checkbox">
+												@if (Model.roles.Any(p => p.id == role.id)) {
+													<input id="@role.id" type="checkbox" name="roleboxes" checked>
+												} else {
+													<input id="@role.id" type="checkbox" name="roleboxes">
+												}
+											</label>
+										</td>
+										<td>
+											@role.name
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				}
 
 				<div class="py-4">
 					<button type="submit" class="button is-success"><i class="fas fa-check"></i></button>

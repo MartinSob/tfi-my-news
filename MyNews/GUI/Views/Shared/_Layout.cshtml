@@ -95,8 +95,11 @@
 						</a>
 
 						<div class="navbar-dropdown">
-							<a class="navbar-item" href="~/User/@(((User)Session["user"]).id)">
+							<a class="navbar-item" href="~/User/View/@(((User)Session["user"]).id)">
 								@(((Dictionary<string,string>)Session["texts"])["profile"])
+							</a>
+							<a class="navbar-item" href="~/User/Password/@(((User)Session["user"]).id)">
+								@(((Dictionary<string,string>)Session["texts"])["password_reset"])
 							</a>
 							<hr class="navbar-divider">
 							<a class="navbar-item" href="~/Login/Logout">

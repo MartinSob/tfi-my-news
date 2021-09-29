@@ -116,7 +116,7 @@ namespace Persistence
 				query.ExecuteNonQuery();
 				conn.Close();
 
-				return getLastId(table);
+				return 1;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 				return 0;

@@ -104,7 +104,6 @@ namespace Persistence.Functional
 				conn.Close();
 
 				update("users", new string[] { "failed_attempts" }, new string[] { attempts.ToString() }, new string[] { "id" }, new string[] { userId.ToString() });
-				new DvDao().updateDv();
 
 				return attempts;
 			} catch (Exception e) {
@@ -131,7 +130,7 @@ namespace Persistence.Functional
 
 		public User login(User user) {
 			try {
-				SqlCommand query = new SqlCommand("SELECT * FROM users WHERE username = @username AND password = @password AND active = 1", conn);
+				SqlCommand query = new SqlCommand("SELECT * FROM users WHERE username = @username AND password = @password AND active = 1 AND deleted = 0", conn);
 				query.Parameters.AddWithValue("@username", user.username);
 				query.Parameters.AddWithValue("@password", user.password);
 
@@ -156,7 +155,7 @@ namespace Persistence.Functional
 		public void block(User user) {
 			try {
 				SqlCommand querySet = new SqlCommand("UPDATE users SET active = 0 WHERE username = @username", conn);
-				querySet.Parameters.AddWithValue("@id", user.username);
+				querySet.Parameters.AddWithValue("@username", user.username);
 
 				executeQuery(querySet);
 
@@ -171,7 +170,6 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@id", user.id);
 
 				executeQuery(querySet);
-				new DvDao().updateDv();
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
@@ -183,6 +181,18 @@ namespace Persistence.Functional
 				querySet.Parameters.AddWithValue("@mail", user.mail);
 				querySet.Parameters.AddWithValue("@password", user.password);
 				executeQuery(querySet);
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+			}
+		}
+
+		public void updatePasswordById(User user) {
+			try {
+				SqlCommand querySet = new SqlCommand("UPDATE users SET password = @password WHERE id = @id", conn);
+				querySet.Parameters.AddWithValue("@id", user.id);
+				querySet.Parameters.AddWithValue("@password", user.password);
+				executeQuery(querySet);
+
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
