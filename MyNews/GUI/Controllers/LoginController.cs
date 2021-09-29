@@ -62,6 +62,10 @@ namespace MyNews.Controllers
 
         [HttpPost]
         public ActionResult CreateUser(string username, string password, string name, string lastname, string mail) {
+            if (new DvBl().verifyDv().Count != 0) {
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"] }, JsonRequestBehavior.AllowGet);
+            }
+
             if (userBl.exists(username, mail)) {
 				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["already_registered"] }, JsonRequestBehavior.AllowGet);
 			}
@@ -87,6 +91,10 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Reset(string email) {
+            if (new DvBl().verifyDv().Count != 0) {
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"] }, JsonRequestBehavior.AllowGet);
+            }
+
             if (userBl.resetPassword(email)) {
                 return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["password_reset_success"] }, JsonRequestBehavior.AllowGet);
             } else {

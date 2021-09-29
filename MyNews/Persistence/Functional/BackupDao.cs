@@ -19,11 +19,9 @@ namespace Persistence.Functional
 
 				query.Parameters.AddWithValue("@bkpPath", path + "..\\BackUps\\" + backup.name);
 
-				conn.Open();
-				singleUser.ExecuteNonQuery();
-				query.ExecuteNonQuery();
-				multiUser.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(singleUser);
+				executeQuery(query);
+				executeQuery(multiUser);
 
 				return true;
 			} catch (Exception e) {
@@ -40,9 +38,7 @@ namespace Persistence.Functional
 				File.Delete(bkpPath);
 				query.Parameters.AddWithValue("@bkpPath", bkpPath);
 
-				conn.Open();
-				query.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(query);
 
 				insert("backups", new string[] { "name", "date" }, new string[] { fileName, DateTime.Now.ToString() });
 

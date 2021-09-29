@@ -57,9 +57,7 @@ namespace Persistence
 					return 0;
 				}
 
-				conn.Open();
-				query.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(query);
 
 				return getLastId(table);
 			} catch (Exception e) {
@@ -112,9 +110,7 @@ namespace Persistence
 					return 0;
 				}
 
-				conn.Open();
-				query.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(query);
 
 				return 1;
 			} catch (Exception e) {
@@ -176,9 +172,7 @@ namespace Persistence
 
 				SqlCommand query = new SqlCommand($"DELETE FROM {table} WHERE id = {id}", conn);
 
-				conn.Open();
-				query.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(query);
 
 				return true;
 			} catch (Exception e) {
@@ -195,9 +189,7 @@ namespace Persistence
 
 				SqlCommand query = new SqlCommand($"UPDATE {table} SET deleted = 1 WHERE id = {id}", conn);
 
-				conn.Open();
-				query.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(query);
 
 				return true;
 			} catch (Exception e) {

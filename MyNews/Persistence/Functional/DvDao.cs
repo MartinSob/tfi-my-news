@@ -153,10 +153,8 @@ namespace Persistence.Functional
 				}
 				conn.Close();
 
-				conn.Open();
 				SqlCommand updateQuery = new SqlCommand(finalQuery.ToString(), conn);
-				updateQuery.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(updateQuery);
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
@@ -191,10 +189,8 @@ namespace Persistence.Functional
 				}
 				conn.Close();
 
-				conn.Open();
 				SqlCommand updateQuery = new SqlCommand(finalQuery.ToString(), conn);
-				updateQuery.ExecuteNonQuery();
-				conn.Close();
+				executeQuery(updateQuery);
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 			}
