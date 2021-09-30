@@ -27,7 +27,6 @@ namespace MyNews
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Assets/Styles/fa.min.css",
 					  "~/Assets/Styles/bulma.min.css",
-					  "~/Assets/Styles/bulma-rtl.min.css",
 					  "~/Assets/Styles/Site.css"));
 		}
 	}
