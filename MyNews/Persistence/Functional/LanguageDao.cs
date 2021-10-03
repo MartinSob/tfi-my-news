@@ -31,9 +31,19 @@ namespace Persistence.Functional
 			}
 		}
 
-		public List<Language> get() {
+		public List<Language> get(string text = null) {
 			try {
-				SqlCommand query = new SqlCommand("SELECT * FROM languages", conn);
+				string q = "SELECT * FROM languages l WHERE deleted = 0 ";
+
+				if (text != null) {
+					q += " AND l.name LIKE CONCAT('%', @name, '%') ";
+				}
+
+				SqlCommand query = new SqlCommand(q, conn);
+
+				if (text != null) {
+					query.Parameters.AddWithValue("@name", text);
+				}
 
 				List<Language> languages = new List<Language>();
 				conn.Open();
@@ -54,9 +64,35 @@ namespace Persistence.Functional
 			}
 		}
 
+		public Language get(int id) {
+			try {
+				SqlCommand query = new SqlCommand("SELECT * FROM languages l WHERE id = @id ", conn);
+				query.Parameters.AddWithValue("@id", id);
+
+				Language language = null;
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						language = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				load(language);
+
+				return language;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
 		public Language loadDefault() {
 			try {
-				SqlCommand query = new SqlCommand("SELECT c.*, l.id as l_id FROM controls c JOIN languages l ON l.id = c.language_id WHERE l.name = 'Español'", conn);
+				SqlCommand query = new SqlCommand("SELECT c.*, l.id as l_id FROM controls c JOIN languages l ON c.language_id = l.id WHERE l.id = (SELECT TOP 1 id FROM languages WHERE deleted = 0 ) ", conn);
 
 				Language language = new Language();
 				conn.Open();
@@ -76,10 +112,6 @@ namespace Persistence.Functional
 			}
 		}
 
-		public void load(User user) {
-			// TODO
-		}
-
 		public void setToUser(Language language, User user) {
 			update("users", 
 				new string[] { "language_id" },
@@ -96,6 +128,19 @@ namespace Persistence.Functional
 			result.name = data["name"].ToString();
 
 			return result;
+		}
+
+		public bool delete(int id) {
+			return logicDeleteById("languages", id);
+		}
+
+		public void update(Language language) {
+			update("languages", new string[] { "name" }, new string[] { language.name }, new string[] { "id" }, new string[] { language.id.ToString() });
+
+			foreach (KeyValuePair<string, string> text in language.texts) {
+				update("controls", new string[] { "text" }, new string[] { text.Value }, 
+					new string[] { "language_id", "tag" }, new string[] { language.id.ToString(), text.Key });
+			}
 		}
 	}
 }

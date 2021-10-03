@@ -71,6 +71,11 @@
 									<i class="fas fa-chart-pie"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["reports"])</span>
 								</a>
 							}
+							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_policies")) {
+								<a class="navbar-item" href="~/Language">
+									<i class="fas fa-language"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["language"])</span>
+								</a>
+							}
 						</div>
 					</div>
 				}

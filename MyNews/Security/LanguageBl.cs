@@ -20,12 +20,24 @@ namespace Security
 			return dao.loadDefault();
 		}
 
-		public List<Language> get() {
-			return dao.get();
+		public List<Language> get(string text = null) {
+			return dao.get(text);
+		}
+
+		public Language get(int id) {
+			return dao.get(id);
 		}
 
 		public void setToUser(Language language, User user) {
 			dao.setToUser(language, user);
+		}
+
+		public bool delete(int id) {
+			return dao.delete(id);
+		}
+
+		public void update(Language language) {
+			dao.update(language);
 		}
 	}
 }

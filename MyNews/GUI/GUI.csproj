@@ -185,10 +185,11 @@
     <Content Include="Views\User\View.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\User\Password.cshtml" />
+    <Content Include="Views\Language\Index.cshtml" />
+    <Content Include="Views\Language\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

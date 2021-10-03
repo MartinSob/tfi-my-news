@@ -1,0 +1,96 @@
+﻿@using BusinessEntity;
+@using MyNews.Models;
+@model ListModel<BusinessEntity.Language>
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">
+				<i class="fas fa-language"></i> @(((Dictionary<string,string>)Session["texts"])["language"])
+				<a href="Authorization/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
+			</h1>
+
+			<div class="filter-container">
+				<div class="columns">
+					<div class="column">
+						<div class="field">
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
+							<div class="control">
+								<input id="textFilter" class="input" type="text">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button id="filterBtn" class="button"><i class="fas fa-search"></i></button>
+			</div>
+
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["action"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (Language lang in Model.Items) {
+							<tr id="@lang.id">
+								<td>@(i++)</td>
+								<td><a href="Language/Update/@lang.id">@lang.name</a></td>
+								<td>
+									<button onclick="showDeleteModal(@lang.id, '@lang.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
+									<a href="Language/Update/@lang.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-card">
+			<header class="modal-card-head">
+				<p id="roleName" class="modal-card-title"></p>
+				<button onclick="toggleModal()" class="delete" aria-label="close"></button>
+			</header>
+			<section class="modal-card-body">
+				<p>@(((Dictionary<string,string>)Session["texts"])["delete_confirmation"])</p>
+			</section>
+			<footer class="modal-card-foot">
+				<button onclick="deleteLanguage()" class="button is-success"><i class="fas fa-check"></i></button>
+				<button onclick="toggleModal()" class="button"><i class="fas fa-times"></i></button>
+			</footer>
+		</div>
+	</div>
+
+	<script>
+		var langId = 0;
+
+		document.getElementById("filterBtn").addEventListener("click", async (event) => {
+			const text = document.getElementById("textFilter").value;
+			window.location.replace('?text=' + text);
+		});
+
+		function showDeleteModal(id, name) {
+			langId = id;
+			document.getElementById("roleName").innerText = name;
+			toggleModal();
+		}
+
+		async function deleteLanguage() {
+			const response = await get('/Language/Delete?id=' + langId);
+			toggleModal();
+			showAlert(response);
+
+			setTimeout(function () { location.reload(); }, 1500);
+		}
+	</script>
+</div>
