@@ -142,5 +142,15 @@ namespace Persistence.Functional
 					new string[] { "language_id", "tag" }, new string[] { language.id.ToString(), text.Key });
 			}
 		}
+
+		public int create(Language language) {
+			language.id = insert("languages", new string[] { "name" }, new string[] { language.name });
+
+			foreach (KeyValuePair<string, string> text in language.texts) {
+				insert("controls", new string[] { "language_id", "tag", "text" }, new string[] { language.id.ToString(), text.Key, text.Value });
+			}
+
+			return language.id;
+		}
 	}
 }

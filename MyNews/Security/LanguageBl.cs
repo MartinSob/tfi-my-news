@@ -39,5 +39,9 @@ namespace Security
 		public void update(Language language) {
 			dao.update(language);
 		}
+
+		public void create(Language language) {
+			language.id = dao.create(language);
+		}
 	}
 }

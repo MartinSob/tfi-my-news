@@ -53,6 +53,10 @@ namespace MyNews.Controllers
             return View(langBl.get(id));
         }
 
+        public ActionResult Create() {
+            return View();
+        }
+
         public ActionResult UpdateLanguage(int id, string name, string[] tags, string[] translations) {
             Language l = new Language {
                 id = id,
@@ -64,6 +68,19 @@ namespace MyNews.Controllers
             }
 
             langBl.update(l);
+            return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CreateLanguage(string name, string[] tags, string[] translations) {
+            Language l = new Language {
+                name = name
+            };
+
+            for (int i = 0; i < tags.Length; i++) {
+                l.texts.Add(tags[i], translations[i]);
+            }
+
+            langBl.create(l);
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
     }

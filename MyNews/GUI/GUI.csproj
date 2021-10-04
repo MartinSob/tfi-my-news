@@ -187,6 +187,7 @@
     <Content Include="Views\User\Password.cshtml" />
     <Content Include="Views\Language\Index.cshtml" />
     <Content Include="Views\Language\Update.cshtml" />
+    <Content Include="Views\Language\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
