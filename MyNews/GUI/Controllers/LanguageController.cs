@@ -37,12 +37,11 @@ namespace MyNews.Controllers
         }
 
         public ActionResult Delete(int id) {
-            // Si es el ultimo lang
-            // if () {
-            //     return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["basic_role_delete"] }, JsonRequestBehavior.AllowGet);
-            // }
+            if (langBl.get().Count == 1) {
+				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["last_language"] }, JsonRequestBehavior.AllowGet);
+			}
 
-            if (langBl.delete(id)) {
+			if (langBl.delete(id)) {
                 return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
             } else {
                 return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error"] }, JsonRequestBehavior.AllowGet);
