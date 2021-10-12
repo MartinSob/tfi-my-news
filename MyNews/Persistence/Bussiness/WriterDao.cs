@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Persistence.Bussiness
 {
-	public class WriterDao
+	public class EmployeeDao
 	{
 		bool delete(int id) {
 			// TODO
@@ -11,46 +11,46 @@ namespace Persistence.Bussiness
 			return true;
 		}
 
-		int getReads(Writer writer) {
+		int getReads(Employee employee) {
 			// TODO
 
 			return 1;
 		}
 
-		List<Writer> getMostRead() {
+		List<Employee> getMostRead() {
 			// TODO
 
-			return new List<Writer>();
+			return new List<Employee>();
 		}
 
-		List<Writer> getLessRead() {
+		List<Employee> getLessRead() {
 			// TODO
 
-			return new List<Writer>();
+			return new List<Employee>();
 		}
 
-		List<Writer> get() {
+		List<Employee> get() {
 			// TODO
 
-			return new List<Writer>();
+			return new List<Employee>();
 		}
 
-		Writer update(Writer writer) {
+		Employee update(Employee employee) {
 			// TODO
 
-			return new Writer();
+			return new Employee();
 		}
 
-		Writer get(int id) {
+		Employee get(int id) {
 			// TODO
 
-			return new Writer();
+			return new Employee();
 		}
 
-		Writer create(Writer writer) {
+		Employee create(Employee employee) {
 			// TODO
 
-			return new Writer();
+			return new Employee();
 		}
 
 		WriterRecommendation getRecommendations(User user, PostRecommendation post) {

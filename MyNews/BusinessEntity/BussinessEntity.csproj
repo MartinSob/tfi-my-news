@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bussiness\Probability.cs" />
     <Compile Include="Functional\Backup.cs" />
     <Compile Include="Functional\BitacoreFilter.cs" />
     <Compile Include="Functional\BitacoreMessage.cs" />
@@ -55,8 +56,8 @@
     <Compile Include="Functional\User.cs" />
     <Compile Include="Bussiness\UserTag.cs" />
     <Compile Include="Bussiness\UserView.cs" />
-    <Compile Include="Bussiness\Writer.cs" />
-    <Compile Include="Bussiness\WriterRecommendation.cs" />
+    <Compile Include="Bussiness\Employee.cs" />
+    <Compile Include="Bussiness\EmployeeRecommendation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

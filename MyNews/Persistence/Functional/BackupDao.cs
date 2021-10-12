@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Functional
+namespace Persistence
 {
 	public class BackupDao : ConnectionDao
 	{

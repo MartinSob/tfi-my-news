@@ -41,8 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="EmployeeBl.cs" />
+    <Compile Include="PostBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagBl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntity\BussinessEntity.csproj">
+      <Project>{93ea0b26-c213-4d43-87a6-ac751b56d8d9}</Project>
+      <Name>BussinessEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{39806ef0-4064-4a82-8d20-1c1cb4c068d0}</Project>
+      <Name>Persistence</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

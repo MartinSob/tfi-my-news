@@ -33,7 +33,7 @@ namespace Persistence.Bussiness
 			return 1;
 		}
 
-		List<Post> get(Writer writer) {
+		List<Post> get(Employee employee) {
 			// TODO
 
 			return new List<Post>();

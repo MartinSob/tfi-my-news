@@ -11,8 +11,13 @@ namespace Security
 	{
 		ErrorDao dao = new ErrorDao();
 
-		public void create(string text) { 
-			// TODO
+		public void create(string text) {
+			using (System.IO.StreamWriter file =
+			new System.IO.StreamWriter("./error_log.txt", true)) {
+				file.WriteLine(DateTime.Now);
+				file.WriteLine("");
+				file.WriteLine(text);
+			}
 		}
 	}
 }

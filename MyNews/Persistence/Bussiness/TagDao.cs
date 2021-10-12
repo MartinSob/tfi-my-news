@@ -1,17 +1,78 @@
 ﻿using BusinessEntity;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace Persistence
 {
-	class TagDao : ConnectionDao
+	public class TagDao : ConnectionDao
 	{
-		List<Tag> get(Post post) {
-			// TODO
-
-			return new List<Tag>();
+		public Tag create(Tag tag) {
+			insert("tags", new string[] { "name" }, new string[] { tag.name });
+			return tag;
 		}
 
-		List<Tag> get() {
+		public bool delete(int id) {
+			return logicDeleteById("tags", id);
+		}
+
+		public List<Tag> get(string name = null) {
+			try {
+				string consultaSQL = "SELECT * FROM tags t WHERE deleted = 0";
+				if (name != null) {
+					consultaSQL += $" AND t.name LIKE '%{name}%'";
+				}
+
+				SqlCommand query = new SqlCommand(consultaSQL, conn);
+
+				List<Tag> tags = new List<Tag>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						tags.Add(castDto(data));
+					}
+				}
+
+				conn.Close();
+
+				return tags;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
+		public Tag get(int id) {
+			try {
+				SqlCommand query = new SqlCommand("SELECT * FROM tags t WHERE deleted = 0 AND id = @id", conn);
+				query.Parameters.AddWithValue("@id", id);
+
+				Tag tag = new Tag();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						tag = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				return tag;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
+		public void update(Tag tag) {
+			update("tags", new string[] { "name" }, new string[] { tag.name }, new string[] { "id" }, new string[] { tag.id.ToString() });
+		}
+
+		List<Tag> get(Post post) {
 			// TODO
 
 			return new List<Tag>();
@@ -21,12 +82,6 @@ namespace Persistence
 			// TODO
 
 			return new List<TagRecommendation>();
-		}
-
-		Tag get(int id) {
-			// TODO
-
-			return new Tag();
 		}
 
 		List<Tag> getPopulars() {
@@ -39,6 +94,14 @@ namespace Persistence
 			// TODO
 
 			return 1;
+		}
+
+		public Tag castDto(SqlDataReader data) {
+			Tag result = new Tag();
+			result.id = Convert.ToInt32(data["id"]);
+			result.name = data["name"].ToString();
+
+			return result;
 		}
 	}
 }

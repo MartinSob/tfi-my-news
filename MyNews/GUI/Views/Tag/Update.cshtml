@@ -1,0 +1,82 @@
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.Language
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@Model.name</h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+				<div class="control">
+					<input id="langName" class="input" type="text" value="@Model.name">
+				</div>
+			</div>
+
+			<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
+			<div class="scrollable-table">
+				<table class="table is-striped is-hoverable" style="width: 100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+							<th>@(((Dictionary<string,string>)Session["texts"])["text"])</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (KeyValuePair<string, string> text in Model.texts) {
+							<tr>
+								<td>@(i++)</td>
+								<td>
+									@(((Dictionary<string,string>)Session["texts"])[text.Key])
+								</td>
+								<td><input name="translation" data-text="@(text.Key)" class="input is-normal" type="text" value="@text.Value"></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="py-4">
+				<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
+				<a href="/Language" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("saveBtn").addEventListener("click", async (event) => {
+			const texts = document.getElementsByName("translation");
+			let tags = [];
+			let translations = []
+
+			texts.forEach(text => {
+				if (!text.value) {
+					return showAlert({
+						type: 'danger',
+						description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
+					});
+				}
+				tags.push(text.dataset.text)
+				translations.push(text.value)
+			})
+
+			const response = await post('/Language/UpdateLanguage', {
+				id: @Model.id,
+				name: document.getElementById("langName").value,
+				tags: tags,
+				translations: translations
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/Language");
+			}
+
+			showAlert(response);
+		});
+	</script>
+</div>

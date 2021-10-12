@@ -8,7 +8,7 @@ namespace BusinessEntity
 		public string title;
 		public string body;
 		public string image;
-		public Writer writer;
+		public Employee employee;
 		public bool deleted;
 		public DateTime date;
 	}
