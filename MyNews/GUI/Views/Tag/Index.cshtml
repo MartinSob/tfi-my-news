@@ -1,6 +1,6 @@
 ﻿@using BusinessEntity;
 @using MyNews.Models;
-@model ListModel<BusinessEntity.Language>
+@model ListModel<BusinessEntity.Tag>
 @{
 	int i = 1;
 }
@@ -9,7 +9,7 @@
 	<div class="columns">
 		<div class="column px-5">
 			<h1 class="title is-2">
-				<i class="fas fa-language"></i> @(((Dictionary<string,string>)Session["texts"])["language"])
+				<i class="fas fa-tags"></i> @(((Dictionary<string,string>)Session["texts"])["tags"])
 				<a href="Language/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
 			</h1>
 
@@ -38,13 +38,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach (Language lang in Model.Items) {
-							<tr id="@lang.id">
+						@foreach (Tag tag in Model.Items) {
+							<tr id="@tag.id">
 								<td>@(i++)</td>
-								<td><a href="Language/Update/@lang.id">@lang.name</a></td>
+								<td><a href="Tag/Update/@tag.id">@tag.name</a></td>
 								<td>
-									<button onclick="showDeleteModal(@lang.id, '@lang.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
-									<a href="Language/Update/@lang.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
+									<button onclick="showDeleteModal(@tag.id, '@tag.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
+									<a href="Language/Update/@tag.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
 								</td>
 							</tr>
 						}
@@ -58,7 +58,7 @@
 		<div class="modal-background"></div>
 		<div class="modal-card">
 			<header class="modal-card-head">
-				<p id="roleName" class="modal-card-title"></p>
+				<p id="tagName" class="modal-card-title"></p>
 				<button onclick="toggleModal()" class="delete" aria-label="close"></button>
 			</header>
 			<section class="modal-card-body">
@@ -72,7 +72,7 @@
 	</div>
 
 	<script>
-		var langId = 0;
+		var tagId = 0;
 
 		document.getElementById("filterBtn").addEventListener("click", async (event) => {
 			const text = document.getElementById("textFilter").value;
@@ -80,13 +80,13 @@
 		});
 
 		function showDeleteModal(id, name) {
-			langId = id;
-			document.getElementById("roleName").innerText = name;
+			tagId = id;
+			document.getElementById("tagName").innerText = name;
 			toggleModal();
 		}
 
 		async function deleteLanguage() {
-			const response = await get('/Language/Delete?id=' + langId);
+			const response = await get('/Tag/Delete?id=' + tagId);
 			toggleModal();
 			showAlert(response);
 

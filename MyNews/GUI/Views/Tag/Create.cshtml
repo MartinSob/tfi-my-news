@@ -17,33 +17,9 @@
 					</div>
 				</div>
 
-				<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
-				<div class="scrollable-table">
-					<table class="table is-striped is-hoverable" style="width: 100%">
-						<thead>
-							<tr>
-								<th></th>
-								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
-								<th>@(((Dictionary<string,string>)Session["texts"])["text"])</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (KeyValuePair<string, string> text in ((Dictionary<string, string>)Session["texts"])) {
-								<tr>
-									<td>@(i++)</td>
-									<td>
-										@(text.Value)
-									</td>
-									<td><input name="translation" data-text="@(text.Key)" class="input is-normal" type="text" required></td>
-								</tr>
-							}
-						</tbody>
-					</table>
-				</div>
-
 				<div class="py-4">
-					<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
-					<a href="/Language" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<a href="/Tag" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
 				</div>
 			</form>
 		</div>
@@ -51,35 +27,12 @@
 
 	<script>
 		document.getElementById("createForm").addEventListener("submit", async (event) => {
-			const texts = document.getElementsByName("translation");
-			const langName = document.getElementById("langName").value;
-
-			let tags = [];
-			let translations = []
-
-			try {
-				texts.forEach(text => {
-					if (!text.value) {
-						throw 'complete_data';
-					}
-					tags.push(text.dataset.text)
-					translations.push(text.value)
-				})
-			} catch (e) {
-				return showAlert({
-					type: 'danger',
-					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
-				});
-			}
-
-			const response = await post('/Language/CreateLanguage', {
-				name: langName,
-				tags: tags,
-				translations: translations
+			const response = await post('/Tag/CreateTag', {
+				name: document.getElementById("langName").value
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Language");
+				window.location.replace("/Tag");
 			}
 
 			showAlert(response);
