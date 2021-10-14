@@ -11,7 +11,7 @@
 <body>
 	<nav class="navbar" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item" href="./">
+			<a class="navbar-item" href="/">
 				<img src="~/Assets/Images/logo.png" width="90" height="28">
 			</a>
 
@@ -74,6 +74,11 @@
 							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_policies")) {
 								<a class="navbar-item" href="~/Language">
 									<i class="fas fa-language"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["language"])</span>
+								</a>
+							}
+							@if (new PolicyBl().hasPermission((User)Session["user"], "admin_tags")) {
+								<a class="navbar-item" href="~/Tag">
+									<i class="fas fa-tags"></i> <span class="navbar-item-text">@(((Dictionary<string,string>)Session["texts"])["tags"])</span>
 								</a>
 							}
 						</div>
