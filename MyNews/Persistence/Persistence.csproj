@@ -45,7 +45,7 @@
     <Compile Include="Bussiness\PostDao.cs" />
     <Compile Include="Bussiness\ProbabilityDao.cs" />
     <Compile Include="Bussiness\TagDao.cs" />
-    <Compile Include="Bussiness\WriterDao.cs" />
+    <Compile Include="Bussiness\EmployeeDao.cs" />
     <Compile Include="ConnectionDao.cs" />
     <Compile Include="Functional\BackupDao.cs" />
     <Compile Include="Functional\BitacoreDao.cs" />

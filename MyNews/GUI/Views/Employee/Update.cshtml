@@ -1,0 +1,44 @@
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.Employee
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">
+				<i class="fas fa-hard-hat"></i> @Model.name
+				<a href="User/Update/@Model.id" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["update"])<i class="fas fa-edit"></i></a>
+			</h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+				<div class="control">
+					<input id="employeeName" class="input" type="text" value="@Model.name">
+				</div>
+			</div>
+
+			<div class="py-4">
+				<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
+				<a href="/Employee" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("saveBtn").addEventListener("click", async (event) => {
+			const response = await post('/Employee/UpdateEmployee', {
+				id: @Model.id,
+				name: document.getElementById("employeeName").value
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/Employee");
+			}
+
+			showAlert(response);
+		});
+	</script>
+</div>

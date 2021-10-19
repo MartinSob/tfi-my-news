@@ -20,6 +20,21 @@ footer {
 	}
 }
 
+.wide-select {
+	width: 100%;
+
+	select {
+		width: 100%;
+	}
+}
+
+.combined-fields {
+	border: solid 1px lightgray;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
 @media (max-width: 1022px) {
 	.scrollable-table {
 		width: 100%;

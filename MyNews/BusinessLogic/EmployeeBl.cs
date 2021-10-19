@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessEntity;
+using Persistence.Bussiness;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,27 @@ namespace BusinessLogic
 {
 	public class EmployeeBl
 	{
+		EmployeeDao dao = new EmployeeDao();
+
+		public Employee create(Employee employee) {
+			dao.create(employee);
+			return employee;
+		}
+
+		public bool delete(int id) {
+			return dao.delete(id);
+		}
+
+		public List<Employee> get(string name = null) {
+			return dao.get(name);
+		}
+
+		public Employee get(int id) {
+			return dao.get(id);
+		}
+
+		public void update(Employee employee) {
+			dao.update(employee);
+		}
 	}
 }

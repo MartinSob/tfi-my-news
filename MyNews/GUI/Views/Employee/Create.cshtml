@@ -1,0 +1,84 @@
+﻿@using BusinessEntity;
+@using Security;
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@(((Dictionary<string,string>)Session["texts"])["create"])</h1>
+
+			<form id="createForm">
+				<div class="combined-fields">
+					<div class="columns">
+						<div class="column">
+							<div class="field">
+								<label class="label">@(((Dictionary<string,string>)Session["texts"])["user"])</label>
+								<p class="control has-icons-left has-icons-right">
+									<input id="userName" class="input" type="text">
+									<span class="icon is-small is-left">
+										<i class="fas fa-search"></i>
+									</span>
+								</p>
+							</div>
+						</div>
+						<div class="column is-narrow">
+							<a href="/User/Create" style="margin-top: 2rem;" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
+						</div>
+					</div>
+					<div class="select wide-select">
+						<select id="userList" required></select>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["document"])</label>
+					<div class="control">
+						<input id="document" class="input" type="text" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["start_day"])</label>
+					<div class="control">
+						<input id="startDay" class="input" type="date">
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["end_day"])</label>
+					<div class="control">
+						<input id="endDay" class="input" type="date">
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["birthday"])</label>
+					<div class="control">
+						<input id="birthday" class="input" type="date">
+					</div>
+				</div>
+
+				<div class="py-4">
+					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<a href="/Employee" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("createForm").addEventListener("submit", async (event) => {
+			const response = await post('/Employee/CreateEmployee', {
+				name: document.getElementById("langName").value
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/Employee");
+			}
+
+			showAlert(response);
+		});
+	</script>
+</div>

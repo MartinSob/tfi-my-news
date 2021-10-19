@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BusinessEntity
 {
-	public class Employee
+	public class Employee : User
 	{
-		public int writerId;
+		public int employeeId;
 		public DateTime startDay;
 		public DateTime endDay;
 		public string document;

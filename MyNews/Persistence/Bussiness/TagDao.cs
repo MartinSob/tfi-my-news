@@ -8,7 +8,7 @@ namespace Persistence
 	public class TagDao : ConnectionDao
 	{
 		public Tag create(Tag tag) {
-			insert("tags", new string[] { "name" }, new string[] { tag.name });
+			tag.id = insert("tags", new string[] { "name" }, new string[] { tag.name });
 			return tag;
 		}
 
