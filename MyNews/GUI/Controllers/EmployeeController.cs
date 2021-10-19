@@ -14,12 +14,12 @@ namespace MyNews.Controllers
 	{
 		EmployeeBl bl = new EmployeeBl();
 
-		public ActionResult Index(string text) {
+		public ActionResult Index(string text, bool showOld = false) {
 			if (!new PolicyBl().hasPermission((User)Session["user"], "admin_employees")) {
 				return HttpNotFound();
 			}
 
-			return View(new ListModel<Employee>(bl.get(text)));
+			return View(new ListModel<Employee>(bl.get(text, showOld)));
 		}
 
 		public ActionResult Delete(int id) {
@@ -38,7 +38,7 @@ namespace MyNews.Controllers
 			return View();
 		}
 
-		public ActionResult UpdateEmployee(int id, int user_id, DateTime start_day, DateTime end_day, string id_number, DateTime birthday) {
+		public ActionResult UpdateEmployee(int id, int user_id, DateTime start_day, DateTime? end_day, string id_number, DateTime birthday) {
 			Employee employee = new Employee {
 				id = user_id,
 				employeeId = id,
@@ -52,14 +52,14 @@ namespace MyNews.Controllers
 			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult CreateEmployee(int user_id, DateTime start_day, DateTime end_day, string id_number, DateTime birthday) {
+		public ActionResult CreateEmployee(int user_id, DateTime start_day, DateTime? end_day, string id_number, DateTime birthday) {
 			Employee employee = new Employee {
-				id = user_id,
-				startDay = start_day,
-				endDay = end_day,
-				document = id_number,
-				birthday = birthday
-			};
+					id = user_id,
+					startDay = start_day,
+					endDay = end_day,
+					document = id_number,
+					birthday = birthday
+				};
 
 			bl.create(employee);
 			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);

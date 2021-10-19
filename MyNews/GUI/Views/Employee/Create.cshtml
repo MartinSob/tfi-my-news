@@ -42,7 +42,7 @@
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["start_day"])</label>
 					<div class="control">
-						<input id="startDay" class="input" type="date">
+						<input id="startDay" class="input" type="date" required>
 					</div>
 				</div>
 
@@ -56,7 +56,7 @@
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["birthday"])</label>
 					<div class="control">
-						<input id="birthday" class="input" type="date">
+						<input id="birthday" class="input" type="date" required>
 					</div>
 				</div>
 
@@ -70,8 +70,14 @@
 
 	<script>
 		document.getElementById("createForm").addEventListener("submit", async (event) => {
+			event.preventDefault();
+
 			const response = await post('/Employee/CreateEmployee', {
-				name: document.getElementById("langName").value
+				user_id: document.getElementById("userList").value,
+				start_day: document.getElementById("startDay").value,
+				end_day: document.getElementById("endDay").value,
+				id_number: document.getElementById("document").value,
+				birthday: document.getElementById("birthday").value,
 			});
 
 			if (response.type == 'success') {

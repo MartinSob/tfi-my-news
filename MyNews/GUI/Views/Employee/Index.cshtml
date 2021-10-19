@@ -22,6 +22,11 @@
 								<input id="textFilter" class="input" type="text">
 							</div>
 						</div>
+
+						<label class="checkbox">
+							<input id="showOld" type="checkbox">
+							@(((Dictionary<string,string>)Session["texts"])["show_unemployed"])
+						</label>
 					</div>
 				</div>
 
@@ -78,7 +83,8 @@
 
 		document.getElementById("filterBtn").addEventListener("click", async (event) => {
 			const text = document.getElementById("textFilter").value;
-			window.location.replace('?text=' + text);
+			const showOld = document.getElementById("showOld").checked;
+			window.location.replace('?text=' + text + '&showOld=' + showOld);
 		});
 
 		function showDeleteModal(id, name) {

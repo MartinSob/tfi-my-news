@@ -12,11 +12,14 @@ namespace Persistence.Bussiness
 			return logicDeleteById("employees", id);
 		}
 
-		public List<Employee> get(string name = null) {
+		public List<Employee> get(string name = null, bool showOld = false) {
 			try {
 				string consultaSQL = "SELECT e.id as employee_id, * FROM employees e JOIN users u ON u.id = e.user_id WHERE e.deleted = 0 AND u.deleted = 0 ";
 				if (name != null) {
-					consultaSQL += $" AND (u.username LIKE '%{name}%' OR u.name LIKE '%{name}%' OR u.lastname LIKE '%{name}%')";
+					consultaSQL += $" AND (u.username LIKE '%{name}%' OR u.name LIKE '%{name}%' OR u.lastname LIKE '%{name}%' OR e.id_number LIKE '%{name}%') ";
+				}
+				if (!showOld) {
+					consultaSQL += $" AND ( e.end_day IS NULL OR e.end_day > GETDATE() ) ";
 				}
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
@@ -104,7 +107,7 @@ namespace Persistence.Bussiness
 
 		public Employee create(Employee employee) {
 			var colums = new string[] { "user_id", "start_day", "end_day", "id_number", "birthday" };
-			var values = new string[] { employee.id.ToString(), employee.startDay.ToString(), employee.endDay.ToString(), employee.document, employee.birthday.ToString() };
+			var values = new string[] { employee.id.ToString(), employee.startDay.ToString(), employee.endDay != null ? employee.endDay.ToString() : null, employee.document, employee.birthday.ToString() };
 			employee.id = insert("employees", colums, values);
 			return employee;
 		}
@@ -143,7 +146,7 @@ namespace Persistence.Bussiness
 			result.employeeId = Convert.ToInt32(data["employee_id"]);
 			result.startDay = DateTime.Parse(data["start_day"].ToString());
 
-			if (data["end_day"].ToString() != "null") {
+			if (data["end_day"].ToString() != "") {
 				result.endDay = DateTime.Parse(data["end_day"].ToString());
 			} else {
 				result.endDay = null;
