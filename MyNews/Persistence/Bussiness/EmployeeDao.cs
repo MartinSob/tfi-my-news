@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -33,6 +34,33 @@ namespace Persistence.Bussiness
 				conn.Close();
 
 				return employees;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
+		public List<User> getUsersNotEmployed(string name) {
+			try {
+				string consultaSQL = "SELECT u.* FROM users u WHERE u.deleted = 0 AND u.id NOT IN (SELECT user_id FROM employees) ";
+				consultaSQL += $" AND (u.username LIKE '%{name}%' OR u.name LIKE '%{name}%' OR u.lastname LIKE '%{name}%')";
+
+				SqlCommand query = new SqlCommand(consultaSQL, conn);
+
+				List<User> users = new List<User>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					UserDao userDao = new UserDao();
+					while (data.Read()) {
+						users.Add(userDao.castDto(data));
+					}
+				}
+
+				conn.Close();
+
+				return users;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
 				return null;
@@ -106,11 +134,21 @@ namespace Persistence.Bussiness
 		}
 
 		public Employee castDto(SqlDataReader data) {
-			Employee result = (Employee)new UserDao().castDto(data);
+			Employee result;
+
+			string serializedParent = JsonConvert.SerializeObject(new UserDao().castDto(data));
+			result = JsonConvert.DeserializeObject<Employee>(serializedParent);
+
 			result.id = Convert.ToInt32(data["user_id"]);
 			result.employeeId = Convert.ToInt32(data["employee_id"]);
 			result.startDay = DateTime.Parse(data["start_day"].ToString());
-			result.endDay = DateTime.Parse(data["end_day"].ToString());
+
+			if (data["end_day"].ToString() != "null") {
+				result.endDay = DateTime.Parse(data["end_day"].ToString());
+			} else {
+				result.endDay = null;
+			}
+
 			result.birthday = DateTime.Parse(data["birthday"].ToString());
 			result.document = data["id_number"].ToString();
 

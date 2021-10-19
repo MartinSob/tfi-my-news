@@ -25,6 +25,10 @@ namespace BusinessLogic
 			return dao.get(name);
 		}
 
+		public List<User> getUsersNotEmployed(string name) {
+			return dao.getUsersNotEmployed(name);
+		}
+
 		public Employee get(int id) {
 			return dao.get(id);
 		}

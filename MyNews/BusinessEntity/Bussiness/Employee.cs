@@ -10,7 +10,7 @@ namespace BusinessEntity
 	{
 		public int employeeId;
 		public DateTime startDay;
-		public DateTime endDay;
+		public DateTime? endDay;
 		public string document;
 		public DateTime birthday;
 	}

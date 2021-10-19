@@ -64,5 +64,10 @@ namespace MyNews.Controllers
 			bl.create(employee);
 			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
 		}
+
+		public ActionResult GetUsersByName(string name) {
+			List<User> users = bl.getUsersNotEmployed(name);
+			return Json(new { data = users }, JsonRequestBehavior.AllowGet);
+		}
 	}
 }

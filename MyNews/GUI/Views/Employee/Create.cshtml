@@ -80,5 +80,21 @@
 
 			showAlert(response);
 		});
+
+		document.getElementById("userName").addEventListener('input', async (event) => {
+			console.log(' - - - 😀 - - -');
+			const response = await get('/Employee/GetUsersByName?name=' + document.getElementById("userName").value);
+			console.log(response);
+			const select = document.getElementById('userList');
+
+			select.innerHTML = "";
+
+			response.data.forEach(item => {
+				let opt = document.createElement('option');
+				opt.value = item.id;
+				opt.innerHTML = item.lastname + ', ' +  item.name;
+				select.appendChild(opt);
+			});
+		});
 	</script>
 </div>
