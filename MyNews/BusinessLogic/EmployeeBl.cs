@@ -21,12 +21,20 @@ namespace BusinessLogic
 			return dao.delete(id);
 		}
 
+		public bool deleteByUser(int id) {
+			return dao.deleteByUser(id);
+		}
+
 		public List<Employee> get(string name = null, bool showOld = false) {
 			return dao.get(name, showOld);
 		}
 
 		public List<User> getUsersNotEmployed(string name) {
 			return dao.getUsersNotEmployed(name);
+		}
+
+		public bool isUserEmployee(User user) {
+			return get(user.id).username != null;
 		}
 
 		public Employee get(int id) {

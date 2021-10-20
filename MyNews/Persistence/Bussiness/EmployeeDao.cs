@@ -12,6 +12,10 @@ namespace Persistence.Bussiness
 			return logicDeleteById("employees", id);
 		}
 
+		public bool deleteByUser(int id) {
+			return update("employees", new string[] { "deleted" }, new string[] { "1" }, new string[] { "user_id" }, new string[] { id.ToString() }) == 1;
+		}
+
 		public List<Employee> get(string name = null, bool showOld = false) {
 			try {
 				string consultaSQL = "SELECT e.id as employee_id, * FROM employees e JOIN users u ON u.id = e.user_id WHERE e.deleted = 0 AND u.deleted = 0 ";

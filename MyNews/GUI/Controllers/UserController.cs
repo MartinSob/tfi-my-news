@@ -1,4 +1,5 @@
 ﻿using BusinessEntity;
+using BusinessLogic;
 using MyNews.Models;
 using Security;
 using System;
@@ -61,6 +62,11 @@ namespace MyNews.Controllers
 		public ActionResult Delete(int id) {
 			if (id == ((User)Session["user"]).id) {
 				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["delete_myself"] }, JsonRequestBehavior.AllowGet);
+			}
+
+			EmployeeBl eBl = new EmployeeBl();
+			if (eBl.isUserEmployee(new User { id = id })) {
+				eBl.deleteByUser(id);
 			}
 
 			if (bl.delete(id)) {
