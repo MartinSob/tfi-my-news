@@ -1,37 +1,73 @@
 ﻿@using BusinessEntity;
 @using Security;
 @model BusinessEntity.Employee
-@{
-	int i = 1;
-}
 
 <div class="container.is-widescreen my-5">
 	<div class="columns">
 		<div class="column px-5">
 			<h1 class="title is-2">
-				<i class="fas fa-hard-hat"></i> @Model.name
-				<a href="User/Update/@Model.id" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["update"])<i class="fas fa-edit"></i></a>
+				<i class="fas fa-hard-hat"></i> @Model.lastname, @Model.name
+				<a href="User/Update/@Model.id"
+					class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["update"])
+					@(((Dictionary<string,string>)Session["texts"])["user"])<i class="fas fa-edit"></i></a>
 			</h1>
 
-			<div class="field">
-				<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
-				<div class="control">
-					<input id="employeeName" class="input" type="text" value="@Model.name">
+			<form id="createForm">
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["user"])</label>
+					<p class="control has-icons-left has-icons-right">
+						<input class="input" type="text" value="@Model.lastname, @Model.name" disabled>
+					</p>
 				</div>
-			</div>
 
-			<div class="py-4">
-				<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
-				<a href="/Employee" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
-			</div>
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["document"])</label>
+					<div class="control">
+						<input id="document" class="input" type="text" value="@Model.document" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["start_day"])</label>
+					<div class="control">
+						<input id="startDay" class="input" type="date" value="@Model.startDay" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["end_day"])</label>
+					<div class="control">
+						<input id="endDay" class="input" type="date" value="@Model.endDay">
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["birthday"])</label>
+					<div class="control">
+						<input id="birthday" class="input" type="date" value="@Model.birthday" required>
+					</div>
+				</div>
+
+				<div class="py-4">
+					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<a href="/Employee"
+						class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+				</div>
+			</form>
 		</div>
 	</div>
 
 	<script>
-		document.getElementById("saveBtn").addEventListener("click", async (event) => {
+		document.getElementById("saveBtn").addEventListener("submit", async (event) => {
+			event.preventDefault();
+
 			const response = await post('/Employee/UpdateEmployee', {
-				id: @Model.id,
-				name: document.getElementById("employeeName").value
+				id: @Model.employeeId,
+				user_id: @Model.id,
+				start_day: document.getElementById("startDay").value,
+				end_day: document.getElementById("endDay").value,
+				id_number: document.getElementById("document").value,
+				birthday: document.getElementById("birthday").value,
 			});
 
 			if (response.type == 'success') {
