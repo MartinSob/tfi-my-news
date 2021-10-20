@@ -1,0 +1,138 @@
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.User
+@{
+	List<Role> allRoles = new PolicyBl().getRoles();
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@(((Dictionary<string,string>)Session["texts"])["create"])</h1>
+
+			<form id="createForm">
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["username"])</label>
+					<div class="control">
+						<input id="username" class="input" type="text" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["name"])</label>
+					<div class="control">
+						<input id="name" class="input" type="text" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["lastname"])</label>
+					<div class="control">
+						<input id="lastname" class="input" type="text" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["mail"])</label>
+					<div class="control">
+						<input id="mail" class="input" type="email" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["password"])</label>
+					<div class="control">
+						<input id="password" class="input" type="password" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["confirm_password"])</label>
+					<div class="control">
+						<input id="confirmPassword" class="input" type="password" required>
+					</div>
+				</div>
+
+				@if (new PolicyBl().hasPermission((User)Session["user"], "policies_manage")) {
+					<label class="label">@(((Dictionary<string, string>)Session["texts"])["permits"])</label>
+					<div class="scrollable-table">
+						<table class="table is-striped is-hoverable" style="width: 100%">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>@(((Dictionary<string, string>)Session["texts"])["name"])</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (Role role in allRoles) {
+									<tr id="@role.id">
+										<td>
+											<label class="checkbox">
+												<input id="@role.id" type="checkbox" name="roleboxes">
+											</label>
+										</td>
+										<td>
+											@role.name
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				}
+
+				<div class="py-4">
+					<button type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<a href="/User" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("createForm").addEventListener("submit", async (event) => {
+			event.preventDefault();
+			const password = document.getElementById("password").value;
+			const confirmPassword = document.getElementById("confirmPassword").value;
+
+			if (password != confirmPassword) {
+				showAlert({
+					type: 'danger',
+					description: '@(((Dictionary<string,string>)Session["texts"])["password_different"])'
+				})
+				return;
+			}
+
+			const checkedBoxes = document.querySelectorAll('input[name=roleboxes]:checked');
+			let rolesSelected = [];
+
+			checkedBoxes.forEach(box => {
+				if (box.checked) {
+					rolesSelected.push(box.id);
+				}
+			})
+
+			if (rolesSelected.length == 0) {
+				return showAlert({
+					type: 'danger',
+					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
+				});
+			}
+
+			const response = await post('/User/CreateUser', {
+				username: document.getElementById("username").value,
+				name: document.getElementById("name").value,
+				lastname: document.getElementById("lastname").value,
+				mail: document.getElementById("mail").value,
+				roles: rolesSelected,
+				password: password
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/User");
+			}
+
+			showAlert(response);
+		});
+	</script>
+</div>

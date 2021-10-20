@@ -12,10 +12,20 @@ namespace Security
 	{
 		UserDao dao = new UserDao();
 
-		public User create(User user) {
+		public User create(User user, List<Role> roles = null) {
 			user.password = new EncryptBl().encrypt(user.password);
 			dao.create(user);
-			new PolicyBl().assignBasicRole(user);
+
+			PolicyBl pBl = new PolicyBl();
+			if (roles == null) {
+				pBl.assignBasicRole(user);
+			} else {
+				foreach (Role r in roles) {
+					pBl.assignRole(user, r);
+				}
+				user.roles = roles;
+			}
+
 			new DvDao().updateDv();
 			return user;
 		}

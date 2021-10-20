@@ -90,5 +90,37 @@ namespace MyNews.Controllers
 				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error"] }, JsonRequestBehavior.AllowGet);
 			}
 		}
+
+		public ActionResult Create() {
+			return View();
+		}
+
+		public ActionResult CreateUser(string username, string name, string lastname, string mail, string[] roles, string password) {
+			try {
+				if (bl.exists(username,mail)) {
+					return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["already_registered"] }, JsonRequestBehavior.AllowGet);
+				}
+
+				User user = new User {
+					username = username,
+					name = name,
+					lastname = lastname,
+					mail = mail,
+					password = password
+				};
+
+				List<Role> newRoles = new List<Role>();
+
+				foreach (string role in roles) {
+					newRoles.Add(new Role { id = int.Parse(role) });
+				}
+
+				bl.create(user, newRoles);
+				return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
+			} catch (Exception e) {
+				Console.WriteLine(e);
+				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error"] }, JsonRequestBehavior.AllowGet);
+			}
+		}
 	}
 }
