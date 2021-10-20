@@ -1,6 +1,7 @@
 ﻿using BusinessEntity;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,34 +10,90 @@ namespace Persistence.Bussiness
 {
 	public class PostDao : ConnectionDao
 	{
-		bool delete(int id) {
-			// TODO
-
-			return true;
+		public bool delete(int id) {
+			return logicDeleteById("posts", id);
 		}
 
-		Dictionary<string, int> getReadsGroupByMonth() {
-			// TODO
-
-			return new Dictionary<string, int>();
+		public Post create(Post post) {
+			string[] columns = { "title", "body", "employee_id", "date", "paragraphs", "words" };
+			string[] values = { post.title, post.body, post.employee.id.ToString(), DateTime.Now.ToString(), post.paragraphs.ToString(), post.words.ToString() };
+			post.id = insert("posts", columns, values);
+			return post;
 		}
 
-		int create(Post post) {
+		public Post update(Post post) {
+			string[] columns = { "title", "body", "employee_id", "date", "paragraphs", "words" };
+			string[] values = { post.title, post.body, post.employee.id.ToString(), DateTime.Now.ToString(), post.paragraphs.ToString(), post.words.ToString() };
+			update("posts", columns, values, new string[] { "id" }, new string[] { post.id.ToString() });
+			return post;
+		}
+
+		public int getReads(Post post) {
 			return 1;
 		}
 
-		int update(Post post) {
-			return 1;
+		public List<Post> get(string name = null) {
+			try {
+				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0";
+				if (name != null) {
+					consultaSQL += $" AND p.title LIKE '%{name}%'";
+				}
+
+				SqlCommand query = new SqlCommand(consultaSQL, conn);
+
+				List<Post> posts = new List<Post>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						posts.Add(castDto(data));
+					}
+				}
+
+				conn.Close();
+
+				return posts;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
 		}
 
-		int getReads(Post post) {
-			return 1;
+		public Post get(int id) {
+			try {
+				SqlCommand query = new SqlCommand("SELECT * FROM posts p WHERE p.deleted = 0 AND p.id = @id", conn);
+				query.Parameters.AddWithValue("@id", id);
+
+				Post post = new Post();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						post = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				return post;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
 		}
 
 		List<Post> get(Employee employee) {
 			// TODO
 
 			return new List<Post>();
+		}
+
+		Dictionary<string, int> getReadsGroupByMonth() {
+			// TODO
+
+			return new Dictionary<string, int>();
 		}
 
 		List<Post> getBad() {
@@ -46,12 +103,6 @@ namespace Persistence.Bussiness
 		}
 
 		List<Post> getGood() {
-			// TODO
-
-			return new List<Post>();
-		}
-
-		List<Post> get(string name) {
 			// TODO
 
 			return new List<Post>();
@@ -67,12 +118,6 @@ namespace Persistence.Bussiness
 			// TODO
 
 			return new List<PostRecommendation>();
-		}
-
-		Post get(int id) {
-			// TODO
-
-			return new Post();
 		}
 
 		void addRead(Post post, User user) {
@@ -97,6 +142,21 @@ namespace Persistence.Bussiness
 
 		void addReview(User user, Tag tag, bool positive) {
 			// TODO
+		}
+
+		public Post castDto(SqlDataReader data) {
+			Post result = new Post();
+			result.id = Convert.ToInt32(data["id"]);
+			result.title = data["title"].ToString();
+			result.body = data["body"].ToString();
+			result.employee = new Employee {
+				id = Convert.ToInt32(data["employee_id"])
+			};
+			result.date = Convert.ToDateTime(data["date"].ToString());
+			result.paragraphs = Convert.ToInt32(data["paragraphs"]);
+			result.words = Convert.ToInt32(data["words"]);
+
+			return result;
 		}
 	}
 }

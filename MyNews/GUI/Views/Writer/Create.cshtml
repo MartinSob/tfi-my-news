@@ -1,0 +1,51 @@
+﻿@using BusinessEntity;
+@using Security;
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">@(((Dictionary<string,string>)Session["texts"])["create"]) @(((Dictionary<string,string>)Session["texts"])["post"])</h1>
+
+			<form id="createForm">
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["title"])</label>
+					<div class="control">
+						<input id="title" class="input" type="text" required>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">@(((Dictionary<string,string>)Session["texts"])["body"])</label>
+					<div class="control">
+						<textarea id="body" class="textarea" required></textarea>
+					</div>
+				</div>
+
+				<div class="py-4">
+					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<a href="/Writer" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("createForm").addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const response = await post('/Writer/CreatePost', {
+				title: document.getElementById("title").value,
+				body: document.getElementById("body").value
+			});
+
+			if (response.type == 'success') {
+				window.location.replace("/Writer");
+			}
+
+			showAlert(response);
+		});
+	</script>
+</div>

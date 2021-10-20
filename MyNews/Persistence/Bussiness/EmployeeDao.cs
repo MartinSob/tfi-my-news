@@ -109,6 +109,32 @@ namespace Persistence.Bussiness
 			}
 		}
 
+		public Employee getByUser(User user) {
+			try {
+				string consultaSQL = "SELECT e.id as employee_id, * FROM employees e JOIN users u ON u.id = e.user_id WHERE e.deleted = 0 AND u.deleted = 0 AND u.id = @id ";
+
+				SqlCommand query = new SqlCommand(consultaSQL, conn);
+				query.Parameters.AddWithValue("@id", user.id);
+
+				Employee employee = new Employee();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						employee = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				return employee;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
 		public Employee create(Employee employee) {
 			var colums = new string[] { "user_id", "start_day", "end_day", "id_number", "birthday" };
 			var values = new string[] { employee.id.ToString(), employee.startDay.ToString(), employee.endDay != null ? employee.endDay.ToString() : null, employee.document, employee.birthday.ToString() };

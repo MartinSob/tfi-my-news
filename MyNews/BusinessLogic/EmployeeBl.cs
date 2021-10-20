@@ -34,7 +34,11 @@ namespace BusinessLogic
 		}
 
 		public bool isUserEmployee(User user) {
-			return get(user.id).username != null;
+			return getByUser(user).username != null;
+		}
+
+		public Employee getByUser(User user) {
+			return dao.getByUser(user);
 		}
 
 		public Employee get(int id) {

@@ -11,5 +11,7 @@ namespace BusinessEntity
 		public Employee employee;
 		public bool deleted;
 		public DateTime date;
+		public int paragraphs;
+		public int words;
 	}
 }
