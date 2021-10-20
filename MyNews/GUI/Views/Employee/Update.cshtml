@@ -1,18 +1,22 @@
 ﻿@using BusinessEntity;
 @using Security;
 @model BusinessEntity.Employee
+@{
+	string endDay = Model.endDay != null ? Model.endDay.Value.ToString("yyyy-MM-d") : "";
+}
 
 <div class="container.is-widescreen my-5">
 	<div class="columns">
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="fas fa-hard-hat"></i> @Model.lastname, @Model.name
-				<a href="User/Update/@Model.id"
-					class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["update"])
-					@(((Dictionary<string,string>)Session["texts"])["user"])<i class="fas fa-edit"></i></a>
+				<a href="/User/Update/@Model.id"
+				   class="button is-outlined">
+					@(((Dictionary<string,string>)Session["texts"])["user"])<i class="fas fa-edit ml-2"></i>
+				</a>
 			</h1>
 
-			<form id="createForm">
+			<form id="updateForm">
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["user"])</label>
 					<p class="control has-icons-left has-icons-right">
@@ -30,35 +34,35 @@
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["start_day"])</label>
 					<div class="control">
-						<input id="startDay" class="input" type="date" value="@Model.startDay" required>
+						<input id="startDay" class="input" type="date" value="@Model.startDay.ToString("yyyy-MM-d")" required>
 					</div>
 				</div>
 
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["end_day"])</label>
 					<div class="control">
-						<input id="endDay" class="input" type="date" value="@Model.endDay">
+						<input id="endDay" class="input" type="date" value="@endDay">
 					</div>
 				</div>
 
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["birthday"])</label>
 					<div class="control">
-						<input id="birthday" class="input" type="date" value="@Model.birthday" required>
+						<input id="birthday" class="input" type="date" value="@Model.birthday.ToString("yyyy-MM-d")" required>
 					</div>
 				</div>
 
 				<div class="py-4">
-					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
+					<button type="submit" class="button is-success"><i class="fas fa-check"></i></button>
 					<a href="/Employee"
-						class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+					   class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
 				</div>
 			</form>
 		</div>
 	</div>
 
 	<script>
-		document.getElementById("saveBtn").addEventListener("submit", async (event) => {
+		document.getElementById("updateForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 
 			const response = await post('/Employee/UpdateEmployee', {

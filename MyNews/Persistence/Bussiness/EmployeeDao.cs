@@ -72,7 +72,7 @@ namespace Persistence.Bussiness
 
 		public Employee update(Employee employee) {
 			var colums = new string[] { "user_id", "start_day", "end_day", "id_number", "birthday" };
-			var values = new string[] { employee.id.ToString(), employee.startDay.ToString(), employee.endDay.ToString(), employee.document, employee.birthday.ToString() };
+			var values = new string[] { employee.id.ToString(), employee.startDay.ToString(), employee.endDay != null ? employee.endDay.ToString() : null, employee.document, employee.birthday.ToString() };
 			var whereColums = new string[] { "id" };
 			var whereValues = new string[] { employee.employeeId.ToString() };
 			update("employees", colums, values, whereColums, whereValues);
