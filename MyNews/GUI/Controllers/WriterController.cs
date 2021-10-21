@@ -28,11 +28,7 @@ namespace MyNews.Controllers
 			return View(new ListModel<Post>(pbl.get(ebl.getByUser(loggedUser).employeeId, text, all)));
         }
 
-        //public ActionResult UploadImage(string image) {
-        //https://stackoverflow.com/questions/5400173/converting-a-base-64-string-to-an-image-and-saving-it
-        //}
-
-        public ActionResult DeletePost(int id) {
+		public ActionResult DeletePost(int id) {
             if (pbl.delete(id)) {
                 return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
             } else {
@@ -48,11 +44,12 @@ namespace MyNews.Controllers
             return View();
         }
 
-        public ActionResult UpdatePost(int id, string title, string body, string[] tags) {
+        public ActionResult UpdatePost(int id, string title, string body, string[] tags, string image = null) {
             Post post = new Post {
                 id = id,
                 title = title,
                 body = body,
+                image = image,
                 employee = new Employee { employeeId = ebl.getByUser((User)Session["user"]).employeeId }
             };
 
@@ -74,10 +71,11 @@ namespace MyNews.Controllers
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CreatePost(string title, string body, string[] tags) {
+        public ActionResult CreatePost(string title, string body, string[] tags, string image = null) {
             Post post = new Post {
                 title = title,
                 body = body,
+                image = image,
                 employee = new Employee { employeeId = ebl.getByUser((User)Session["user"]).employeeId }
             };
 
