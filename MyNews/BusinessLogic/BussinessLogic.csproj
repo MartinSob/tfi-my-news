@@ -55,6 +55,10 @@
       <Project>{39806ef0-4064-4a82-8d20-1c1cb4c068d0}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{074BC7C2-8679-4DFE-BBE2-E87EF9168DBE}</Project>
+      <Name>Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
