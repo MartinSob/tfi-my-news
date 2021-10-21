@@ -1,5 +1,6 @@
 ﻿using BusinessEntity;
 using Persistence.Bussiness;
+using Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,8 @@ namespace BusinessLogic
 			return dao.delete(id);
 		}
 
-		public List<Post> get(string name = null) {
-			return dao.get(name);
+		public List<Post> get(int employeeId, string name = null, bool all = false) {
+			return dao.get(employeeId, name, all);
 		}
 
 		public Post get(int id) {

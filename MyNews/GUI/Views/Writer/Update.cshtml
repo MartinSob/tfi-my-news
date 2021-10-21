@@ -1,8 +1,10 @@
 ﻿@using BusinessEntity;
+@using BusinessLogic;
 @using Security;
 @model BusinessEntity.Post
 @{
 	int i = 1;
+	Employee e;
 }
 
 <div class="container.is-widescreen my-5">
@@ -17,6 +19,15 @@
 						<input id="title" class="input" type="text" value="@Model.title" required>
 					</div>
 				</div>
+
+				@if (new PolicyBl().hasPermission((User)Session["user"], "admin_post")) {
+					<div class="field">
+						<label class="label">@(((Dictionary<string, string>)Session["texts"])["writer"])</label>
+						<div class="control">
+							<input class="input" type="text" value="@((e = new EmployeeBl().get(Model.employee.employeeId)).lastname), @(e.name)" disabled>
+						</div>
+					</div>
+				}
 
 				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["body"])</label>
@@ -43,7 +54,7 @@
 	<script>
 		document.getElementById("updateForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
-			
+
 			const response = await post('/Writer/UpdatePost', {
 				id: @Model.id,
 				title: document.getElementById("title").value,

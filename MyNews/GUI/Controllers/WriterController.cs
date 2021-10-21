@@ -17,11 +17,15 @@ namespace MyNews.Controllers
 
         public ActionResult Index(string text = null)
         {
-			if (!new PolicyBl().hasPermission((User)Session["user"], "admin_tags")) {
+            User loggedUser = (User)Session["user"];
+
+            if (!new PolicyBl().hasPermission(loggedUser, "admin_tags")) {
 				return HttpNotFound();
 			}
 
-			return View(new ListModel<Post>(pbl.get(text)));
+            bool all = new PolicyBl().hasPermission(loggedUser, "admin_post");
+
+			return View(new ListModel<Post>(pbl.get(ebl.getByUser(loggedUser).employeeId, text, all)));
         }
 
         //public ActionResult UploadImage(string image) {
@@ -53,6 +57,14 @@ namespace MyNews.Controllers
             };
 
             pbl.update(post);
+
+            new BitacoreBl().create(new BitacoreMessage {
+                title = "Actualización Post",
+                type = MessageType.Info,
+                description = $"{((User)Session["user"]).username} ha modificado el post {id}",
+                user = null
+            });
+
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
 

@@ -16,14 +16,14 @@ namespace Persistence.Bussiness
 
 		public Post create(Post post) {
 			string[] columns = { "title", "body", "employee_id", "date", "paragraphs", "words" };
-			string[] values = { post.title, post.body, post.employee.id.ToString(), DateTime.Now.ToString(), post.paragraphs.ToString(), post.words.ToString() };
+			string[] values = { post.title, post.body, post.employee.employeeId.ToString(), DateTime.Now.ToString(), post.paragraphs.ToString(), post.words.ToString() };
 			post.id = insert("posts", columns, values);
 			return post;
 		}
 
 		public Post update(Post post) {
-			string[] columns = { "title", "body", "employee_id", "date", "paragraphs", "words" };
-			string[] values = { post.title, post.body, post.employee.id.ToString(), DateTime.Now.ToString(), post.paragraphs.ToString(), post.words.ToString() };
+			string[] columns = { "title", "body", "paragraphs", "words" };
+			string[] values = { post.title, post.body, post.paragraphs.ToString(), post.words.ToString() };
 			update("posts", columns, values, new string[] { "id" }, new string[] { post.id.ToString() });
 			return post;
 		}
@@ -32,11 +32,14 @@ namespace Persistence.Bussiness
 			return 1;
 		}
 
-		public List<Post> get(string name = null) {
+		public List<Post> get(int employeeId, string name = null, bool all = false) {
 			try {
-				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0";
+				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0 ";
 				if (name != null) {
-					consultaSQL += $" AND p.title LIKE '%{name}%'";
+					consultaSQL += $" AND p.title LIKE '%{name}%' ";
+				}
+				if (!all) {
+					consultaSQL += $" AND p.employee_id = {employeeId} ";
 				}
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
@@ -150,7 +153,7 @@ namespace Persistence.Bussiness
 			result.title = data["title"].ToString();
 			result.body = data["body"].ToString();
 			result.employee = new Employee {
-				id = Convert.ToInt32(data["employee_id"])
+				employeeId = Convert.ToInt32(data["employee_id"])
 			};
 			result.date = Convert.ToDateTime(data["date"].ToString());
 			result.paragraphs = Convert.ToInt32(data["paragraphs"]);
