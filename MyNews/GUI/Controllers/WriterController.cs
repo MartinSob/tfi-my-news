@@ -48,13 +48,19 @@ namespace MyNews.Controllers
             return View();
         }
 
-        public ActionResult UpdatePost(int id, string title, string body) {
+        public ActionResult UpdatePost(int id, string title, string body, string[] tags) {
             Post post = new Post {
                 id = id,
                 title = title,
                 body = body,
                 employee = new Employee { employeeId = ebl.getByUser((User)Session["user"]).employeeId }
             };
+
+            foreach (string tag in tags) {
+                post.tags.Add(new Tag {
+                    id = int.Parse(tag)
+                });
+            }
 
             pbl.update(post);
 
@@ -68,12 +74,18 @@ namespace MyNews.Controllers
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CreatePost(string title, string body) {
+        public ActionResult CreatePost(string title, string body, string[] tags) {
             Post post = new Post {
                 title = title,
                 body = body,
                 employee = new Employee { employeeId = ebl.getByUser((User)Session["user"]).employeeId }
             };
+
+            foreach (string tag in tags) {
+                post.tags.Add(new Tag {
+                    id = int.Parse(tag)
+                });
+            }
 
             pbl.create(post);
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);

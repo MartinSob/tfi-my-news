@@ -5,6 +5,7 @@
 @{
 	int i = 1;
 	Employee e;
+	List<Tag> allTags = new TagBl().get();
 }
 
 <div class="container.is-widescreen my-5">
@@ -43,6 +44,36 @@
 					</div>
 				</div>
 
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["tags"])</label>
+				<div class="scrollable-table">
+					<table class="table is-striped is-hoverable" style="width: 100%">
+						<thead>
+							<tr>
+								<th></th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["color"])</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (Tag tag in allTags) {
+								<tr>
+									<td>
+										<label class="checkbox">
+											@if (Model.tags.Any(p => p.id == tag.id)) {
+											<input id="@tag.id" type="checkbox" name="tagboxes" checked>
+											} else {
+											<input id="@tag.id" type="checkbox" name="tagboxes">
+											}
+										</label>
+									</td>
+									<td>@tag.name</td>
+									<td><div class="tag round-tag" style="background-color: @tag.color"></div></td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+
 				<div class="py-4">
 					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
 					<a href="/Writer" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
@@ -55,10 +86,27 @@
 		document.getElementById("updateForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 
+			const checkedBoxes = document.querySelectorAll('input[name=tagboxes]:checked');
+			let tagsSelected = [];
+
+			checkedBoxes.forEach(box => {
+				if (box.checked) {
+					tagsSelected.push(box.id);
+				}
+			})
+
+			if (tagsSelected.length == 0) {
+				return showAlert({
+					type: 'danger',
+					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
+				});
+			}
+
 			const response = await post('/Writer/UpdatePost', {
 				id: @Model.id,
 				title: document.getElementById("title").value,
-				body: document.getElementById("body").value
+				body: document.getElementById("body").value,
+				tags: tagsSelected
 			});
 
 			if (response.type == 'success') {

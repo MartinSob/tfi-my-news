@@ -18,14 +18,37 @@ namespace Persistence.Bussiness
 			string[] columns = { "title", "body", "employee_id", "date", "paragraphs", "words" };
 			string[] values = { post.title, post.body, post.employee.employeeId.ToString(), DateTime.Now.ToString(), post.paragraphs.ToString(), post.words.ToString() };
 			post.id = insert("posts", columns, values);
+
+			foreach (Tag tag in post.tags) {
+				addTag(post, tag);
+			}
+
 			return post;
+		}
+
+		public void addTag(Post post, Tag tag) {
+			string[] columns = { "post_id", "tag_id" };
+			string[] values = { post.id.ToString(), tag.id.ToString() };
+			insert("post_tags", columns, values);
 		}
 
 		public Post update(Post post) {
 			string[] columns = { "title", "body", "paragraphs", "words" };
 			string[] values = { post.title, post.body, post.paragraphs.ToString(), post.words.ToString() };
 			update("posts", columns, values, new string[] { "id" }, new string[] { post.id.ToString() });
+
+			deleteTags(post);
+			foreach (Tag tag in post.tags) {
+				addTag(post, tag);
+			}
+
 			return post;
+		}
+
+		public void deleteTags(Post post) {
+			SqlCommand query = new SqlCommand("DELETE FROM post_tags WHERE post_id = @id", conn);
+			query.Parameters.AddWithValue("@id", post.id);
+			executeQuery(query);
 		}
 
 		public int getReads(Post post) {
@@ -75,6 +98,22 @@ namespace Persistence.Bussiness
 				if (data.HasRows) {
 					while (data.Read()) {
 						post = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				SqlCommand queryTags = new SqlCommand("SELECT * FROM post_tags pt WHERE pt.post_id = @id", conn);
+				queryTags.Parameters.AddWithValue("@id", id);
+
+				conn.Open();
+				SqlDataReader dataTags = queryTags.ExecuteReader();
+
+				if (dataTags.HasRows) {
+					while (dataTags.Read()) {
+						post.tags.Add(new Tag {
+							id = Convert.ToInt32(dataTags["tag_id"])
+						});
 					}
 				}
 

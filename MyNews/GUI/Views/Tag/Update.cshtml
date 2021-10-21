@@ -17,6 +17,13 @@
 				</div>
 			</div>
 
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["color"])</label>
+				<div class="control">
+					<input class="input" type="color" id="color" value="@Model.color" required>
+				</div>
+			</div>
+
 			<div class="py-4">
 				<button id="saveBtn" class="button is-success"><i class="fas fa-check"></i></button>
 				<a href="/Tag" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
@@ -28,7 +35,8 @@
 		document.getElementById("saveBtn").addEventListener("click", async (event) => {
 			const response = await post('/Tag/UpdateTag', {
 				id: @Model.id,
-				name: document.getElementById("tagName").value
+				name: document.getElementById("tagName").value,
+				color: document.getElementById("color").value
 			});
 
 			if (response.type == 'success') {

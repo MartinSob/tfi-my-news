@@ -8,7 +8,7 @@ namespace Persistence
 	public class TagDao : ConnectionDao
 	{
 		public Tag create(Tag tag) {
-			tag.id = insert("tags", new string[] { "name" }, new string[] { tag.name });
+			tag.id = insert("tags", new string[] { "name", "color" }, new string[] { tag.name, tag.color });
 			return tag;
 		}
 
@@ -69,7 +69,7 @@ namespace Persistence
 		}
 
 		public void update(Tag tag) {
-			update("tags", new string[] { "name" }, new string[] { tag.name }, new string[] { "id" }, new string[] { tag.id.ToString() });
+			update("tags", new string[] { "name", "color" }, new string[] { tag.name, tag.color }, new string[] { "id" }, new string[] { tag.id.ToString() });
 		}
 
 		List<Tag> get(Post post) {
@@ -100,6 +100,7 @@ namespace Persistence
 			Tag result = new Tag();
 			result.id = Convert.ToInt32(data["id"]);
 			result.name = data["name"].ToString();
+			result.color = data["color"].ToString();
 
 			return result;
 		}

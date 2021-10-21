@@ -48,7 +48,7 @@ namespace Persistence
 					if (values[i] == null) {
 						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
 					} else {
-						query.Parameters.AddWithValue("@" + columns[i], truncate(values[i], 200));
+						query.Parameters.AddWithValue("@" + columns[i], values[i]);
 					}
 				}
 
@@ -94,7 +94,7 @@ namespace Persistence
 					if (values[i] == null) {
 						query.Parameters.AddWithValue("@" + columns[i], DBNull.Value);
 					} else {
-						query.Parameters.AddWithValue("@" + columns[i], truncate(values[i], 200));
+						query.Parameters.AddWithValue("@" + columns[i], values[i]);
 					}
 				}
 
@@ -102,7 +102,7 @@ namespace Persistence
 					if (whereValues[i] == null) {
 						query.Parameters.AddWithValue("@" + whereColumns[i], DBNull.Value);
 					} else {
-						query.Parameters.AddWithValue("@" + whereColumns[i], truncate(whereValues[i], 200));
+						query.Parameters.AddWithValue("@" + whereColumns[i], whereValues[i]);
 					}
 				}
 

@@ -39,19 +39,21 @@ namespace MyNews.Controllers
             return View();
         }
 
-        public ActionResult UpdateTag(int id, string name) {
+        public ActionResult UpdateTag(int id, string name, string color) {
             Tag tag = new Tag {
                 id = id,
-                name = name
+                name = name,
+                color = color
             };
 
             bl.update(tag);
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CreateTag(string name) {
+        public ActionResult CreateTag(string name, string color) {
             Tag tag = new Tag {
-                name = name
+                name = name,
+                color = color
             };
 
             bl.create(tag);

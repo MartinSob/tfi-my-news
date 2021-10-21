@@ -28,14 +28,14 @@
 					</thead>
 					<tbody>
 						@foreach (Policy policy in allPolicies) {
-							<tr>
-								<td>
-									<label class="checkbox">
-											<input id="@policy.id" type="checkbox" name="policyboxes">
-									</label>
-								</td>
-								<td>@policy.name</td>
-							</tr>
+						<tr>
+							<td>
+								<label class="checkbox">
+									<input id="@policy.id" type="checkbox" name="policyboxes">
+								</label>
+							</td>
+							<td>@policy.name</td>
+						</tr>
 						}
 					</tbody>
 				</table>

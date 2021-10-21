@@ -35,6 +35,11 @@ footer {
     margin: 1rem 0;
 }
 
+.tag.round-tag {
+	border-radius: 100%;
+    padding: 0.8rem;
+}
+
 @media (max-width: 1022px) {
 	.scrollable-table {
 		width: 100%;
