@@ -9,7 +9,13 @@
 	<div class="columns">
 		<div class="column px-5">
 			<div class="post-body">
-				<h1 class="title is-2">
+				@if (@Model.image != null) {
+					<div class="card-image" style="text-align: center;">
+						<img src="@Model.image">
+					</div>
+				}
+
+				<h1 class="title is-2 mt-2">
 					@Model.title
 				</h1>
 
