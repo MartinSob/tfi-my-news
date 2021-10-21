@@ -1,0 +1,33 @@
+﻿@using BusinessEntity;
+@using Security;
+@model BusinessEntity.Post
+@{
+	int i = 1;
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<div class="post-body">
+				<h1 class="title is-2">
+					@Model.title
+				</h1>
+
+				@foreach (Tag tag in Model.tags) {
+					<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
+				}
+
+				<p>
+					@Model.body
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.getElementById("editBtn").addEventListener("click", async (event) => {
+			const text = document.getElementById("textFilter").value;
+			window.location.replace('?text=' + text);
+		});
+	</script>
+</div>

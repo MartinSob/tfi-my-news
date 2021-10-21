@@ -103,7 +103,7 @@ namespace Persistence.Bussiness
 
 				conn.Close();
 
-				SqlCommand queryTags = new SqlCommand("SELECT * FROM post_tags pt WHERE pt.post_id = @id", conn);
+				SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
 				queryTags.Parameters.AddWithValue("@id", id);
 
 				conn.Open();
@@ -111,9 +111,7 @@ namespace Persistence.Bussiness
 
 				if (dataTags.HasRows) {
 					while (dataTags.Read()) {
-						post.tags.Add(new Tag {
-							id = Convert.ToInt32(dataTags["tag_id"])
-						});
+						post.tags.Add(new TagDao().castDto(dataTags));
 					}
 				}
 
@@ -124,12 +122,6 @@ namespace Persistence.Bussiness
 				new ErrorDao().create(e.ToString());
 				return null;
 			}
-		}
-
-		List<Post> get(Employee employee) {
-			// TODO
-
-			return new List<Post>();
 		}
 
 		Dictionary<string, int> getReadsGroupByMonth() {
@@ -156,10 +148,46 @@ namespace Persistence.Bussiness
 			return new List<Post>();
 		}
 
-		List<PostRecommendation> getRecommendations(int days) {
-			// TODO
+		//List<PostRecommendation> getRecommendations(int days) {
+		public List<Post> getRecommendations() {
+			try {
+				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0 ";
 
-			return new List<PostRecommendation>();
+				SqlCommand query = new SqlCommand(consultaSQL, conn);
+
+				List<Post> posts = new List<Post>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						posts.Add(castDto(data));
+					}
+				}
+
+				conn.Close();
+
+				foreach (Post post in posts) { 
+					SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
+					queryTags.Parameters.AddWithValue("@id", post.id);
+
+					conn.Open();
+					SqlDataReader dataTags = queryTags.ExecuteReader();
+
+					if (dataTags.HasRows) {
+						while (dataTags.Read()) {
+							post.tags.Add(new TagDao().castDto(dataTags));
+						}
+					}
+
+					conn.Close();
+				}
+
+				return posts;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
 		}
 
 		void addRead(Post post, User user) {

@@ -1,1 +1,30 @@
-﻿
+﻿.tag {
+    &.round-tag {
+        border-radius: 100%;
+        padding: 0.8rem;
+    }
+
+    &.square-tag {
+        border-left: solid 5px;
+        border-radius: 0;
+        padding: 0.8rem;
+    }
+}
+
+.card {
+    transition: 0.3s;
+}
+
+.card-hover:hover {
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 50%), 0 0 0 1px rgb(10 10 10 / 2%);
+}
+
+.post-body {
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 15%), 0 0 0 1px rgb(10 10 10 / 2%);
+    padding: 2rem;
+    border-radius: 5px;
+
+    p {
+        white-space: pre-line;
+    }
+}

@@ -62,5 +62,9 @@ namespace BusinessLogic
 
 			return wordCount;
 		}
+
+		public List<Post> getRecommendations() {
+			return dao.getRecommendations();
+		}
 	}
 }

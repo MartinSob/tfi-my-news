@@ -16,7 +16,7 @@ namespace MyNews.Controllers
         // GET: Authorization
         public ActionResult Index(string text)
         {
-            if (!new PolicyBl().hasPermission((User)Session["user"], "admin_policies")) {
+            if (!policyBl.hasPermission((User)Session["user"], "admin_policies")) {
                 return HttpNotFound();
             }
 

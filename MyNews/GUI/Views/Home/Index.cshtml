@@ -1,4 +1,84 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using BusinessEntity;
+@using MyNews.Models;
+@model ListModel<BusinessEntity.Post>
+@{
+	ViewBag.Title = "Home";
+	int i = 1;
 }
 
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">
+				<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
+			</h1>
+
+			<div class="columns">
+				@foreach (Post post in Model.Items)
+				{
+					<div class="column">
+						<a href="Home/View?id=@post.id">
+							<div class="card card-hover">
+								<div class="card-content">
+									<div class="media">
+										<div class="media-content">
+											<p class="title is-4">@post.title</p>
+										</div>
+									</div>
+
+									<div class="content">
+										@foreach (Tag tag in post.tags) { 
+											<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
+										}
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+
+	<div class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-card">
+			<header class="modal-card-head">
+				<p id="userName" class="modal-card-title"></p>
+				<button onclick="toggleModal()" class="delete" aria-label="close"></button>
+			</header>
+			<section class="modal-card-body">
+				<p>@(((Dictionary<string,string>)Session["texts"])["delete_confirmation"])</p>
+			</section>
+			<footer class="modal-card-foot">
+				<button onclick="deleteUser()" class="button is-success"><i class="fas fa-check"></i></button>
+				<button onclick="toggleModal()" class="button"><i class="fas fa-times"></i></button>
+			</footer>
+		</div>
+	</div>
+
+	<script>
+		var userId = 0;
+		let params = new URLSearchParams(location.search);
+		document.getElementById("nameFilter").value = params.get('name')
+
+		document.getElementById("filterBtn").addEventListener("click", async (event) => {
+			const name = document.getElementById("nameFilter").value;
+			window.location.replace('?name=' + name);
+		});
+
+		function showDeleteModal(id, name) {
+			userId = id;
+			document.getElementById("userName").innerText = name;
+			toggleModal();
+		}
+
+		async function deleteUser() {
+			const response = await get('/User/Delete?id=' + userId);
+			toggleModal();
+			showAlert(response);
+
+			setTimeout(function () { location.reload(); }, 1500);
+		}
+	</script>
+</div>
