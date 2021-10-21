@@ -1,12 +1,8 @@
 ﻿using BusinessEntity;
 using Persistence.Bussiness;
-using Security;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -19,6 +15,15 @@ namespace BusinessLogic
 			post.words = countWords(post.body);
 
 			dao.create(post);
+
+			try {
+				post.image = post.image.Split(',')[1];
+				byte[] bytes = Convert.FromBase64String(post.image);
+				dao.updateImage(bytes, post);
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
+
 			return post;
 		}
 
@@ -39,6 +44,14 @@ namespace BusinessLogic
 			post.words = countWords(post.body);
 
 			dao.update(post);
+
+			try {
+				post.image = post.image.Split(',')[1];
+				byte[] bytes = Convert.FromBase64String(post.image);
+				dao.updateImage(bytes, post);
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
 		}
 
 		int countWords(string text) {

@@ -1,10 +1,9 @@
 ﻿using BusinessEntity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Persistence.Bussiness
 {
@@ -43,6 +42,41 @@ namespace Persistence.Bussiness
 			}
 
 			return post;
+		}
+
+		public void updateImage(byte[] image, Post post) {
+			SqlCommand command = new SqlCommand(
+				"UPDATE posts SET image = @Photo WHERE id = @id", conn);
+
+			command.Parameters.Add("@Photo",
+				SqlDbType.Image, image.Length).Value = image;
+			command.Parameters.AddWithValue("@id", post.id);
+
+			executeQuery(command);
+		}
+
+		public void getImage(Post post) {
+			try {
+				SqlCommand command = new SqlCommand(
+					"SELECT image FROM posts WHERE id = @id", conn);
+				command.Parameters.AddWithValue("@id", post.id);
+
+				MemoryStream stream = new MemoryStream();
+				conn.Open();
+				var result = command.ExecuteScalar();
+
+				if (result is DBNull) {
+					conn.Close();
+					return;
+				}
+
+				byte[] image = (byte[])result;
+				stream.Write(image, 0, image.Length);
+				conn.Close();
+				post.image = "data:image/jpeg;base64," + Convert.ToBase64String(image);
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
 		}
 
 		public void deleteTags(Post post) {
@@ -117,6 +151,8 @@ namespace Persistence.Bussiness
 
 				conn.Close();
 
+				getImage(post);
+
 				return post;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
@@ -181,6 +217,8 @@ namespace Persistence.Bussiness
 					}
 
 					conn.Close();
+
+					getImage(post);
 				}
 
 				return posts;

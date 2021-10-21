@@ -31,6 +31,16 @@
 				}
 
 				<div class="field">
+					<label class="label">@(((Dictionary<string, string>)Session["texts"])["image"])</label>
+					@if (Model.image != null) {
+						<img src="@Model.image" width="150" height="150">
+					}
+					<div class="control">
+						<input class="input" type="file" id="myFile" name="filename">
+					</div>
+				</div>
+
+				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["body"])</label>
 					<div class="control">
 						<textarea id="body" class="textarea" required>@Model.body</textarea>
@@ -60,9 +70,9 @@
 									<td>
 										<label class="checkbox">
 											@if (Model.tags.Any(p => p.id == tag.id)) {
-											<input id="@tag.id" type="checkbox" name="tagboxes" checked>
+												<input id="@tag.id" type="checkbox" name="tagboxes" checked>
 											} else {
-											<input id="@tag.id" type="checkbox" name="tagboxes">
+												<input id="@tag.id" type="checkbox" name="tagboxes">
 											}
 										</label>
 									</td>
@@ -102,11 +112,15 @@
 				});
 			}
 
+			const file = document.getElementById("myFile").files[0];
+			const image = await getBase64(file);
+
 			const response = await post('/Writer/UpdatePost', {
 				id: @Model.id,
 				title: document.getElementById("title").value,
 				body: document.getElementById("body").value,
-				tags: tagsSelected
+				tags: tagsSelected,
+				image: image
 			});
 
 			if (response.type == 'success') {

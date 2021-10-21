@@ -19,6 +19,13 @@
 					<div class="column">
 						<a href="Home/View?id=@post.id">
 							<div class="card card-hover">
+								<div class="card-image">
+									<figure class="image is-4by3">
+										@if (post.image != null) { 
+										<img src="@post.image">
+										}
+									</figure>
+								</div>
 								<div class="card-content">
 									<div class="media">
 										<div class="media-content">
@@ -27,7 +34,7 @@
 									</div>
 
 									<div class="content">
-										@foreach (Tag tag in post.tags) { 
+										@foreach (Tag tag in post.tags) {
 											<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
 										}
 									</div>
@@ -56,29 +63,4 @@
 			</footer>
 		</div>
 	</div>
-
-	<script>
-		var userId = 0;
-		let params = new URLSearchParams(location.search);
-		document.getElementById("nameFilter").value = params.get('name')
-
-		document.getElementById("filterBtn").addEventListener("click", async (event) => {
-			const name = document.getElementById("nameFilter").value;
-			window.location.replace('?name=' + name);
-		});
-
-		function showDeleteModal(id, name) {
-			userId = id;
-			document.getElementById("userName").innerText = name;
-			toggleModal();
-		}
-
-		async function deleteUser() {
-			const response = await get('/User/Delete?id=' + userId);
-			toggleModal();
-			showAlert(response);
-
-			setTimeout(function () { location.reload(); }, 1500);
-		}
-	</script>
 </div>

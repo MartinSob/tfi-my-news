@@ -20,6 +20,13 @@
 				</div>
 
 				<div class="field">
+					<label class="label">@(((Dictionary<string, string>)Session["texts"])["image"])</label>
+					<div class="control">
+						<input class="input" type="file" id="myFile" name="filename">
+					</div>
+				</div>
+
+				<div class="field">
 					<label class="label">@(((Dictionary<string,string>)Session["texts"])["body"])</label>
 					<div class="control">
 						<textarea id="body" class="textarea" required></textarea>
@@ -38,15 +45,15 @@
 						</thead>
 						<tbody>
 							@foreach (Tag tag in allTags) {
-							<tr>
-								<td>
-									<label class="checkbox">
-										<input id="@tag.id" type="checkbox" name="tagboxes">
-									</label>
-								</td>
-								<td>@tag.name</td>
-								<td><div class="tag round-tag" style="background-color: @tag.color"></div></td>
-							</tr>
+								<tr>
+									<td>
+										<label class="checkbox">
+											<input id="@tag.id" type="checkbox" name="tagboxes">
+										</label>
+									</td>
+									<td>@tag.name</td>
+									<td><div class="tag round-tag" style="background-color: @tag.color"></div></td>
+								</tr>
 							}
 						</tbody>
 					</table>
@@ -80,10 +87,14 @@
 				});
 			}
 
+			const file = document.getElementById("myFile").files[0];
+			const image = await getBase64(file);
+
 			const response = await post('/Writer/CreatePost', {
 				title: document.getElementById("title").value,
 				body: document.getElementById("body").value,
-				tags: tagsSelected
+				tags: tagsSelected,
+				image: image
 			});
 
 			if (response.type == 'success') {
