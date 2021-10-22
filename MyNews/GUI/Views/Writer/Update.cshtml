@@ -36,7 +36,7 @@
 						<img src="@Model.image" width="150" height="150">
 					}
 					<div class="control">
-						<input class="input" type="file" id="myFile" name="filename">
+						<input class="input" type="file" id="myFile" name="filename" accept="image/*">
 					</div>
 				</div>
 
@@ -109,6 +109,14 @@
 				return showAlert({
 					type: 'danger',
 					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'
+				});
+			}
+
+			const array = document.getElementById("myFile").value.split('.');
+			if (!["jpg", "png", "jpeg"].includes(array[array.length - 1])) {
+				return showAlert({
+					type: 'danger',
+					description: '@(((Dictionary<string,string>)Session["texts"])["invalid_file_format"])'
 				});
 			}
 
