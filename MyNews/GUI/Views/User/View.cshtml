@@ -49,7 +49,11 @@
 							<tr id="@role.id">
 								<td>@(i++)</td>
 								<td>
-									@role.name
+									@try {
+										@(((Dictionary<string, string>)Session["texts"])[role.name])
+									} catch (Exception e) {
+										@role.name
+									}
 								</td>
 							</tr>
 						}
