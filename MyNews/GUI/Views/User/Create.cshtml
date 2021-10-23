@@ -2,7 +2,7 @@
 @using Security;
 @model BusinessEntity.User
 @{
-	List<Role> allRoles = new PolicyBl().getRoles();
+	List<Policy> allRoles = new PolicyBl().getPolicies();
 }
 
 <div class="container.is-widescreen my-5">
@@ -64,7 +64,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach (Role role in allRoles) {
+								@foreach (Policy role in allRoles) {
 									<tr id="@role.id">
 										<td>
 											<label class="checkbox">
@@ -72,7 +72,11 @@
 											</label>
 										</td>
 										<td>
-											@role.name
+											@try {
+												@(((Dictionary<string, string>)Session["texts"])[role.name])
+											} catch (Exception e) { 
+												@role.name
+											}
 										</td>
 									</tr>
 								}
