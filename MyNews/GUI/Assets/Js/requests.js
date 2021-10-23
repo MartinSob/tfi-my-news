@@ -48,6 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    if (document.getElementById('logoutBtn')) {
+        document.getElementById('logoutBtn').addEventListener("click", async function () {
+            window.location.replace('/Login/Logout');
+        });
+    }
 });
 
 /*
