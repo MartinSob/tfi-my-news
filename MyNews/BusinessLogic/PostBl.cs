@@ -39,6 +39,10 @@ namespace BusinessLogic
 			return dao.get(id);
 		}
 
+		public UserView getUserView(Post post, User user) {
+			return dao.getUserView(post, user);
+		}
+
 		public void update(Post post) {
 			post.paragraphs = Regex.Matches(post.body, "[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*").Count;
 			post.words = countWords(post.body);
@@ -76,8 +80,28 @@ namespace BusinessLogic
 			return wordCount;
 		}
 
-		public List<Post> getRecommendations() {
-			return dao.getRecommendations();
+		public List<Post> getRecommendations(User user) {
+			return dao.getRecommendations(user);
+		}
+
+		public void addLike(Post post, User user, int qualification) {
+			// TODO add same for Tag
+			try {
+				addRead(post, user);
+				dao.addReview(post, user, qualification);
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
+		}
+
+		public void addOpen(Post post, User user) {
+			// TODO add same for Tag
+			dao.addOpen(post, user);
+		}
+
+		public void addRead(Post post, User user) {
+			// TODO add same for Tag
+			dao.addRead(post, user);
 		}
 	}
 }

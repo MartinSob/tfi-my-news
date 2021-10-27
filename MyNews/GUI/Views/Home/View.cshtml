@@ -1,6 +1,6 @@
 ﻿@using BusinessEntity;
 @using Security;
-@model BusinessEntity.Post
+@model BusinessEntity.UserView
 @{
 	int i = 1;
 }
@@ -9,31 +9,65 @@
 	<div class="columns">
 		<div class="column px-5">
 			<div class="post-body">
-				@if (@Model.image != null) {
+				@if (@Model.post.image != null) {
 					<div class="card-image" style="text-align: center;">
-						<img src="@Model.image">
+						<img src="@Model.post.image">
 					</div>
 				}
 
 				<h1 class="title is-2 mt-2">
-					@Model.title
+					@Model.post.title
 				</h1>
 
-				@foreach (Tag tag in Model.tags) {
+				@foreach (Tag tag in Model.post.tags) {
 					<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
 				}
 
 				<p>
-					@Model.body
+					@Model.post.body
 				</p>
+
+				<div class="like-button-container">
+					<label class="like-button">
+						@if (Model.qualification > 0) {
+							<input id="likeBtn" type="checkbox" hidden checked><span><i class="fas fa-thumbs-up"></i></span>
+						} else {
+							<input id="likeBtn" type="checkbox" hidden><span><i class="fas fa-thumbs-up"></i></span>
+						}
+					</label>
+					<label class="like-button">
+						@if (Model.qualification < 0) {
+							<input id="dislikeBtn" type="checkbox" hidden checked><span><i class="far fa-thumbs-down"></i></span>
+						} else {
+							<input id="dislikeBtn" type="checkbox" hidden><span><i class="far fa-thumbs-down"></i></span>
+						}
+					</label>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<script>
-		document.getElementById("editBtn").addEventListener("click", async (event) => {
-			const text = document.getElementById("textFilter").value;
-			window.location.replace('?text=' + text);
-		});
+		document.getElementById("likeBtn").addEventListener('change', async (event) => {
+			document.getElementById("dislikeBtn").checked = false;
+			let qualification = 0;
+			if (event.currentTarget.checked) {
+				qualification = 1;
+			}
+
+			const result = await get('/Home/QualifyPost?id=' + @Model.post.id +'&qualification=' + qualification);
+			console.log(result);
+		})
+
+		document.getElementById("dislikeBtn").addEventListener('change', async (event) => {
+			document.getElementById("likeBtn").checked = false;
+			let qualification = 0;
+			if (event.currentTarget.checked) {
+				qualification = -1;
+			}
+
+			const result = get('/Home/QualifyPost?id=' + @Model.post.id +'&qualification=' + qualification);
+			console.log(result);
+		})
 	</script>
 </div>

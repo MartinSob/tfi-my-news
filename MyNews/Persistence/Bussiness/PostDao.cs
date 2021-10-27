@@ -85,10 +85,6 @@ namespace Persistence.Bussiness
 			executeQuery(query);
 		}
 
-		public int getReads(Post post) {
-			return 1;
-		}
-
 		public List<Post> get(int employeeId, string name = null, bool all = false) {
 			try {
 				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0 ";
@@ -166,6 +162,10 @@ namespace Persistence.Bussiness
 			return new Dictionary<string, int>();
 		}
 
+		public int getReads(Post post) {
+			return 1;
+		}
+
 		List<Post> getBad() {
 			// TODO
 
@@ -184,8 +184,53 @@ namespace Persistence.Bussiness
 			return new List<Post>();
 		}
 
+		public UserView getUserView(Post post, User user) {
+			try {
+				SqlCommand query = new SqlCommand("SELECT p.*, uv.qualification FROM posts p JOIN user_views uv ON uv.post_id = p.id AND uv.user_id = @userId WHERE p.deleted = 0 AND p.id = @postId", conn);
+				query.Parameters.AddWithValue("@userId", user.id);
+				query.Parameters.AddWithValue("@postId", post.id);
+
+				UserView userView = new UserView();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						userView = new UserView {
+							user = user,
+							post = castDto(data),
+							qualification = Convert.ToInt32(data["qualification"])
+						};
+					}
+				}
+
+				conn.Close();
+
+				SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
+				queryTags.Parameters.AddWithValue("@id", post.id);
+
+				conn.Open();
+				SqlDataReader dataTags = queryTags.ExecuteReader();
+
+				if (dataTags.HasRows) {
+					while (dataTags.Read()) {
+						userView.post.tags.Add(new TagDao().castDto(dataTags));
+					}
+				}
+
+				conn.Close();
+
+				getImage(userView.post);
+
+				return userView;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
 		//List<PostRecommendation> getRecommendations(int days) {
-		public List<Post> getRecommendations() {
+		public List<Post> getRecommendations(User user) {
 			try {
 				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0 ";
 
@@ -203,7 +248,7 @@ namespace Persistence.Bussiness
 
 				conn.Close();
 
-				foreach (Post post in posts) { 
+				foreach (Post post in posts) {
 					SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
 					queryTags.Parameters.AddWithValue("@id", post.id);
 
@@ -228,19 +273,42 @@ namespace Persistence.Bussiness
 			}
 		}
 
-		void addRead(Post post, User user) {
-			// TODO
+		public void addOpen(Post post, User user) {
+			SqlCommand query = new SqlCommand("SELECT * FROM user_views uv WHERE post_id = @postId AND user_id = @userId ", conn);
+			query.Parameters.AddWithValue("@postId", post.id);
+			query.Parameters.AddWithValue("@userId", user.id);
+
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
+			if (data.HasRows) {
+				conn.Close();
+				return;
+			}
+
+			conn.Close();
+
+			var columns = new string[] { "user_id", "post_id", "date", };
+			var values = new string[] { user.id.ToString(), post.id.ToString(), DateTime.Now.ToString() };
+			insert("user_views", columns, values);
+		}
+
+		public void addRead(Post post, User user) {
+			var columns = new string[] { "date", "finished" };
+			var values = new string[] { DateTime.Now.ToString(), 1.ToString() };
+			var whereColumns = new string[] { "user_id", "post_id" };
+			var whereValues = new string[] { user.id.ToString(), post.id.ToString() };
+			update("user_views", columns, values, whereColumns, whereValues);
+		}
+
+		public void addReview(Post post, User user, int qualification) {
+			var columns = new string[] { "date", "qualification" };
+			var values = new string[] { DateTime.Now.ToString(), qualification.ToString() };
+			var whereColumns = new string[] { "user_id", "post_id" };
+			var whereValues = new string[] { user.id.ToString(), post.id.ToString() };
+			update("user_views", columns, values, whereColumns, whereValues);
 		}
 
 		void addView(User user, Tag tag) {
-			// TODO
-		}
-
-		void addReview(Post post, bool positive) {
-			// TODO
-		}
-
-		void addView(Post post, User user) {
 			// TODO
 		}
 

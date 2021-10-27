@@ -19,11 +19,23 @@ namespace MyNews.Controllers
 				return HttpNotFound();
 			}
 
-			return View(new ListModel<Post>(postBl.getRecommendations()));
+			return View(new ListModel<Post>(postBl.getRecommendations((User)Session["user"])));
 		}
 
 		public ActionResult View(int id) {
-			return View(postBl.get(id));
+			postBl.addOpen(new Post { id = id }, (User)Session["user"]);
+			return View(postBl.getUserView(new Post { id = id}, (User)Session["user"]));
+		}
+
+		public ActionResult ReadPost(int id) {
+			// TODO
+			postBl.addRead(new Post { id = id }, (User)Session["user"]);
+			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
+		}
+
+		public ActionResult QualifyPost(int id, int qualification) {
+			postBl.addLike(new Post { id = id }, (User)Session["user"], qualification);
+			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
 		}
 	}
 }

@@ -12,5 +12,7 @@ namespace MyNews.Models
 		public ListModel(List<T> list) {
 			Items = list;
 		}
+
+		public ListModel() {}
 	}
 }
