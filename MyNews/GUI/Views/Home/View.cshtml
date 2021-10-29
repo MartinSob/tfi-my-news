@@ -32,14 +32,14 @@
 						@if (Model.qualification > 0) {
 							<input id="likeBtn" type="checkbox" hidden checked><span><i class="fas fa-thumbs-up"></i></span>
 						} else {
-							<input id="likeBtn" type="checkbox" hidden><span><i class="fas fa-thumbs-up"></i></span>
+							<input id="likeBtn" type="checkbox" hidden><span><i class="far fa-thumbs-up"></i></span>
 						}
 					</label>
 					<label class="like-button">
 						@if (Model.qualification < 0) {
 							<input id="dislikeBtn" type="checkbox" hidden checked><span><i class="fas fa-thumbs-down"></i></span>
 						} else {
-							<input id="dislikeBtn" type="checkbox" hidden><span><i class="fas fa-thumbs-down"></i></span>
+							<input id="dislikeBtn" type="checkbox" hidden><span><i class="far fa-thumbs-down"></i></span>
 						}
 					</label>
 				</div>
@@ -48,6 +48,8 @@
 	</div>
 
 	<script>
+		var hasVScroll = document.documentElement.scrollHeight > document.documentElement.clientHeight;
+
 		document.getElementById("likeBtn").addEventListener('change', async (event) => {
 			document.getElementById("dislikeBtn").checked = false;
 			let qualification = 0;
@@ -56,7 +58,6 @@
 			}
 
 			const result = await get('/Home/QualifyPost?id=' + @Model.post.id +'&qualification=' + qualification);
-			console.log(result);
 		})
 
 		document.getElementById("dislikeBtn").addEventListener('change', async (event) => {
@@ -67,7 +68,22 @@
 			}
 
 			const result = get('/Home/QualifyPost?id=' + @Model.post.id +'&qualification=' + qualification);
-			console.log(result);
 		})
+
+		window.onscroll = async function () {
+			const d = document.documentElement;
+			const offset = d.scrollTop + window.innerHeight;
+			const height = d.offsetHeight;
+
+			if (offset >= height) {
+				const result = await get('/Home/ReadPost?id=' + @Model.post.id);
+			}
+		};
+
+		if (!hasVScroll) {
+			setTimeout(async function () {
+				const result = await get('/Home/ReadPost?id=' + @Model.post.id);
+			}, 10000);
+		}
 	</script>
 </div>

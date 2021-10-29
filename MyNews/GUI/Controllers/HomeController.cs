@@ -28,7 +28,6 @@ namespace MyNews.Controllers
 		}
 
 		public ActionResult ReadPost(int id) {
-			// TODO
 			postBl.addRead(new Post { id = id }, (User)Session["user"]);
 			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
 		}
