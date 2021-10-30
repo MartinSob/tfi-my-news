@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 
-namespace Persistence.Bussiness
+namespace Persistence
 {
 	public class PostDao : ConnectionDao
 	{

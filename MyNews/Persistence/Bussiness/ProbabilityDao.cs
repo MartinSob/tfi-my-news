@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Bussiness
+namespace Persistence
 {
 	public class ProbabilityDao
 	{

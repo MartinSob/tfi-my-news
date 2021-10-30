@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace Persistence.Bussiness
+namespace Persistence
 {
 	public class EmployeeDao : ConnectionDao
 	{

@@ -72,13 +72,10 @@ namespace Persistence
 			update("tags", new string[] { "name", "color" }, new string[] { tag.name, tag.color }, new string[] { "id" }, new string[] { tag.id.ToString() });
 		}
 
-		List<Tag> get(Post post) {
+		public List<Tag> get(Post post) {
 			try {
 				// TODO fix query
 				string consultaSQL = "SELECT * FROM tags t WHERE deleted = 0";
-				if (name != null) {
-					consultaSQL += $" AND t.name LIKE '%{name}%'";
-				}
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
 
