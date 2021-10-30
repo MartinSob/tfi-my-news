@@ -90,6 +90,10 @@ namespace BusinessLogic
 			try {
 				addRead(post, user);
 				dao.addReview(post, user, qualification);
+
+				foreach (Tag tag in tDao.get(post)) {
+					tDao.addReview(tag, user, qualification);
+				}
 			} catch (Exception e) {
 				Console.WriteLine(e);
 			}

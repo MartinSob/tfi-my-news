@@ -74,10 +74,10 @@ namespace Persistence
 
 		public List<Tag> get(Post post) {
 			try {
-				// TODO fix query
-				string consultaSQL = "SELECT * FROM tags t WHERE deleted = 0";
+				string consultaSQL = "SELECT * FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE t.deleted = 0 AND pt.post_id = @postId";
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
+				query.Parameters.AddWithValue("@postId", post.id);
 
 				List<Tag> tags = new List<Tag>();
 				conn.Open();
@@ -116,28 +116,38 @@ namespace Persistence
 			return 1;
 		}
 
-		// TODO review
 		public void addOpen(Tag tag, User user) {
-			SqlCommand query = new SqlCommand("SELECT * FROM user_tags uv WHERE post_id = @tagId AND user_id = @userId ", conn);
+			SqlCommand query = new SqlCommand("SELECT * FROM user_tags ut WHERE tag_id = @tagId AND user_id = @userId ", conn);
 			query.Parameters.AddWithValue("@tagId", tag.id);
 			query.Parameters.AddWithValue("@userId", user.id);
 
 			conn.Open();
 			SqlDataReader data = query.ExecuteReader();
+			TagRecommendation tagRecommendation = new TagRecommendation();
 			if (data.HasRows) {
+				while (data.Read()) {
+					tagRecommendation = castRecommendationDto(data);
+				}
+			} else {
 				conn.Close();
+				insert("user_tags", 
+					new string[] { "user_id", "tag_id", "updated_date", }, 
+					new string[] { user.id.ToString(), tag.id.ToString(), DateTime.Now.ToString() });
 				return;
 			}
 
 			conn.Close();
 
-			var columns = new string[] { "user_id", "tag_id", "date", };
-			var values = new string[] { user.id.ToString(), tag.id.ToString(), DateTime.Now.ToString() };
-			insert("user_tags", columns, values);
+			tagRecommendation.views++;
+			var columns = new string[] { "updated_date", "views" };
+			var values = new string[] { DateTime.Now.ToString(), tagRecommendation.views.ToString() };
+			var whereColumns = new string[] { "user_id", "tag_id" };
+			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
+			update("user_tags", columns, values, whereColumns, whereValues);
 		}
 
 		public void addRead(Tag tag, User user) {
-			var columns = new string[] { "date", "finished" };
+			var columns = new string[] { "updated_date", "finished" };
 			var values = new string[] { DateTime.Now.ToString(), 1.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
@@ -145,7 +155,7 @@ namespace Persistence
 		}
 
 		public void addReview(Tag tag, User user, int qualification) {
-			var columns = new string[] { "date", "qualification" };
+			var columns = new string[] { "updated_date", "qualification" };
 			var values = new string[] { DateTime.Now.ToString(), qualification.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
@@ -159,6 +169,15 @@ namespace Persistence
 			result.color = data["color"].ToString();
 
 			return result;
+		}
+
+		public TagRecommendation castRecommendationDto(SqlDataReader data) {
+			TagRecommendation t = new TagRecommendation(castDto(data));
+			t.views = Convert.ToInt32(data["views"]);
+			t.finished = Convert.ToInt32(data["finished"]);
+			t.qualification = Convert.ToInt32(data["qualification"]);
+			
+			return t;
 		}
 	}
 }
