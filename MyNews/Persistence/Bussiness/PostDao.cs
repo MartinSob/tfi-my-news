@@ -308,18 +308,6 @@ namespace Persistence.Bussiness
 			update("user_views", columns, values, whereColumns, whereValues);
 		}
 
-		void addView(User user, Tag tag) {
-			// TODO
-		}
-
-		void addRead(User user, Tag tag) {
-			// TODO
-		}
-
-		void addReview(User user, Tag tag, bool positive) {
-			// TODO
-		}
-
 		public Post castDto(SqlDataReader data) {
 			Post result = new Post();
 			result.id = Convert.ToInt32(data["id"]);

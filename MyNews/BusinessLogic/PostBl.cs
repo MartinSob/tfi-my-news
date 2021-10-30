@@ -9,6 +9,7 @@ namespace BusinessLogic
 	public class PostBl
 	{
 		PostDao dao = new PostDao();
+		TagDao tDao = new TagDao();
 
 		public Post create(Post post) {
 			post.paragraphs = Regex.Matches(post.body, "[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*").Count;
@@ -95,13 +96,19 @@ namespace BusinessLogic
 		}
 
 		public void addOpen(Post post, User user) {
-			// TODO add same for Tag
 			dao.addOpen(post, user);
+
+			foreach(Tag tag in tDao.get(post)) {
+				tDao.addOpen(tag, user);
+			}
 		}
 
 		public void addRead(Post post, User user) {
-			// TODO add same for Tag
 			dao.addRead(post, user);
+
+			foreach(Tag tag in tDao.get(post)) {
+				tDao.addRead(tag, user);
+			}
 		}
 	}
 }

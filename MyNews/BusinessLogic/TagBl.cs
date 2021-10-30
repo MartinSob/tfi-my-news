@@ -32,5 +32,9 @@ namespace BusinessLogic
 		public void update(Tag tag) {
 			dao.update(tag);
 		}
+
+		public List<Tag> get(Post post) {
+			return dao.get(post);
+		}
 	}
 }
