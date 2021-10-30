@@ -14,6 +14,14 @@ Versiones de SSMS 17 y 18. Scripts generados para version 2017, compatibles con 
 Ubicacion del script: `\script.sql`
 
 
+## Error de dependencias
+En caso de tener un error de dependencias NuGet al descargar el proyecto, es necesario agregar la fuente de paquetes (package source). Para esto, ir a *Tools > Nuget Package Manager > Package Manager Settings*. Debajo de Nuget '*Package Manager*', seleccionar '*Package Sources*'. En caso de no existir, agregar la siguiente fuente de paquetes:
+ - Nombre: `nuget.org`
+ - Fuente: `https://api.nuget.org/v3/index.json`
+
+Una vez creado, volver a buildear la solución.
+
+
 ## Usuarios
 Existen cuatro diferentes usuarios, uno por cada rol, cuyas contraseñas son siempre `admin`.
  - admin
