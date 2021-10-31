@@ -22,7 +22,8 @@ namespace MyNews
 			//		  "~/Scripts/bootstrap.js"));
 
 			bundles.Add(new ScriptBundle("~/Content/js").Include(
-					  "~/Assets/Js/requests.js"));
+					  "~/Assets/Js/requests.js",
+					  "~/Assets/Js/roundProgressBar.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Assets/Styles/fa.min.css",

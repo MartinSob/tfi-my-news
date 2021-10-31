@@ -4,6 +4,7 @@
 @import "Backup";
 @import "Bitacore";
 @import "LikeButton";
+@import "ProgressBar";
 
 .column.left-divider {
 	border-top: solid 1px #ccc;
@@ -45,5 +46,12 @@ footer {
 	.scrollable-table {
 		width: 100%;
 		overflow: scroll;
+	}
+}
+
+@media (max-width: 360px) {
+	.columns {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
