@@ -13,5 +13,6 @@
 			this.color = t.color;
 		}
 
-		public TagRecommendation() {}
+		public TagRecommendation() { }
 	}
+}

@@ -104,6 +104,27 @@ namespace Persistence
 			return new List<TagRecommendation>();
 		}
 
+		public TagRecommendation getRecommendation(User user, Tag tag) {
+			SqlCommand query = new SqlCommand("SELECT * FROM tags t JOIN user_tags ut ON ut.tag_id = t.id WHERE tag_id = @tagId AND user_id = @userId ", conn);
+			query.Parameters.AddWithValue("@tagId", tag.id);
+			query.Parameters.AddWithValue("@userId", user.id);
+
+			TagRecommendation tagRecommendation = new TagRecommendation();
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
+			if (!data.HasRows) {
+				conn.Close();
+				return null;
+			}
+
+			while (data.Read()) {
+				tagRecommendation = castRecommendationDto(data);
+			}
+			conn.Close();
+
+			return tagRecommendation;
+		}
+
 		List<Tag> getPopulars() {
 			// TODO
 
@@ -117,26 +138,14 @@ namespace Persistence
 		}
 
 		public void addOpen(Tag tag, User user) {
-			SqlCommand query = new SqlCommand("SELECT * FROM user_tags ut WHERE tag_id = @tagId AND user_id = @userId ", conn);
-			query.Parameters.AddWithValue("@tagId", tag.id);
-			query.Parameters.AddWithValue("@userId", user.id);
+			TagRecommendation tagRecommendation = getRecommendation(user, tag);
 
-			conn.Open();
-			SqlDataReader data = query.ExecuteReader();
-			TagRecommendation tagRecommendation = new TagRecommendation();
-			if (data.HasRows) {
-				while (data.Read()) {
-					tagRecommendation = castRecommendationDto(data);
-				}
-			} else {
-				conn.Close();
+			if (tagRecommendation == null) {
 				insert("user_tags", 
 					new string[] { "user_id", "tag_id", "updated_date", }, 
 					new string[] { user.id.ToString(), tag.id.ToString(), DateTime.Now.ToString() });
 				return;
 			}
-
-			conn.Close();
 
 			tagRecommendation.views++;
 			var columns = new string[] { "updated_date", "views" };
@@ -147,16 +156,22 @@ namespace Persistence
 		}
 
 		public void addRead(Tag tag, User user) {
+			TagRecommendation tagRecommendation = getRecommendation(user, tag);
+			tagRecommendation.finished++;
+
 			var columns = new string[] { "updated_date", "finished" };
-			var values = new string[] { DateTime.Now.ToString(), 1.ToString() };
+			var values = new string[] { DateTime.Now.ToString(), tagRecommendation.finished.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
 			update("user_tags", columns, values, whereColumns, whereValues);
 		}
 
 		public void addReview(Tag tag, User user, int qualification) {
+			TagRecommendation tagRecommendation = getRecommendation(user, tag);
+			tagRecommendation.qualification += qualification;
+
 			var columns = new string[] { "updated_date", "qualification" };
-			var values = new string[] { DateTime.Now.ToString(), qualification.ToString() };
+			var values = new string[] { DateTime.Now.ToString(), tagRecommendation.qualification.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
 			update("user_tags", columns, values, whereColumns, whereValues);
