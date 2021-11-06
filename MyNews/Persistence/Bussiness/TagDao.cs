@@ -98,33 +98,6 @@ namespace Persistence
 			}
 		}
 
-		List<TagRecommendation> getRecommendations(User user, PostRecommendation post) {
-			// TODO
-
-			return new List<TagRecommendation>();
-		}
-
-		public TagRecommendation getRecommendation(User user, Tag tag) {
-			SqlCommand query = new SqlCommand("SELECT * FROM tags t JOIN user_tags ut ON ut.tag_id = t.id WHERE tag_id = @tagId AND user_id = @userId ", conn);
-			query.Parameters.AddWithValue("@tagId", tag.id);
-			query.Parameters.AddWithValue("@userId", user.id);
-
-			TagRecommendation tagRecommendation = new TagRecommendation();
-			conn.Open();
-			SqlDataReader data = query.ExecuteReader();
-			if (!data.HasRows) {
-				conn.Close();
-				return null;
-			}
-
-			while (data.Read()) {
-				tagRecommendation = castRecommendationDto(data);
-			}
-			conn.Close();
-
-			return tagRecommendation;
-		}
-
 		List<Tag> getPopulars() {
 			// TODO
 
@@ -138,7 +111,7 @@ namespace Persistence
 		}
 
 		public void addOpen(Tag tag, User user) {
-			TagRecommendation tagRecommendation = getRecommendation(user, tag);
+			TagRecommendation tagRecommendation = new TagRecommendationDao().get(user, tag);
 
 			if (tagRecommendation == null) {
 				insert("user_tags", 
@@ -156,7 +129,7 @@ namespace Persistence
 		}
 
 		public void addRead(Tag tag, User user) {
-			TagRecommendation tagRecommendation = getRecommendation(user, tag);
+			TagRecommendation tagRecommendation = new TagRecommendationDao().get(user, tag);
 			tagRecommendation.finished++;
 
 			var columns = new string[] { "updated_date", "finished" };
@@ -167,7 +140,7 @@ namespace Persistence
 		}
 
 		public void addReview(Tag tag, User user, int qualification) {
-			TagRecommendation tagRecommendation = getRecommendation(user, tag);
+			TagRecommendation tagRecommendation = new TagRecommendationDao().get(user, tag);
 			tagRecommendation.qualification += qualification;
 
 			var columns = new string[] { "updated_date", "qualification" };
@@ -184,15 +157,6 @@ namespace Persistence
 			result.color = data["color"].ToString();
 
 			return result;
-		}
-
-		public TagRecommendation castRecommendationDto(SqlDataReader data) {
-			TagRecommendation t = new TagRecommendation(castDto(data));
-			t.views = Convert.ToInt32(data["views"]);
-			t.finished = Convert.ToInt32(data["finished"]);
-			t.qualification = Convert.ToInt32(data["qualification"]);
-			
-			return t;
 		}
 	}
 }

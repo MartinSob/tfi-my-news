@@ -4,5 +4,6 @@ namespace BusinessEntity
 {
 	public class Probability
 	{
+
 	}
 }

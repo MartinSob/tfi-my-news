@@ -86,7 +86,6 @@ namespace BusinessLogic
 		}
 
 		public void addLike(Post post, User user, int qualification) {
-			// TODO add same for Tag
 			try {
 				addRead(post, user);
 				dao.addReview(post, user, qualification);
