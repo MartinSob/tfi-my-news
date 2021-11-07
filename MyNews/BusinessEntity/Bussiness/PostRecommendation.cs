@@ -6,6 +6,6 @@ namespace BusinessEntity
 	{
 		public double value;
 		public List<TagRecommendation> tags;
-		public EmployeeRecommendation writer;
+		public EmployeeRecommendation employee;
 	}
 }
