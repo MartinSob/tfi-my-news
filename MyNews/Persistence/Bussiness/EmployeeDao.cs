@@ -160,10 +160,10 @@ namespace Persistence
 			return new List<Employee>();
 		}
 
-		WriterRecommendation getRecommendations(User user, PostRecommendation post) {
+		EmployeeRecommendation getRecommendations(User user, PostRecommendation post) {
 			// TODO
 
-			return new WriterRecommendation();
+			return new EmployeeRecommendation();
 		}
 
 		public Employee castDto(SqlDataReader data) {

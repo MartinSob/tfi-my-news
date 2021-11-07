@@ -46,6 +46,7 @@
     <Compile Include="PostBl.cs" />
     <Compile Include="ProbabilityBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecommendationBl.cs" />
     <Compile Include="TagBl.cs" />
   </ItemGroup>
   <ItemGroup>

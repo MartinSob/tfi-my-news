@@ -110,41 +110,32 @@ namespace Persistence
 			return 1;
 		}
 
-		public void addOpen(Tag tag, User user) {
-			TagRecommendation tagRecommendation = new TagRecommendationDao().get(user, tag);
-
-			if (tagRecommendation == null) {
+		public void addOpen(TagRecommendation tag, User user) {
+			if (tag == null) {
 				insert("user_tags", 
 					new string[] { "user_id", "tag_id", "updated_date", }, 
 					new string[] { user.id.ToString(), tag.id.ToString(), DateTime.Now.ToString() });
 				return;
 			}
 
-			tagRecommendation.views++;
 			var columns = new string[] { "updated_date", "views" };
-			var values = new string[] { DateTime.Now.ToString(), tagRecommendation.views.ToString() };
+			var values = new string[] { DateTime.Now.ToString(), tag.views.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
 			update("user_tags", columns, values, whereColumns, whereValues);
 		}
 
-		public void addRead(Tag tag, User user) {
-			TagRecommendation tagRecommendation = new TagRecommendationDao().get(user, tag);
-			tagRecommendation.finished++;
-
+		public void addRead(TagRecommendation tag, User user) {
 			var columns = new string[] { "updated_date", "finished" };
-			var values = new string[] { DateTime.Now.ToString(), tagRecommendation.finished.ToString() };
+			var values = new string[] { DateTime.Now.ToString(), tag.finished.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
 			update("user_tags", columns, values, whereColumns, whereValues);
 		}
 
-		public void addReview(Tag tag, User user, int qualification) {
-			TagRecommendation tagRecommendation = new TagRecommendationDao().get(user, tag);
-			tagRecommendation.qualification += qualification;
-
+		public void addReview(TagRecommendation tag, User user) {
 			var columns = new string[] { "updated_date", "qualification" };
-			var values = new string[] { DateTime.Now.ToString(), tagRecommendation.qualification.ToString() };
+			var values = new string[] { DateTime.Now.ToString(), tag.qualification.ToString() };
 			var whereColumns = new string[] { "user_id", "tag_id" };
 			var whereValues = new string[] { user.id.ToString(), tag.id.ToString() };
 			update("user_tags", columns, values, whereColumns, whereValues);

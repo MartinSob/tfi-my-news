@@ -10,6 +10,7 @@ namespace BusinessLogic
 	{
 		PostDao dao = new PostDao();
 		TagDao tDao = new TagDao();
+		TagRecommendationDao trDao = new TagRecommendationDao();
 
 		public Post create(Post post) {
 			post.paragraphs = Regex.Matches(post.body, "[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*").Count;
@@ -91,7 +92,10 @@ namespace BusinessLogic
 				dao.addReview(post, user, qualification);
 
 				foreach (Tag tag in tDao.get(post)) {
-					tDao.addReview(tag, user, qualification);
+					TagRecommendation tagRecommendation = trDao.get(user, tag);
+					tagRecommendation.qualification += qualification;
+
+					tDao.addReview(tagRecommendation, user);
 				}
 			} catch (Exception e) {
 				Console.WriteLine(e);
@@ -102,7 +106,13 @@ namespace BusinessLogic
 			dao.addOpen(post, user);
 
 			foreach(Tag tag in tDao.get(post)) {
-				tDao.addOpen(tag, user);
+				TagRecommendation tagRecommendation = trDao.get(user, tag);
+
+				if (tagRecommendation != null) {
+					tagRecommendation.views++;
+				}
+
+				tDao.addOpen(tagRecommendation, user);
 			}
 		}
 
@@ -110,7 +120,10 @@ namespace BusinessLogic
 			dao.addRead(post, user);
 
 			foreach(Tag tag in tDao.get(post)) {
-				tDao.addRead(tag, user);
+				TagRecommendation tagRecommendation = trDao.get(user, tag);
+				tagRecommendation.finished++;
+
+				tDao.addRead(tagRecommendation, user);
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 ﻿namespace BusinessEntity
 {
-	public class WriterRecommendation
+	public class EmployeeRecommendation
 	{
 		public double value;
 		public int countRead;
