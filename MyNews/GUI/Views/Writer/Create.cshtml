@@ -132,13 +132,21 @@
 				body: document.getElementById("body").value,
 				tags: tagsSelected
 			});
-			console.log(response.data);
 
 			const ul = document.getElementById("recommendationList");
 			ul.innerHTML = "";
 			response.data.recommendations.forEach(reco => {
 				const li = document.createElement("li");
-				li.appendChild(document.createTextNode(reco));
+
+				let logo = document.createElement("i");
+				if (reco.value == 'error') {
+					logo.classList.add("fas", "fa-exclamation-circle", "has-text-danger");
+				} else {
+					logo.classList.add("fas", "fa-check", "has-text-success");
+				}
+
+				li.appendChild(logo);
+				li.appendChild(document.createTextNode("  " + reco.item));
 				ul.appendChild(li);
 			})
 
