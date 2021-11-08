@@ -14,6 +14,7 @@ namespace MyNews.Controllers
     {
         PostBl pbl = new PostBl();
         EmployeeBl ebl = new EmployeeBl();
+        ProbabilityBl probBl = new ProbabilityBl();
 
         public ActionResult Index(string text = null)
         {
@@ -89,21 +90,21 @@ namespace MyNews.Controllers
             return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult GetProbability(string title, string body, string[] tags, bool image) {
-        //    Post post = new Post {
-        //        title = title,
-        //        body = body,
-        //        employee = new Employee { employeeId = ebl.getByUser((User)Session["user"]).employeeId }
-        //    };
+		public ActionResult GetProbability(string title, string body, string[] tags) {
+			Post post = new Post {
+				title = title,
+				body = body,
+				employee = new Employee { employeeId = ebl.getByUser((User)Session["user"]).employeeId }
+			};
 
-        //    foreach (string tag in tags) {
-        //        post.tags.Add(new Tag {
-        //            id = int.Parse(tag)
-        //        });
-        //    }
+			foreach (string tag in tags) {
+				post.tags.Add(new Tag {
+					id = int.Parse(tag)
+				});
+			}
 
-        //    pbl.create(post);
-        //    return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
-        //}
-    }
+            Probability p = probBl.calculate(post);
+			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], data = p }, JsonRequestBehavior.AllowGet);
+		}
+	}
 }

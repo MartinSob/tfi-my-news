@@ -1,10 +1,8 @@
 ﻿using BusinessEntity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {
@@ -15,7 +13,7 @@ namespace Persistence
 				string consultaSQL = "SELECT SUM(ut.views) as count FROM user_tags ut JOIN tags t ON t.id = ut.tag_id WHERE t.deleted = 0 AND t.id = @tagId";
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
-				query.Parameters.AddWithValue("@id", tag.id);
+				query.Parameters.AddWithValue("@tagId", tag.id);
 
 				int result = 0;
 				conn.Open();
@@ -41,7 +39,7 @@ namespace Persistence
 				string consultaSQL = "SELECT SUM(ut.finished) as count FROM user_tags ut JOIN tags t ON t.id = ut.tag_id WHERE t.deleted = 0 AND t.id = @tagId";
 
 				SqlCommand query = new SqlCommand(consultaSQL, conn);
-				query.Parameters.AddWithValue("@id", tag.id);
+				query.Parameters.AddWithValue("@tagId", tag.id);
 
 				int result = 0;
 				conn.Open();
@@ -114,15 +112,19 @@ namespace Persistence
 
 		public List<Post> getPositivePosts(Tag tag) {
 			try {
-				string consultaSQL = "";
+				SqlCommand query = new SqlCommand("GetPositivePosts", conn);
+				query.CommandType = CommandType.StoredProcedure;
 
-				SqlCommand query = new SqlCommand(consultaSQL, conn);
-				query.Parameters.AddWithValue("@id", tag.id);
+				query.Parameters.Add(new SqlParameter {
+					ParameterName = "@tagId",
+					DbType = DbType.Int32,
+					Value = tag.id
+				});
 
-				List<Post> posts = new List<Post>();
 				conn.Open();
 				SqlDataReader data = query.ExecuteReader();
 
+				List<Post> posts = new List<Post>();
 				if (data.HasRows) {
 					while (data.Read()) {
 						posts.Add(new PostDao().castDto(data));

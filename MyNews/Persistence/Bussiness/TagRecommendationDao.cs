@@ -38,7 +38,7 @@ namespace Persistence
 		}
 
 		public TagRecommendation castDto(SqlDataReader data) {
-			TagRecommendation t = new TagRecommendation(castDto(data));
+			TagRecommendation t = new TagRecommendation(new TagDao().castDto(data));
 			t.views = Convert.ToInt32(data["views"]);
 			t.finished = Convert.ToInt32(data["finished"]);
 			t.qualification = Convert.ToInt32(data["qualification"]);

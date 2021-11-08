@@ -65,7 +65,7 @@ namespace BusinessLogic
 			}
 		}
 
-		int countWords(string text) {
+		public int countWords(string text) {
 			int wordCount = 0, index = 0;
 
 			// skip whitespace until first word

@@ -80,7 +80,7 @@
 						<div id="pb" class="round-progress-bar"></div>
 					</div>
 					<div class="column">
-						<p>AAAAA</p>
+						<ul id="recommendationList"></ul>
 					</div>
 				</div>
 			</section>
@@ -123,13 +123,26 @@
 			showValidationModal();
 		});
 
-		function showValidationModal() {
+		async function showValidationModal() {
 			const divGraph = document.getElementById("pb");
 			divGraph.innerHTML = "";
 
-			// TODO Add GET backend 
+			const response = await post('/Writer/GetProbability', {
+				title: document.getElementById("title").value,
+				body: document.getElementById("body").value,
+				tags: tagsSelected
+			});
+			console.log(response.data);
 
-			divGraph.dataset.percent = 80;
+			const ul = document.getElementById("recommendationList");
+			ul.innerHTML = "";
+			response.data.recommendations.forEach(reco => {
+				const li = document.createElement("li");
+				li.appendChild(document.createTextNode(reco));
+				ul.appendChild(li);
+			})
+
+			divGraph.dataset.percent = response.data.value;
 			drawRoundProgressBar(divGraph)
 			toggleModal();
 		}

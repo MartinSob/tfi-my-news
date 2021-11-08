@@ -1,6 +1,8 @@
 ﻿using BusinessEntity;
 using Persistence;
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace BusinessLogic
 {
@@ -8,7 +10,15 @@ namespace BusinessLogic
 	{
 		ProbabilityDao dao = new ProbabilityDao();
 
+		/// <summary>
+		/// Calculates the probability of succes of a given Post
+		/// </summary>
+		/// <param name="post"></param>
+		/// <returns></returns>
 		public Probability calculate(Post post) {
+			post.paragraphs = Regex.Matches(post.body, "[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*").Count;
+			post.words = new PostBl().countWords(post.body);
+
 			Probability probability = new Probability();
 
 			double recommendedWords = 0;
@@ -39,6 +49,28 @@ namespace BusinessLogic
 			probability.probParagraph = post.paragraphs > recommendedParagraphs ? recommendedParagraphs / post.paragraphs : post.paragraphs / recommendedParagraphs;
 			probability.probWords = post.words > recommendedWords ? recommendedWords / post.words : post.words / recommendedWords;
 
+			if (probability.probOpen * 100 < 60)
+				probability.recommendations.Add("tag_low_open_probability");
+
+			if (probability.probRead * 100 < 60)
+				probability.recommendations.Add("tag_low_read_probability");
+
+			if (probability.probParagraph * 100 < 60) {
+				if (post.paragraphs > recommendedParagraphs) {
+					probability.recommendations.Add("too_long_paragraphs_probability");
+				} else {
+					probability.recommendations.Add("too_short_paragraphs_probability");
+				}
+			}
+
+			if (probability.probWords * 100 < 60) {
+				if (post.words > recommendedWords) {
+					probability.recommendations.Add("too_many_words_probability");
+				} else {
+					probability.recommendations.Add("too_few_words_probability");
+				}
+			}
+
 			return calculateValue(probability);
 		}
 
@@ -67,26 +99,8 @@ namespace BusinessLogic
 		}
 
 		Probability calculateValue(Probability probability) {
-			// Make the values a percentage
-			probability.probOpen *= 100;
-			probability.probRead *= 100;
-			probability.probParagraph *= 100;
-			probability.probWords *= 100;
-
-			if (probability.probOpen < 60)
-				probability.recommendations.Add("low_open_probability");
-
-			if (probability.probRead < 60)
-				probability.recommendations.Add("low_read_probability");
-
-			if (probability.probParagraph < 60)
-				probability.recommendations.Add("low_paragraphs_probability");
-
-			if (probability.probWords < 60)
-				probability.recommendations.Add("low_words_probability");
-
-			// Multiply by 25 so the Sum of all perfect values is 100%
-			probability.value = (int)(probability.probOpen * 25 + probability.probRead * 25 + probability.probParagraph * 25 + probability.probWords * 25);
+			// Multiply by 25 so the Sum of all perfect values would be 100%
+			probability.value = Convert.ToInt32(probability.probOpen * 25 + probability.probRead * 25 + probability.probParagraph * 25 + probability.probWords * 25);
 
 			return probability;
 		}
