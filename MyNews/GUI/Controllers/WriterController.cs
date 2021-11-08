@@ -104,7 +104,20 @@ namespace MyNews.Controllers
 			}
 
             Probability p = probBl.calculate(post);
-			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], data = p }, JsonRequestBehavior.AllowGet);
+
+            List<GenericModel> r = new List<GenericModel>();
+            foreach (string s in p.recommendations) {
+                r.Add(new GenericModel { 
+                    item = ((Dictionary<string, string>)Session["texts"])[s.Split('.')[1]],
+                    value = s.Split('.')[0]
+                });
+            }
+
+			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], 
+                data = new { 
+                    value = p.value,
+                    recommendations = r
+                } }, JsonRequestBehavior.AllowGet);
 		}
 	}
 }

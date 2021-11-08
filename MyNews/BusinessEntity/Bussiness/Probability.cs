@@ -9,6 +9,7 @@ namespace BusinessEntity
 		public double probParagraph = 0;
 		public double probRead = 0;
 		public double probWords = 0;
+		public double probTitle = 0;
 		public int value = 0;
 		public List<string> recommendations = new List<string>();
 	}
