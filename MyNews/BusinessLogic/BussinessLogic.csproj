@@ -47,6 +47,11 @@
     <Compile Include="ProbabilityBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecommendationBl.cs" />
+    <Compile Include="ReportEmployeeBl.cs" />
+    <Compile Include="ReportPostBl.cs" />
+    <Compile Include="ReportReadsBl.cs" />
+    <Compile Include="ReportTagBl.cs" />
+    <Compile Include="ReportTemplateBl.cs" />
     <Compile Include="TagBl.cs" />
   </ItemGroup>
   <ItemGroup>

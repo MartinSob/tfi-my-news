@@ -1,6 +1,7 @@
 ﻿using BusinessEntity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,31 @@ namespace Persistence
 			// TODO
 
 			return new List<TagRecommendation>();
+		}
+
+		public List<TagRecommendation> getPopulars() {
+			SqlCommand query = new SqlCommand("GetPopularTags", conn);
+			query.CommandType = CommandType.StoredProcedure;
+
+			conn.Open();
+			SqlDataReader data = query.ExecuteReader();
+
+			List<TagRecommendation> tags = new List<TagRecommendation>();
+			if (data.HasRows) {
+				while (data.Read()) {
+					tags.Add(castDto(data));
+				}
+			}
+
+			conn.Close();
+
+			return tags;
+		}
+
+		public TagRecommendation get(Tag tag) {
+			// TODO
+
+			return new TagRecommendation();
 		}
 
 		public TagRecommendation get(User user, Tag tag) {

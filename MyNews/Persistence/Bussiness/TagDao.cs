@@ -98,18 +98,6 @@ namespace Persistence
 			}
 		}
 
-		List<Tag> getPopulars() {
-			// TODO
-
-			return new List<Tag>();
-		}
-
-		int getReads(Tag tag) {
-			// TODO
-
-			return 1;
-		}
-
 		public void addOpen(TagRecommendation tag, User user) {
 			if (tag == null) {
 				insert("user_tags", 

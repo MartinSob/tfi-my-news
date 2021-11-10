@@ -148,18 +148,6 @@ namespace Persistence
 			return 1;
 		}
 
-		List<Employee> getMostRead() {
-			// TODO
-
-			return new List<Employee>();
-		}
-
-		List<Employee> getLessRead() {
-			// TODO
-
-			return new List<Employee>();
-		}
-
 		EmployeeRecommendation getRecommendations(User user, PostRecommendation post) {
 			// TODO
 
