@@ -92,12 +92,37 @@
 		</div>
 	</div>
 
+	<div class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-card">
+			<header class="modal-card-head">
+				<p class="modal-card-title"><i class="fas fa-spell-check"></i> @(((Dictionary<string,string>)Session["texts"])["validation"])</p>
+				<button onclick="toggleModal()" class="delete" aria-label="close"></button>
+			</header>
+			<section class="modal-card-body">
+				<div class="columns">
+					<div class="column" style="display: flex; justify-content: center;">
+						<div id="pb" class="round-progress-bar"></div>
+					</div>
+					<div class="column">
+						<ul id="recommendationList"></ul>
+					</div>
+				</div>
+			</section>
+			<footer class="modal-card-foot">
+				<button onclick="updatePost()" class="button"><i class="fas fa-check"></i></button>
+			</footer>
+		</div>
+	</div>
+
 	<script>
+		let tagsSelected = [];
+
 		document.getElementById("updateForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 
+			tagsSelected = [];
 			const checkedBoxes = document.querySelectorAll('input[name=tagboxes]:checked');
-			let tagsSelected = [];
 
 			checkedBoxes.forEach(box => {
 				if (box.checked) {
@@ -120,6 +145,42 @@
 				});
 			}
 
+			showValidationModal();
+		});
+
+		async function showValidationModal() {
+			const divGraph = document.getElementById("pb");
+			divGraph.innerHTML = "";
+
+			const response = await post('/Writer/GetProbability', {
+				title: document.getElementById("title").value,
+				body: document.getElementById("body").value,
+				tags: tagsSelected
+			});
+
+			const ul = document.getElementById("recommendationList");
+			ul.innerHTML = "";
+			response.data.recommendations.forEach(reco => {
+				const li = document.createElement("li");
+
+				let logo = document.createElement("i");
+				if (reco.value == 'error') {
+					logo.classList.add("fas", "fa-exclamation-circle", "has-text-danger");
+				} else {
+					logo.classList.add("fas", "fa-check", "has-text-success");
+				}
+
+				li.appendChild(logo);
+				li.appendChild(document.createTextNode("  " + reco.item));
+				ul.appendChild(li);
+			})
+
+			divGraph.dataset.percent = response.data.value;
+			drawRoundProgressBar(divGraph)
+			toggleModal();
+		}
+
+		async function updatePost() {
 			const file = document.getElementById("myFile").files[0];
 			const image = await getBase64(file);
 
@@ -136,6 +197,6 @@
 			}
 
 			showAlert(response);
-		});
+		}
 	</script>
 </div>
