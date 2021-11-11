@@ -1,17 +1,13 @@
 ﻿using BusinessEntity;
 using Persistence;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
 	public class ReportReadsBl : ReportTemplateBl
 	{
-		PostDao dao = new PostDao();
+		PostRecommendationDao dao = new PostRecommendationDao();
 
 		public ReportReadsBl() {
 			this.goodList = new List<PostRecommendation>();
@@ -19,13 +15,9 @@ namespace BusinessLogic
 		}
 
 		public override void getData() {
-			// dao.getReadsGroupByMonth() : List<Post>
-			throw new NotImplementedException();
+			goodList = dao.getTotalReads().ToList();
 		}
 
-		public override void calculateProps() {
-			// Dunno :D
-			throw new NotImplementedException();
-		}
+		public override void calculateProps() {}
 	}
 }

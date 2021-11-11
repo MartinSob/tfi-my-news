@@ -1,17 +1,12 @@
 ﻿using BusinessEntity;
 using Persistence;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
 	public class ReportPostBl : ReportTemplateBl
 	{
-		PostDao dao = new PostDao();
+		PostRecommendationDao dao = new PostRecommendationDao();
 
 		public ReportPostBl() {
 			this.goodList = new List<PostRecommendation>();
@@ -19,15 +14,18 @@ namespace BusinessLogic
 		}
 
 		public override void getData() {
-			// dao.getGood() : List<Post>
-			// dao.getBad() : List<Post>
-			throw new NotImplementedException();
+			goodList = dao.getPopulars();
+			badList = dao.getUnpopulars();
 		}
 
 		public override void calculateProps() {
-			// Por cada recommendation: dao.get(Post) : PostRecommendation
-			// Por cada recommendation: dao.get(Post) : PostRecommendation
-			throw new NotImplementedException();
+			foreach (PostRecommendation post in goodList) {
+				post.value = post.views + post.qualification + post.finished;
+			}
+
+			foreach (PostRecommendation post in goodList) {
+				post.value = post.views + post.qualification + post.finished;
+			}
 		}
 	}
 }
