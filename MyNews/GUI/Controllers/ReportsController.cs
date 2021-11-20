@@ -12,27 +12,39 @@ namespace MyNews.Controllers
         }
 
         public ActionResult popularTags() {
-            return Json(new { type = "success", data = new ReportTagBl().getResult() }, JsonRequestBehavior.AllowGet);
+            ReportTagBl reportBl = new ReportTagBl();
+            reportBl.calculateResult();
+            return Json(new { type = "success", data = reportBl.getResult() }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult totalReads() {
-            return Json(new { type = "success", data = new ReportReadsBl().getResult() }, JsonRequestBehavior.AllowGet);
+            ReportReadsBl reportBl = new ReportReadsBl();
+            reportBl.calculateResult();
+            return Json(new { type = "success", data = reportBl.getResult() }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult popularPosts() {
-            return Json(new { type = "success", data = new ReportPostBl().getResult() }, JsonRequestBehavior.AllowGet);
+            ReportPostBl reportBl = new ReportPostBl();
+            reportBl.calculateResult();
+            return Json(new { type = "success", data = reportBl.getResult() }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult unpopularPosts() {
-            return Json(new { type = "success", data = new ReportPostBl().getResult() }, JsonRequestBehavior.AllowGet);
+            ReportPostBl reportBl = new ReportPostBl();
+            reportBl.calculateResult();
+            return Json(new { type = "success", data = reportBl.getNegativeResult() }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult popularEmployees() {
-            return Json(new { type = "success", data = new ReportEmployeeBl().getResult() }, JsonRequestBehavior.AllowGet);
+            ReportEmployeeBl reportBl = new ReportEmployeeBl();
+            reportBl.calculateResult();
+            return Json(new { type = "success", data = reportBl.getResult() }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult unpopularEmployees() {
-            return Json(new { type = "success", data = new ReportEmployeeBl().getResult() }, JsonRequestBehavior.AllowGet);
+            ReportEmployeeBl reportBl = new ReportEmployeeBl();
+            reportBl.calculateResult();
+            return Json(new { type = "success", data = reportBl.getNegativeResult() }, JsonRequestBehavior.AllowGet);
         }
     }
 }

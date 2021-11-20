@@ -13,10 +13,10 @@ namespace BusinessLogic
 			this.goodList = new List<PostRecommendation>();
 		}
 
-		public override void getData() {
+		protected override void getData() {
 			goodList = dao.getTotalReads().ToList();
 		}
 
-		public override void calculateProps() {}
+		protected override void calculateProps() {}
 	}
 }

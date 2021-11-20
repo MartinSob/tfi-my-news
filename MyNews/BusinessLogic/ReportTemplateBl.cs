@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 namespace BusinessLogic
 {
@@ -8,12 +9,16 @@ namespace BusinessLogic
 		protected IList badList;
 
 		public void calculateResult() {
-			getData();
-			calculateProps();
+			try {
+				getData();
+				calculateProps();
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
 		}
 
-		public abstract void getData();
-		public abstract void calculateProps();
+		protected abstract void getData();
+		protected abstract void calculateProps();
 
 		public IList getResult() {
 			return goodList;

@@ -1,58 +1,152 @@
 ﻿<div class="container.is-widescreen my-5">
 	<div class="columns">
 		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="myChart"></canvas>
+			<canvas id="popularTags"></canvas>
 		</div>
 		<div class="column is-6 is-12-mobile px-5">
+			<canvas id="totalReads"></canvas>
 		</div>
 		<div class="column is-6 is-12-mobile px-5">
+			<canvas id="popularPosts"></canvas>
 		</div>
 		<div class="column is-6 is-12-mobile px-5">
+			<canvas id="unpopularPosts"></canvas>
 		</div>
 		<div class="column is-6 is-12-mobile px-5">
+			<canvas id="popularEmployees"></canvas>
 		</div>
 		<div class="column is-6 is-12-mobile px-5">
+			<canvas id="unpopularEmployees"></canvas>
 		</div>
 	</div>
 </div>
 
+<script>
+	document.addEventListener('DOMContentLoaded', async () => {
+		const [popularTags, totalReads, popularPosts, unpopularPosts, popularEmployees, unpopularEmployees] = await Promise.all([
+			get('/Reports/popularTags'),
+			get('/Reports/totalReads'),
+			get('/Reports/popularPosts'),
+			get('/Reports/unpopularPosts'),
+			get('/Reports/popularEmployees'),
+			get('/Reports/unpopularEmployees')
+		]);
 
-			<script>
-				document.addEventListener('DOMContentLoaded', () => {
-					const ctx = document.getElementById('myChart').getContext('2d');
-					const myChart = new Chart(ctx, {
-						type: 'bar',
-						data: {
-							labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-							datasets: [{
-								label: '# of Votes',
-								data: [12, 19, 3, 5, 2, 3],
-								backgroundColor: [
-									'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)',
-									'rgba(75, 192, 192, 0.2)',
-									'rgba(153, 102, 255, 0.2)',
-									'rgba(255, 159, 64, 0.2)'
-								],
-								borderColor: [
-									'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)',
-									'rgba(75, 192, 192, 1)',
-									'rgba(153, 102, 255, 1)',
-									'rgba(255, 159, 64, 1)'
-								],
-								borderWidth: 1
-							}]
-						},
-						options: {
-							scales: {
-								y: {
-									beginAtZero: true
-								}
-							}
-						}
-					});
-				})
-			</script>
+		console.log('1️⃣ popularTags', popularTags);
+		console.log('2️⃣ totalReads', totalReads);
+		console.log('3️⃣ popularPosts', popularPosts);
+		console.log('4️⃣ unpopularPosts', unpopularPosts);
+		console.log('5️⃣ popularEmployees', popularEmployees);
+		console.log('6️⃣ unpopularEmployees', unpopularEmployees);
+
+		const popularTagsCanvas = document.getElementById('popularTags').getContext('2d');
+		new Chart(popularTagsCanvas, {
+			type: 'bar',
+			data: buildPopularTags(popularTags.data)
+		});
+
+		const totalReadsCanvas = document.getElementById('totalReads').getContext('2d');
+		new Chart(totalReadsCanvas, {
+			type: 'bar',
+			data: buildTotalReads(totalReads.data)
+		});
+
+		const popularPostsCanvas = document.getElementById('popularPosts').getContext('2d');
+		new Chart(popularPostsCanvas, {
+			type: 'bar',
+			data: buildPopularPosts(popularPosts.data)
+		});
+
+		const unpopularPostsCanvas = document.getElementById('unpopularPosts').getContext('2d');
+		new Chart(unpopularPostsCanvas, {
+			type: 'bar',
+			data: buildPopularPosts(unpopularPosts.data)
+		});
+
+		const popularEmployeesCanvas = document.getElementById('popularEmployees').getContext('2d');
+		new Chart(popularEmployeesCanvas, {
+			type: 'bar',
+			data: buildEmployees(popularEmployees.data)
+		});
+
+		const unpopularEmployeesCanvas = document.getElementById('unpopularEmployees').getContext('2d');
+		new Chart(unpopularEmployeesCanvas, {
+			type: 'bar',
+			data: buildEmployees(unpopularEmployees.data)
+		});
+	})
+
+	const buildPopularTags = (pList) => {
+		let data = {
+			labels: ['qualification', 'finished', 'views'],
+			datasets: []
+		}
+
+		pList.forEach(tag => {
+			data.datasets.push({
+				label: tag.name,
+				data: [tag.qualification, tag.finished, tag.views],
+				backgroundColor: [tag.color, tag.color, tag.color]
+			});
+		})
+
+		return data;
+	}
+
+	const buildTotalReads = (pList) => {
+		let data = {
+			labels: [],
+			datasets: []
+		}
+
+		pList.forEach(p => {
+			data.labels.push(p.Key);
+			data.datasets.push({
+				label: 'count',
+				data: [p.Value],
+				// TODO replace for random color
+				backgroundColor: ['rgba(255, 99, 132, 0.2)']
+			});
+		})
+
+		return data;
+	}
+
+	const buildPopularPosts = (pList) => {
+		let data = {
+			labels: ['qualification', 'finished', 'views'],
+			datasets: []
+		}
+
+		pList.forEach(post => {
+			// TODO replace for random color
+			const postColor = 'rgba(255, 99, 132, 0.2)';
+			data.datasets.push({
+				label: post.title,
+				data: [post.qualification, post.finished, post.views],
+				backgroundColor: [postColor, postColor, postColor]
+			});
+		})
+
+		return data;
+	}
+
+	const buildEmployees = (pList) => {
+		let data = {
+			labels: ['qualification', 'finished', 'views'],
+			datasets: []
+		}
+
+		pList.forEach(emp => {
+			// TODO replace for random color
+			const employeeColor = 'rgba(255, 99, 132, 0.2)';
+			data.datasets.push({
+				label: emp.lastname + ', ' + emp.name,
+				data: [emp.qualification, emp.finished, emp.views],
+				backgroundColor: [employeeColor, employeeColor, employeeColor]
+			});
+		})
+
+		return data;
+	}
+</script>

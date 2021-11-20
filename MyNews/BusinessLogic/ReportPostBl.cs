@@ -1,5 +1,6 @@
 ﻿using BusinessEntity;
 using Persistence;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
@@ -13,12 +14,16 @@ namespace BusinessLogic
 			this.badList = new List<PostRecommendation>();
 		}
 
-		public override void getData() {
-			goodList = dao.getPopulars();
-			badList = dao.getUnpopulars();
+		protected override void getData() {
+			try {
+				goodList = dao.getPopulars();
+				badList = dao.getUnpopulars();
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
 		}
 
-		public override void calculateProps() {
+		protected override void calculateProps() {
 			foreach (PostRecommendation post in goodList) {
 				post.value = post.views + post.qualification + post.finished;
 			}

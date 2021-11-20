@@ -9,41 +9,51 @@ namespace Persistence
 	public class EmployeeRecommendationDao : ConnectionDao
 	{
 		public List<EmployeeRecommendation> getPopulars() {
-			SqlCommand query = new SqlCommand("GetPopularEmployees", conn);
-			query.CommandType = CommandType.StoredProcedure;
+			try {
+				SqlCommand query = new SqlCommand("GetPopularEmployees", conn);
+				query.CommandType = CommandType.StoredProcedure;
 
-			conn.Open();
-			SqlDataReader data = query.ExecuteReader();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
 
-			List<EmployeeRecommendation> employees = new List<EmployeeRecommendation>();
-			if (data.HasRows) {
-				while (data.Read()) {
-					employees.Add(castDto(data));
+				List<EmployeeRecommendation> employees = new List<EmployeeRecommendation>();
+				if (data.HasRows) {
+					while (data.Read()) {
+						employees.Add(castDto(data));
+					}
 				}
+
+				conn.Close();
+
+				return employees;
+			} catch (Exception e) {
+				Console.WriteLine(e);
+				return new List<EmployeeRecommendation>();
 			}
-
-			conn.Close();
-
-			return employees;
 		}
 
 		public List<EmployeeRecommendation> getUnpopulars() {
-			SqlCommand query = new SqlCommand("GetUnpopularEmployees", conn);
-			query.CommandType = CommandType.StoredProcedure;
+			try {
+				SqlCommand query = new SqlCommand("GetUnpopularEmployees", conn);
+				query.CommandType = CommandType.StoredProcedure;
 
-			conn.Open();
-			SqlDataReader data = query.ExecuteReader();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
 
-			List<EmployeeRecommendation> employees = new List<EmployeeRecommendation>();
-			if (data.HasRows) {
-				while (data.Read()) {
-					employees.Add(castDto(data));
+				List<EmployeeRecommendation> employees = new List<EmployeeRecommendation>();
+				if (data.HasRows) {
+					while (data.Read()) {
+						employees.Add(castDto(data));
+					}
 				}
+
+				conn.Close();
+
+				return employees;
+			} catch (Exception e) {
+				Console.WriteLine(e);
+				return new List<EmployeeRecommendation>();
 			}
-
-			conn.Close();
-
-			return employees;
 		}
 
 		public EmployeeRecommendation castDto(SqlDataReader data) {

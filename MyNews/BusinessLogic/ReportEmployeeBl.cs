@@ -14,13 +14,12 @@ namespace BusinessLogic
 			this.badList = new List<EmployeeRecommendation>();
 		}
 
-		public override void getData() {
+		protected override void getData() {
 			goodList = dao.getPopulars();
 			badList = dao.getUnpopulars();
-			throw new NotImplementedException();
 		}
 
-		public override void calculateProps() {
+		protected override void calculateProps() {
 			foreach (EmployeeRecommendation e in goodList) {
 				e.value = e.views + e.qualification + e.finished;
 			}
