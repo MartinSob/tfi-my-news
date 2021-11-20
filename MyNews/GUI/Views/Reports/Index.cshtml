@@ -104,8 +104,7 @@
 			data.datasets.push({
 				label: 'count',
 				data: [p.Value],
-				// TODO replace for random color
-				backgroundColor: ['rgba(255, 99, 132, 0.2)']
+				backgroundColor: [generateRandomColor()]
 			});
 		})
 
@@ -119,8 +118,7 @@
 		}
 
 		pList.forEach(post => {
-			// TODO replace for random color
-			const postColor = 'rgba(255, 99, 132, 0.2)';
+			const postColor = generateRandomColor();
 			data.datasets.push({
 				label: post.title,
 				data: [post.qualification, post.finished, post.views],
@@ -138,8 +136,7 @@
 		}
 
 		pList.forEach(emp => {
-			// TODO replace for random color
-			const employeeColor = 'rgba(255, 99, 132, 0.2)';
+			const employeeColor = generateRandomColor();
 			data.datasets.push({
 				label: emp.lastname + ', ' + emp.name,
 				data: [emp.qualification, emp.finished, emp.views],

@@ -1,6 +1,6 @@
 ﻿async function get(url) {
-	let response = await fetch(url);
-	return response.json();
+    let response = await fetch(url);
+    return response.json();
 }
 
 async function post(url = '', data = {}) {
@@ -8,10 +8,10 @@ async function post(url = '', data = {}) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-		},
+        },
         body: JSON.stringify(data) // body data type must match "Content-Type" header
-	});
-	return response.json();
+    });
+    return response.json();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -70,7 +70,7 @@ const showAlert = (response) => {
     alertNotification.style.opacity = "1";
 
     const customAlert = document.getElementById('custom-alert');
-    customAlert.classList.add('is-'+response.type);
+    customAlert.classList.add('is-' + response.type);
 
     const customAlertMessage = document.getElementById('custom-alert-message');
     customAlertMessage.innerHTML = response.description;
@@ -102,7 +102,7 @@ const toggleModal = () => {
     let html = document.querySelector('html');
     modal.classList.toggle('is-active');
     const isShown = html.classList.toggle('is-clipped');
-    
+
     if (isShown) {
         modal.querySelector('.modal-background').addEventListener('click', function (e) {
             e.preventDefault();
@@ -119,4 +119,8 @@ function getBase64(file) {
         reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
     });
+}
+
+const generateRandomColor = () => {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }
