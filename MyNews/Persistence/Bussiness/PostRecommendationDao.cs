@@ -56,7 +56,7 @@ namespace Persistence
 			Dictionary<string, int> posts = new Dictionary<string, int>();
 			if (data.HasRows) {
 				while (data.Read()) {
-					posts.Add(data["month"].ToString(), Convert.ToInt32(data["reads"].ToString()));
+					posts.Add(data["month"].ToString().ToLower(), Convert.ToInt32(data["finished"].ToString()));
 				}
 			}
 

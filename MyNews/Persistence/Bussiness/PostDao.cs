@@ -186,7 +186,7 @@ namespace Persistence
 
 		public UserView getUserView(Post post, User user) {
 			try {
-				SqlCommand query = new SqlCommand("SELECT p.*, uv.qualification FROM posts p JOIN user_views uv ON uv.post_id = p.id AND uv.user_id = @userId WHERE p.deleted = 0 AND p.id = @postId", conn);
+				SqlCommand query = new SqlCommand("SELECT p.*, uv.qualification FROM posts p JOIN user_posts uv ON uv.post_id = p.id AND uv.user_id = @userId WHERE p.deleted = 0 AND p.id = @postId", conn);
 				query.Parameters.AddWithValue("@userId", user.id);
 				query.Parameters.AddWithValue("@postId", post.id);
 
@@ -274,7 +274,7 @@ namespace Persistence
 		}
 
 		public void addOpen(Post post, User user) {
-			SqlCommand query = new SqlCommand("SELECT * FROM user_views uv WHERE post_id = @postId AND user_id = @userId ", conn);
+			SqlCommand query = new SqlCommand("SELECT * FROM user_posts uv WHERE post_id = @postId AND user_id = @userId ", conn);
 			query.Parameters.AddWithValue("@postId", post.id);
 			query.Parameters.AddWithValue("@userId", user.id);
 
@@ -289,7 +289,7 @@ namespace Persistence
 
 			var columns = new string[] { "user_id", "post_id", "date", };
 			var values = new string[] { user.id.ToString(), post.id.ToString(), DateTime.Now.ToString() };
-			insert("user_views", columns, values);
+			insert("user_posts", columns, values);
 		}
 
 		public void addRead(Post post, User user) {
@@ -297,7 +297,7 @@ namespace Persistence
 			var values = new string[] { DateTime.Now.ToString(), 1.ToString() };
 			var whereColumns = new string[] { "user_id", "post_id" };
 			var whereValues = new string[] { user.id.ToString(), post.id.ToString() };
-			update("user_views", columns, values, whereColumns, whereValues);
+			update("user_posts", columns, values, whereColumns, whereValues);
 		}
 
 		public void addReview(Post post, User user, int qualification) {
@@ -305,7 +305,7 @@ namespace Persistence
 			var values = new string[] { DateTime.Now.ToString(), qualification.ToString() };
 			var whereColumns = new string[] { "user_id", "post_id" };
 			var whereValues = new string[] { user.id.ToString(), post.id.ToString() };
-			update("user_views", columns, values, whereColumns, whereValues);
+			update("user_posts", columns, values, whereColumns, whereValues);
 		}
 
 		public Post castDto(SqlDataReader data) {

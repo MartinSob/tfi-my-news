@@ -10,7 +10,6 @@ namespace BusinessLogic
 
 		public ReportTagBl() { 
 			this.goodList = new List<TagRecommendation>();
-			this.badList = new List<TagRecommendation>();
 		}
 
 		public override void getData() {

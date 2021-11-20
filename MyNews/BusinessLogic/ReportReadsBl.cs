@@ -11,7 +11,6 @@ namespace BusinessLogic
 
 		public ReportReadsBl() {
 			this.goodList = new List<PostRecommendation>();
-			this.badList = new List<PostRecommendation>();
 		}
 
 		public override void getData() {

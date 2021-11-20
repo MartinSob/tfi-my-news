@@ -23,6 +23,7 @@ namespace MyNews
 
 			bundles.Add(new ScriptBundle("~/Content/js").Include(
 					  "~/Assets/Js/requests.js",
+					  "~/Assets/Js/chartJs.js",
 					  "~/Assets/Js/roundProgressBar.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
