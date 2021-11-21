@@ -70,7 +70,7 @@
 
 		const totalReadsCanvas = document.getElementById('totalReads').getContext('2d');
 		new Chart(totalReadsCanvas, {
-			type: 'bar',
+			type: 'line',
 			data: buildTotalReads(totalReads.data)
 		});
 
@@ -121,16 +121,17 @@
 	const buildTotalReads = (pList) => {
 		let data = {
 			labels: [],
-			datasets: []
+			datasets: [{
+				label: '@(((Dictionary<string,string>)Session["texts"])["count"])',
+				data: [],
+				backgroundColor: [generateRandomColor()],
+				fill: true,
+			}]
 		}
 
 		pList.forEach(p => {
 			data.labels.push(p.Key);
-			data.datasets.push({
-				label: '@(((Dictionary<string,string>)Session["texts"])["count"])',
-				data: [p.Value],
-				backgroundColor: [generateRandomColor()]
-			});
+			data.datasets[0].data.push(p.Value);
 		})
 
 		return data;
