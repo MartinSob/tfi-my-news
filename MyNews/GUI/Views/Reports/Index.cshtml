@@ -1,5 +1,11 @@
 ﻿<div class="container.is-widescreen my-5">
 	<div class="columns is-multiline reports">
+		<div class="column is-12 px-5">
+			<h1 class="title is-2">
+				<i class="fas fa-chart-pie"></i> @(((Dictionary<string,string>)Session["texts"])["reports"])
+			</h1>
+		</div>
+
 		<div class="column is-6 is-12-mobile">
 			<div class="report">
 				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["popular_tags"])</h4>
@@ -41,14 +47,13 @@
 
 <script>
 	document.addEventListener('DOMContentLoaded', async () => {
-		const [popularTags, totalReads, popularPosts, unpopularPosts, popularEmployees, unpopularEmployees] = await Promise.all([
-			get('/Reports/popularTags'),
-			get('/Reports/totalReads'),
-			get('/Reports/popularPosts'),
-			get('/Reports/unpopularPosts'),
-			get('/Reports/popularEmployees'),
-			get('/Reports/unpopularEmployees')
-		]);
+		// For some reason Promise.all takes a lot more time
+		const popularTags = await get('/Reports/popularTags');
+		const totalReads = await get('/Reports/totalReads');
+		const popularPosts = await get('/Reports/popularPosts');
+		const unpopularPosts = await get('/Reports/unpopularPosts');
+		const popularEmployees = await get('/Reports/popularEmployees');
+		const unpopularEmployees = await get('/Reports/unpopularEmployees');
 
 		console.log('1️⃣ popularTags', popularTags);
 		console.log('2️⃣ totalReads', totalReads);
@@ -96,8 +101,8 @@
 
 	const buildPopularTags = (pList) => {
 		let data = {
-			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])', 
-				'@(((Dictionary<string,string>)Session["texts"])["finished"])', 
+			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])',
+				'@(((Dictionary<string,string>)Session["texts"])["finished"])',
 				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
 		}
@@ -133,8 +138,8 @@
 
 	const buildPopularPosts = (pList) => {
 		let data = {
-			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])', 
-				'@(((Dictionary<string,string>)Session["texts"])["finished"])', 
+			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])',
+				'@(((Dictionary<string,string>)Session["texts"])["finished"])',
 				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
 		}
@@ -153,8 +158,8 @@
 
 	const buildEmployees = (pList) => {
 		let data = {
-			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])', 
-				'@(((Dictionary<string,string>)Session["texts"])["finished"])', 
+			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])',
+				'@(((Dictionary<string,string>)Session["texts"])["finished"])',
 				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
 		}
