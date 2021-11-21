@@ -55,3 +55,11 @@ footer {
 		margin-right: 0;
 	}
 }
+
+.columns.reports .column {
+	.report {
+		border: solid 1px darkgray;
+		border-radius: 4px;
+		padding: 1rem;
+	}
+}

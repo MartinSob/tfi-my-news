@@ -1,4 +1,6 @@
 ﻿using BusinessLogic;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace MyNews.Controllers
@@ -20,7 +22,13 @@ namespace MyNews.Controllers
         public ActionResult totalReads() {
             ReportReadsBl reportBl = new ReportReadsBl();
             reportBl.calculateResult();
-            return Json(new { type = "success", data = reportBl.getResult() }, JsonRequestBehavior.AllowGet);
+
+            Dictionary<string, int> result = new Dictionary<string, int>();
+            foreach (KeyValuePair<string, int> item in reportBl.getResult()) {
+                result.Add(((Dictionary<string, string>)Session["texts"])[item.Key], item.Value);
+            }
+
+            return Json(new { type = "success", data = result.ToList() }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult popularPosts() {

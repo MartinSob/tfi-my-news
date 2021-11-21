@@ -1,22 +1,40 @@
 ﻿<div class="container.is-widescreen my-5">
-	<div class="columns">
-		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="popularTags"></canvas>
+	<div class="columns is-multiline reports">
+		<div class="column is-6 is-12-mobile">
+			<div class="report">
+				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["popular_tags"])</h4>
+				<canvas id="popularTags"></canvas>
+			</div>
 		</div>
-		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="totalReads"></canvas>
+		<div class="column is-6 is-12-mobile">
+			<div class="report">
+				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["total_reads"])</h4>
+				<canvas id="totalReads"></canvas>
+			</div>
 		</div>
-		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="popularPosts"></canvas>
+		<div class="column is-6 is-12-mobile">
+			<div class="report">
+				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["popular_posts"])</h4>
+				<canvas id="popularPosts"></canvas>
+			</div>
 		</div>
-		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="unpopularPosts"></canvas>
+		<div class="column is-6 is-12-mobile">
+			<div class="report">
+				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["unpopular_posts"])</h4>
+				<canvas id="unpopularPosts"></canvas>
+			</div>
 		</div>
-		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="popularEmployees"></canvas>
+		<div class="column is-6 is-12-mobile">
+			<div class="report">
+				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["popular_employees"])</h4>
+				<canvas id="popularEmployees"></canvas>
+			</div>
 		</div>
-		<div class="column is-6 is-12-mobile px-5">
-			<canvas id="unpopularEmployees"></canvas>
+		<div class="column is-6 is-12-mobile">
+			<div class="report">
+				<h4 class="title is-4">@(((Dictionary<string,string>)Session["texts"])["unpopular_employees"])</h4>
+				<canvas id="unpopularEmployees"></canvas>
+			</div>
 		</div>
 	</div>
 </div>
@@ -78,7 +96,9 @@
 
 	const buildPopularTags = (pList) => {
 		let data = {
-			labels: ['qualification', 'finished', 'views'],
+			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])', 
+				'@(((Dictionary<string,string>)Session["texts"])["finished"])', 
+				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
 		}
 
@@ -102,7 +122,7 @@
 		pList.forEach(p => {
 			data.labels.push(p.Key);
 			data.datasets.push({
-				label: 'count',
+				label: '@(((Dictionary<string,string>)Session["texts"])["count"])',
 				data: [p.Value],
 				backgroundColor: [generateRandomColor()]
 			});
@@ -113,7 +133,9 @@
 
 	const buildPopularPosts = (pList) => {
 		let data = {
-			labels: ['qualification', 'finished', 'views'],
+			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])', 
+				'@(((Dictionary<string,string>)Session["texts"])["finished"])', 
+				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
 		}
 
@@ -131,7 +153,9 @@
 
 	const buildEmployees = (pList) => {
 		let data = {
-			labels: ['qualification', 'finished', 'views'],
+			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])', 
+				'@(((Dictionary<string,string>)Session["texts"])["finished"])', 
+				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
 		}
 
