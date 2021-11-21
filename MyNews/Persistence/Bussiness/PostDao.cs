@@ -229,50 +229,6 @@ namespace Persistence
 			}
 		}
 
-		//List<PostRecommendation> getRecommendations(int days) {
-		public List<Post> getRecommendations(User user) {
-			try {
-				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0 ";
-
-				SqlCommand query = new SqlCommand(consultaSQL, conn);
-
-				List<Post> posts = new List<Post>();
-				conn.Open();
-				SqlDataReader data = query.ExecuteReader();
-
-				if (data.HasRows) {
-					while (data.Read()) {
-						posts.Add(castDto(data));
-					}
-				}
-
-				conn.Close();
-
-				foreach (Post post in posts) {
-					SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
-					queryTags.Parameters.AddWithValue("@id", post.id);
-
-					conn.Open();
-					SqlDataReader dataTags = queryTags.ExecuteReader();
-
-					if (dataTags.HasRows) {
-						while (dataTags.Read()) {
-							post.tags.Add(new TagDao().castDto(dataTags));
-						}
-					}
-
-					conn.Close();
-
-					getImage(post);
-				}
-
-				return posts;
-			} catch (Exception e) {
-				new ErrorDao().create(e.ToString());
-				return null;
-			}
-		}
-
 		public void addOpen(Post post, User user) {
 			SqlCommand query = new SqlCommand("SELECT * FROM user_posts uv WHERE post_id = @postId AND user_id = @userId ", conn);
 			query.Parameters.AddWithValue("@postId", post.id);
@@ -309,6 +265,21 @@ namespace Persistence
 		}
 
 		public Post castDto(SqlDataReader data) {
+			Post result = new Post();
+			result.id = Convert.ToInt32(data["id"]);
+			result.title = data["title"].ToString();
+			result.body = data["body"].ToString();
+			result.employee = new Employee {
+				employeeId = Convert.ToInt32(data["employee_id"])
+			};
+			result.date = Convert.ToDateTime(data["date"].ToString());
+			result.paragraphs = Convert.ToInt32(data["paragraphs"]);
+			result.words = Convert.ToInt32(data["words"]);
+
+			return result;
+		}
+
+		public Post castRecommendationDto(SqlDataReader data) {
 			Post result = new Post();
 			result.id = Convert.ToInt32(data["id"]);
 			result.title = data["title"].ToString();

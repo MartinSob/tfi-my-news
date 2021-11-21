@@ -10,44 +10,58 @@ namespace BusinessLogic
 {
 	public class RecommendationBl
 	{
+		PostRecommendationDao pRDao = new PostRecommendationDao();
 		PostDao pDao = new PostDao();
-		TagDao tDao = new TagDao();
-		EmployeeDao wDao = new EmployeeDao();
+		TagRecommendationDao tDao = new TagRecommendationDao();
+		EmployeeRecommendationDao eDao = new EmployeeRecommendationDao();
 
 		public List<PostRecommendation> get(User user, int count) {
-			return new List<PostRecommendation>();
+			List<PostRecommendation> posts = pRDao.get(user, DateTime.Now.AddMonths(-1));
 
-			/*
-			 * postDao.getRecommendations(days) : List<PostRecommendation>
-			 * 
-			 * Loop por cada nota
-			 *		writerDao.getRecommendations(user, post): WriterRecommendation
-			 *		tagDao.getRecommendations(user, post) : TagRecommendation
-			 *		calculateEmployeeValue(EmployeeRecommendation) : EmployeeRecommendation
-			 *		
-			 *		Loop por cada tag de la nota:
-			 *			calculateTagValue()
-			 *		
-			 *		calculatePostValue
-			 *	
-			 *	orderRecommendations(List<PostRecommendation>, int)
-			 */
+			foreach (PostRecommendation post in posts) {
+				EmployeeRecommendation employee = eDao.get(user, post.employee);
+				calculateEmployeeValue(employee);
+
+				List<TagRecommendation> tags = new List<TagRecommendation>();
+				foreach (Tag tag in post.tags) {
+					TagRecommendation tr = tDao.get(user, tag);
+					calculateTagValue(tr);
+					tags.Add(tr);
+				}
+
+				calculatePostValue(post, employee, tags);
+			}
+
+			posts = orderRecommendations(posts, count);
+			return posts;
 		}
 
-		EmployeeRecommendation calculateEmployeeValue(EmployeeRecommendation employee) {
-			return new EmployeeRecommendation();
+		void calculateEmployeeValue(EmployeeRecommendation employee) {
+			employee.value = employee.views * 25 + employee.finished * 35 + employee.qualification * 40;
 		}
 
-		TagRecommendation calculateTagValue(TagRecommendation tag) {
-			return new TagRecommendation();
+		void calculateTagValue(TagRecommendation tag) {
+			tag.value = tag.views * 15 + tag.finished * 25 + tag.qualification * 60;
 		}
 
-		PostRecommendation calculatePostValue(PostRecommendation post) {
-			return new PostRecommendation();
+		void calculatePostValue(PostRecommendation post, EmployeeRecommendation employee, List<TagRecommendation> tags) {
+			post.value = employee.value * 40;
+
+			foreach (TagRecommendation tag in tags) {
+				post.value += tag.value * (60 / tags.Count);
+			}
 		}
 
 		List<PostRecommendation> orderRecommendations(List<PostRecommendation> posts, int count) {
-			return new List<PostRecommendation>();
+			posts = posts.OrderByDescending(x => x.value)
+				.ToList();
+
+			List<PostRecommendation> results = new List<PostRecommendation>();
+			for (int i = 0; i < count; i++) {
+				results.Add(posts[i]);
+			}
+
+			return results;
 		}
 	}
 }

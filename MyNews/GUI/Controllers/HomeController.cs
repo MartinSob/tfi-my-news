@@ -13,13 +13,14 @@ namespace MyNews.Controllers
 	public class HomeController : Controller
 	{
 		PostBl postBl = new PostBl();
+		RecommendationBl recommendationBl = new RecommendationBl();
 
 		public ActionResult Index(string text = null) {
 			if (!new PolicyBl().hasPermission((User)Session["user"], "post_read")) {
 				return HttpNotFound();
 			}
 
-			return View(new ListModel<Post>(postBl.getRecommendations((User)Session["user"])));
+			return View(new ListModel<PostRecommendation>(recommendationBl.get((User)Session["user"], 10)));
 		}
 
 		public ActionResult View(int id) {

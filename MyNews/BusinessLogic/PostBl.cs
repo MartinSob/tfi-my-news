@@ -87,10 +87,6 @@ namespace BusinessLogic
 			return wordCount;
 		}
 
-		public List<Post> getRecommendations(User user) {
-			return dao.getRecommendations(user);
-		}
-
 		public void addLike(Post post, User user, int qualification) {
 			try {
 				addRead(post, user);

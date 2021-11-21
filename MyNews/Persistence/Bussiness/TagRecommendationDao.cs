@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {
@@ -18,56 +15,71 @@ namespace Persistence
 		}
 
 		public List<TagRecommendation> getPopulars() {
-			SqlCommand query = new SqlCommand("GetPopularTags", conn);
-			query.CommandType = CommandType.StoredProcedure;
+			try {
+				SqlCommand query = new SqlCommand("GetPopularTags", conn);
+				query.CommandType = CommandType.StoredProcedure;
 
-			conn.Open();
-			SqlDataReader data = query.ExecuteReader();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
 
-			List<TagRecommendation> tags = new List<TagRecommendation>();
-			if (data.HasRows) {
-				while (data.Read()) {
-					tags.Add(castDto(data));
+				List<TagRecommendation> tags = new List<TagRecommendation>();
+				if (data.HasRows) {
+					while (data.Read()) {
+						tags.Add(castDto(data));
+					}
 				}
+
+				conn.Close();
+
+				return tags;
+			} catch (Exception e) {
+				Console.WriteLine(e);
+				return null;
 			}
-
-			conn.Close();
-
-			return tags;
-		}
-
-		public TagRecommendation get(Tag tag) {
-			// TODO
-
-			return new TagRecommendation();
 		}
 
 		public TagRecommendation get(User user, Tag tag) {
-			SqlCommand query = new SqlCommand("SELECT * FROM tags t JOIN user_tags ut ON ut.tag_id = t.id WHERE tag_id = @tagId AND user_id = @userId ", conn);
-			query.Parameters.AddWithValue("@tagId", tag.id);
-			query.Parameters.AddWithValue("@userId", user.id);
+			try {
+				SqlCommand query = new SqlCommand("GetTagRecommendationForUser", conn);
+				query.CommandType = CommandType.StoredProcedure;
 
-			TagRecommendation tagRecommendation = new TagRecommendation();
-			conn.Open();
-			SqlDataReader data = query.ExecuteReader();
-			if (!data.HasRows) {
+				query.Parameters.Add(new SqlParameter {
+					ParameterName = "@userId",
+					DbType = DbType.Int32,
+					Value = user.id
+				});
+
+				query.Parameters.Add(new SqlParameter {
+					ParameterName = "@tagId",
+					DbType = DbType.Int32,
+					Value = tag.id
+				});
+
+				TagRecommendation tagRecommendation = new TagRecommendation();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+				if (!data.HasRows) {
+					conn.Close();
+					return null;
+				}
+
+				while (data.Read()) {
+					tagRecommendation = castDto(data);
+				}
 				conn.Close();
+
+				return tagRecommendation;
+			} catch (Exception e) {
+				Console.WriteLine(e);
 				return null;
 			}
-
-			while (data.Read()) {
-				tagRecommendation = castDto(data);
-			}
-			conn.Close();
-
-			return tagRecommendation;
 		}
 
 		public TagRecommendation castDto(SqlDataReader data) {
 			TagRecommendation t = new TagRecommendation(new TagDao().castDto(data));
-			t.views = Convert.ToInt32(data["views"]);
-			t.finished = Convert.ToInt32(data["finished"]);
-			t.qualification = Convert.ToInt32(data["qualification"]);
+			t.views = data["views"] != null ? Convert.ToInt32(data["views"]) : 0;
+			t.finished = data["finished"] != null ? Convert.ToInt32(data["finished"]) : 0;
+			t.qualification = data["qualification"] != null ? Convert.ToInt32(data["qualification"]) : 0;
 
 			return t;
 		}

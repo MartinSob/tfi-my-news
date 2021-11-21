@@ -8,6 +8,42 @@ namespace Persistence
 {
 	public class EmployeeRecommendationDao : ConnectionDao
 	{
+		public EmployeeRecommendation get(User user, Employee employee) {
+			try {
+				SqlCommand query = new SqlCommand("GetEmployeeRecommendationForUser", conn);
+				query.CommandType = CommandType.StoredProcedure;
+
+				query.Parameters.Add(new SqlParameter {
+					ParameterName = "@userId",
+					DbType = DbType.Int32,
+					Value = user.id
+				});
+
+				query.Parameters.Add(new SqlParameter {
+					ParameterName = "@employeeId",
+					DbType = DbType.Int32,
+					Value = employee.id
+				});
+
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				EmployeeRecommendation employees = new EmployeeRecommendation();
+				if (data.HasRows) {
+					while (data.Read()) {
+						employees = castDto(data);
+					}
+				}
+
+				conn.Close();
+
+				return employees;
+			} catch (Exception e) {
+				Console.WriteLine(e);
+				return null;
+			}
+		}
+
 		public List<EmployeeRecommendation> getPopulars() {
 			try {
 				SqlCommand query = new SqlCommand("GetPopularEmployees", conn);
@@ -58,9 +94,9 @@ namespace Persistence
 
 		public EmployeeRecommendation castDto(SqlDataReader data) {
 			EmployeeRecommendation t = new EmployeeRecommendation(new EmployeeDao().castDto(data));
-			t.views = Convert.ToInt32(data["views"]);
-			t.finished = Convert.ToInt32(data["finished"]);
-			t.qualification = Convert.ToInt32(data["qualification"]);
+			t.views = data["views"] != null ? Convert.ToInt32(data["views"]) : 0;
+			t.finished = data["finished"] != null ? Convert.ToInt32(data["finished"]) : 0;
+			t.qualification = data["qualification"] != null ? Convert.ToInt32(data["qualification"]) : 0;
 
 			return t;
 		}
