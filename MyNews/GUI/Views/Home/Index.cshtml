@@ -2,7 +2,7 @@
 @using MyNews.Models;
 @model ListModel<BusinessEntity.PostRecommendation>
 @{
-	int i = 1;
+	
 }
 
 <div class="container.is-widescreen my-5">
@@ -12,35 +12,56 @@
 				<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
 			</h1>
 
-			<div class="columns">
-				@foreach (Post post in Model.Items)
-				{
-					<div class="column">
-						<a href="Home/View?id=@post.id">
-							<div class="card card-hover">
-								<div class="card-image">
-									<figure class="image is-4by3">
-										@if (post.image != null) { 
-										<img src="@post.image">
-										}
-									</figure>
-								</div>
-								<div class="card-content">
-									<div class="media">
-										<div class="media-content">
-											<p class="title is-4">@post.title</p>
+			<div class="columns is-multiline">
+				@for (int i = 0; i < Model.Items.Count; i++) {
+					if (i == 0) {
+						<div class="column is-12">
+							<a href="Home/View?id=@Model.Items[i].id">
+								<div class="main-card" style="background-image: url(@Model.Items[i].image)">
+									<div class="main-card-content">
+										<div class="media">
+											<div class="media-content">
+												<p class="title is-4">@Model.Items[i].title</p>
+											</div>
+										</div>
+
+										<div class="content">
+											@foreach (Tag tag in Model.Items[i].tags) {
+												<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
+											}
 										</div>
 									</div>
+								</div>
+							</a>
+						</div>
+					} else {
+						<div class="column @(i == 1 || i == 2 ? "is-6" : "is-4")">
+							<a href="Home/View?id=@Model.Items[i].id">
+								<div class="card card-hover">
+									<div class="card-image">
+										<figure class="image is-4by3">
+											@if (Model.Items[i].image != null) {
+												<img src="@Model.Items[i].image">
+											}
+										</figure>
+									</div>
+									<div class="card-content">
+										<div class="media">
+											<div class="media-content">
+												<p class="title is-4">@Model.Items[i].title</p>
+											</div>
+										</div>
 
-									<div class="content">
-										@foreach (Tag tag in post.tags) {
-											<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
-										}
+										<div class="content">
+											@foreach (Tag tag in Model.Items[i].tags) {
+												<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
+											}
+										</div>
 									</div>
 								</div>
-							</div>
-						</a>
-					</div>
+							</a>
+						</div>
+					}
 				}
 			</div>
 		</div>

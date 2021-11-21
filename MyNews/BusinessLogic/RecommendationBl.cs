@@ -3,8 +3,6 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -32,29 +30,31 @@ namespace BusinessLogic
 				calculatePostValue(post, employee, tags);
 			}
 
-			posts = orderRecommendations(posts, count);
-			return posts;
+			return orderRecommendations(posts, count);
 		}
 
 		void calculateEmployeeValue(EmployeeRecommendation employee) {
-			employee.value = employee.views * 25 + employee.finished * 35 + employee.qualification * 40;
+			employee.value = employee.views * 25 / 100 + employee.finished * 35 / 100 + employee.qualification * 40 / 100;
 		}
 
 		void calculateTagValue(TagRecommendation tag) {
-			tag.value = tag.views * 15 + tag.finished * 25 + tag.qualification * 60;
+			tag.value = tag.views * 15 / 100 + tag.finished * 25 / 100 + tag.qualification * 60 / 100;
 		}
 
 		void calculatePostValue(PostRecommendation post, EmployeeRecommendation employee, List<TagRecommendation> tags) {
-			post.value = employee.value * 40;
+			post.value = employee.value * 40 / 100;
 
 			foreach (TagRecommendation tag in tags) {
-				post.value += tag.value * (60 / tags.Count);
+				post.value += tag.value * (60 / tags.Count) / 100;
 			}
 		}
 
 		List<PostRecommendation> orderRecommendations(List<PostRecommendation> posts, int count) {
 			posts = posts.OrderByDescending(x => x.value)
 				.ToList();
+
+			if (count > posts.Count)
+				count = posts.Count;
 
 			List<PostRecommendation> results = new List<PostRecommendation>();
 			for (int i = 0; i < count; i++) {

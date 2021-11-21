@@ -34,3 +34,32 @@
         white-space: pre-line;
     }
 }
+
+.main-card {
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+    transition: 0.3s;
+    min-height: 60vh;
+    display: flex;
+    align-items: end;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    .main-card-content {
+        padding: 1.5rem;
+        width: 100%;
+        border-radius: 5px;
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,1) 25%, rgba(255,255,255,0) 100%);
+    }
+
+    p.title.is-4 {
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+
+    &:hover {
+        box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 50%), 0 0 0 1px rgb(10 10 10 / 2%);
+    }
+}
