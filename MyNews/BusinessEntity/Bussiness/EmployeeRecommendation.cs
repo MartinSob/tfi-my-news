@@ -13,6 +13,8 @@
 			this.endDay = e.endDay;
 			this.document = e.document;
 			this.birthday = e.birthday;
+			this.name = e.name;
+			this.lastname = e.lastname;
 		}
 
 		public EmployeeRecommendation() { }
