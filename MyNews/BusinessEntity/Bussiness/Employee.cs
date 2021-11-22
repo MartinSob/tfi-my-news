@@ -8,10 +8,10 @@ namespace BusinessEntity
 {
 	public class Employee : User
 	{
-		public int employeeId;
-		public DateTime startDay;
-		public DateTime? endDay;
-		public string document;
-		public DateTime birthday;
+		public int employeeId { get; set; }
+		public DateTime startDay { get; set; }
+		public DateTime? endDay { get; set; }
+		public string document { get; set; }
+		public DateTime birthday { get; set; }
 	}
 }

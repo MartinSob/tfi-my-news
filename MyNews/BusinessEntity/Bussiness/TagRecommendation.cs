@@ -2,10 +2,10 @@
 {
 	public class TagRecommendation : Tag
 	{
-		public int finished;
-		public int views;
-		public int qualification;
-		public double value;
+		public int finished { get; set; }
+		public int views { get; set; }
+		public int qualification { get; set; }
+		public double value { get; set; }
 
 		public TagRecommendation(Tag t) {
 			this.id = t.id;

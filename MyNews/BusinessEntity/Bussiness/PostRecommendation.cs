@@ -2,10 +2,10 @@
 {
 	public class PostRecommendation : Post
 	{
-		public double value;
-		public int finished;
-		public int views;
-		public int qualification;
+		public double value { get; set; }
+		public int finished { get; set; }
+		public int views { get; set; }
+		public int qualification { get; set; }
 
 		public PostRecommendation(Post p) {
 			this.id = p.id;

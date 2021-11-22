@@ -114,6 +114,12 @@ namespace Persistence
 			PostRecommendation t = new PostRecommendation(pDao.castDto(data));
 
 			try {
+				t.employee = new EmployeeDao().castDto(data);
+			} catch (Exception e) {
+				Console.WriteLine(e);
+			}
+
+			try {
 				t.views = Convert.ToInt32(data["views"]);
 			} catch (Exception e) {
 				Console.WriteLine(e);

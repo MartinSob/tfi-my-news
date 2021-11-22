@@ -2,10 +2,10 @@
 {
 	public class EmployeeRecommendation : Employee
 	{
-		public double value;
-		public int finished;
-		public int views;
-		public int qualification;
+		public double value { get; set; }
+		public int finished { get; set; }
+		public int views { get; set; }
+		public int qualification { get; set; }
 
 		public EmployeeRecommendation(Employee e) {
 			this.employeeId = e.employeeId;
@@ -15,6 +15,10 @@
 			this.birthday = e.birthday;
 			this.name = e.name;
 			this.lastname = e.lastname;
+			this.username = e.username;
+			this.mail = e.mail;
+			this.active = e.active;
+			this.failedAttempts = e.failedAttempts;
 		}
 
 		public EmployeeRecommendation() { }

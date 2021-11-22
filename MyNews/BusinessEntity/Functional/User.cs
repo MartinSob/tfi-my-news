@@ -4,15 +4,15 @@ namespace BusinessEntity
 {
 	public class User
 	{
-		public int id;
-		public string name;
-		public string lastname;
+		public int id { get; set; }
+		public string name { get; set; }
+		public string lastname { get; set; }
 		public List<Role> roles = new List<Role>();
-		public string mail;
-		public string username;
-		public string password;
-		public Language language;
-		public bool active;
-		public int failedAttempts;
+		public string mail { get; set; }
+		public string username { get; set; }
+		public string password { get; set; }
+		public Language language { get; set; }
+		public bool active { get; set; }
+		public int failedAttempts { get; set; }
 	}
 }

@@ -3,6 +3,27 @@
 		<div class="column is-12 px-5">
 			<h1 class="title is-2">
 				<i class="fas fa-chart-pie"></i> @(((Dictionary<string,string>)Session["texts"])["reports"])
+
+				<div id="downloadList" class="dropdown">
+					<div class="dropdown-trigger">
+						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu" onclick="toggleDonwload()">
+							<span><i class="fas fa-download mx-1"></i></span>
+							<span class="icon is-small">
+								<i class="fas fa-angle-down" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+					<div class="dropdown-menu" id="dropdown-menu" role="menu">
+						<div class="dropdown-content">
+							<a href="/Reports/CSV" class="dropdown-item">
+								<i class="fas fa-file-csv mr-2"></i> CSV
+							</a>
+							<a href="/Reports/PDF" class="dropdown-item">
+								<i class="far fa-file-pdf mr-2"></i> PDF
+							</a>
+						</div>
+					</div>
+				</div>
 			</h1>
 		</div>
 
@@ -175,5 +196,9 @@
 		})
 
 		return data;
+	}
+
+	const toggleDonwload = () => {
+		document.getElementById("downloadList").classList.toggle("is-active");
 	}
 </script>

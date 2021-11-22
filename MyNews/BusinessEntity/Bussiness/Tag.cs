@@ -2,8 +2,8 @@
 {
 	public class Tag
 	{
-		public int id;
-		public string name;
-		public string color;
+		public int id { get; set; }
+		public string name { get; set; }
+		public string color { get; set; }
 	}
 }
