@@ -34,6 +34,10 @@ namespace MyNews.Controllers
 			return View(bl.get(id));
 		}
 
+		public ActionResult View(int id) {
+			return View(bl.get(id));
+		}
+
 		public ActionResult Create() {
 			return View();
 		}

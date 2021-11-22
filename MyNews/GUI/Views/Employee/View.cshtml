@@ -1,0 +1,64 @@
+﻿@using BusinessEntity;
+@using BusinessLogic;
+@using Security;
+@model BusinessEntity.Employee
+@{
+	
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns is-multiline">
+		<div class="column px-5">
+			<h1 class="title is-2">
+				<i class="fas fa-i-cursor"></i> @Model.lastname, @Model.username
+			</h1>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["birthday"])</label>
+				<div class="control">
+					<input id="birthday" class="input" type="date" value="@Model.birthday.ToString("yyyy-MM-d")" disabled>
+				</div>
+			</div>
+
+			<div class="field">
+				<label class="label">@(((Dictionary<string,string>)Session["texts"])["mail"])</label>
+				<div class="control">
+					<input id="birthday" class="input" type="text" value="@Model.mail" disabled>
+				</div>
+			</div>
+		</div>
+
+		<div class="column is-12">
+			<div class="columns is-multiline">
+				@foreach (Post post in new PostBl().get(Model.employeeId, null)) {
+					<div class="column is-3">
+						<a href="/Home/View?id=@post.id">
+							<div class="card card-hover">
+								<div class="card-image">
+									<figure class="image is-4by3">
+										@if (post.image != null) {
+											<img src="@post.image">
+										}
+									</figure>
+								</div>
+								<div class="card-content">
+									<div class="media">
+										<div class="media-content">
+											<p class="title is-4">@post.title</p>
+										</div>
+									</div>
+
+									<div class="content">
+										@foreach (Tag tag in post.tags) {
+											<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
+										}
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

@@ -109,6 +109,24 @@ namespace Persistence
 
 				conn.Close();
 
+				foreach (Post post in posts) {
+					SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
+					queryTags.Parameters.AddWithValue("@id", post.id);
+
+					conn.Open();
+					SqlDataReader dataTags = queryTags.ExecuteReader();
+
+					if (dataTags.HasRows) {
+						while (dataTags.Read()) {
+							post.tags.Add(new TagDao().castDto(dataTags));
+						}
+					}
+
+					conn.Close();
+
+					getImage(post);
+				}
+
 				return posts;
 			} catch (Exception e) {
 				new ErrorDao().create(e.ToString());
