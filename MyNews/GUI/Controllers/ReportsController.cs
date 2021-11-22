@@ -1,6 +1,7 @@
 ﻿using BusinessEntity;
 using BusinessLogic;
 using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -79,6 +80,11 @@ namespace MyNews.Controllers
             using (var writer = new StreamWriter(Server.MapPath("~/report.csv")))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) {
 
+                csv.WriteField(" - " + ((Dictionary<string,string>)Session["texts"])["date"]);
+                csv.WriteField(DateTime.Now.ToString("yyyy-MM-d"));
+                csv.NextRecord();
+                csv.NextRecord();
+                csv.NextRecord();
                 csv.WriteField(" - " + ((Dictionary<string,string>)Session["texts"])["popular_employees"]);
                 csv.NextRecord();
                 csv.WriteHeader<EmployeeRecommendation>();
