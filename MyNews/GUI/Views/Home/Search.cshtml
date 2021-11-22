@@ -117,6 +117,12 @@
 	</div>
 
 	<script>
+		let params = new URLSearchParams(location.search);
+		document.getElementById("textFilter").value = params.get('text')
+		document.getElementById("fromFilter").value = params.get('from')
+		document.getElementById("toFilter").value = params.get('to')
+		document.getElementById("tagList").value = params.get('tagId')
+
 		document.getElementById("filterBtn").addEventListener("click", async (event) => {
 			const text = document.getElementById("textFilter").value;
 			const from = document.getElementById("fromFilter").value;
