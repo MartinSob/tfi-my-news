@@ -1,29 +1,30 @@
-﻿@using BusinessEntity;
+﻿@using BusinessLogic;
+@using BusinessEntity;
 @using MyNews.Models;
-@model ListModel<BusinessEntity.PostRecommendation>
+@model ListModel<BusinessEntity.Post>
 @{
 
 }
 
-<div class="container.is-widescreen my-5">
-	<div class="columns">
-		<div class="column px-5">
-			<h1 class="title is-2">
-				<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
-				<a href="Home" class="button is-outlined"><i class="fas fa-long-arrow-alt-left ml-2"></i></a>
-			</h1>
+<div class="container.is-widescreen my-5 px-5">
+	<h1 class="title is-2">
+		<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
+		<a href="/Home" class="button is-outlined"><i class="fas fa-long-arrow-alt-left"></i></a>
+	</h1>
 
-			<div class="filter-container">
-				<div class="columns">
-					<div class="column">
+	<div class="columns">
+		<div class="column is-3">
+			<div class="filter-container m-0">
+				<div class="columns is-multiline">
+					<div class="column is-12">
 						<div class="field">
 							<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
 							<div class="control">
-								<input id="typeFilter" class="input" type="text">
+								<input id="textFilter" class="input" type="text">
 							</div>
 						</div>
 					</div>
-					<div class="column">
+					<div class="column is-12">
 						<div class="field">
 							<label class="label">@(((Dictionary<string,string>)Session["texts"])["from"])</label>
 							<div class="control">
@@ -31,7 +32,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="column">
+					<div class="column is-12">
 						<div class="field">
 							<label class="label">@(((Dictionary<string,string>)Session["texts"])["to"])</label>
 							<div class="control">
@@ -39,11 +40,48 @@
 							</div>
 						</div>
 					</div>
+					<div class="column is-12">
+						<div class="field">
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["tags"])</label>
+							<div class="control">
+								<div class="select wide-select">
+									<select id="tagList">
+										<option selected disabled hidden value="0">@(((Dictionary<string,string>)Session["texts"])["tags"])</option>
+										@foreach (Tag t in new TagBl().get()) {
+											<option value="@t.id">@t.name</option>
+										}
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="column is-12">
+						<div class="combined-fields">
+							<div class="columns">
+								<div class="column">
+									<div class="field">
+										<label class="label">@(((Dictionary<string,string>)Session["texts"])["employees"])</label>
+										<p class="control has-icons-left has-icons-right">
+											<input id="userName" class="input" type="text">
+											<span class="icon is-small is-left">
+												<i class="fas fa-search"></i>
+											</span>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="select wide-select">
+								<select id="userList"></select>
+							</div>
+						</div>
+					</div>
+					<div class="column is-12">
+						<button id="filterBtn" class="button"><i class="fas fa-search"></i></button>
+					</div>
 				</div>
-
-				<button id="filterBtn" class="button"><i class="fas fa-search"></i></button>
 			</div>
-
+		</div>
+		<div class="column is-9">
 			<div class="columns is-multiline">
 				@for (int i = 0; i < Model.Items.Count; i++) {
 					<div class="column is-4">
@@ -74,6 +112,33 @@
 					</div>
 				}
 			</div>
+
 		</div>
 	</div>
+
+	<script>
+		document.getElementById("filterBtn").addEventListener("click", async (event) => {
+			const text = document.getElementById("textFilter").value;
+			const from = document.getElementById("fromFilter").value;
+			const to = document.getElementById("toFilter").value;
+			const tagId = document.getElementById("tagList").value;
+			const employeeId = document.getElementById("userList").value;
+			window.location.replace('?text=' + text + '&from=' + from + '&to=' + to + '&tagId=' + tagId + '&employeeId=' + employeeId);
+		});
+
+		document.getElementById("userName").addEventListener('input', async (event) => {
+			const response = await get('/Employee/GetEmployees?name=' + document.getElementById("userName").value);
+			console.log(response);
+			const select = document.getElementById('userList');
+
+			select.innerHTML = "";
+
+			response.data.forEach(item => {
+				let opt = document.createElement('option');
+				opt.value = item.employeeId;
+				opt.innerHTML = item.lastname + ', ' + item.name;
+				select.appendChild(opt);
+			});
+		});
+	</script>
 </div>

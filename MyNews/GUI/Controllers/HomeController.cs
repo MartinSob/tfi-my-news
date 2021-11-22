@@ -28,9 +28,20 @@ namespace MyNews.Controllers
 			return View(postBl.getUserView(new Post { id = id}, (User)Session["user"]));
 		}
 
-		public ActionResult Search(string text, string from = null, string to = null) {
-			//new ListModel<Post>(postBl.get())
-			return View();
+		public ActionResult Search(string text = null, string from = null, string to = null, int tagId = 0, int employeeId = 0) {
+			DateTime? fromDate = null;
+			DateTime? toDate = null;
+			DateTime value;
+
+			if (DateTime.TryParse(from, out value)) {
+				fromDate = value;
+			}
+
+			if (DateTime.TryParse(to, out value)) {
+				toDate = value;
+			}
+
+			return View(new ListModel<Post>(postBl.get(text, fromDate, toDate, tagId, employeeId)));
 		}
 
 		public ActionResult ReadPost(int id) {

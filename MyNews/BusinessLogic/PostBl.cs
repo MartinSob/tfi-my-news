@@ -37,6 +37,10 @@ namespace BusinessLogic
 			return dao.get(employeeId, name);
 		}
 
+		public List<Post> get(string text = null, DateTime? from = null, DateTime? to = null, int tagId = 0, int employeeId = 0) {
+			return dao.get(text, from, to, tagId, employeeId);
+		}
+
 		/// <summary>
 		/// Returns both the data of the post and the Tags associated.
 		/// </summary>

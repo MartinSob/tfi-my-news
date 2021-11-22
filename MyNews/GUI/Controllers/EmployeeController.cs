@@ -69,5 +69,10 @@ namespace MyNews.Controllers
 			List<User> users = bl.getUsersNotEmployed(name);
 			return Json(new { data = users }, JsonRequestBehavior.AllowGet);
 		}
+
+		public ActionResult GetEmployees(string name) {
+			List<Employee> users = bl.get(name);
+			return Json(new { data = users }, JsonRequestBehavior.AllowGet);
+		}
 	}
 }

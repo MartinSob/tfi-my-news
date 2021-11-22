@@ -116,6 +116,88 @@ namespace Persistence
 			}
 		}
 
+		public List<Post> get(string text = null, DateTime? from = null, DateTime? to = null, int tagId = 0, int employeeId = 0) {
+			try {
+				SqlCommand query = new SqlCommand("GetPosts", conn);
+				query.CommandType = CommandType.StoredProcedure;
+
+				if (text != null) { 
+					query.Parameters.Add(new SqlParameter {
+						ParameterName = "@text",
+						DbType = DbType.String,
+						Value = text
+					});
+				}
+
+				if (from != null) {
+					query.Parameters.Add(new SqlParameter {
+						ParameterName = "@from",
+						DbType = DbType.DateTime,
+						Value = from
+					});
+				}
+				
+				if (to != null) {
+					query.Parameters.Add(new SqlParameter {
+						ParameterName = "@to",
+						DbType = DbType.DateTime,
+						Value = to
+					});
+				}
+
+				if (tagId != 0) {
+					query.Parameters.Add(new SqlParameter {
+						ParameterName = "@tagId",
+						DbType = DbType.Int32,
+						Value = tagId
+					});
+				}
+
+				if (employeeId != 0) {
+					query.Parameters.Add(new SqlParameter {
+						ParameterName = "@employeeId",
+						DbType = DbType.Int32,
+						Value = employeeId
+					});
+				}
+
+				List<Post> posts = new List<Post>();
+				conn.Open();
+				SqlDataReader data = query.ExecuteReader();
+
+				if (data.HasRows) {
+					while (data.Read()) {
+						posts.Add(castDto(data));
+					}
+				}
+
+				conn.Close();
+
+				foreach (Post post in posts) {
+					SqlCommand queryTags = new SqlCommand("SELECT t.* FROM tags t JOIN post_tags pt ON pt.tag_id = t.id WHERE pt.post_id = @id", conn);
+					queryTags.Parameters.AddWithValue("@id", post.id);
+
+					conn.Open();
+					SqlDataReader dataTags = queryTags.ExecuteReader();
+
+					if (dataTags.HasRows) {
+						while (dataTags.Read()) {
+							post.tags.Add(new TagDao().castDto(dataTags));
+						}
+					}
+
+					conn.Close();
+
+					getImage(post);
+				}
+
+				return posts;
+			} catch (Exception e) {
+				new ErrorDao().create(e.ToString());
+				return null;
+			}
+		}
+
 		public Post get(int id) {
 			try {
 				SqlCommand query = new SqlCommand("SELECT * FROM posts p WHERE p.deleted = 0 AND p.id = @id", conn);
