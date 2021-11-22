@@ -10,6 +10,7 @@
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
+				<a href="Home/Search" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["search"])<i class="fas fa-search ml-2"></i></a>
 			</h1>
 
 			<div class="columns is-multiline">
@@ -64,23 +65,6 @@
 					}
 				}
 			</div>
-		</div>
-	</div>
-
-	<div class="modal">
-		<div class="modal-background"></div>
-		<div class="modal-card">
-			<header class="modal-card-head">
-				<p id="userName" class="modal-card-title"></p>
-				<button onclick="toggleModal()" class="delete" aria-label="close"></button>
-			</header>
-			<section class="modal-card-body">
-				<p>@(((Dictionary<string,string>)Session["texts"])["delete_confirmation"])</p>
-			</section>
-			<footer class="modal-card-foot">
-				<button onclick="deleteUser()" class="button is-success"><i class="fas fa-check"></i></button>
-				<button onclick="toggleModal()" class="button"><i class="fas fa-times"></i></button>
-			</footer>
 		</div>
 	</div>
 </div>

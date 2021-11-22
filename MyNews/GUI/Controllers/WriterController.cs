@@ -26,7 +26,7 @@ namespace MyNews.Controllers
 
             bool all = new PolicyBl().hasPermission(loggedUser, "admin_post");
 
-			return View(new ListModel<Post>(pbl.get(ebl.getByUser(loggedUser).employeeId, text, all)));
+			return View(new ListModel<Post>(pbl.get(all ? 0 : ebl.getByUser(loggedUser).employeeId, text)));
         }
 
 		public ActionResult DeletePost(int id) {

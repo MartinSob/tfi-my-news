@@ -28,6 +28,11 @@ namespace MyNews.Controllers
 			return View(postBl.getUserView(new Post { id = id}, (User)Session["user"]));
 		}
 
+		public ActionResult Search(string text, string from = null, string to = null) {
+			//new ListModel<Post>(postBl.get())
+			return View();
+		}
+
 		public ActionResult ReadPost(int id) {
 			postBl.addRead(new Post { id = id }, (User)Session["user"]);
 			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);

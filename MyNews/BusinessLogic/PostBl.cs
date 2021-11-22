@@ -33,8 +33,8 @@ namespace BusinessLogic
 			return dao.delete(id);
 		}
 
-		public List<Post> get(int employeeId, string name = null, bool all = false) {
-			return dao.get(employeeId, name, all);
+		public List<Post> get(int employeeId, string name = null) {
+			return dao.get(employeeId, name);
 		}
 
 		/// <summary>

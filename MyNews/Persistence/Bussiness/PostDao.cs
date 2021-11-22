@@ -85,13 +85,13 @@ namespace Persistence
 			executeQuery(query);
 		}
 
-		public List<Post> get(int employeeId, string name = null, bool all = false) {
+		public List<Post> get(int employeeId = 0, string name = null) {
 			try {
 				string consultaSQL = "SELECT * FROM posts p WHERE p.deleted = 0 ";
 				if (name != null) {
 					consultaSQL += $" AND p.title LIKE '%{name}%' ";
 				}
-				if (!all) {
+				if (employeeId != 0) {
 					consultaSQL += $" AND p.employee_id = {employeeId} ";
 				}
 

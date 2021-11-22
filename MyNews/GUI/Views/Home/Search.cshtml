@@ -1,0 +1,79 @@
+﻿@using BusinessEntity;
+@using MyNews.Models;
+@model ListModel<BusinessEntity.PostRecommendation>
+@{
+
+}
+
+<div class="container.is-widescreen my-5">
+	<div class="columns">
+		<div class="column px-5">
+			<h1 class="title is-2">
+				<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
+				<a href="Home" class="button is-outlined"><i class="fas fa-long-arrow-alt-left ml-2"></i></a>
+			</h1>
+
+			<div class="filter-container">
+				<div class="columns">
+					<div class="column">
+						<div class="field">
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["text"])</label>
+							<div class="control">
+								<input id="typeFilter" class="input" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["from"])</label>
+							<div class="control">
+								<input id="fromFilter" class="input" type="date" placeholder="@(((Dictionary<string,string>)Session["texts"])["from"])">
+							</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="field">
+							<label class="label">@(((Dictionary<string,string>)Session["texts"])["to"])</label>
+							<div class="control">
+								<input id="toFilter" class="input" type="date" placeholder="@(((Dictionary<string,string>)Session["texts"])["to"])">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<button id="filterBtn" class="button"><i class="fas fa-search"></i></button>
+			</div>
+
+			<div class="columns is-multiline">
+				@for (int i = 0; i < Model.Items.Count; i++) {
+					<div class="column is-4">
+						<a href="Home/View?id=@Model.Items[i].id">
+							<div class="card card-hover">
+								<div class="card-image">
+									<figure class="image is-4by3">
+										@if (Model.Items[i].image != null) {
+											<img src="@Model.Items[i].image">
+										}
+									</figure>
+								</div>
+								<div class="card-content">
+									<div class="media">
+										<div class="media-content">
+											<p class="title is-4">@Model.Items[i].title</p>
+										</div>
+									</div>
+
+									<div class="content">
+										@foreach (Tag tag in Model.Items[i].tags) {
+											<div class="tag square-tag" style="border-left-color: @tag.color">@tag.name</div>
+										}
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
