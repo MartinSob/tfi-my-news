@@ -6,7 +6,8 @@
 
 				<div id="downloadList" class="dropdown">
 					<div class="dropdown-trigger">
-						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu" onclick="toggleDonwload()">
+						<button class="button" aria-haspopup="true" aria-controls="dropdown-menu"
+							onclick="toggleDonwload()">
 							<span><i class="fas fa-download mx-1"></i></span>
 							<span class="icon is-small">
 								<i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -18,7 +19,7 @@
 							<a href="/Reports/CSV" class="dropdown-item">
 								<i class="fas fa-file-csv mr-2"></i> CSV
 							</a>
-							<a href="/Reports/PDF" class="dropdown-item">
+							<a onclick="pdfDownload()" class="dropdown-item">
 								<i class="far fa-file-pdf mr-2"></i> PDF
 							</a>
 						</div>
@@ -66,6 +67,136 @@
 	</div>
 </div>
 
+<div id="theHoleReport" style="display: none;">
+	<div style="width: 100%;">
+		<div style="width: 100%; font-size: 1.5rem;">
+			<h1 style="margin: 0">
+				@(((Dictionary<string,string>)Session["texts"])["reports"]) <span
+					style="font-size: 1rem">@DateTime.Now.ToString("yyyy-MM-d")</span>
+			</h1>
+		</div>
+		<div style="width: 100%;">
+			<div style="width: 100%;">
+				<div style="border: solid 1px darkgray; padding: 0.5rem; border-radius: 5px; margin: 0.5rem 0 0.5rem 0">
+					<h4 style="font-size: 1.5rem; margin: 0">
+						@(((Dictionary<string,string>)Session["texts"])["popular_tags"])</h4>
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["qualification"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["views"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["finished"])</th>
+							</tr>
+						</thead>
+						<tbody id="popularTagsTable"></tbody>
+					</table>
+				</div>
+			</div>
+			<div style="width: 100%;">
+				<div style="border: solid 1px darkgray; padding: 0.5rem; border-radius: 5px; margin: 0.5rem 0 0.5rem 0">
+					<h4 style="font-size: 1.5rem; margin: 0">
+						@(((Dictionary<string,string>)Session["texts"])["total_reads"])</h4>
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>@(((Dictionary<string,string>)Session["texts"])["date"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["count"])</th>
+							</tr>
+						</thead>
+						<tbody id="totalReadsTable"></tbody>
+					</table>
+				</div>
+			</div>
+			<div style="width: 100%;">
+				<div style="border: solid 1px darkgray; padding: 0.5rem; border-radius: 5px; margin: 0.5rem 0 0.5rem 0">
+					<h4 style="font-size: 1.5rem; margin: 0">
+						@(((Dictionary<string,string>)Session["texts"])["popular_posts"])</h4>
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["title"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["employees"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["paragraphs"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["words"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["qualification"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["views"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["finished"])</th>
+							</tr>
+						</thead>
+						<tbody id="popularPostsTable"></tbody>
+					</table>
+				</div>
+			</div>
+			<div style="width: 100%;">
+				<div style="border: solid 1px darkgray; padding: 0.5rem; border-radius: 5px; margin: 0.5rem 0 0.5rem 0">
+					<h4 style="font-size: 1.5rem; margin: 0">
+						@(((Dictionary<string,string>)Session["texts"])["unpopular_posts"])
+					</h4>
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["title"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["employees"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["paragraphs"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["words"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["qualification"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["views"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["finished"])</th>
+							</tr>
+						</thead>
+						<tbody id="unpopularPostsTable"></tbody>
+					</table>
+				</div>
+			</div>
+			<div style="width: 100%;">
+				<div style="border: solid 1px darkgray; padding: 0.5rem; border-radius: 5px; margin: 0.5rem 0 0.5rem 0">
+					<h4 style="font-size: 1.5rem; margin: 0">
+						@(((Dictionary<string,string>)Session["texts"])["popular_employees"])
+					</h4>
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["lastname"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["mail"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["qualification"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["views"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["finished"])</th>
+							</tr>
+						</thead>
+						<tbody id="popularEmployeesTable"></tbody>
+					</table>
+				</div>
+			</div>
+			<div style="width: 100%;">
+				<div style="border: solid 1px darkgray; padding: 0.5rem; border-radius: 5px; margin: 0.5rem 0 0.5rem 0">
+					<h4 style="font-size: 1.5rem; margin: 0">
+						@(((Dictionary<string,string>)Session["texts"])["unpopular_employees"])</h4>
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["name"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["lastname"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["mail"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["qualification"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["views"])</th>
+								<th>@(((Dictionary<string,string>)Session["texts"])["finished"])</th>
+							</tr>
+						</thead>
+						<tbody id="unpopularEmployeesTable"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	document.addEventListener('DOMContentLoaded', async () => {
 		// For some reason Promise.all takes a lot more time
@@ -98,25 +229,25 @@
 		const popularPostsCanvas = document.getElementById('popularPosts').getContext('2d');
 		new Chart(popularPostsCanvas, {
 			type: 'bar',
-			data: buildPopularPosts(popularPosts.data)
+			data: buildPopularPosts(popularPosts.data, true)
 		});
 
 		const unpopularPostsCanvas = document.getElementById('unpopularPosts').getContext('2d');
 		new Chart(unpopularPostsCanvas, {
 			type: 'bar',
-			data: buildPopularPosts(unpopularPosts.data)
+			data: buildPopularPosts(unpopularPosts.data, false)
 		});
 
 		const popularEmployeesCanvas = document.getElementById('popularEmployees').getContext('2d');
 		new Chart(popularEmployeesCanvas, {
 			type: 'bar',
-			data: buildEmployees(popularEmployees.data)
+			data: buildEmployees(popularEmployees.data, true)
 		});
 
 		const unpopularEmployeesCanvas = document.getElementById('unpopularEmployees').getContext('2d');
 		new Chart(unpopularEmployeesCanvas, {
 			type: 'bar',
-			data: buildEmployees(unpopularEmployees.data)
+			data: buildEmployees(unpopularEmployees.data, false)
 		});
 	})
 
@@ -128,12 +259,33 @@
 			datasets: []
 		}
 
+		const table = document.getElementById("popularTagsTable");
+
 		pList.forEach(tag => {
 			data.datasets.push({
 				label: tag.name,
 				data: [tag.qualification, tag.finished, tag.views],
 				backgroundColor: [tag.color, tag.color, tag.color]
 			});
+
+			const tr = document.createElement('tr');
+			const td1 = document.createElement('td');
+			td1.innerText = tag.id;
+			const td2 = document.createElement('td');
+			td2.innerText = tag.name;
+			const td3 = document.createElement('td');
+			td3.innerText = tag.qualification;
+			const td4 = document.createElement('td');
+			td4.innerText = tag.views;
+			const td5 = document.createElement('td');
+			td5.innerText = tag.finished;
+			tr.appendChild(td1)
+			tr.appendChild(td2)
+			tr.appendChild(td3)
+			tr.appendChild(td4)
+			tr.appendChild(td5)
+
+			table.appendChild(tr)
 		})
 
 		return data;
@@ -150,20 +302,39 @@
 			}]
 		}
 
+		const table = document.getElementById("totalReadsTable");
+
 		pList.forEach(p => {
 			data.labels.push(p.Key);
 			data.datasets[0].data.push(p.Value);
+
+			const tr = document.createElement('tr');
+			const td1 = document.createElement('td');
+			td1.innerText = p.Key;
+			const td2 = document.createElement('td');
+			td2.innerText = p.Value;
+			tr.appendChild(td1)
+			tr.appendChild(td2)
+
+			table.appendChild(tr)
 		})
 
 		return data;
 	}
 
-	const buildPopularPosts = (pList) => {
+	const buildPopularPosts = (pList, popular = false) => {
 		let data = {
 			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])',
 				'@(((Dictionary<string,string>)Session["texts"])["finished"])',
 				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
+		}
+
+		let table;
+		if (popular) {
+			table = document.getElementById("popularPostsTable");
+		} else {
+			table = document.getElementById("unpopularPostsTable");
 		}
 
 		pList.forEach(post => {
@@ -173,17 +344,52 @@
 				data: [post.qualification, post.finished, post.views],
 				backgroundColor: [postColor, postColor, postColor]
 			});
+
+			const tr = document.createElement('tr');
+			const td1 = document.createElement('td');
+			td1.innerText = post.id;
+			const td2 = document.createElement('td');
+			td2.innerText = post.title;
+			const td3 = document.createElement('td');
+			td3.innerText = post.employee.lastname + ' ' + post.employee.name
+			const td4 = document.createElement('td');
+			td4.innerText = post.paragraphs;
+			const td5 = document.createElement('td');
+			td5.innerText = post.words;
+			const td6 = document.createElement('td');
+			td6.innerText = post.qualification;
+			const td7 = document.createElement('td');
+			td7.innerText = post.views;
+			const td8 = document.createElement('td');
+			td8.innerText = post.finished;
+			tr.appendChild(td1)
+			tr.appendChild(td2)
+			tr.appendChild(td3)
+			tr.appendChild(td4)
+			tr.appendChild(td5)
+			tr.appendChild(td6)
+			tr.appendChild(td7)
+			tr.appendChild(td8)
+
+			table.appendChild(tr)
 		})
 
 		return data;
 	}
 
-	const buildEmployees = (pList) => {
+	const buildEmployees = (pList, popular = false) => {
 		let data = {
 			labels: ['@(((Dictionary<string,string>)Session["texts"])["qualification"])',
 				'@(((Dictionary<string,string>)Session["texts"])["finished"])',
 				'@(((Dictionary<string,string>)Session["texts"])["views"])'],
 			datasets: []
+		}
+
+		let table;
+		if (popular) {
+			table = document.getElementById("popularEmployeesTable");
+		} else {
+			table = document.getElementById("unpopularEmployeesTable");
 		}
 
 		pList.forEach(emp => {
@@ -193,6 +399,31 @@
 				data: [emp.qualification, emp.finished, emp.views],
 				backgroundColor: [employeeColor, employeeColor, employeeColor]
 			});
+
+			const tr = document.createElement('tr');
+			const td1 = document.createElement('td');
+			td1.innerText = emp.employeeId;
+			const td2 = document.createElement('td');
+			td2.innerText = emp.name;
+			const td3 = document.createElement('td');
+			td3.innerText = emp.lastname
+			const td4 = document.createElement('td');
+			td4.innerText = emp.mail;
+			const td5 = document.createElement('td');
+			td5.innerText = emp.qualification;
+			const td6 = document.createElement('td');
+			td6.innerText = emp.views;
+			const td7 = document.createElement('td');
+			td7.innerText = emp.finished;
+			tr.appendChild(td1)
+			tr.appendChild(td2)
+			tr.appendChild(td3)
+			tr.appendChild(td4)
+			tr.appendChild(td5)
+			tr.appendChild(td6)
+			tr.appendChild(td7)
+
+			table.appendChild(tr)
 		})
 
 		return data;
@@ -200,5 +431,12 @@
 
 	const toggleDonwload = () => {
 		document.getElementById("downloadList").classList.toggle("is-active");
+	}
+
+	const pdfDownload = async () => {
+		await post('/Reports/createPDF', {
+			htmlFile: document.getElementById('theHoleReport').innerHTML
+		})
+		window.location.replace('/Reports/downloadPDF');
 	}
 </script>

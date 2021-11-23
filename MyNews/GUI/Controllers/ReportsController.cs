@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using IronPdf;
 
 namespace MyNews.Controllers
 {
@@ -60,8 +61,21 @@ namespace MyNews.Controllers
             return Json(new { type = "success", data = reportBl.getNegativeResult() }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult PDF() {
-            return Json(new { type = "success", data = "" }, JsonRequestBehavior.AllowGet);
+        public ActionResult createPDF(string htmlFile) {
+			try {
+				ChromePdfRenderer Renderer = new ChromePdfRenderer();
+                Renderer.RenderHtmlAsPdf(htmlFile).SaveAs(Server.MapPath("~/report.pdf"));
+            } catch (Exception e) {
+                Console.WriteLine(e);
+            }
+
+            return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult downloadPDF() {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/report.pdf"));
+            string fileName = "report.pdf";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
         public ActionResult CSV() {

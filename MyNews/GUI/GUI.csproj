@@ -47,6 +47,9 @@
     <Reference Include="CsvHelper, Version=27.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.27.2.0\lib\net47\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="IronPdf, Version=2021.11.0.4257, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.Slim.2021.11.4257\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -165,6 +168,7 @@
     <Content Include="Assets\Fonts\fa-regular-400.svg" />
     <Content Include="Assets\Fonts\fa-solid-900.svg" />
     <Content Include="Assets\Js\chartJs.js" />
+    <Content Include="Assets\Js\html2pdf.js" />
     <Content Include="Assets\Js\requests.js" />
     <Content Include="Assets\Js\roundProgressBar.js" />
     <Content Include="Assets\Styles\fa.min.css" />
@@ -294,7 +298,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\IronPdf.Native.Chrome.Windows.2021.11.4251\build\net452\IronPdf.Native.Chrome.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\IronPdf.Native.Chrome.Windows.2021.11.4251\build\net452\IronPdf.Native.Chrome.Windows.targets'))" />
   </Target>
+  <Import Project="..\packages\IronPdf.Native.Chrome.Windows.2021.11.4251\build\net452\IronPdf.Native.Chrome.Windows.targets" Condition="Exists('..\packages\IronPdf.Native.Chrome.Windows.2021.11.4251\build\net452\IronPdf.Native.Chrome.Windows.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
