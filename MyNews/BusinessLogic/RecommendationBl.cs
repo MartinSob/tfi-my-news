@@ -14,23 +14,36 @@ namespace BusinessLogic
 		EmployeeRecommendationDao eDao = new EmployeeRecommendationDao();
 
 		public List<PostRecommendation> get(User user, int count) {
-			List<PostRecommendation> posts = pRDao.get(user, DateTime.Now.AddMonths(-1));
+			try {
+				List<PostRecommendation> posts = pRDao.get(user, DateTime.Now.AddMonths(-1));
 
-			foreach (PostRecommendation post in posts) {
-				EmployeeRecommendation employee = eDao.get(user, post.employee);
-				calculateEmployeeValue(employee);
+				foreach (PostRecommendation post in posts) {
+					EmployeeRecommendation employee = eDao.get(user, post.employee);
+					calculateEmployeeValue(employee);
 
-				List<TagRecommendation> tags = new List<TagRecommendation>();
-				foreach (Tag tag in post.tags) {
-					TagRecommendation tr = tDao.get(user, tag);
-					calculateTagValue(tr);
-					tags.Add(tr);
+					List<TagRecommendation> tags = new List<TagRecommendation>();
+					foreach (Tag tag in post.tags) {
+						TagRecommendation tr = tDao.get(user, tag);
+						if (tr != null) {
+							calculateTagValue(tr);
+							tags.Add(tr);
+						}
+					}
+
+					calculatePostValue(post, employee, tags);
 				}
 
-				calculatePostValue(post, employee, tags);
-			}
+				return orderRecommendations(posts, count);
+			} catch (Exception e) {
+				List<Post> posts = pDao.get(0, "");
+				List<PostRecommendation> result = new List<PostRecommendation>();
 
-			return orderRecommendations(posts, count);
+				foreach (Post post in posts) {
+					result.Add(new PostRecommendation(post));
+				}
+
+				return result;
+			}
 		}
 
 		void calculateEmployeeValue(EmployeeRecommendation employee) {

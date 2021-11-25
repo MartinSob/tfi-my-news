@@ -13,6 +13,7 @@ namespace Security
 		UserDao dao = new UserDao();
 
 		public User create(User user, List<Role> roles = null) {
+			var realPassword = user.password;
 			user.password = new EncryptBl().encrypt(user.password);
 			dao.create(user);
 
@@ -27,6 +28,11 @@ namespace Security
 			}
 
 			new DvDao().updateDv();
+
+			new EmailBl().sendEmail(
+					"<h1>New user</h1><p>The system has generated a password for the new user.<br><br>New Pass: " + realPassword + "<br><br>Thanks<br>myNewsMaker</p>",
+					"New Password", user.mail);
+
 			return user;
 		}
 
@@ -110,10 +116,12 @@ namespace Security
 		public User update(User user) {
 			dao.update(user);
 
-			PolicyBl policyBl = new PolicyBl();
-			policyBl.cleanRoles(user);
-			foreach (Role role in user.roles) {
-				policyBl.assignRole(user, role);
+			if (user.roles.Count > 0) { 
+				PolicyBl policyBl = new PolicyBl();
+				policyBl.cleanRoles(user);
+				foreach (Role role in user.roles) {
+					policyBl.assignRole(user, role);
+				}
 			}
 
 			new DvDao().updateDv();
@@ -131,7 +139,7 @@ namespace Security
 				new DvDao().updateDv();
 
 				new EmailBl().sendEmail(
-					"<h1>Reset password</h1><p>The system has generated a new password.<br><br>New Pass: " + user.password + "<br><br>Thanks<br>myNewsMaker</p>", 
+					"<h1>Reset password</h1><p>The system has generated a new password.<br><br>New Pass: " + newPass + "<br><br>Thanks<br>myNewsMaker</p>", 
 					"New Password", user.mail);
 				return true;
 			} catch {

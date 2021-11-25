@@ -115,6 +115,9 @@ namespace BusinessLogic
 
 				if (tagRecommendation != null) {
 					tagRecommendation.views++;
+				} else { 
+					tagRecommendation = new TagRecommendation(tag);
+					tagRecommendation.views = 1;
 				}
 
 				tDao.addOpen(tagRecommendation, user);

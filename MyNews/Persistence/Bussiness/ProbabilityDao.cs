@@ -21,7 +21,7 @@ namespace Persistence
 
 				if (data.HasRows) {
 					while (data.Read()) {
-						result = Convert.ToInt32(data["count"]);
+						result = data["count"].ToString() != "" ? Convert.ToInt32(data["count"].ToString()) : 0;
 					}
 				}
 
@@ -47,7 +47,7 @@ namespace Persistence
 
 				if (data.HasRows) {
 					while (data.Read()) {
-						result = Convert.ToInt32(data["count"]);
+						result = data["count"].ToString() != "" ? Convert.ToInt32(data["count"].ToString()) : 0;
 					}
 				}
 
@@ -72,7 +72,7 @@ namespace Persistence
 
 				if (data.HasRows) {
 					while (data.Read()) {
-						result = Convert.ToInt32(data["count"]);
+						result = data["count"].ToString() != "" ? Convert.ToInt32(data["count"].ToString()) : 0;
 					}
 				}
 
@@ -97,7 +97,7 @@ namespace Persistence
 
 				if (data.HasRows) {
 					while (data.Read()) {
-						result = Convert.ToInt32(data["count"]);
+						result = data["count"].ToString() != "" ? Convert.ToInt32(data["count"].ToString()) : 0;
 					}
 				}
 

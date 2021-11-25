@@ -33,7 +33,7 @@
 				</div>
 
 				@if (new PolicyBl().hasPermission((User)Session["user"], "policies_manage")) {
-					<label class="label">@(((Dictionary<string, string>)Session["texts"])["permits"])</label>
+					<label id="permits" class="label">@(((Dictionary<string, string>)Session["texts"])["permits"])</label>
 					<div class="scrollable-table">
 						<table class="table is-striped is-hoverable" style="width: 100%">
 							<thead>
@@ -87,7 +87,7 @@
 				}
 			})
 
-			if (rolesSelected.length == 0) {
+			if (document.getElementById("permits") && rolesSelected.length == 0) {
 				return showAlert({
 					type: 'danger',
 					description: '@(((Dictionary<string,string>)Session["texts"])["complete_data"])'

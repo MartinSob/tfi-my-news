@@ -85,8 +85,10 @@ namespace MyNews.Controllers
 					mail = mail
 				};
 
-				foreach (string role in roles) {
-					user.roles.Add(new Role { id = int.Parse(role) });
+				if (roles != null) { 
+					foreach (string role in roles) {
+						user.roles.Add(new Role { id = int.Parse(role) });
+					}
 				}
 
 				bl.update(user);

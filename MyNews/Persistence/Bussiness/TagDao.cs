@@ -99,7 +99,7 @@ namespace Persistence
 		}
 
 		public void addOpen(TagRecommendation tag, User user) {
-			if (tag == null) {
+			if (tag.views == 1) {
 				insert("user_tags", 
 					new string[] { "user_id", "tag_id", "updated_date", }, 
 					new string[] { user.id.ToString(), tag.id.ToString(), DateTime.Now.ToString() });

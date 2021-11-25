@@ -33,7 +33,7 @@ namespace Persistence
 
 				return tags;
 			} catch (Exception e) {
-				Console.WriteLine(e);
+				new ErrorDao().create(e.ToString());
 				return null;
 			}
 		}
@@ -70,7 +70,7 @@ namespace Persistence
 
 				return tagRecommendation;
 			} catch (Exception e) {
-				Console.WriteLine(e);
+				new ErrorDao().create(e.ToString());
 				return null;
 			}
 		}
