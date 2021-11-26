@@ -18,7 +18,8 @@ namespace MyNews.Controllers
 				return HttpNotFound();
 			}
 
-			return View(new ListModel<PostRecommendation>(recommendationBl.get((User)Session["user"], 10)));
+			var posts = new ListModel<PostRecommendation>(recommendationBl.get((User)Session["user"], 10));
+			return View(posts);
 		}
 
 		public ActionResult View(int id) {

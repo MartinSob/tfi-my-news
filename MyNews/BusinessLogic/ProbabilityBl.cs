@@ -14,7 +14,7 @@ namespace BusinessLogic
 		/// Calculates the probability of success of a given Post, returning a value and a list of reasons for that value.
 		/// </summary>
 		/// <param name="post"></param>
-		/// <returns></returns>
+		/// <returns> Probability </returns>
 		public Probability calculate(Post post) {
 			post.paragraphs = Regex.Matches(post.body, "[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*").Count;
 			post.words = new PostBl().countWords(post.body);

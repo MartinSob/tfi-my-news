@@ -13,6 +13,15 @@ namespace BusinessLogic
 		TagRecommendationDao tDao = new TagRecommendationDao();
 		EmployeeRecommendationDao eDao = new EmployeeRecommendationDao();
 
+		/// <summary>
+		/// This method returns a list of posts that are likely to be liked for a specific user.
+		/// It checks for each of the posts of the last month the employee that wrote the post,
+		///		and if the user usually likes his/her posts; and also checks the probability 
+		///		that the user will like the post based on the tags associated.
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="count"></param>
+		/// <returns> List<PostRecommendation> </returns>
 		public List<PostRecommendation> get(User user, int count) {
 			try {
 				List<PostRecommendation> posts = pRDao.get(user, DateTime.Now.AddMonths(-1));
