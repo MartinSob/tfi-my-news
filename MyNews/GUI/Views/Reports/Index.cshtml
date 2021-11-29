@@ -67,6 +67,10 @@
 	</div>
 </div>
 
+<div id="loading" class="page_loading is-hidden">
+	<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+</div>
+
 <div id="theHoleReport" style="display: none;">
 	<div style="width: 100%;">
 		<div style="width: 100%; font-size: 1.5rem;">
@@ -434,6 +438,7 @@
 	}
 
 	const pdfDownload = async () => {
+		document.getElementById("loading").classList.toggle("is-hidden");
 		console.log('Starting PDF creation');
 		await post('/Reports/createPDF', {
 			htmlFile: document.getElementById('theHoleReport').innerHTML
@@ -441,5 +446,6 @@
 		console.log('Starting PDF download');
 		window.location.replace('/Reports/downloadPDF');
 		console.log('PDF downloaded');
+		document.getElementById("loading").classList.toggle("is-hidden");
 	}
 </script>
