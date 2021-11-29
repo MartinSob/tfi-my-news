@@ -434,9 +434,12 @@
 	}
 
 	const pdfDownload = async () => {
+		console.log('Starting PDF creation');
 		await post('/Reports/createPDF', {
 			htmlFile: document.getElementById('theHoleReport').innerHTML
 		})
+		console.log('Starting PDF download');
 		window.location.replace('/Reports/downloadPDF');
+		console.log('PDF downloaded');
 	}
 </script>
