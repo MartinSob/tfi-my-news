@@ -142,18 +142,6 @@ namespace Persistence
 			return employee;
 		}
 
-		int getReads(Employee employee) {
-			// TODO
-
-			return 1;
-		}
-
-		EmployeeRecommendation getRecommendations(User user, PostRecommendation post) {
-			// TODO
-
-			return new EmployeeRecommendation();
-		}
-
 		public Employee castDto(SqlDataReader data) {
 			Employee result;
 

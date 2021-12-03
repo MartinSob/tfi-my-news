@@ -32,10 +32,6 @@ namespace Security
 			return dao.delete(id);
 		}
 
-		public bool exists(string name) {
-			return dao.exists(name);
-		}
-
 		public List<Role> getAllPermits(User user) {
 			List<Role> roles = dao.getRole(user);
 

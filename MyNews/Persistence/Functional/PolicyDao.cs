@@ -40,12 +40,6 @@ namespace Persistence
 			return executeQuery(query);
 		}
 
-		public bool exists(string names) {
-			// TODO
-
-			return true;
-		}
-
 		public int create(Role role) {
 			role.id = insert("policies", new string[] { "name" }, new string[] { role.name });
 
@@ -228,33 +222,6 @@ namespace Persistence
 				return null;
 			}
 		}
-
-		//public List<Policy> getRole() {
-		//	try {
-		//		string q = "SELECT * FROM policies p WHERE p.id NOT IN ( SELECT DISTINCT p.id FROM roles r JOIN policies p ON p.id = r.role_id )";
-		//		SqlCommand query = new SqlCommand(q, conn);
-
-		//		List<Policy> policies = new List<Policy>();
-		//		conn.Open();
-		//		SqlDataReader data = query.ExecuteReader();
-
-		//		if (data.HasRows) {
-		//			while (data.Read()) {
-		//				policies.Add(new Policy {
-		//					id = int.Parse(data["id"].ToString()),
-		//					name = data["name"].ToString()
-		//				});
-		//			}
-		//		}
-
-		//		conn.Close();
-
-		//		return policies;
-		//	} catch (Exception e) {
-		//		new ErrorDao().create(e.ToString());
-		//		return null;
-		//	}
-		//}
 
 		public bool cleanRoles(User user) {
 			SqlCommand query = new SqlCommand($"DELETE FROM user_roles WHERE user_id = {user.id}", conn);

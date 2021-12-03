@@ -120,10 +120,6 @@ namespace Persistence
 			}
 		}
 
-		public string truncate(string value, int maxChars) {
-			return value.Length <= maxChars ? value : value.Substring(0, maxChars) + " ...";
-		}
-
 		protected int getLastId(string table) {
 			try {
 				if (conn.State == ConnectionState.Open) {
@@ -157,23 +153,6 @@ namespace Persistence
 				conn.Open();
 				strQuery.ExecuteNonQuery();
 				conn.Close();
-
-				return true;
-			} catch (Exception e) {
-				new ErrorDao().create(e.ToString());
-				return false;
-			}
-		}
-
-		protected bool deleteById(string table, int id) {
-			try {
-				if (conn.State == ConnectionState.Open) {
-					return false;
-				}
-
-				SqlCommand query = new SqlCommand($"DELETE FROM {table} WHERE id = {id}", conn);
-
-				executeQuery(query);
 
 				return true;
 			} catch (Exception e) {
