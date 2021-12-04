@@ -8,12 +8,6 @@ namespace Persistence
 {
 	public class TagRecommendationDao : ConnectionDao
 	{
-		List<TagRecommendation> get(User user, PostRecommendation post) {
-			// TODO
-
-			return new List<TagRecommendation>();
-		}
-
 		public List<TagRecommendation> getPopulars() {
 			try {
 				SqlCommand query = new SqlCommand("GetPopularTags", conn);

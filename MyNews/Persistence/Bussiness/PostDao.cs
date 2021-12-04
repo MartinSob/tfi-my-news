@@ -256,34 +256,6 @@ namespace Persistence
 			}
 		}
 
-		Dictionary<string, int> getReadsGroupByMonth() {
-			// TODO
-
-			return new Dictionary<string, int>();
-		}
-
-		public int getReads(Post post) {
-			return 1;
-		}
-
-		List<Post> getBad() {
-			// TODO
-
-			return new List<Post>();
-		}
-
-		List<Post> getGood() {
-			// TODO
-
-			return new List<Post>();
-		}
-
-		List<Post> get(Tag tag) {
-			// TODO
-
-			return new List<Post>();
-		}
-
 		public UserView getUserView(Post post, User user) {
 			try {
 				SqlCommand query = new SqlCommand("SELECT p.*, uv.qualification FROM posts p JOIN user_posts uv ON uv.post_id = p.id AND uv.user_id = @userId WHERE p.deleted = 0 AND p.id = @postId", conn);
@@ -365,21 +337,6 @@ namespace Persistence
 		}
 
 		public Post castDto(SqlDataReader data) {
-			Post result = new Post();
-			result.id = Convert.ToInt32(data["id"]);
-			result.title = data["title"].ToString();
-			result.body = data["body"].ToString();
-			result.employee = new Employee {
-				employeeId = Convert.ToInt32(data["employee_id"])
-			};
-			result.date = Convert.ToDateTime(data["date"].ToString());
-			result.paragraphs = Convert.ToInt32(data["paragraphs"]);
-			result.words = Convert.ToInt32(data["words"]);
-
-			return result;
-		}
-
-		public Post castRecommendationDto(SqlDataReader data) {
 			Post result = new Post();
 			result.id = Convert.ToInt32(data["id"]);
 			result.title = data["title"].ToString();
