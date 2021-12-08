@@ -20,10 +20,6 @@ namespace MyNews.Controllers
         {
             User loggedUser = (User)Session["user"];
 
-            if (!new PolicyBl().hasPermission(loggedUser, "admin_tags")) {
-				return HttpNotFound();
-			}
-
             bool all = new PolicyBl().hasPermission(loggedUser, "admin_post");
 
 			return View(new ListModel<Post>(pbl.get(all ? 0 : ebl.getByUser(loggedUser).employeeId, text)));
