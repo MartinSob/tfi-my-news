@@ -28,13 +28,14 @@ namespace Security
 
 		public List<string> verifyDv(User user = null) {
 			List<string> errors = new List<string>();
+			BitacoreBl bbl = new BitacoreBl();
 
 			foreach (string table in dao.getTables()) {
 				if (!dao.verifyDvv(table)) {
 					string errorMsg = "Error DV en tabla: " + table;
 					errors.Add(errorMsg);
 
-					new BitacoreBl().create(new BitacoreMessage {
+					bbl.create(new BitacoreMessage {
 						title = "Error DVV en BD",
 						description = errorMsg,
 						type = MessageType.Error,
@@ -45,6 +46,14 @@ namespace Security
 				List<string> dvhErrors = dao.verifyDvh(table);
 				foreach (string e in dvhErrors) {
 					errors.Add("[DVH] [" + table + "] Linea:" + e);
+
+					bbl.create(new BitacoreMessage {
+						title = "Error DVH en BD",
+						description = "[DVH] [" + table + "] Linea:" + e,
+						type = MessageType.Error,
+						date = DateTime.Now,
+						user = user
+					});
 				}
 			}
 
