@@ -76,3 +76,4 @@ _[Ss]cripts
 *.dot[Cc]over
 **/report.csv
 **/report.pdf
+GUI/Properties/PublishProfiles/**

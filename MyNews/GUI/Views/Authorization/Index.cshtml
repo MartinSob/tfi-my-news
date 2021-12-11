@@ -10,7 +10,7 @@
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="fas fa-clipboard-list"></i> @(((Dictionary<string,string>)Session["texts"])["permits"])
-				<a href="Authorization/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
+				<a href="~/Authorization/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
 			</h1>
 
 			<div class="filter-container">
@@ -41,10 +41,10 @@
 						@foreach (Role role in Model.Items) {
 							<tr id="@role.id">
 								<td>@(i++)</td>
-								<td><a href="Authorization/View/@role.id">@role.name</a></td>
+								<td><a href="~/Authorization/View/@role.id">@role.name</a></td>
 								<td>
 									<button onclick="showDeleteModal(@role.id, '@role.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
-									<a href="Authorization/Update/@role.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
+									<a href="~/Authorization/Update/@role.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
 								</td>
 							</tr>
 						}

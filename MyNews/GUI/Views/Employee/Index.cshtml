@@ -10,7 +10,7 @@
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="fas fa-hard-hat"></i> @(((Dictionary<string,string>)Session["texts"])["employees"])
-				<a href="Employee/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
+				<a href="~/Employee/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
 			</h1>
 
 			<div class="filter-container">
@@ -47,11 +47,11 @@
 						@foreach (Employee employee in Model.Items) {
 							<tr id="@employee.employeeId">
 								<td>@(i++)</td>
-								<td><a href="Employee/Update/@employee.employeeId">@employee.name</a></td>
+								<td><a href="~/Employee/Update/@employee.employeeId">@employee.name</a></td>
 								<td>@employee.document</td>
 								<td>
 									<button onclick="showDeleteModal(@employee.employeeId, '@employee.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
-									<a href="Employee/Update/@employee.employeeId" class="button is-outlined"><i class="fas fa-edit"></i></a>
+									<a href="~/Employee/Update/@employee.employeeId" class="button is-outlined"><i class="fas fa-edit"></i></a>
 								</td>
 							</tr>
 						}

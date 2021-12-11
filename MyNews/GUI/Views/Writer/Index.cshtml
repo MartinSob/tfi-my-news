@@ -13,7 +13,7 @@
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="fas fa-i-cursor"></i> @(((Dictionary<string,string>)Session["texts"])["writer"])
-				<a href="Writer/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"]) @(((Dictionary<string,string>)Session["texts"])["post"])<i class="far fa-plus-square ml-2"></i></a>
+				<a href="~/Writer/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"]) @(((Dictionary<string,string>)Session["texts"])["post"])<i class="far fa-plus-square ml-2"></i></a>
 			</h1>
 
 			<div class="filter-container">
@@ -47,13 +47,13 @@
 						@foreach (Post post in Model.Items) {
 							<tr id="@post.id">
 								<td>@(i++)</td>
-								<td><a href="Writer/Update/@post.id">@post.title</a></td>
+								<td><a href="~/Writer/Update/@post.id">@post.title</a></td>
 								@if (new PolicyBl().hasPermission((User)Session["user"], "admin_post")) {
 								<td>@((e = new EmployeeBl().get(post.employee.employeeId)).lastname), @(e.name) </td>
 								}
 								<td>
 									<button onclick="showDeleteModal(@post.id, '@post.title')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
-									<a href="Writer/Update/@post.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
+									<a href="~/Writer/Update/@post.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
 								</td>
 							</tr>
 						}

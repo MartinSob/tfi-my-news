@@ -10,14 +10,14 @@
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="far fa-sticky-note"></i> @(((Dictionary<string,string>)Session["texts"])["posts"])
-				<a href="Home/Search" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["search"])<i class="fas fa-search ml-2"></i></a>
+				<a href="~/Home/Search" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["search"])<i class="fas fa-search ml-2"></i></a>
 			</h1>
 
 			<div class="columns is-multiline">
 				@for (int i = 0; i < Model.Items.Count; i++) {
 					if (i == 0) {
 						<div class="column is-12">
-							<a href="Home/View?id=@Model.Items[i].id">
+							<a href="~/Home/View?id=@Model.Items[i].id">
 								<div class="main-card" style="background-image: url(@Model.Items[i].image)">
 									<div class="main-card-content">
 										<div class="media">
@@ -37,7 +37,7 @@
 						</div>
 					} else {
 						<div class="column @(i == 1 || i == 2 ? "is-6" : "is-4")">
-							<a href="Home/View?id=@Model.Items[i].id">
+							<a href="~/Home/View?id=@Model.Items[i].id">
 								<div class="card card-hover">
 									<div class="card-image">
 										<figure class="image is-4by3">

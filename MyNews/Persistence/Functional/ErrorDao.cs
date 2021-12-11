@@ -18,11 +18,11 @@ namespace Persistence
 		}
 
 		public void create(string text) {
-			var fileName = CurrentAssemblyDirectory() + "//..//error_log.txt";
-			if (!File.Exists(fileName))
-				File.Create(fileName);
-
 			try {
+				var fileName = CurrentAssemblyDirectory() + "//..//error_log.txt";
+				if (!File.Exists(fileName))
+					File.Create(fileName);
+
 				using (System.IO.StreamWriter file =
 				new System.IO.StreamWriter(fileName, true)) {
 					file.WriteLine(DateTime.Now);

@@ -32,7 +32,7 @@
 			<div class="columns is-multiline">
 				@foreach (Post post in new PostBl().get(Model.employeeId, null)) {
 					<div class="column is-3">
-						<a href="/Home/View?id=@post.id">
+						<a href="~/Home/View?id=@post.id">
 							<div class="card card-hover">
 								<div class="card-image">
 									<figure class="image is-4by3">

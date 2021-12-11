@@ -21,7 +21,7 @@
 							</div>
 						</div>
 						<div class="column is-narrow">
-							<a href="/User/Create" style="margin-top: 2rem;" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["create"]) @(((Dictionary<string,string>)Session["texts"])["user"])<i class="far fa-plus-square ml-2"></i></a>
+							<a href="~/User/Create" style="margin-top: 2rem;" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["create"]) @(((Dictionary<string,string>)Session["texts"])["user"])<i class="far fa-plus-square ml-2"></i></a>
 						</div>
 					</div>
 					<div class="select wide-select">
@@ -59,7 +59,7 @@
 
 				<div class="py-4">
 					<button id="saveBtn" type="submit" class="button is-success"><i class="fas fa-check"></i></button>
-					<a href="/Employee" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
+					<a href="~/Employee" class="button is-danger is-outlined">@(((Dictionary<string,string>)Session["texts"])["cancel"])</a>
 				</div>
 			</form>
 		</div>
@@ -85,7 +85,6 @@
 		});
 
 		document.getElementById("userName").addEventListener('input', async (event) => {
-			console.log(' - - - 😀 - - -');
 			const response = await get('/Employee/GetUsersByName?name=' + document.getElementById("userName").value);
 			console.log(response);
 			const select = document.getElementById('userList');

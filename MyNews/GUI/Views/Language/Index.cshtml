@@ -10,7 +10,7 @@
 		<div class="column px-5">
 			<h1 class="title is-2">
 				<i class="fas fa-language"></i> @(((Dictionary<string,string>)Session["texts"])["language"])
-				<a href="Language/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
+				<a href="~/Language/Create" class="button is-outlined">@(((Dictionary<string,string>)Session["texts"])["add"])<i class="far fa-plus-square ml-2"></i></a>
 			</h1>
 
 			<div class="filter-container">
@@ -41,10 +41,10 @@
 						@foreach (Language lang in Model.Items) {
 							<tr id="@lang.id">
 								<td>@(i++)</td>
-								<td><a href="Language/Update/@lang.id">@lang.name</a></td>
+								<td><a href="~/Language/Update/@lang.id">@lang.name</a></td>
 								<td>
 									<button onclick="showDeleteModal(@lang.id, '@lang.name')" class="button is-danger is-outlined"><i class="fas fa-trash-alt"></i></button>
-									<a href="Language/Update/@lang.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
+									<a href="~/Language/Update/@lang.id" class="button is-outlined"><i class="fas fa-edit"></i></a>
 								</td>
 							</tr>
 						}
