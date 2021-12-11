@@ -106,7 +106,7 @@
 
 		const response = await post('CreateUser', data);
 		if (response.type == 'success') {
-			window.location.replace("./");
+			relocation("Login");
 		} else {
 			showAlert(response);
 		}

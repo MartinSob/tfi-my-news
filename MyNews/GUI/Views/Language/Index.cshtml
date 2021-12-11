@@ -76,7 +76,7 @@
 
 		document.getElementById("filterBtn").addEventListener("click", async (event) => {
 			const text = document.getElementById("textFilter").value;
-			window.location.replace('?text=' + text);
+			relocation('Language?text=' + text);
 		});
 
 		function showDeleteModal(id, name) {
@@ -86,7 +86,7 @@
 		}
 
 		async function deleteLanguage() {
-			const response = await get('/Language/Delete?id=' + langId);
+			const response = await get('Language/Delete?id=' + langId);
 			toggleModal();
 			showAlert(response);
 

@@ -84,7 +84,7 @@
 
 		document.getElementById("filterBtn").addEventListener("click", async (event) => {
 			const name = document.getElementById("nameFilter").value;
-			window.location.replace('?name=' + name);
+			relocation('User?name=' + name);
 		});
 
 		function showDeleteModal(id, name) {
@@ -94,7 +94,7 @@
 		}
 
 		async function deleteUser() {
-			const response = await get('/User/Delete?id=' + userId);
+			const response = await get('User/Delete?id=' + userId);
 			toggleModal();
 			showAlert(response);
 

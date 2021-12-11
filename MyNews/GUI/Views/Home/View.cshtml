@@ -67,7 +67,7 @@
 				qualification = 1;
 			}
 
-			const result = await get('/Home/QualifyPost?id=' + @Model.post.id +'&qualification=' + qualification);
+			const result = await get('Home/QualifyPost?id=' + @Model.post.id +'&qualification=' + qualification);
 		})
 
 		document.getElementById("dislikeBtn").addEventListener('change', async (event) => {
@@ -86,13 +86,13 @@
 			const height = d.offsetHeight;
 
 			if (offset >= height) {
-				const result = await get('/Home/ReadPost?id=' + @Model.post.id);
+				const result = await get('Home/ReadPost?id=' + @Model.post.id);
 			}
 		};
 
 		if (!hasVScroll) {
 			setTimeout(async function () {
-				const result = await get('/Home/ReadPost?id=' + @Model.post.id);
+				const result = await get('Home/ReadPost?id=' + @Model.post.id);
 			}, 10000);
 		}
 	</script>

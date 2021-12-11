@@ -94,7 +94,7 @@
 				});
 			}
 
-			const response = await post('/User/UpdateUser', {
+			const response = await post('User/UpdateUser', {
 				id: @Model.id,
 				name: document.getElementById("name").value,
 				lastname: document.getElementById("lastname").value,
@@ -103,7 +103,7 @@
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/User/View/@Model.id");
+				relocation("User/View/@Model.id");
 			}
 
 			showAlert(response);

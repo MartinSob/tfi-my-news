@@ -127,7 +127,7 @@
 			const divGraph = document.getElementById("pb");
 			divGraph.innerHTML = "";
 
-			const response = await post('/Writer/GetProbability', {
+			const response = await post('Writer/GetProbability', {
 				title: document.getElementById("title").value,
 				body: document.getElementById("body").value,
 				tags: tagsSelected
@@ -159,7 +159,7 @@
 			const file = document.getElementById("myFile").files[0];
 			const image = await getBase64(file);
 
-			const response = await post('/Writer/CreatePost', {
+			const response = await post('Writer/CreatePost', {
 				title: document.getElementById("title").value,
 				body: document.getElementById("body").value,
 				tags: tagsSelected,
@@ -167,7 +167,7 @@
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Writer");
+				relocation("Writer");
 			}
 
 			showAlert(response);

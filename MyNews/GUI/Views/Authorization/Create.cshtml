@@ -67,13 +67,13 @@
 				});
 			}
 
-			const response = await post('/Authorization/CreateRole', {
+			const response = await post('Authorization/CreateRole', {
 				name: roleName,
 				policies: policiesSelected
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Authorization/View/" + response.data);
+				relocation("Authorization/View/" + response.data);
 			}
 		});
 	</script>

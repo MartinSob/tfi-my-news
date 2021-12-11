@@ -129,11 +129,11 @@
 			const to = document.getElementById("toFilter").value;
 			const tagId = document.getElementById("tagList").value;
 			const employeeId = document.getElementById("userList").value;
-			window.location.replace('?text=' + text + '&from=' + from + '&to=' + to + '&tagId=' + tagId + '&employeeId=' + employeeId);
+			relocation('Home/Search?text=' + text + '&from=' + from + '&to=' + to + '&tagId=' + tagId + '&employeeId=' + employeeId);
 		});
 
 		document.getElementById("userName").addEventListener('input', async (event) => {
-			const response = await get('/Employee/GetEmployees?name=' + document.getElementById("userName").value);
+			const response = await get('Employee/GetEmployees?name=' + document.getElementById("userName").value);
 			console.log(response);
 			const select = document.getElementById('userList');
 

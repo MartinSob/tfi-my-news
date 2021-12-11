@@ -72,14 +72,14 @@
 				});
 			}
 
-			const response = await post('/Language/CreateLanguage', {
+			const response = await post('Language/CreateLanguage', {
 				name: langName,
 				tags: tags,
 				translations: translations
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Language");
+				relocation("Language");
 			}
 
 			showAlert(response);

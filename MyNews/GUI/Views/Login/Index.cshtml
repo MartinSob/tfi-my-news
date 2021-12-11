@@ -55,12 +55,12 @@
 		showAlert(response);
 
 		if (response.type == 'success') {
-			window.location.replace("Home");
+			relocation("Home");
 		}
 
 		if (response.data) {
 			setTimeout(function () {
-				window.location.replace("Backup");
+				relocation("Backup");
 			}, 1000);
 		}
 	});

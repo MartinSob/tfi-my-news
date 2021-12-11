@@ -65,7 +65,7 @@
 		document.getElementById("updateForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 
-			const response = await post('/Employee/UpdateEmployee', {
+			const response = await post('Employee/UpdateEmployee', {
 				id: @Model.employeeId,
 				user_id: @Model.id,
 				start_day: document.getElementById("startDay").value,
@@ -75,7 +75,7 @@
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Employee");
+				relocation("Employee");
 			}
 
 			showAlert(response);

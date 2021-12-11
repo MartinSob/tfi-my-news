@@ -34,13 +34,13 @@
 
 	<script>
 		document.getElementById("createForm").addEventListener("submit", async (event) => {
-			const response = await post('/Tag/CreateTag', {
+			const response = await post('Tag/CreateTag', {
 				name: document.getElementById("langName").value,
 				color: document.getElementById("color").value
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Tag");
+				relocation("Tag");
 			}
 
 			showAlert(response);

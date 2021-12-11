@@ -204,12 +204,12 @@
 <script>
 	document.addEventListener('DOMContentLoaded', async () => {
 		// For some reason Promise.all takes a lot more time
-		const popularTags = await get('/Reports/popularTags');
-		const totalReads = await get('/Reports/totalReads');
-		const popularPosts = await get('/Reports/popularPosts');
-		const unpopularPosts = await get('/Reports/unpopularPosts');
-		const popularEmployees = await get('/Reports/popularEmployees');
-		const unpopularEmployees = await get('/Reports/unpopularEmployees');
+		const popularTags = await get('Reports/popularTags');
+		const totalReads = await get('Reports/totalReads');
+		const popularPosts = await get('Reports/popularPosts');
+		const unpopularPosts = await get('Reports/unpopularPosts');
+		const popularEmployees = await get('Reports/popularEmployees');
+		const unpopularEmployees = await get('Reports/unpopularEmployees');
 
 		console.log('1️⃣ popularTags', popularTags);
 		console.log('2️⃣ totalReads', totalReads);
@@ -440,11 +440,11 @@
 	const pdfDownload = async () => {
 		document.getElementById("loading").classList.toggle("is-hidden");
 		console.log('Starting PDF creation');
-		await post('/Reports/createPDF', {
+		await post('Reports/createPDF', {
 			htmlFile: document.getElementById('theHoleReport').innerHTML
 		})
 		console.log('Starting PDF download');
-		window.location.replace('/Reports/downloadPDF');
+		relocation('Reports/downloadPDF');
 		console.log('PDF downloaded');
 		document.getElementById("loading").classList.toggle("is-hidden");
 	}

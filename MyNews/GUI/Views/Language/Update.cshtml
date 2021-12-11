@@ -65,7 +65,7 @@
 				translations.push(text.value)
 			})
 
-			const response = await post('/Language/UpdateLanguage', {
+			const response = await post('Language/UpdateLanguage', {
 				id: @Model.id,
 				name: document.getElementById("langName").value,
 				tags: tags,
@@ -73,7 +73,7 @@
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Language");
+				relocation("Language");
 			}
 
 			showAlert(response);

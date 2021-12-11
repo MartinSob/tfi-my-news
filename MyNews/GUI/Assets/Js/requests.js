@@ -1,10 +1,12 @@
-﻿async function get(url) {
-    let response = await fetch(url);
+﻿const urlPrefix = 'http://localhost/MyNewsMaker/';
+
+async function get(url) {
+    let response = await fetch(urlPrefix + url);
     return response.json();
 }
 
 async function post(url = '', data = {}) {
-    const response = await fetch(url, {
+    const response = await fetch(urlPrefix + url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -12,6 +14,10 @@ async function post(url = '', data = {}) {
         body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
     return response.json();
+}
+
+function relocation(url) {
+    window.location.replace(urlPrefix + url);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!this.value)
                 return;
 
-            const response = await get('/Language/LoadLanguage?id=' + this.value);
+            const response = await get('Language/LoadLanguage?id=' + this.value);
             if (response.type === 'success') {
                 location.reload();
             }
@@ -51,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.getElementById('logoutBtn')) {
         document.getElementById('logoutBtn').addEventListener("click", async function () {
-            window.location.replace('/Login/Logout');
+            relocation('Login/Logout');
         });
     }
 });

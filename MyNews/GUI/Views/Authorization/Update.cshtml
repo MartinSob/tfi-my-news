@@ -74,14 +74,14 @@
 				});
 			}
 
-			const response = await post('/Authorization/UpdateRole', {
+			const response = await post('Authorization/UpdateRole', {
 				id: @Model.id,
 				name: roleName,
 				policies: policiesSelected
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Authorization/View/@Model.id");
+				relocation("Authorization/View/@Model.id");
 			}
 
 			showAlert(response);

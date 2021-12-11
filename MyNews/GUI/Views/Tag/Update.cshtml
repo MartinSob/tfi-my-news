@@ -33,14 +33,14 @@
 
 	<script>
 		document.getElementById("saveBtn").addEventListener("click", async (event) => {
-			const response = await post('/Tag/UpdateTag', {
+			const response = await post('Tag/UpdateTag', {
 				id: @Model.id,
 				name: document.getElementById("tagName").value,
 				color: document.getElementById("color").value
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Tag");
+				relocation("Tag");
 			}
 
 			showAlert(response);

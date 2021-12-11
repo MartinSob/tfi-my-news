@@ -69,7 +69,7 @@
 		document.getElementById("createForm").addEventListener("submit", async (event) => {
 			event.preventDefault();
 
-			const response = await post('/Employee/CreateEmployee', {
+			const response = await post('Employee/CreateEmployee', {
 				user_id: document.getElementById("userList").value,
 				start_day: document.getElementById("startDay").value,
 				end_day: document.getElementById("endDay").value,
@@ -78,14 +78,14 @@
 			});
 
 			if (response.type == 'success') {
-				window.location.replace("/Employee");
+				relocation("Employee");
 			}
 
 			showAlert(response);
 		});
 
 		document.getElementById("userName").addEventListener('input', async (event) => {
-			const response = await get('/Employee/GetUsersByName?name=' + document.getElementById("userName").value);
+			const response = await get('Employee/GetUsersByName?name=' + document.getElementById("userName").value);
 			console.log(response);
 			const select = document.getElementById('userList');
 
