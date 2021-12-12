@@ -77,3 +77,4 @@ _[Ss]cripts
 **/report.csv
 **/report.pdf
 GUI/Properties/PublishProfiles/**
+Installer/**/*.cab
