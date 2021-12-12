@@ -51,6 +51,7 @@
 
 	<script>
 		document.getElementById("createForm").addEventListener("submit", async (event) => {
+			event.preventDefault();
 			const texts = document.getElementsByName("translation");
 			const langName = document.getElementById("langName").value;
 
@@ -79,7 +80,7 @@
 			});
 
 			if (response.type == 'success') {
-				relocation("Language");
+				relocation('Language');
 			}
 
 			showAlert(response);
