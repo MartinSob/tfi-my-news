@@ -4,10 +4,8 @@ using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-using IronPdf;
 
 namespace MyNews.Controllers
 {
@@ -63,8 +61,8 @@ namespace MyNews.Controllers
 
         public ActionResult createPDF(string htmlFile) {
 			try {
-				ChromePdfRenderer Renderer = new ChromePdfRenderer();
-                Renderer.RenderHtmlAsPdf(htmlFile).SaveAs(Server.MapPath("~/report.pdf"));
+                ReportTagBl reportBl = new ReportTagBl();
+                reportBl.createPDF(htmlFile, Server.MapPath("/"));
             } catch (Exception e) {
                 Console.WriteLine(e);
             }
@@ -73,7 +71,9 @@ namespace MyNews.Controllers
         }
 
         public ActionResult downloadPDF() {
-            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("~/report.pdf"));
+            ReportTagBl reportBl = new ReportTagBl();
+            byte[] fileBytes = reportBl.downloadPDF(Server.MapPath("/"));
+
             string fileName = "report.pdf";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
@@ -91,15 +91,15 @@ namespace MyNews.Controllers
             ReportReadsBl reportReadBl = new ReportReadsBl();
             reportReadBl.calculateResult();
 
-            using (var writer = new StreamWriter(Server.MapPath("~/report.csv")))
+            using (var writer = reportTagBl.getCSVStremWriter(Server.MapPath("/")))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture)) {
 
-                csv.WriteField(" - " + ((Dictionary<string,string>)Session["texts"])["date"]);
+                csv.WriteField(" - " + ((Dictionary<string, string>)Session["texts"])["date"]);
                 csv.WriteField(DateTime.Now.ToString("yyyy-MM-d"));
                 csv.NextRecord();
                 csv.NextRecord();
                 csv.NextRecord();
-                csv.WriteField(" - " + ((Dictionary<string,string>)Session["texts"])["popular_employees"]);
+                csv.WriteField(" - " + ((Dictionary<string, string>)Session["texts"])["popular_employees"]);
                 csv.NextRecord();
                 csv.WriteHeader<EmployeeRecommendation>();
                 csv.NextRecord();
@@ -164,7 +164,7 @@ namespace MyNews.Controllers
 
             Response.ContentType = "text/csv";
             Response.AppendHeader("Content-Disposition", "attachment;filename=report.csv");
-            Response.TransmitFile(Server.MapPath("~/report.csv"));
+            Response.TransmitFile(reportTagBl.getCSVPath(Server.MapPath("/")));
             Response.End();
 
             return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);

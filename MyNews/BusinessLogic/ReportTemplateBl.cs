@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
+using IronPdf;
 
 namespace BusinessLogic
 {
@@ -25,6 +27,23 @@ namespace BusinessLogic
 		}
 		public IList getNegativeResult() {
 			return badList;
+		}
+
+		public void createPDF(string htmlFile, string path) {
+			ChromePdfRenderer Renderer = new ChromePdfRenderer();
+			Renderer.RenderHtmlAsPdf(htmlFile).SaveAs(path + "..\\..\\Backups\\report.pdf");
+		}
+
+		public byte[] downloadPDF(string path) {
+			return System.IO.File.ReadAllBytes(path + "..\\..\\Backups\\report.pdf");
+		}
+
+		public StreamWriter getCSVStremWriter(string path) {
+			return new StreamWriter(path + "..\\..\\Backups\\report.csv");
+		}
+
+		public string getCSVPath(string path) {
+			return path + "..\\..\\Backups\\report.csv";
 		}
 	}
 }
