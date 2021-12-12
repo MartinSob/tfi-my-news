@@ -26,19 +26,6 @@ namespace MyNews.Controllers
         public ActionResult Login(string username, string password) {
             User loggedUser;
 
-            if (new DvBl().verifyDv().Count != 0) {
-                loggedUser = userBl.basicLogin(new User { username = username, password = password });
-                if (!new PolicyBl().hasPermission(loggedUser, "admin_copy")) {
-                    return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"] }, JsonRequestBehavior.AllowGet);
-                }
-
-                Session["user"] = loggedUser;
-                new LanguageBl().load(loggedUser.language);
-                Session["texts"] = loggedUser.language.texts;
-
-                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["vd_problems"], data = "vd_problems" }, JsonRequestBehavior.AllowGet);
-            }
-
             loggedUser = userBl.login(new User { username = username, password = password });
             if (loggedUser == null) {
                 return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["login_failed"] }, JsonRequestBehavior.AllowGet);
@@ -48,13 +35,23 @@ namespace MyNews.Controllers
             new LanguageBl().load(loggedUser.language);
             Session["texts"] = loggedUser.language.texts;
 
+            List<string> dvErrors = new DvBl().verifyDv();
+
+            if (dvErrors.Count != 0) {
+                if (!new PolicyBl().hasPermission(loggedUser, "admin_copy")) {
+                    return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error_try_again"], datas = dvErrors }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["vd_problems"], data = "vd_problems", datas = dvErrors }, JsonRequestBehavior.AllowGet);
+            }
+
             return Json(new { type = "success" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Logout() {
             userBl.logout((User)Session["user"]);
             Session["user"] = null;
-            return Redirect("/Login");
+            return Redirect("/MyNewsMaker/Login");
         }
 
         public ActionResult Signup() {

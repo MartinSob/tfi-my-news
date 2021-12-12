@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessEntity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,8 +12,21 @@ namespace Persistence
 	public class DvDao : ConnectionDao
 	{
 		public bool verifyDvv(string table) {
-			string dvvCalculado = calculateDvv(table);
-			return dvvCalculado.Equals(getDvv(table));
+			try {
+				string dvvCalculado = calculateDvv(table);
+				string dvvOriginal = getDvv(table);
+
+				new BitacoreDao().create(new BitacoreMessage {
+					title = "DVV en BD",
+					description = "dvvCalculado: " + dvvCalculado + "; dvvOriginal: " + dvvOriginal,
+					type = MessageType.Info,
+					date = DateTime.Now
+				});
+
+				return dvvCalculado.Equals(dvvOriginal);
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		public List<string> verifyDvh(string table) {

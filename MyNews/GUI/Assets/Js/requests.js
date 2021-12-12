@@ -1,4 +1,5 @@
-﻿const urlPrefix = 'http://localhost/MyNewsMaker/';
+﻿const urlPrefix = 'http://localhost/MyNewsMaker/'; // Prod
+// const urlPrefix = '/'; // Local
 
 async function get(url) {
     let response = await fetch(urlPrefix + url);
