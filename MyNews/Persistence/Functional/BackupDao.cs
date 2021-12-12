@@ -17,7 +17,7 @@ namespace Persistence
 				SqlCommand query = new SqlCommand("USE master; RESTORE DATABASE myNews FROM DISK = @bkpPath WITH REPLACE;", conn);
 				SqlCommand multiUser = new SqlCommand("ALTER DATABASE myNews SET Multi_User", conn);
 
-				query.Parameters.AddWithValue("@bkpPath", path + "..\\BackUps\\" + backup.name);
+				query.Parameters.AddWithValue("@bkpPath", path + "..\\..\\Backups\\" + backup.name);
 
 				executeQuery(singleUser);
 				executeQuery(query);
@@ -33,8 +33,8 @@ namespace Persistence
 		public bool backup(string path) {
 			try {
 				string fileName = "bkp_" + getTimestamp(DateTime.Now) + ".bak";
-				SqlCommand query = new SqlCommand("BACKUP DATABASE myNews TO  DISK = @bkpPath", conn);
-				string bkpPath = path + "\\..\\BackUps\\" + fileName;
+				SqlCommand query = new SqlCommand("BACKUP DATABASE myNews TO DISK = @bkpPath", conn);
+				string bkpPath = path + "..\\..\\Backups\\" + fileName;
 				File.Delete(bkpPath);
 				query.Parameters.AddWithValue("@bkpPath", bkpPath);
 

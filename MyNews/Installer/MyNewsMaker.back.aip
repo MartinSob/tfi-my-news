@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="18.9.1" version="18.9.1" Modules="professional" RootPath="." Language="en" Id="{930E9161-F144-42CD-AA50-C5C2E933F854}">
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_CURRENT_YEAR" Value="2021" ValueLocId="-"/>
+    <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
+    <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_DOTNET_VERSION;AI_DETECTED_IIS_VERSION;AI_DETECTED_IIS_SERVICE"/>
+    <ROW Property="AI_REQUIRED_DOTNET_DISPLAY" MultiBuildValue="DefaultBuild:4.0" ValueLocId="-"/>
+    <ROW Property="AI_REQUIRED_DOTNET_VERSION" MultiBuildValue="DefaultBuild:4.0.1" ValueLocId="-"/>
+    <ROW Property="AI_REQUIRED_IIS_DISPLAY" MultiBuildValue="DefaultBuild:7.0" ValueLocId="-"/>
+    <ROW Property="AI_REQUIRED_IIS_VERSION" MultiBuildValue="DefaultBuild:07.0" ValueLocId="-"/>
+    <ROW Property="AI_ThemeSteps" Value="radio" MsiKey="AI_ThemeSteps"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPNOREPAIR" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="ARPPRODUCTICON" Value="just_logo.exe" Type="8"/>
+    <ROW Property="Manufacturer" Value="MyNewsMaker"/>
+    <ROW Property="ProductCode" Value="1033:{0CCCDD44-D351-4C2D-8DE7-33C1A81FA45F} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="MyNewsMaker"/>
+    <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
+    <ROW Property="UpgradeCode" Value="{B1604B51-BB12-4ECA-B6E1-85A015A61267}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="Assets_Dir" Directory_Parent="APPDIR" DefaultDir="Assets"/>
+    <ROW Directory="Authorization_Dir" Directory_Parent="Views_Dir" DefaultDir="AUTHOR~1|Authorization"/>
+    <ROW Directory="Backup_Dir" Directory_Parent="Views_Dir" DefaultDir="Backup"/>
+    <ROW Directory="Bitacore_Dir" Directory_Parent="Views_Dir" DefaultDir="Bitacore"/>
+    <ROW Directory="Employee_Dir" Directory_Parent="Views_Dir" DefaultDir="Employee"/>
+    <ROW Directory="Fonts_1_Dir" Directory_Parent="APPDIR" DefaultDir="Fonts"/>
+    <ROW Directory="Fonts_Dir" Directory_Parent="Assets_Dir" DefaultDir="Fonts"/>
+    <ROW Directory="Home_Dir" Directory_Parent="Views_Dir" DefaultDir="Home"/>
+    <ROW Directory="Images_Dir" Directory_Parent="Assets_Dir" DefaultDir="Images"/>
+    <ROW Directory="Js_Dir" Directory_Parent="Assets_Dir" DefaultDir="Js"/>
+    <ROW Directory="Language_Dir" Directory_Parent="Views_Dir" DefaultDir="Language"/>
+    <ROW Directory="Login_Dir" Directory_Parent="Views_Dir" DefaultDir="Login"/>
+    <ROW Directory="Reports_Dir" Directory_Parent="Views_Dir" DefaultDir="Reports"/>
+    <ROW Directory="Sass_Dir" Directory_Parent="Styles_Dir" DefaultDir="Sass"/>
+    <ROW Directory="Shared_Dir" Directory_Parent="Views_Dir" DefaultDir="Shared"/>
+    <ROW Directory="Styles_Dir" Directory_Parent="Assets_Dir" DefaultDir="Styles"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="Tag_Dir" Directory_Parent="Views_Dir" DefaultDir="Tag"/>
+    <ROW Directory="User_Dir" Directory_Parent="Views_Dir" DefaultDir="User"/>
+    <ROW Directory="Views_Dir" Directory_Parent="APPDIR" DefaultDir="Views"/>
+    <ROW Directory="Writer_Dir" Directory_Parent="Views_Dir" DefaultDir="Writer"/>
+    <ROW Directory="bin_Dir" Directory_Parent="APPDIR" DefaultDir="bin"/>
+    <ROW Directory="locales_1_Dir" Directory_Parent="native_1_Dir" DefaultDir="locales"/>
+    <ROW Directory="locales_Dir" Directory_Parent="native_Dir" DefaultDir="locales"/>
+    <ROW Directory="native_1_Dir" Directory_Parent="winx86_Dir" DefaultDir="native"/>
+    <ROW Directory="native_Dir" Directory_Parent="winx64_Dir" DefaultDir="native"/>
+    <ROW Directory="roslyn_Dir" Directory_Parent="bin_Dir" DefaultDir="roslyn"/>
+    <ROW Directory="runtimes_Dir" Directory_Parent="bin_Dir" DefaultDir="runtimes"/>
+    <ROW Directory="swiftshader_1_Dir" Directory_Parent="native_1_Dir" DefaultDir="SWIFTS~1|swiftshader"/>
+    <ROW Directory="swiftshader_Dir" Directory_Parent="native_Dir" DefaultDir="SWIFTS~1|swiftshader"/>
+    <ROW Directory="winx64_Dir" Directory_Parent="runtimes_Dir" DefaultDir="win-x64"/>
+    <ROW Directory="winx86_Dir" Directory_Parent="runtimes_Dir" DefaultDir="win-x86"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="AI_ExePath" ComponentId="{0B86233E-3AE8-425E-920D-801CC046246E}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
+    <ROW Component="APPDIR" ComponentId="{5B0E34E7-FBC4-4232-B5DA-D6E77DC29237}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="Antlr3.Runtime.dll" ComponentId="{FA593CB8-DF98-4CA8-BBD4-6532388F7352}" Directory_="bin_Dir" Attributes="0" KeyPath="Antlr3.Runtime.dll"/>
+    <ROW Component="Backup.scss" ComponentId="{FC1C0995-5DAC-421F-B7D5-C19296550723}" Directory_="Sass_Dir" Attributes="0" KeyPath="Backup.scss" Type="0"/>
+    <ROW Component="BusinessEntity.dll" ComponentId="{D28AC366-03C4-44CC-A0E1-DA1F9DDC2C3F}" Directory_="bin_Dir" Attributes="0" KeyPath="BusinessEntity.dll"/>
+    <ROW Component="BusinessLogic.dll" ComponentId="{D9B90E0F-B668-49E9-B75B-C0156993ADE1}" Directory_="bin_Dir" Attributes="0" KeyPath="BusinessLogic.dll"/>
+    <ROW Component="Create.cshtml" ComponentId="{87EF8679-113C-4D7D-80D5-E8FA64CA5ED1}" Directory_="Authorization_Dir" Attributes="0" KeyPath="Create.cshtml" Type="0"/>
+    <ROW Component="Create.cshtml_1" ComponentId="{8F6BB5AA-7BAF-4573-8086-F981C9314104}" Directory_="Employee_Dir" Attributes="0" KeyPath="Create.cshtml_1" Type="0"/>
+    <ROW Component="Create.cshtml_2" ComponentId="{7C280802-7873-4096-8DC8-BC07BAF1C48E}" Directory_="Language_Dir" Attributes="0" KeyPath="Create.cshtml_2" Type="0"/>
+    <ROW Component="Create.cshtml_3" ComponentId="{A8FA3A13-A4DB-466D-BBF0-DF1240597522}" Directory_="Tag_Dir" Attributes="0" KeyPath="Create.cshtml_3" Type="0"/>
+    <ROW Component="Create.cshtml_4" ComponentId="{7DDE1803-60A9-45F3-A48E-97CACDA48452}" Directory_="User_Dir" Attributes="0" KeyPath="Create.cshtml_4" Type="0"/>
+    <ROW Component="Create.cshtml_5" ComponentId="{2D13FC0B-F543-4B43-BF68-DFD697DE7671}" Directory_="Writer_Dir" Attributes="0" KeyPath="Create.cshtml_5" Type="0"/>
+    <ROW Component="CsvHelper.dll" ComponentId="{B235040B-CF9F-4FFE-9288-794F14BAEFAE}" Directory_="bin_Dir" Attributes="0" KeyPath="CsvHelper.dll"/>
+    <ROW Component="Error.cshtml" ComponentId="{406F44FF-4947-40BE-97A7-0CF2A6EF5C78}" Directory_="Shared_Dir" Attributes="0" KeyPath="Error.cshtml" Type="0"/>
+    <ROW Component="ForgotPassword.cshtml" ComponentId="{A4C8DD07-5B27-450A-B57F-37FBB2E559A3}" Directory_="Login_Dir" Attributes="0" KeyPath="ForgotPassword.cshtml" Type="0"/>
+    <ROW Component="Index.cshtml" ComponentId="{826670CC-8425-40CD-83E0-6DF8AB42AE0D}" Directory_="Backup_Dir" Attributes="0" KeyPath="Index.cshtml_1" Type="0"/>
+    <ROW Component="Index.cshtml_1" ComponentId="{0245604A-007B-4259-9B11-A839F2B874E0}" Directory_="Bitacore_Dir" Attributes="0" KeyPath="Index.cshtml_2" Type="0"/>
+    <ROW Component="Index.cshtml_2" ComponentId="{856B5458-7A06-48FC-9514-2308F5635640}" Directory_="Home_Dir" Attributes="0" KeyPath="Index.cshtml_4" Type="0"/>
+    <ROW Component="Index.cshtml_3" ComponentId="{7426157D-95EC-4966-9440-989445B000D3}" Directory_="Reports_Dir" Attributes="0" KeyPath="Index.cshtml_7" Type="0"/>
+    <ROW Component="IronCefSubprocess.exe" ComponentId="{76A375BF-B42E-4C59-B639-D22AE654C282}" Directory_="native_Dir" Attributes="256" KeyPath="IronCefSubprocess.exe"/>
+    <ROW Component="IronCefSubprocess.exe_1" ComponentId="{708CC575-3CE1-4494-A1DD-C4D835D3F155}" Directory_="native_1_Dir" Attributes="0" KeyPath="IronCefSubprocess.exe_1"/>
+    <ROW Component="IronInterop.dll" ComponentId="{33EA51E3-410A-4674-BC4E-80601B5AFB9C}" Directory_="native_Dir" Attributes="256" KeyPath="IronInterop.dll"/>
+    <ROW Component="IronInterop.dll_1" ComponentId="{9BA39714-835F-4162-B2EE-6395B59F2254}" Directory_="native_1_Dir" Attributes="0" KeyPath="IronInterop.dll_1"/>
+    <ROW Component="IronPdf.dll" ComponentId="{7882241E-53E3-48CE-A1E5-9C486A6C689A}" Directory_="bin_Dir" Attributes="0" KeyPath="IronPdf.dll"/>
+    <ROW Component="Microsoft.Bcl.AsyncInterfaces.dll" ComponentId="{856DFB20-920D-43DF-849F-4315FA46984A}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Bcl.AsyncInterfaces.dll"/>
+    <ROW Component="Microsoft.Bcl.HashCode.dll" ComponentId="{39520B42-771D-49DC-8B07-F307856464BF}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Bcl.HashCode.dll"/>
+    <ROW Component="Microsoft.Build.Tasks.CodeAnalysis.dll" ComponentId="{A0385E15-C940-4EAC-A58E-C1B40EF16858}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.Build.Tasks.CodeAnalysis.dll"/>
+    <ROW Component="Microsoft.CodeAnalysis.CSharp.Scripting.dll" ComponentId="{1DEEE322-A949-40FE-B3C4-2EEB17A63F1F}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.CSharp.Scripting.dll"/>
+    <ROW Component="Microsoft.CodeAnalysis.CSharp.dll" ComponentId="{2E98595B-9FBA-4533-89F0-D83F96EDC9F8}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.CSharp.dll"/>
+    <ROW Component="Microsoft.CodeAnalysis.Scripting.dll" ComponentId="{4ACCA5CF-4A5B-4573-9B18-02B8B54463C3}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.Scripting.dll"/>
+    <ROW Component="Microsoft.CodeAnalysis.VisualBasic.dll" ComponentId="{310B196F-CF79-47A2-9F3D-9E82499372C7}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.VisualBasic.dll"/>
+    <ROW Component="Microsoft.CodeAnalysis.dll" ComponentId="{AB3479BE-E67A-4AD6-8108-4AEE974BDB17}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.CodeAnalysis.dll"/>
+    <ROW Component="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" ComponentId="{EAACA050-C672-44A6-A057-C37A593D079D}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll"/>
+    <ROW Component="Microsoft.DiaSymReader.Native.amd64.dll" ComponentId="{BE5750AA-915C-4F04-AD23-1611586B62D3}" Directory_="roslyn_Dir" Attributes="256" KeyPath="Microsoft.DiaSymReader.Native.amd64.dll"/>
+    <ROW Component="Microsoft.DiaSymReader.Native.x86.dll" ComponentId="{0EB79330-F9F1-4F98-AD69-C809CE22149A}" Directory_="roslyn_Dir" Attributes="0" KeyPath="Microsoft.DiaSymReader.Native.x86.dll"/>
+    <ROW Component="Microsoft.Web.Infrastructure.dll" ComponentId="{B1EAC6E6-19BD-41DD-9B4F-8EAB4DF31E82}" Directory_="bin_Dir" Attributes="0" KeyPath="Microsoft.Web.Infrastructure.dll"/>
+    <ROW Component="MyNews.dll" ComponentId="{178E0269-04EA-4879-81A9-9F527F99CCEB}" Directory_="bin_Dir" Attributes="0" KeyPath="MyNews.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{93A2A559-9683-4803-8FC9-01D83AE354AA}" Directory_="bin_Dir" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="Persistence.dll" ComponentId="{B5C2C4F3-0F3A-4236-A8FF-EDAB87C9080F}" Directory_="bin_Dir" Attributes="0" KeyPath="Persistence.dll"/>
+    <ROW Component="ProductInformation" ComponentId="{6B848461-8A26-4056-BC88-58B8E693997D}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="Security.dll" ComponentId="{CF664747-2D4B-4D3C-BA1B-F9FE919402DD}" Directory_="bin_Dir" Attributes="0" KeyPath="Security.dll"/>
+    <ROW Component="System.Buffers.dll" ComponentId="{830A7607-9B1A-4E7B-B0B5-06981350BA72}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Buffers.dll"/>
+    <ROW Component="System.Buffers.dll_1" ComponentId="{EDEE4A93-2654-4187-9C39-6773263390DD}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Buffers.dll_1"/>
+    <ROW Component="System.Collections.Immutable.dll" ComponentId="{89F394C0-BB99-48AA-9951-D7104354D7E4}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Collections.Immutable.dll"/>
+    <ROW Component="System.Memory.dll" ComponentId="{5A8A1E5D-D081-439F-86FC-7809D5A26643}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Memory.dll"/>
+    <ROW Component="System.Memory.dll_1" ComponentId="{E2E41216-C7D6-418B-8A48-8BC22A720ED2}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Memory.dll_1"/>
+    <ROW Component="System.Numerics.Vectors.dll" ComponentId="{F1C702B8-7BA3-401D-8D6A-DCCEEFC4FF7F}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Numerics.Vectors.dll"/>
+    <ROW Component="System.Numerics.Vectors.dll_1" ComponentId="{5C6BDDCC-8D4F-4865-A2DC-11775B804602}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Numerics.Vectors.dll_1"/>
+    <ROW Component="System.Reflection.Metadata.dll" ComponentId="{10849F4B-DE55-4A35-B119-DAA75DEE4CD9}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Reflection.Metadata.dll"/>
+    <ROW Component="System.Runtime.CompilerServices.Unsafe.dll" ComponentId="{C6A52660-F75D-4CFF-A1CA-55C830C146F1}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW Component="System.Runtime.CompilerServices.Unsafe.dll_1" ComponentId="{1F9313CE-2C6C-4144-A62C-59F730EE47CD}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Runtime.CompilerServices.Unsafe.dll_1"/>
+    <ROW Component="System.Text.Encoding.CodePages.dll" ComponentId="{EC62ED1A-8D9C-4963-BB56-21098905DC98}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Text.Encoding.CodePages.dll"/>
+    <ROW Component="System.Threading.Tasks.Extensions.dll" ComponentId="{8E73DC4C-D057-49A6-8149-1F36006D69FB}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Threading.Tasks.Extensions.dll"/>
+    <ROW Component="System.Threading.Tasks.Extensions.dll_1" ComponentId="{779D3FC8-60A0-4823-9700-27C2E7474F43}" Directory_="roslyn_Dir" Attributes="0" KeyPath="System.Threading.Tasks.Extensions.dll_1"/>
+    <ROW Component="System.Web.Helpers.dll" ComponentId="{2C001775-CEEC-4ED9-AAB0-F983B46351FD}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Helpers.dll"/>
+    <ROW Component="System.Web.Mvc.dll" ComponentId="{A0E225D2-EE78-48DB-9552-BF4E3ABAE063}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Mvc.dll"/>
+    <ROW Component="System.Web.Optimization.dll" ComponentId="{76C5D4C5-DDBE-41CF-BA7F-C3FD46E0EBB1}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Optimization.dll"/>
+    <ROW Component="System.Web.Razor.dll" ComponentId="{FFC2FDD5-80D1-46ED-9205-8A06490AA103}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.Razor.dll"/>
+    <ROW Component="System.Web.WebPages.Deployment.dll" ComponentId="{8B319B5E-EBA9-40D1-A51C-79D69DBF2943}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.Deployment.dll"/>
+    <ROW Component="System.Web.WebPages.Razor.dll" ComponentId="{E801273F-EC91-4DD4-88EA-863332A403EE}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.Razor.dll"/>
+    <ROW Component="System.Web.WebPages.dll" ComponentId="{926846DC-577F-406D-A898-A16A2F5A70B2}" Directory_="bin_Dir" Attributes="0" KeyPath="System.Web.WebPages.dll"/>
+    <ROW Component="VBCSCompiler.exe" ComponentId="{FF07D2CF-1F62-45AB-B05C-FB77B84B8A04}" Directory_="roslyn_Dir" Attributes="0" KeyPath="VBCSCompiler.exe"/>
+    <ROW Component="Web.config" ComponentId="{F4618FFA-4136-4FFE-B68B-FCE4D2385783}" Directory_="Views_Dir" Attributes="0" KeyPath="Web.config_1" Type="0"/>
+    <ROW Component="WebGrease.dll" ComponentId="{A7E836A2-92F1-4948-B7F6-228D774D795E}" Directory_="bin_Dir" Attributes="0" KeyPath="WebGrease.dll"/>
+    <ROW Component="am.pak" ComponentId="{A092691D-40A0-4CA9-BFFF-58B5AC5AFF9A}" Directory_="locales_Dir" Attributes="0" KeyPath="am.pak" Type="0"/>
+    <ROW Component="am.pak_1" ComponentId="{D61A99FE-835A-48AE-A0CD-E62EFF1D0A05}" Directory_="locales_1_Dir" Attributes="0" KeyPath="am.pak_1" Type="0"/>
+    <ROW Component="bulmartl.min.css" ComponentId="{FB116252-E5DB-40B1-8A6F-98629BD5EFC3}" Directory_="Styles_Dir" Attributes="0" KeyPath="bulmartl.min.css" Type="0"/>
+    <ROW Component="chartJs.js" ComponentId="{C7D6EEAB-A06D-448B-995F-91B893A127B1}" Directory_="Js_Dir" Attributes="0" KeyPath="chartJs.js" Type="0"/>
+    <ROW Component="chrome_100_percent.pak" ComponentId="{C7220BDD-C063-4070-B6E2-BD9948699CF3}" Directory_="native_Dir" Attributes="0" KeyPath="chrome_100_percent.pak" Type="0"/>
+    <ROW Component="chrome_100_percent.pak_1" ComponentId="{59BC48A8-0693-4699-B4BF-73B130E057DC}" Directory_="native_1_Dir" Attributes="0" KeyPath="chrome_100_percent.pak_1" Type="0"/>
+    <ROW Component="chrome_elf.dll" ComponentId="{ED3720BF-DF05-4E1B-9F94-3496D13E5618}" Directory_="native_Dir" Attributes="256" KeyPath="chrome_elf.dll"/>
+    <ROW Component="chrome_elf.dll_1" ComponentId="{71F15F69-6A90-4CAE-8292-A7392F6B8FB3}" Directory_="native_1_Dir" Attributes="0" KeyPath="chrome_elf.dll_1"/>
+    <ROW Component="csc.exe" ComponentId="{E176495E-549F-460C-8A27-739A2022DD1F}" Directory_="roslyn_Dir" Attributes="0" KeyPath="csc.exe"/>
+    <ROW Component="csc.exe.config" ComponentId="{2895A150-CDD6-49DF-96B7-6ACC8CE1DAC5}" Directory_="roslyn_Dir" Attributes="0" KeyPath="csc.exe.config" Type="0"/>
+    <ROW Component="csi.exe" ComponentId="{600996FD-EC76-42F6-B9C4-40D683693D2A}" Directory_="roslyn_Dir" Attributes="0" KeyPath="csi.exe"/>
+    <ROW Component="d3dcompiler_47.dll" ComponentId="{A34BD907-D86D-4D34-BCDA-B5DD6AF4FA3A}" Directory_="native_Dir" Attributes="256" KeyPath="d3dcompiler_47.dll"/>
+    <ROW Component="d3dcompiler_47.dll_1" ComponentId="{FAA6E712-6163-474D-8056-77AAB2AF9B95}" Directory_="native_1_Dir" Attributes="0" KeyPath="d3dcompiler_47.dll_1"/>
+    <ROW Component="fabrands400.eot" ComponentId="{2B4303D6-4619-4052-8880-620BE51B2DD0}" Directory_="Fonts_Dir" Attributes="0" KeyPath="fabrands400.eot" Type="0"/>
+    <ROW Component="fabrands400.eot_1" ComponentId="{950FB237-DACB-4D70-AC01-FD7668D583F1}" Directory_="Fonts_1_Dir" Attributes="0" KeyPath="fabrands400.eot_1" Type="0"/>
+    <ROW Component="favicon.ico" ComponentId="{72686F73-9D72-4ECE-9F41-D1CBD05AB151}" Directory_="APPDIR" Attributes="0" KeyPath="favicon.ico" Type="0"/>
+    <ROW Component="libEGL.dll" ComponentId="{9620A7DA-53E3-42FC-A241-3656A3AD2531}" Directory_="native_Dir" Attributes="256" KeyPath="libEGL.dll"/>
+    <ROW Component="libEGL.dll_1" ComponentId="{8B543B4E-D25E-4C26-8DE6-6DB76502A1D7}" Directory_="swiftshader_Dir" Attributes="256" KeyPath="libEGL.dll_1"/>
+    <ROW Component="libEGL.dll_2" ComponentId="{A45B1ED2-0603-466D-8B1F-B2DD1EF15BAD}" Directory_="native_1_Dir" Attributes="0" KeyPath="libEGL.dll_2"/>
+    <ROW Component="libEGL.dll_3" ComponentId="{FC76F5FB-75D9-4586-A25A-73DCCDA16731}" Directory_="swiftshader_1_Dir" Attributes="0" KeyPath="libEGL.dll_3"/>
+    <ROW Component="libGLESv2.dll" ComponentId="{44EC6A28-C7D9-4688-B3A7-AC7930FF2A9E}" Directory_="native_Dir" Attributes="256" KeyPath="libGLESv2.dll"/>
+    <ROW Component="libGLESv2.dll_1" ComponentId="{513082E3-BD10-47FD-BF84-AE0D22A312A9}" Directory_="swiftshader_Dir" Attributes="256" KeyPath="libGLESv2.dll_1"/>
+    <ROW Component="libGLESv2.dll_2" ComponentId="{AEACEBD1-1DC9-4326-AA28-E9AC0CB5E884}" Directory_="native_1_Dir" Attributes="0" KeyPath="libGLESv2.dll_2"/>
+    <ROW Component="libGLESv2.dll_3" ComponentId="{0AD4CE1F-8088-4AB2-B838-D8D795F56E8D}" Directory_="swiftshader_1_Dir" Attributes="0" KeyPath="libGLESv2.dll_3"/>
+    <ROW Component="libcef.dll" ComponentId="{16D72595-5534-4442-8684-DD63E2B4C1D4}" Directory_="native_Dir" Attributes="256" KeyPath="libcef.dll"/>
+    <ROW Component="libcef.dll_1" ComponentId="{03BC48A8-0109-49A3-9658-C0E81520705E}" Directory_="native_1_Dir" Attributes="0" KeyPath="libcef.dll_1"/>
+    <ROW Component="logo.png" ComponentId="{20371976-B87E-4F82-86E3-25C60FD6ED0C}" Directory_="Images_Dir" Attributes="0" KeyPath="logo.png" Type="0"/>
+    <ROW Component="vbc.exe" ComponentId="{2038504A-6677-49C7-B21C-2782774A7C7C}" Directory_="roslyn_Dir" Attributes="0" KeyPath="vbc.exe"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="favicon.ico" Component_="favicon.ico" FileName="favicon.ico" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\favicon.ico" SelfReg="false"/>
+    <ROW File="Global.asax" Component_="favicon.ico" FileName="GLOBAL~1.ASA|Global.asax" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Global.asax" SelfReg="false"/>
+    <ROW File="Web.config" Component_="favicon.ico" FileName="WEB~1.CON|Web.config" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Web.config" SelfReg="false"/>
+    <ROW File="fabrands400.eot" Component_="fabrands400.eot" FileName="FA-BRA~1.EOT|fa-brands-400.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-brands-400.eot" SelfReg="false"/>
+    <ROW File="fabrands400.svg" Component_="fabrands400.eot" FileName="FA-BRA~1.SVG|fa-brands-400.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-brands-400.svg" SelfReg="false"/>
+    <ROW File="fabrands400.ttf" Component_="fabrands400.eot" FileName="FA-BRA~1.TTF|fa-brands-400.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-brands-400.ttf" SelfReg="false"/>
+    <ROW File="fabrands400.woff" Component_="fabrands400.eot" FileName="FA-BRA~1.WOF|fa-brands-400.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-brands-400.woff" SelfReg="false"/>
+    <ROW File="fabrands400.woff2" Component_="fabrands400.eot" FileName="FA-BRA~2.WOF|fa-brands-400.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-brands-400.woff2" SelfReg="false"/>
+    <ROW File="faregular400.eot" Component_="fabrands400.eot" FileName="FA-REG~1.EOT|fa-regular-400.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-regular-400.eot" SelfReg="false"/>
+    <ROW File="faregular400.svg" Component_="fabrands400.eot" FileName="FA-REG~1.SVG|fa-regular-400.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-regular-400.svg" SelfReg="false"/>
+    <ROW File="faregular400.ttf" Component_="fabrands400.eot" FileName="FA-REG~1.TTF|fa-regular-400.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-regular-400.ttf" SelfReg="false"/>
+    <ROW File="faregular400.woff" Component_="fabrands400.eot" FileName="FA-REG~1.WOF|fa-regular-400.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-regular-400.woff" SelfReg="false"/>
+    <ROW File="faregular400.woff2" Component_="fabrands400.eot" FileName="FA-REG~2.WOF|fa-regular-400.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-regular-400.woff2" SelfReg="false"/>
+    <ROW File="fasolid900.eot" Component_="fabrands400.eot" FileName="FA-SOL~1.EOT|fa-solid-900.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-solid-900.eot" SelfReg="false"/>
+    <ROW File="fasolid900.svg" Component_="fabrands400.eot" FileName="FA-SOL~1.SVG|fa-solid-900.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-solid-900.svg" SelfReg="false"/>
+    <ROW File="fasolid900.ttf" Component_="fabrands400.eot" FileName="FA-SOL~1.TTF|fa-solid-900.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-solid-900.ttf" SelfReg="false"/>
+    <ROW File="fasolid900.woff" Component_="fabrands400.eot" FileName="FA-SOL~1.WOF|fa-solid-900.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-solid-900.woff" SelfReg="false"/>
+    <ROW File="fasolid900.woff2" Component_="fabrands400.eot" FileName="FA-SOL~2.WOF|fa-solid-900.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Fonts\fa-solid-900.woff2" SelfReg="false"/>
+    <ROW File="logo.png" Component_="logo.png" FileName="logo.png" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Images\logo.png" SelfReg="false"/>
+    <ROW File="chartJs.js" Component_="chartJs.js" FileName="chartJs.js" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Js\chartJs.js" SelfReg="false"/>
+    <ROW File="html2pdf.js" Component_="chartJs.js" FileName="html2pdf.js" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Js\html2pdf.js" SelfReg="false"/>
+    <ROW File="requests.js" Component_="chartJs.js" FileName="requests.js" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Js\requests.js" SelfReg="false"/>
+    <ROW File="roundProgressBar.js" Component_="chartJs.js" FileName="ROUNDP~1.JS|roundProgressBar.js" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Js\roundProgressBar.js" SelfReg="false"/>
+    <ROW File="bulmartl.min.css" Component_="bulmartl.min.css" FileName="BULMA-~1.CSS|bulma-rtl.min.css" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\bulma-rtl.min.css" SelfReg="false"/>
+    <ROW File="bulma.min.css" Component_="bulmartl.min.css" FileName="BULMAM~1.CSS|bulma.min.css" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\bulma.min.css" SelfReg="false"/>
+    <ROW File="fa.min.css" Component_="bulmartl.min.css" FileName="FAMIN~1.CSS|fa.min.css" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\fa.min.css" SelfReg="false"/>
+    <ROW File="Site.css" Component_="bulmartl.min.css" FileName="Site.css" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\Site.css" SelfReg="false"/>
+    <ROW File="Backup.scss" Component_="Backup.scss" FileName="BACKUP~1.SCS|Backup.scss" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\Sass\Backup.scss" SelfReg="false"/>
+    <ROW File="Bitacore.scss" Component_="Backup.scss" FileName="BITACO~1.SCS|Bitacore.scss" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\Sass\Bitacore.scss" SelfReg="false"/>
+    <ROW File="Home.scss" Component_="Backup.scss" FileName="HOME~1.SCS|Home.scss" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\Sass\Home.scss" SelfReg="false"/>
+    <ROW File="Navbar.scss" Component_="Backup.scss" FileName="NAVBAR~1.SCS|Navbar.scss" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\Sass\Navbar.scss" SelfReg="false"/>
+    <ROW File="Site.scss" Component_="Backup.scss" FileName="SITE~1.SCS|Site.scss" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Assets\Styles\Sass\Site.scss" SelfReg="false"/>
+    <ROW File="Antlr3.Runtime.dll" Component_="Antlr3.Runtime.dll" FileName="ANTLR3~1.DLL|Antlr3.Runtime.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Antlr3.Runtime.dll" SelfReg="false"/>
+    <ROW File="Antlr3.Runtime.pdb" Component_="Antlr3.Runtime.dll" FileName="ANTLR3~1.PDB|Antlr3.Runtime.pdb" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Antlr3.Runtime.pdb" SelfReg="false"/>
+    <ROW File="BusinessEntity.dll" Component_="BusinessEntity.dll" FileName="BUSINE~1.DLL|BusinessEntity.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\BusinessEntity.dll" SelfReg="false"/>
+    <ROW File="BusinessEntity.pdb" Component_="BusinessEntity.dll" FileName="BUSINE~1.PDB|BusinessEntity.pdb" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\BusinessEntity.pdb" SelfReg="false"/>
+    <ROW File="BusinessLogic.dll" Component_="BusinessLogic.dll" FileName="BUSINE~2.DLL|BusinessLogic.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\BusinessLogic.dll" SelfReg="false"/>
+    <ROW File="BusinessLogic.pdb" Component_="BusinessLogic.dll" FileName="BUSINE~2.PDB|BusinessLogic.pdb" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\BusinessLogic.pdb" SelfReg="false"/>
+    <ROW File="CsvHelper.dll" Component_="CsvHelper.dll" FileName="CSVHEL~1.DLL|CsvHelper.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\CsvHelper.dll" SelfReg="false"/>
+    <ROW File="IronPdf.dll" Component_="IronPdf.dll" FileName="IronPdf.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\IronPdf.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Bcl.AsyncInterfaces.dll" Component_="Microsoft.Bcl.AsyncInterfaces.dll" FileName="MICROS~1.DLL|Microsoft.Bcl.AsyncInterfaces.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Microsoft.Bcl.AsyncInterfaces.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Bcl.HashCode.dll" Component_="Microsoft.Bcl.HashCode.dll" FileName="MICROS~2.DLL|Microsoft.Bcl.HashCode.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Microsoft.Bcl.HashCode.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" Component_="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" FileName="MICROS~3.DLL|Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Web.Infrastructure.dll" Component_="Microsoft.Web.Infrastructure.dll" FileName="MICROS~4.DLL|Microsoft.Web.Infrastructure.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Microsoft.Web.Infrastructure.dll" SelfReg="false"/>
+    <ROW File="MyNews.dll" Component_="MyNews.dll" FileName="MyNews.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\MyNews.dll" SelfReg="false"/>
+    <ROW File="MyNews.pdb" Component_="MyNews.dll" FileName="MyNews.pdb" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\MyNews.pdb" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="Persistence.dll" Component_="Persistence.dll" FileName="PERSIS~1.DLL|Persistence.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Persistence.dll" SelfReg="false"/>
+    <ROW File="Persistence.pdb" Component_="Persistence.dll" FileName="PERSIS~1.PDB|Persistence.pdb" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Persistence.pdb" SelfReg="false"/>
+    <ROW File="Security.dll" Component_="Security.dll" FileName="Security.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Security.dll" SelfReg="false"/>
+    <ROW File="Security.pdb" Component_="Security.dll" FileName="Security.pdb" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\Security.pdb" SelfReg="false"/>
+    <ROW File="System.Buffers.dll" Component_="System.Buffers.dll" FileName="SYSTEM~1.DLL|System.Buffers.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Buffers.dll" SelfReg="false"/>
+    <ROW File="System.Memory.dll" Component_="System.Memory.dll" FileName="SYSTEM~2.DLL|System.Memory.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Memory.dll" SelfReg="false"/>
+    <ROW File="System.Numerics.Vectors.dll" Component_="System.Numerics.Vectors.dll" FileName="SYSTEM~3.DLL|System.Numerics.Vectors.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Numerics.Vectors.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.dll" Component_="System.Runtime.CompilerServices.Unsafe.dll" FileName="SYSTEM~4.DLL|System.Runtime.CompilerServices.Unsafe.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Runtime.CompilerServices.Unsafe.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Extensions.dll" Component_="System.Threading.Tasks.Extensions.dll" FileName="SYSTEM~5.DLL|System.Threading.Tasks.Extensions.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Threading.Tasks.Extensions.dll" SelfReg="false"/>
+    <ROW File="System.Web.Helpers.dll" Component_="System.Web.Helpers.dll" FileName="SYSTEM~6.DLL|System.Web.Helpers.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.Helpers.dll" SelfReg="false"/>
+    <ROW File="System.Web.Mvc.dll" Component_="System.Web.Mvc.dll" FileName="SYSTEM~7.DLL|System.Web.Mvc.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.Mvc.dll" SelfReg="false"/>
+    <ROW File="System.Web.Optimization.dll" Component_="System.Web.Optimization.dll" FileName="SYSTEM~8.DLL|System.Web.Optimization.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.Optimization.dll" SelfReg="false"/>
+    <ROW File="System.Web.Razor.dll" Component_="System.Web.Razor.dll" FileName="SYSTEM~9.DLL|System.Web.Razor.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.Razor.dll" SelfReg="false"/>
+    <ROW File="System.Web.WebPages.Deployment.dll" Component_="System.Web.WebPages.Deployment.dll" FileName="SYSTE~10.DLL|System.Web.WebPages.Deployment.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.WebPages.Deployment.dll" SelfReg="false"/>
+    <ROW File="System.Web.WebPages.dll" Component_="System.Web.WebPages.dll" FileName="SYSTE~11.DLL|System.Web.WebPages.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.WebPages.dll" SelfReg="false"/>
+    <ROW File="System.Web.WebPages.Razor.dll" Component_="System.Web.WebPages.Razor.dll" FileName="SYSTE~12.DLL|System.Web.WebPages.Razor.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\System.Web.WebPages.Razor.dll" SelfReg="false"/>
+    <ROW File="WebGrease.dll" Component_="WebGrease.dll" FileName="WEBGRE~1.DLL|WebGrease.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\WebGrease.dll" SelfReg="false"/>
+    <ROW File="csc.exe" Component_="csc.exe" FileName="csc.exe" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\csc.exe" SelfReg="false"/>
+    <ROW File="csc.exe.config" Component_="csc.exe.config" FileName="CSCEXE~1.CON|csc.exe.config" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\csc.exe.config" SelfReg="false"/>
+    <ROW File="csc.rsp" Component_="csc.exe.config" FileName="csc.rsp" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\csc.rsp" SelfReg="false"/>
+    <ROW File="csi.exe" Component_="csi.exe" FileName="csi.exe" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\csi.exe" SelfReg="false"/>
+    <ROW File="csi.exe.config" Component_="csc.exe.config" FileName="CSIEXE~1.CON|csi.exe.config" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\csi.exe.config" SelfReg="false"/>
+    <ROW File="csi.rsp" Component_="csc.exe.config" FileName="csi.rsp" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\csi.rsp" SelfReg="false"/>
+    <ROW File="Microsoft.Build.Tasks.CodeAnalysis.dll" Component_="Microsoft.Build.Tasks.CodeAnalysis.dll" FileName="MICROS~1.DLL|Microsoft.Build.Tasks.CodeAnalysis.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.dll" Component_="Microsoft.CodeAnalysis.CSharp.dll" FileName="MICROS~2.DLL|Microsoft.CodeAnalysis.CSharp.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.CSharp.Scripting.dll" Component_="Microsoft.CodeAnalysis.CSharp.Scripting.dll" FileName="MICROS~3.DLL|Microsoft.CodeAnalysis.CSharp.Scripting.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.dll" Component_="Microsoft.CodeAnalysis.dll" FileName="MICROS~4.DLL|Microsoft.CodeAnalysis.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.CodeAnalysis.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.Scripting.dll" Component_="Microsoft.CodeAnalysis.Scripting.dll" FileName="MICROS~5.DLL|Microsoft.CodeAnalysis.Scripting.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CodeAnalysis.VisualBasic.dll" Component_="Microsoft.CodeAnalysis.VisualBasic.dll" FileName="MICROS~6.DLL|Microsoft.CodeAnalysis.VisualBasic.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" SelfReg="false"/>
+    <ROW File="Microsoft.CSharp.Core.targets" Component_="csc.exe.config" FileName="MICROS~1.TAR|Microsoft.CSharp.Core.targets" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.CSharp.Core.targets" SelfReg="false"/>
+    <ROW File="Microsoft.DiaSymReader.Native.amd64.dll" Component_="Microsoft.DiaSymReader.Native.amd64.dll" FileName="MICROS~7.DLL|Microsoft.DiaSymReader.Native.amd64.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" SelfReg="false"/>
+    <ROW File="Microsoft.DiaSymReader.Native.x86.dll" Component_="Microsoft.DiaSymReader.Native.x86.dll" FileName="MICROS~8.DLL|Microsoft.DiaSymReader.Native.x86.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" SelfReg="false"/>
+    <ROW File="Microsoft.Managed.Core.targets" Component_="csc.exe.config" FileName="MICROS~2.TAR|Microsoft.Managed.Core.targets" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.Managed.Core.targets" SelfReg="false"/>
+    <ROW File="Microsoft.VisualBasic.Core.targets" Component_="csc.exe.config" FileName="MICROS~3.TAR|Microsoft.VisualBasic.Core.targets" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\Microsoft.VisualBasic.Core.targets" SelfReg="false"/>
+    <ROW File="System.Buffers.dll_1" Component_="System.Buffers.dll_1" FileName="SYSTEM~1.DLL|System.Buffers.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Buffers.dll" SelfReg="false"/>
+    <ROW File="System.Collections.Immutable.dll" Component_="System.Collections.Immutable.dll" FileName="SYSTEM~2.DLL|System.Collections.Immutable.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Collections.Immutable.dll" SelfReg="false"/>
+    <ROW File="System.Memory.dll_1" Component_="System.Memory.dll_1" FileName="SYSTEM~3.DLL|System.Memory.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Memory.dll" SelfReg="false"/>
+    <ROW File="System.Numerics.Vectors.dll_1" Component_="System.Numerics.Vectors.dll_1" FileName="SYSTEM~4.DLL|System.Numerics.Vectors.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Numerics.Vectors.dll" SelfReg="false"/>
+    <ROW File="System.Reflection.Metadata.dll" Component_="System.Reflection.Metadata.dll" FileName="SYSTEM~5.DLL|System.Reflection.Metadata.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Reflection.Metadata.dll" SelfReg="false"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.dll_1" Component_="System.Runtime.CompilerServices.Unsafe.dll_1" FileName="SYSTEM~6.DLL|System.Runtime.CompilerServices.Unsafe.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll" SelfReg="false"/>
+    <ROW File="System.Text.Encoding.CodePages.dll" Component_="System.Text.Encoding.CodePages.dll" FileName="SYSTEM~7.DLL|System.Text.Encoding.CodePages.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Text.Encoding.CodePages.dll" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Extensions.dll_1" Component_="System.Threading.Tasks.Extensions.dll_1" FileName="SYSTEM~8.DLL|System.Threading.Tasks.Extensions.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\System.Threading.Tasks.Extensions.dll" SelfReg="false"/>
+    <ROW File="vbc.exe" Component_="vbc.exe" FileName="vbc.exe" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\vbc.exe" SelfReg="false"/>
+    <ROW File="vbc.exe.config" Component_="csc.exe.config" FileName="VBCEXE~1.CON|vbc.exe.config" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\vbc.exe.config" SelfReg="false"/>
+    <ROW File="vbc.rsp" Component_="csc.exe.config" FileName="vbc.rsp" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\vbc.rsp" SelfReg="false"/>
+    <ROW File="VBCSCompiler.exe" Component_="VBCSCompiler.exe" FileName="VBCSCO~1.EXE|VBCSCompiler.exe" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\VBCSCompiler.exe" SelfReg="false"/>
+    <ROW File="VBCSCompiler.exe.config" Component_="csc.exe.config" FileName="VBCSCO~1.CON|VBCSCompiler.exe.config" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\roslyn\VBCSCompiler.exe.config" SelfReg="false"/>
+    <ROW File="chrome_100_percent.pak" Component_="chrome_100_percent.pak" FileName="CHROME~1.PAK|chrome_100_percent.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\chrome_100_percent.pak" SelfReg="false"/>
+    <ROW File="chrome_200_percent.pak" Component_="chrome_100_percent.pak" FileName="CHROME~2.PAK|chrome_200_percent.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\chrome_200_percent.pak" SelfReg="false"/>
+    <ROW File="chrome_elf.dll" Component_="chrome_elf.dll" FileName="CHROME~1.DLL|chrome_elf.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\chrome_elf.dll" SelfReg="false"/>
+    <ROW File="d3dcompiler_47.dll" Component_="d3dcompiler_47.dll" FileName="D3DCOM~1.DLL|d3dcompiler_47.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\d3dcompiler_47.dll" SelfReg="false"/>
+    <ROW File="icudtl.dat" Component_="chrome_100_percent.pak" FileName="icudtl.dat" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\icudtl.dat" SelfReg="false"/>
+    <ROW File="IronCefSubprocess.exe" Component_="IronCefSubprocess.exe" FileName="IRONCE~1.EXE|IronCefSubprocess.exe" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\IronCefSubprocess.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="IronInterop.dll" Component_="IronInterop.dll" FileName="IRONIN~1.DLL|IronInterop.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\IronInterop.dll" SelfReg="false"/>
+    <ROW File="IronPdf.Native.Chrome.deployment.json" Component_="chrome_100_percent.pak" FileName="IRONPD~1.JSO|IronPdf.Native.Chrome.deployment.json" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\IronPdf.Native.Chrome.deployment.json" SelfReg="false"/>
+    <ROW File="libcef.dll" Component_="libcef.dll" FileName="libcef.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\libcef.dll" SelfReg="false"/>
+    <ROW File="libEGL.dll" Component_="libEGL.dll" FileName="libEGL.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\libEGL.dll" SelfReg="false"/>
+    <ROW File="libGLESv2.dll" Component_="libGLESv2.dll" FileName="LIBGLE~1.DLL|libGLESv2.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\libGLESv2.dll" SelfReg="false"/>
+    <ROW File="resources.pak" Component_="chrome_100_percent.pak" FileName="RESOUR~1.PAK|resources.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\resources.pak" SelfReg="false"/>
+    <ROW File="snapshot_blob.bin" Component_="chrome_100_percent.pak" FileName="SNAPSH~1.BIN|snapshot_blob.bin" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\snapshot_blob.bin" SelfReg="false"/>
+    <ROW File="v8_context_snapshot.bin" Component_="chrome_100_percent.pak" FileName="V8_CON~1.BIN|v8_context_snapshot.bin" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\v8_context_snapshot.bin" SelfReg="false"/>
+    <ROW File="am.pak" Component_="am.pak" FileName="am.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\am.pak" SelfReg="false"/>
+    <ROW File="ar.pak" Component_="am.pak" FileName="ar.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ar.pak" SelfReg="false"/>
+    <ROW File="bg.pak" Component_="am.pak" FileName="bg.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\bg.pak" SelfReg="false"/>
+    <ROW File="bn.pak" Component_="am.pak" FileName="bn.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\bn.pak" SelfReg="false"/>
+    <ROW File="ca.pak" Component_="am.pak" FileName="ca.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ca.pak" SelfReg="false"/>
+    <ROW File="cs.pak" Component_="am.pak" FileName="cs.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\cs.pak" SelfReg="false"/>
+    <ROW File="da.pak" Component_="am.pak" FileName="da.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\da.pak" SelfReg="false"/>
+    <ROW File="de.pak" Component_="am.pak" FileName="de.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\de.pak" SelfReg="false"/>
+    <ROW File="el.pak" Component_="am.pak" FileName="el.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\el.pak" SelfReg="false"/>
+    <ROW File="enGB.pak" Component_="am.pak" FileName="en-GB.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\en-GB.pak" SelfReg="false"/>
+    <ROW File="enUS.pak" Component_="am.pak" FileName="en-US.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\en-US.pak" SelfReg="false"/>
+    <ROW File="es419.pak" Component_="am.pak" FileName="es-419.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\es-419.pak" SelfReg="false"/>
+    <ROW File="es.pak" Component_="am.pak" FileName="es.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\es.pak" SelfReg="false"/>
+    <ROW File="et.pak" Component_="am.pak" FileName="et.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\et.pak" SelfReg="false"/>
+    <ROW File="fa.pak" Component_="am.pak" FileName="fa.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\fa.pak" SelfReg="false"/>
+    <ROW File="fi.pak" Component_="am.pak" FileName="fi.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\fi.pak" SelfReg="false"/>
+    <ROW File="fil.pak" Component_="am.pak" FileName="fil.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\fil.pak" SelfReg="false"/>
+    <ROW File="fr.pak" Component_="am.pak" FileName="fr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\fr.pak" SelfReg="false"/>
+    <ROW File="gu.pak" Component_="am.pak" FileName="gu.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\gu.pak" SelfReg="false"/>
+    <ROW File="he.pak" Component_="am.pak" FileName="he.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\he.pak" SelfReg="false"/>
+    <ROW File="hi.pak" Component_="am.pak" FileName="hi.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\hi.pak" SelfReg="false"/>
+    <ROW File="hr.pak" Component_="am.pak" FileName="hr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\hr.pak" SelfReg="false"/>
+    <ROW File="hu.pak" Component_="am.pak" FileName="hu.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\hu.pak" SelfReg="false"/>
+    <ROW File="id.pak" Component_="am.pak" FileName="id.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\id.pak" SelfReg="false"/>
+    <ROW File="it.pak" Component_="am.pak" FileName="it.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\it.pak" SelfReg="false"/>
+    <ROW File="ja.pak" Component_="am.pak" FileName="ja.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ja.pak" SelfReg="false"/>
+    <ROW File="kn.pak" Component_="am.pak" FileName="kn.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\kn.pak" SelfReg="false"/>
+    <ROW File="ko.pak" Component_="am.pak" FileName="ko.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ko.pak" SelfReg="false"/>
+    <ROW File="lt.pak" Component_="am.pak" FileName="lt.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\lt.pak" SelfReg="false"/>
+    <ROW File="lv.pak" Component_="am.pak" FileName="lv.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\lv.pak" SelfReg="false"/>
+    <ROW File="ml.pak" Component_="am.pak" FileName="ml.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ml.pak" SelfReg="false"/>
+    <ROW File="mr.pak" Component_="am.pak" FileName="mr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\mr.pak" SelfReg="false"/>
+    <ROW File="ms.pak" Component_="am.pak" FileName="ms.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ms.pak" SelfReg="false"/>
+    <ROW File="nb.pak" Component_="am.pak" FileName="nb.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\nb.pak" SelfReg="false"/>
+    <ROW File="nl.pak" Component_="am.pak" FileName="nl.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\nl.pak" SelfReg="false"/>
+    <ROW File="pl.pak" Component_="am.pak" FileName="pl.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\pl.pak" SelfReg="false"/>
+    <ROW File="ptBR.pak" Component_="am.pak" FileName="pt-BR.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\pt-BR.pak" SelfReg="false"/>
+    <ROW File="ptPT.pak" Component_="am.pak" FileName="pt-PT.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\pt-PT.pak" SelfReg="false"/>
+    <ROW File="ro.pak" Component_="am.pak" FileName="ro.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ro.pak" SelfReg="false"/>
+    <ROW File="ru.pak" Component_="am.pak" FileName="ru.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ru.pak" SelfReg="false"/>
+    <ROW File="sk.pak" Component_="am.pak" FileName="sk.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\sk.pak" SelfReg="false"/>
+    <ROW File="sl.pak" Component_="am.pak" FileName="sl.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\sl.pak" SelfReg="false"/>
+    <ROW File="sr.pak" Component_="am.pak" FileName="sr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\sr.pak" SelfReg="false"/>
+    <ROW File="sv.pak" Component_="am.pak" FileName="sv.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\sv.pak" SelfReg="false"/>
+    <ROW File="sw.pak" Component_="am.pak" FileName="sw.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\sw.pak" SelfReg="false"/>
+    <ROW File="ta.pak" Component_="am.pak" FileName="ta.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\ta.pak" SelfReg="false"/>
+    <ROW File="te.pak" Component_="am.pak" FileName="te.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\te.pak" SelfReg="false"/>
+    <ROW File="th.pak" Component_="am.pak" FileName="th.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\th.pak" SelfReg="false"/>
+    <ROW File="tr.pak" Component_="am.pak" FileName="tr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\tr.pak" SelfReg="false"/>
+    <ROW File="uk.pak" Component_="am.pak" FileName="uk.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\uk.pak" SelfReg="false"/>
+    <ROW File="vi.pak" Component_="am.pak" FileName="vi.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\vi.pak" SelfReg="false"/>
+    <ROW File="zhCN.pak" Component_="am.pak" FileName="zh-CN.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\zh-CN.pak" SelfReg="false"/>
+    <ROW File="zhTW.pak" Component_="am.pak" FileName="zh-TW.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\locales\zh-TW.pak" SelfReg="false"/>
+    <ROW File="libEGL.dll_1" Component_="libEGL.dll_1" FileName="libEGL.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\swiftshader\libEGL.dll" SelfReg="false"/>
+    <ROW File="libGLESv2.dll_1" Component_="libGLESv2.dll_1" FileName="LIBGLE~1.DLL|libGLESv2.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x64\native\swiftshader\libGLESv2.dll" SelfReg="false"/>
+    <ROW File="chrome_100_percent.pak_1" Component_="chrome_100_percent.pak_1" FileName="CHROME~1.PAK|chrome_100_percent.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\chrome_100_percent.pak" SelfReg="false"/>
+    <ROW File="chrome_200_percent.pak_1" Component_="chrome_100_percent.pak_1" FileName="CHROME~2.PAK|chrome_200_percent.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\chrome_200_percent.pak" SelfReg="false"/>
+    <ROW File="chrome_elf.dll_1" Component_="chrome_elf.dll_1" FileName="CHROME~1.DLL|chrome_elf.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\chrome_elf.dll" SelfReg="false"/>
+    <ROW File="d3dcompiler_47.dll_1" Component_="d3dcompiler_47.dll_1" FileName="D3DCOM~1.DLL|d3dcompiler_47.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\d3dcompiler_47.dll" SelfReg="false"/>
+    <ROW File="icudtl.dat_1" Component_="chrome_100_percent.pak_1" FileName="icudtl.dat" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\icudtl.dat" SelfReg="false"/>
+    <ROW File="IronCefSubprocess.exe_1" Component_="IronCefSubprocess.exe_1" FileName="IRONCE~1.EXE|IronCefSubprocess.exe" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\IronCefSubprocess.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="IronInterop.dll_1" Component_="IronInterop.dll_1" FileName="IRONIN~1.DLL|IronInterop.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\IronInterop.dll" SelfReg="false"/>
+    <ROW File="IronPdf.Native.Chrome.deployment.json_1" Component_="chrome_100_percent.pak_1" FileName="IRONPD~1.JSO|IronPdf.Native.Chrome.deployment.json" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\IronPdf.Native.Chrome.deployment.json" SelfReg="false"/>
+    <ROW File="libcef.dll_1" Component_="libcef.dll_1" FileName="libcef.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\libcef.dll" SelfReg="false"/>
+    <ROW File="libEGL.dll_2" Component_="libEGL.dll_2" FileName="libEGL.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\libEGL.dll" SelfReg="false"/>
+    <ROW File="libGLESv2.dll_2" Component_="libGLESv2.dll_2" FileName="LIBGLE~1.DLL|libGLESv2.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\libGLESv2.dll" SelfReg="false"/>
+    <ROW File="resources.pak_1" Component_="chrome_100_percent.pak_1" FileName="RESOUR~1.PAK|resources.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\resources.pak" SelfReg="false"/>
+    <ROW File="snapshot_blob.bin_1" Component_="chrome_100_percent.pak_1" FileName="SNAPSH~1.BIN|snapshot_blob.bin" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\snapshot_blob.bin" SelfReg="false"/>
+    <ROW File="v8_context_snapshot.bin_1" Component_="chrome_100_percent.pak_1" FileName="V8_CON~1.BIN|v8_context_snapshot.bin" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\v8_context_snapshot.bin" SelfReg="false"/>
+    <ROW File="am.pak_1" Component_="am.pak_1" FileName="am.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\am.pak" SelfReg="false"/>
+    <ROW File="ar.pak_1" Component_="am.pak_1" FileName="ar.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ar.pak" SelfReg="false"/>
+    <ROW File="bg.pak_1" Component_="am.pak_1" FileName="bg.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\bg.pak" SelfReg="false"/>
+    <ROW File="bn.pak_1" Component_="am.pak_1" FileName="bn.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\bn.pak" SelfReg="false"/>
+    <ROW File="ca.pak_1" Component_="am.pak_1" FileName="ca.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ca.pak" SelfReg="false"/>
+    <ROW File="cs.pak_1" Component_="am.pak_1" FileName="cs.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\cs.pak" SelfReg="false"/>
+    <ROW File="da.pak_1" Component_="am.pak_1" FileName="da.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\da.pak" SelfReg="false"/>
+    <ROW File="de.pak_1" Component_="am.pak_1" FileName="de.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\de.pak" SelfReg="false"/>
+    <ROW File="el.pak_1" Component_="am.pak_1" FileName="el.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\el.pak" SelfReg="false"/>
+    <ROW File="enGB.pak_1" Component_="am.pak_1" FileName="en-GB.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\en-GB.pak" SelfReg="false"/>
+    <ROW File="enUS.pak_1" Component_="am.pak_1" FileName="en-US.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\en-US.pak" SelfReg="false"/>
+    <ROW File="es419.pak_1" Component_="am.pak_1" FileName="es-419.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\es-419.pak" SelfReg="false"/>
+    <ROW File="es.pak_1" Component_="am.pak_1" FileName="es.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\es.pak" SelfReg="false"/>
+    <ROW File="et.pak_1" Component_="am.pak_1" FileName="et.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\et.pak" SelfReg="false"/>
+    <ROW File="fa.pak_1" Component_="am.pak_1" FileName="fa.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\fa.pak" SelfReg="false"/>
+    <ROW File="fi.pak_1" Component_="am.pak_1" FileName="fi.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\fi.pak" SelfReg="false"/>
+    <ROW File="fil.pak_1" Component_="am.pak_1" FileName="fil.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\fil.pak" SelfReg="false"/>
+    <ROW File="fr.pak_1" Component_="am.pak_1" FileName="fr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\fr.pak" SelfReg="false"/>
+    <ROW File="gu.pak_1" Component_="am.pak_1" FileName="gu.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\gu.pak" SelfReg="false"/>
+    <ROW File="he.pak_1" Component_="am.pak_1" FileName="he.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\he.pak" SelfReg="false"/>
+    <ROW File="hi.pak_1" Component_="am.pak_1" FileName="hi.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\hi.pak" SelfReg="false"/>
+    <ROW File="hr.pak_1" Component_="am.pak_1" FileName="hr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\hr.pak" SelfReg="false"/>
+    <ROW File="hu.pak_1" Component_="am.pak_1" FileName="hu.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\hu.pak" SelfReg="false"/>
+    <ROW File="id.pak_1" Component_="am.pak_1" FileName="id.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\id.pak" SelfReg="false"/>
+    <ROW File="it.pak_1" Component_="am.pak_1" FileName="it.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\it.pak" SelfReg="false"/>
+    <ROW File="ja.pak_1" Component_="am.pak_1" FileName="ja.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ja.pak" SelfReg="false"/>
+    <ROW File="kn.pak_1" Component_="am.pak_1" FileName="kn.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\kn.pak" SelfReg="false"/>
+    <ROW File="ko.pak_1" Component_="am.pak_1" FileName="ko.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ko.pak" SelfReg="false"/>
+    <ROW File="lt.pak_1" Component_="am.pak_1" FileName="lt.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\lt.pak" SelfReg="false"/>
+    <ROW File="lv.pak_1" Component_="am.pak_1" FileName="lv.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\lv.pak" SelfReg="false"/>
+    <ROW File="ml.pak_1" Component_="am.pak_1" FileName="ml.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ml.pak" SelfReg="false"/>
+    <ROW File="mr.pak_1" Component_="am.pak_1" FileName="mr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\mr.pak" SelfReg="false"/>
+    <ROW File="ms.pak_1" Component_="am.pak_1" FileName="ms.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ms.pak" SelfReg="false"/>
+    <ROW File="nb.pak_1" Component_="am.pak_1" FileName="nb.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\nb.pak" SelfReg="false"/>
+    <ROW File="nl.pak_1" Component_="am.pak_1" FileName="nl.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\nl.pak" SelfReg="false"/>
+    <ROW File="pl.pak_1" Component_="am.pak_1" FileName="pl.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\pl.pak" SelfReg="false"/>
+    <ROW File="ptBR.pak_1" Component_="am.pak_1" FileName="pt-BR.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\pt-BR.pak" SelfReg="false"/>
+    <ROW File="ptPT.pak_1" Component_="am.pak_1" FileName="pt-PT.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\pt-PT.pak" SelfReg="false"/>
+    <ROW File="ro.pak_1" Component_="am.pak_1" FileName="ro.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ro.pak" SelfReg="false"/>
+    <ROW File="ru.pak_1" Component_="am.pak_1" FileName="ru.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ru.pak" SelfReg="false"/>
+    <ROW File="sk.pak_1" Component_="am.pak_1" FileName="sk.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\sk.pak" SelfReg="false"/>
+    <ROW File="sl.pak_1" Component_="am.pak_1" FileName="sl.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\sl.pak" SelfReg="false"/>
+    <ROW File="sr.pak_1" Component_="am.pak_1" FileName="sr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\sr.pak" SelfReg="false"/>
+    <ROW File="sv.pak_1" Component_="am.pak_1" FileName="sv.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\sv.pak" SelfReg="false"/>
+    <ROW File="sw.pak_1" Component_="am.pak_1" FileName="sw.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\sw.pak" SelfReg="false"/>
+    <ROW File="ta.pak_1" Component_="am.pak_1" FileName="ta.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\ta.pak" SelfReg="false"/>
+    <ROW File="te.pak_1" Component_="am.pak_1" FileName="te.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\te.pak" SelfReg="false"/>
+    <ROW File="th.pak_1" Component_="am.pak_1" FileName="th.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\th.pak" SelfReg="false"/>
+    <ROW File="tr.pak_1" Component_="am.pak_1" FileName="tr.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\tr.pak" SelfReg="false"/>
+    <ROW File="uk.pak_1" Component_="am.pak_1" FileName="uk.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\uk.pak" SelfReg="false"/>
+    <ROW File="vi.pak_1" Component_="am.pak_1" FileName="vi.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\vi.pak" SelfReg="false"/>
+    <ROW File="zhCN.pak_1" Component_="am.pak_1" FileName="zh-CN.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\zh-CN.pak" SelfReg="false"/>
+    <ROW File="zhTW.pak_1" Component_="am.pak_1" FileName="zh-TW.pak" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\locales\zh-TW.pak" SelfReg="false"/>
+    <ROW File="libEGL.dll_3" Component_="libEGL.dll_3" FileName="libEGL.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\swiftshader\libEGL.dll" SelfReg="false"/>
+    <ROW File="libGLESv2.dll_3" Component_="libGLESv2.dll_3" FileName="LIBGLE~1.DLL|libGLESv2.dll" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\bin\runtimes\win-x86\native\swiftshader\libGLESv2.dll" SelfReg="false"/>
+    <ROW File="fabrands400.eot_1" Component_="fabrands400.eot_1" FileName="FA-BRA~1.EOT|fa-brands-400.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-brands-400.eot" SelfReg="false"/>
+    <ROW File="fabrands400.svg_1" Component_="fabrands400.eot_1" FileName="FA-BRA~1.SVG|fa-brands-400.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-brands-400.svg" SelfReg="false"/>
+    <ROW File="fabrands400.ttf_1" Component_="fabrands400.eot_1" FileName="FA-BRA~1.TTF|fa-brands-400.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-brands-400.ttf" SelfReg="false"/>
+    <ROW File="fabrands400.woff_1" Component_="fabrands400.eot_1" FileName="FA-BRA~1.WOF|fa-brands-400.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-brands-400.woff" SelfReg="false"/>
+    <ROW File="fabrands400.woff2_1" Component_="fabrands400.eot_1" FileName="FA-BRA~2.WOF|fa-brands-400.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-brands-400.woff2" SelfReg="false"/>
+    <ROW File="faregular400.eot_1" Component_="fabrands400.eot_1" FileName="FA-REG~1.EOT|fa-regular-400.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-regular-400.eot" SelfReg="false"/>
+    <ROW File="faregular400.svg_1" Component_="fabrands400.eot_1" FileName="FA-REG~1.SVG|fa-regular-400.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-regular-400.svg" SelfReg="false"/>
+    <ROW File="faregular400.ttf_1" Component_="fabrands400.eot_1" FileName="FA-REG~1.TTF|fa-regular-400.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-regular-400.ttf" SelfReg="false"/>
+    <ROW File="faregular400.woff_1" Component_="fabrands400.eot_1" FileName="FA-REG~1.WOF|fa-regular-400.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-regular-400.woff" SelfReg="false"/>
+    <ROW File="faregular400.woff2_1" Component_="fabrands400.eot_1" FileName="FA-REG~2.WOF|fa-regular-400.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-regular-400.woff2" SelfReg="false"/>
+    <ROW File="fasolid900.eot_1" Component_="fabrands400.eot_1" FileName="FA-SOL~1.EOT|fa-solid-900.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-solid-900.eot" SelfReg="false"/>
+    <ROW File="fasolid900.svg_1" Component_="fabrands400.eot_1" FileName="FA-SOL~1.SVG|fa-solid-900.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-solid-900.svg" SelfReg="false"/>
+    <ROW File="fasolid900.ttf_1" Component_="fabrands400.eot_1" FileName="FA-SOL~1.TTF|fa-solid-900.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-solid-900.ttf" SelfReg="false"/>
+    <ROW File="fasolid900.woff_1" Component_="fabrands400.eot_1" FileName="FA-SOL~1.WOF|fa-solid-900.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-solid-900.woff" SelfReg="false"/>
+    <ROW File="fasolid900.woff2_1" Component_="fabrands400.eot_1" FileName="FA-SOL~2.WOF|fa-solid-900.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\fa-solid-900.woff2" SelfReg="false"/>
+    <ROW File="glyphiconshalflingsregular.eot" Component_="fabrands400.eot_1" FileName="GLYPHI~1.EOT|glyphicons-halflings-regular.eot" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\glyphicons-halflings-regular.eot" SelfReg="false"/>
+    <ROW File="glyphiconshalflingsregular.svg" Component_="fabrands400.eot_1" FileName="GLYPHI~1.SVG|glyphicons-halflings-regular.svg" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\glyphicons-halflings-regular.svg" SelfReg="false"/>
+    <ROW File="glyphiconshalflingsregular.ttf" Component_="fabrands400.eot_1" FileName="GLYPHI~1.TTF|glyphicons-halflings-regular.ttf" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\glyphicons-halflings-regular.ttf" SelfReg="false"/>
+    <ROW File="glyphiconshalflingsregular.woff" Component_="fabrands400.eot_1" FileName="GLYPHI~1.WOF|glyphicons-halflings-regular.woff" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\glyphicons-halflings-regular.woff" SelfReg="false"/>
+    <ROW File="glyphiconshalflingsregular.woff2" Component_="fabrands400.eot_1" FileName="GLYPHI~2.WOF|glyphicons-halflings-regular.woff2" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Fonts\glyphicons-halflings-regular.woff2" SelfReg="false"/>
+    <ROW File="Web.config_1" Component_="Web.config" FileName="WEB~1.CON|Web.config" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Web.config" SelfReg="false"/>
+    <ROW File="_ViewStart.cshtml" Component_="Web.config" FileName="_VIEWS~1.CSH|_ViewStart.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\_ViewStart.cshtml" SelfReg="false"/>
+    <ROW File="Create.cshtml" Component_="Create.cshtml" FileName="CREATE~1.CSH|Create.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Authorization\Create.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml" Component_="Create.cshtml" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Authorization\Index.cshtml" SelfReg="false"/>
+    <ROW File="Update.cshtml" Component_="Create.cshtml" FileName="UPDATE~1.CSH|Update.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Authorization\Update.cshtml" SelfReg="false"/>
+    <ROW File="View.cshtml" Component_="Create.cshtml" FileName="VIEW~1.CSH|View.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Authorization\View.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_1" Component_="Index.cshtml" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Backup\Index.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_2" Component_="Index.cshtml_1" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Bitacore\Index.cshtml" SelfReg="false"/>
+    <ROW File="Create.cshtml_1" Component_="Create.cshtml_1" FileName="CREATE~1.CSH|Create.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Employee\Create.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_3" Component_="Create.cshtml_1" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Employee\Index.cshtml" SelfReg="false"/>
+    <ROW File="Update.cshtml_1" Component_="Create.cshtml_1" FileName="UPDATE~1.CSH|Update.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Employee\Update.cshtml" SelfReg="false"/>
+    <ROW File="View.cshtml_1" Component_="Create.cshtml_1" FileName="VIEW~1.CSH|View.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Employee\View.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_4" Component_="Index.cshtml_2" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Home\Index.cshtml" SelfReg="false"/>
+    <ROW File="Search.cshtml" Component_="Index.cshtml_2" FileName="SEARCH~1.CSH|Search.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Home\Search.cshtml" SelfReg="false"/>
+    <ROW File="View.cshtml_2" Component_="Index.cshtml_2" FileName="VIEW~1.CSH|View.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Home\View.cshtml" SelfReg="false"/>
+    <ROW File="Create.cshtml_2" Component_="Create.cshtml_2" FileName="CREATE~1.CSH|Create.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Language\Create.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_5" Component_="Create.cshtml_2" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Language\Index.cshtml" SelfReg="false"/>
+    <ROW File="Update.cshtml_2" Component_="Create.cshtml_2" FileName="UPDATE~1.CSH|Update.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Language\Update.cshtml" SelfReg="false"/>
+    <ROW File="ForgotPassword.cshtml" Component_="ForgotPassword.cshtml" FileName="FORGOT~1.CSH|ForgotPassword.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Login\ForgotPassword.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_6" Component_="ForgotPassword.cshtml" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Login\Index.cshtml" SelfReg="false"/>
+    <ROW File="Signup.cshtml" Component_="ForgotPassword.cshtml" FileName="SIGNUP~1.CSH|Signup.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Login\Signup.cshtml" SelfReg="false"/>
+    <ROW File="_LoginLayout.cshtml" Component_="ForgotPassword.cshtml" FileName="_LOGIN~1.CSH|_LoginLayout.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Login\_LoginLayout.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_7" Component_="Index.cshtml_3" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Reports\Index.cshtml" SelfReg="false"/>
+    <ROW File="Error.cshtml" Component_="Error.cshtml" FileName="ERROR~1.CSH|Error.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Shared\Error.cshtml" SelfReg="false"/>
+    <ROW File="_Layout.cshtml" Component_="Error.cshtml" FileName="_LAYOU~1.CSH|_Layout.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Shared\_Layout.cshtml" SelfReg="false"/>
+    <ROW File="Create.cshtml_3" Component_="Create.cshtml_3" FileName="CREATE~1.CSH|Create.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Tag\Create.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_8" Component_="Create.cshtml_3" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Tag\Index.cshtml" SelfReg="false"/>
+    <ROW File="Update.cshtml_3" Component_="Create.cshtml_3" FileName="UPDATE~1.CSH|Update.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Tag\Update.cshtml" SelfReg="false"/>
+    <ROW File="Create.cshtml_4" Component_="Create.cshtml_4" FileName="CREATE~1.CSH|Create.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\User\Create.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_9" Component_="Create.cshtml_4" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\User\Index.cshtml" SelfReg="false"/>
+    <ROW File="Password.cshtml" Component_="Create.cshtml_4" FileName="PASSWO~1.CSH|Password.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\User\Password.cshtml" SelfReg="false"/>
+    <ROW File="Update.cshtml_4" Component_="Create.cshtml_4" FileName="UPDATE~1.CSH|Update.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\User\Update.cshtml" SelfReg="false"/>
+    <ROW File="View.cshtml_3" Component_="Create.cshtml_4" FileName="VIEW~1.CSH|View.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\User\View.cshtml" SelfReg="false"/>
+    <ROW File="Create.cshtml_5" Component_="Create.cshtml_5" FileName="CREATE~1.CSH|Create.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Writer\Create.cshtml" SelfReg="false"/>
+    <ROW File="Index.cshtml_10" Component_="Create.cshtml_5" FileName="INDEX~1.CSH|Index.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Writer\Index.cshtml" SelfReg="false"/>
+    <ROW File="Update.cshtml_5" Component_="Create.cshtml_5" FileName="UPDATE~1.CSH|Update.cshtml" Attributes="0" SourcePath="..\..\..\..\Desktop\AWS Certified Developer - Associate\Installation\Views\Writer\Update.cshtml" SelfReg="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
+    <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrapperUISequenceComponent">
+    <ROW Action="AI_DetectSoftware" Sequence="151"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="Setup Files" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" UseLargeSchema="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="PreparePrereqDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\PreparePrereqDlg.aip"/>
+    <ROW Fragment="PrerequisitesDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\PrerequisitesDlg.aip"/>
+    <ROW Fragment="ProgressPrereqDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\ProgressPrereqDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\WelcomeDlg.aip"/>
+    <ROW Fragment="WelcomePrereqDlg.aip" Path="&lt;AI_THEMES&gt;graphite\fragments\WelcomePrereqDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
+    <ROW Action="AI_DeleteLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_DeleteRLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractFiles" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractLzma" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
+    <ROW Action="AI_IIsConfig" Description="Configuring Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsConfig" Template="Installing &quot;[1]&quot;" TemplateLocId="ActionText.Template.AI_IIsConfig"/>
+    <ROW Action="AI_IIsInstall" Description="Generating actions to configure Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsInstall"/>
+    <ROW Action="AI_IIsRemove" Description="Configuring Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsRemove" Template="Removing &quot;[1]&quot;" TemplateLocId="ActionText.Template.AI_IIsRemove"/>
+    <ROW Action="AI_IIsRollback" Description="Rolling back IIS configuration" DescriptionLocId="ActionText.Description.AI_IIsRollback" Template="Restoring metabase configuration." TemplateLocId="ActionText.Template.AI_IIsRollback"/>
+    <ROW Action="AI_IIsUninstall" Description="Generating actions to configure Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsUninstall"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiAppSearchComponent">
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
+    <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+    <ROW Name="iis.dll" SourcePath="&lt;AI_CUSTACTS&gt;iis.dll"/>
+    <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
+    <ROW Dialog_="WelcomePrereqDlg" Control="Description" Type="Text" X="175" Y="89" Width="323" Height="220" Attributes="196611" Text="The setup has determined that some of the prerequisites needed to run [ProductName] are missing. This wizard will assist you in getting and installing those prerequisites. Click &quot;[Text_Next]&quot; to continue or &quot;[ButtonText_Cancel]&quot; to exit the [Wizard]." Order="800" TextLocId="Control.Text.WelcomePrereqDlg#Description" MsiKey="WelcomePrereqDlg#Description"/>
+    <ROW Dialog_="WelcomePrereqDlg" Control="PreparingLabel" Type="Text" X="35" Y="114" Width="104" Height="11" Attributes="196611" Text="Preparing installation" TextStyle="Labels" Order="900" TextLocId="Graphite.Control.Text.Dlg#PreparingLabel" MsiKey="WelcomePrereqDlg#PreparingLabel"/>
+    <ROW Dialog_="WelcomePrereqDlg" Control="InstallingLabel" Type="Text" X="35" Y="138" Width="104" Height="11" Attributes="196611" Text="Installing" TextStyle="Labels" Order="1000" TextLocId="Graphite.Control.Text.Dlg#InstallingLabel" MsiKey="WelcomePrereqDlg#InstallingLabel"/>
+    <ROW Dialog_="WelcomePrereqDlg" Control="FinalizingLabel" Type="Text" X="35" Y="162" Width="104" Height="11" Attributes="196611" Text="Finalizing installation" TextStyle="Labels" Order="1100" TextLocId="Graphite.Control.Text.Dlg#FinalizingLabel" MsiKey="WelcomePrereqDlg#FinalizingLabel"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomePrereqDlg" Control_="Next" Event="NewDialog" Argument="PrerequisitesDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="PrerequisitesDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="PrerequisitesDlg" Control_="Back" Event="NewDialog" Argument="WelcomePrereqDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Next" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="1401"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Next" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND MaintenanceTypeOption=&quot;Remove&quot;" Ordering="1403"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND MaintenanceTypeOption=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Next" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND MaintenanceTypeOption=&quot;Repair&quot;" Ordering="1402"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND MaintenanceTypeOption=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND MaintenanceTypeOption=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND MaintenanceTypeOption=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DATA_SETTER" Type="51" Source="CustomActionData" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DetectSoftware" Type="257" Source="SoftwareDetector.dll" Target="OnDetectSoftware"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_ExtractCadLzma" Type="51" Source="AI_ExtractLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_ExtractFiles" Type="1" Source="Prereq.dll" Target="ExtractSourceFiles" AdditionalSeq="AI_DATA_SETTER"/>
+    <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
+    <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
+    <ROW Action="AI_IIsConfig" Type="11265" Source="iis.dll" Target="OnIIsConfig" WithoutSeq="true"/>
+    <ROW Action="AI_IIsInstall" Type="1" Source="iis.dll" Target="OnIIsInstall"/>
+    <ROW Action="AI_IIsRemove" Type="11265" Source="iis.dll" Target="OnIIsRemove" WithoutSeq="true"/>
+    <ROW Action="AI_IIsRollback" Type="11521" Source="iis.dll" Target="OnIIsRollback" WithoutSeq="true"/>
+    <ROW Action="AI_IIsUninstall" Type="1" Source="iis.dll" Target="OnIIsUninstall"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
+    <ROW Feature_="MainFeature" Component_="APPDIR"/>
+    <ROW Feature_="MainFeature" Component_="ProductInformation"/>
+    <ROW Feature_="MainFeature" Component_="AI_ExePath"/>
+    <ROW Feature_="MainFeature" Component_="favicon.ico"/>
+    <ROW Feature_="MainFeature" Component_="fabrands400.eot"/>
+    <ROW Feature_="MainFeature" Component_="logo.png"/>
+    <ROW Feature_="MainFeature" Component_="chartJs.js"/>
+    <ROW Feature_="MainFeature" Component_="bulmartl.min.css"/>
+    <ROW Feature_="MainFeature" Component_="Backup.scss"/>
+    <ROW Feature_="MainFeature" Component_="Antlr3.Runtime.dll"/>
+    <ROW Feature_="MainFeature" Component_="BusinessEntity.dll"/>
+    <ROW Feature_="MainFeature" Component_="BusinessLogic.dll"/>
+    <ROW Feature_="MainFeature" Component_="CsvHelper.dll"/>
+    <ROW Feature_="MainFeature" Component_="IronPdf.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Bcl.AsyncInterfaces.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Bcl.HashCode.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Web.Infrastructure.dll"/>
+    <ROW Feature_="MainFeature" Component_="MyNews.dll"/>
+    <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="Persistence.dll"/>
+    <ROW Feature_="MainFeature" Component_="Security.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Buffers.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Memory.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Numerics.Vectors.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Tasks.Extensions.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.Helpers.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.Mvc.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.Optimization.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.Razor.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.WebPages.Deployment.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.WebPages.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Web.WebPages.Razor.dll"/>
+    <ROW Feature_="MainFeature" Component_="WebGrease.dll"/>
+    <ROW Feature_="MainFeature" Component_="csc.exe"/>
+    <ROW Feature_="MainFeature" Component_="csc.exe.config"/>
+    <ROW Feature_="MainFeature" Component_="csi.exe"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.Build.Tasks.CodeAnalysis.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CodeAnalysis.CSharp.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CodeAnalysis.CSharp.Scripting.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CodeAnalysis.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CodeAnalysis.Scripting.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.CodeAnalysis.VisualBasic.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.DiaSymReader.Native.amd64.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.DiaSymReader.Native.x86.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Buffers.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="System.Collections.Immutable.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Memory.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="System.Numerics.Vectors.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="System.Reflection.Metadata.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Runtime.CompilerServices.Unsafe.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="System.Text.Encoding.CodePages.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Threading.Tasks.Extensions.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="vbc.exe"/>
+    <ROW Feature_="MainFeature" Component_="VBCSCompiler.exe"/>
+    <ROW Feature_="MainFeature" Component_="chrome_100_percent.pak"/>
+    <ROW Feature_="MainFeature" Component_="chrome_elf.dll"/>
+    <ROW Feature_="MainFeature" Component_="d3dcompiler_47.dll"/>
+    <ROW Feature_="MainFeature" Component_="IronCefSubprocess.exe"/>
+    <ROW Feature_="MainFeature" Component_="IronInterop.dll"/>
+    <ROW Feature_="MainFeature" Component_="libcef.dll"/>
+    <ROW Feature_="MainFeature" Component_="libEGL.dll"/>
+    <ROW Feature_="MainFeature" Component_="libGLESv2.dll"/>
+    <ROW Feature_="MainFeature" Component_="am.pak"/>
+    <ROW Feature_="MainFeature" Component_="libEGL.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="libGLESv2.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="chrome_100_percent.pak_1"/>
+    <ROW Feature_="MainFeature" Component_="chrome_elf.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="d3dcompiler_47.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="IronCefSubprocess.exe_1"/>
+    <ROW Feature_="MainFeature" Component_="IronInterop.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="libcef.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="libEGL.dll_2"/>
+    <ROW Feature_="MainFeature" Component_="libGLESv2.dll_2"/>
+    <ROW Feature_="MainFeature" Component_="am.pak_1"/>
+    <ROW Feature_="MainFeature" Component_="libEGL.dll_3"/>
+    <ROW Feature_="MainFeature" Component_="libGLESv2.dll_3"/>
+    <ROW Feature_="MainFeature" Component_="fabrands400.eot_1"/>
+    <ROW Feature_="MainFeature" Component_="Web.config"/>
+    <ROW Feature_="MainFeature" Component_="Create.cshtml"/>
+    <ROW Feature_="MainFeature" Component_="Index.cshtml"/>
+    <ROW Feature_="MainFeature" Component_="Index.cshtml_1"/>
+    <ROW Feature_="MainFeature" Component_="Create.cshtml_1"/>
+    <ROW Feature_="MainFeature" Component_="Index.cshtml_2"/>
+    <ROW Feature_="MainFeature" Component_="Create.cshtml_2"/>
+    <ROW Feature_="MainFeature" Component_="ForgotPassword.cshtml"/>
+    <ROW Feature_="MainFeature" Component_="Index.cshtml_3"/>
+    <ROW Feature_="MainFeature" Component_="Error.cshtml"/>
+    <ROW Feature_="MainFeature" Component_="Create.cshtml_3"/>
+    <ROW Feature_="MainFeature" Component_="Create.cshtml_4"/>
+    <ROW Feature_="MainFeature" Component_="Create.cshtml_5"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="just_logo.exe" SourcePath="..\..\..\..\..\..\Projects\my-news\just_logo.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1397"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99" Builds="DefaultBuild"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="103" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="199" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="198" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="197" Builds="DefaultBuild"/>
+    <ROW Action="AI_FindExeLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="196" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1549" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1548" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="6599" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractFiles" Sequence="1399" Builds="DefaultBuild"/>
+    <ROW Action="AI_DATA_SETTER" Sequence="1398"/>
+    <ROW Action="AI_DetectSoftware" Sequence="102"/>
+    <ROW Action="AI_AppSearchEx" Sequence="101"/>
+    <ROW Action="AI_IIsInstall" Condition="(NOT PATCH AND NOT MSIPATCHREMOVE ) AND (NOT Reinstall AND AI_INSTALL_MODE &lt;&gt; &quot;Repair&quot;) AND ((VersionNT &gt;= 500 AND NOT Installed) OR (Installed AND REMOVE &lt;&gt; &quot;ALL&quot; AND AI_INSTALL_MODE &lt;&gt; &quot;Remove&quot;))" Sequence="6509"/>
+    <ROW Action="AI_IIsUninstall" Condition="(VersionNT &gt;= 500) AND (REMOVE = &quot;ALL&quot;)" Sequence="1699"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="103"/>
+    <ROW Action="AI_DetectSoftware" Sequence="102"/>
+    <ROW Action="AI_AppSearchEx" Sequence="101"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(AI_DETECTED_IIS_VERSION &gt;= AI_REQUIRED_IIS_VERSION) AND AI_DETECTED_IIS_SERVICE" Description="[ProductName] cannot be installed on systems with Internet Information Services version lower than [AI_REQUIRED_IIS_DISPLAY]." DescriptionLocId="AI.LaunchCondition.IIS" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="AI_DETECTED_DOTNET_VERSION &gt;= AI_REQUIRED_DOTNET_VERSION" Description="[ProductName] cannot be installed on systems with .NET Framework version lower than [AI_REQUIRED_DOTNET_DISPLAY]." DescriptionLocId="AI.LaunchCondition.DotNET" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="SETUPEXEDIR OR (REMOVE=&quot;ALL&quot;)" Description="This package can only be run from a bootstrapper." DescriptionLocId="AI.LaunchCondition.RequireBootstrapper" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
+    <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
+    <ROW Signature_="AI_EXE_PATH_LM" Root="2" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="graphite"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
+    <ROW PrereqKey="C673FE9433B49AFAC9592AB26B8F8E4" DisplayName=".NET Framework 4.0" SetupFileUrl="http://download.microsoft.com/download/9/5/A/95A9616B-7A37-4AF6-BC36-D6EA96C8DAAE/dotNetFx40_Full_x86_x64.exe" Location="1" ExactSize="50449456" WinNTVersions="Windows 8 x86, Windows 8.1 x86, Windows 10 x86" WinNT64Versions="Windows 8 x64, Windows Server 2012 x64, Windows 8.1 x64, Windows Server 2012 R2 x64, Windows 10 x64, Windows 11 x64, Windows Server x64" Operator="1" NoUiComLine="/q /norestart" Options="xy" MD5="251743dfd3fda414570524bac9e55381" TargetName=".NET Framework 4.0"/>
+    <ATTRIBUTE name="PrereqsOrder" value="C673FE9433B49AFAC9592AB26B8F8E4"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
+    <ROW SearchKey="C673FE9433B49AFAC9592AB26B8F8E4Install" Prereq="C673FE9433B49AFAC9592AB26B8F8E4" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Install" RefContent="M1" Order="1" Property="PreReqSearch_C673FE9433B49AFAC9592A"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.VirtualDirectoriesComponent">
+    <ROW VirtualDirectoryId="0" Path="APPDIR" Condition="1" AccessFlags="17089057" AccessPerm="513" AspNetVers="4.0.30319" ContentExpireUnits="0" ContentExpireTime="0" MachineKeys="&#4;" VirtualDirectory="MyNewsMaker" WebApplication="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.WebApplicationsComponent">
+    <ROW WebSiteId="0" Root="APPDIR" Condition="1" AccessFlags="49761" AccessPerm="513" DocumentList="index.html, index.htm, default.htm" ContentExpireUnits="0" ContentExpireTime="0" MachineKeys="&#4;" WebApplication="Default Web Site" AccessSSLFlags="0" ConnectionTimeout="-1" MaxConcurrentRequests="-1" MaxRequests="-1" TimeLimit="-1"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.WebBindingComponent">
+    <ROW BindingId="0" Port="80" Website="0" Condition="1" SecureFlags="0"/>
+  </COMPONENT>
+</DOCUMENT>

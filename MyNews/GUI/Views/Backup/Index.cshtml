@@ -12,7 +12,7 @@
 		@if (new PolicyBl().hasPermission((User)Session["user"], "backup_manage")) {
 			<div class="column px-5">
 				<h1 class="title is-2"><i class="fas fa-archive"></i> @(((Dictionary<string,string>)Session["texts"])["backup"])</h1>
-				<p>@(((Dictionary<string,string>)Session["texts"])["backup_description"])</p>
+				<p>@(((Dictionary<string,string>)Session["texts"])["backup_description"]) (C:/Backups/)</p>
 				<button id="backupBtn" class="button is-success my-4">@(((Dictionary<string,string>)Session["texts"])["create"])</button>
 			</div>
 		}
