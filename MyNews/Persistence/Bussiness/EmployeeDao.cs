@@ -137,8 +137,8 @@ namespace Persistence
 
 		public Employee create(Employee employee) {
 			var colums = new string[] { "user_id", "start_day", "end_day", "id_number", "birthday" };
-			var values = new string[] { employee.id.ToString(), employee.startDay.ToString(), employee.endDay != null ? employee.endDay.ToString() : null, employee.document, employee.birthday.ToString() };
-			employee.id = insert("employees", colums, values);
+			var values = new string[] { employee.id.ToString(), employee.startDay.ToString("yyyy-MM-d"), employee.endDay != null ? employee.endDay.ToString() : null, employee.document, employee.birthday.ToString("yyyy-MM-d") };
+			employee.employeeId = insert("employees", colums, values);
 			return employee;
 		}
 

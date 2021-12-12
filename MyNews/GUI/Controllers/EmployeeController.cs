@@ -56,17 +56,26 @@ namespace MyNews.Controllers
 			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult CreateEmployee(int user_id, DateTime start_day, DateTime? end_day, string id_number, DateTime birthday) {
-			Employee employee = new Employee {
-					id = user_id,
-					startDay = start_day,
-					endDay = end_day,
-					document = id_number,
-					birthday = birthday
-				};
+		public ActionResult CreateEmployee(int user_id, string start_day, string end_day, string id_number, DateTime birthday) {
+			try {
+				DateTime? end = null;
+				if (end_day != "") {
+					end = Convert.ToDateTime(end_day);
+				}
 
-			bl.create(employee);
-			return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"] }, JsonRequestBehavior.AllowGet);
+				Employee employee = new Employee {
+						id = user_id,
+						startDay = Convert.ToDateTime(start_day),
+						endDay = end,
+						document = id_number,
+						birthday = birthday
+					};
+
+				bl.create(employee);
+				return Json(new { type = "success", description = ((Dictionary<string, string>)Session["texts"])["success"], data = employee }, JsonRequestBehavior.AllowGet);
+			} catch (Exception e) {
+				return Json(new { type = "danger", description = ((Dictionary<string, string>)Session["texts"])["error"], data = e.Message }, JsonRequestBehavior.AllowGet);
+			}
 		}
 
 		public ActionResult GetUsersByName(string name) {

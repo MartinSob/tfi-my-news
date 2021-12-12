@@ -72,16 +72,16 @@
 			const response = await post('Employee/CreateEmployee', {
 				user_id: document.getElementById("userList").value,
 				start_day: document.getElementById("startDay").value,
-				end_day: document.getElementById("endDay").value,
+				end_day: document.getElementById("endDay").value ? document.getElementById("endDay").value : '',
 				id_number: document.getElementById("document").value,
 				birthday: document.getElementById("birthday").value,
 			});
 
+			showAlert(response);
+
 			if (response.type == 'success') {
 				relocation("Employee");
 			}
-
-			showAlert(response);
 		});
 
 		document.getElementById("userName").addEventListener('input', async (event) => {

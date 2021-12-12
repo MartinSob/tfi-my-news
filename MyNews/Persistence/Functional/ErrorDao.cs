@@ -19,6 +19,13 @@ namespace Persistence
 
 		public void create(string text) {
 			try {
+				new BitacoreDao().create(new BusinessEntity.BitacoreMessage {
+					title = "Error",
+					type = BusinessEntity.MessageType.Error,
+					description = text.Length <= 150 ? text : text.Substring(0, 150),
+					user = null
+				});
+
 				var fileName = CurrentAssemblyDirectory() + "//..//error_log.txt";
 				if (!File.Exists(fileName))
 					File.Create(fileName);
