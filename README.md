@@ -1,4 +1,4 @@
-# aWords
+# My News Maker - TFI
 Proyecto para las materias 'SEMINARIO DE APLICACIÓN PROFESIONAL' y 'TRABAJO FINAL DE INGENIERÍA' de la carrera de Ing. en Sistemas Informaticos. Es una aplicación para crear notas con etiquetas o "tags", con las cuales se generarán recomendaciones para el lector de forma dinámica. También se usará la información recaudada de las lecturas para mejorar la experiencia de crear nuevo contenido.
 
 
@@ -28,3 +28,9 @@ Existen cuatro diferentes usuarios, uno por cada rol, cuyas contraseñas son sie
  - lector
  - escritor
  - tecnico
+
+
+## Instalador
+El instalador fue creado utilizando la herramienta [Advanced Installer](https://www.advancedinstaller.com/). Para que la instalacion funcione, el usuario y contraseña para el acceso a la BD deben estar en el archivo de configuracion `GUI/Web.config`.
+
+> En caso de no poder iniciar sesion en la BD con la cuenta, verificar que la base permite el loggeo con `SQL Server and Windows Auth mode` y que el usuario (dentro de `Security > Logins`) tenga el login habilitado. En ultima instancia, se puede probar reiniciar el servicio de SQL Server.
